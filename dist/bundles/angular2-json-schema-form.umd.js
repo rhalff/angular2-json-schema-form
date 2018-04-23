@@ -8517,8 +8517,7 @@
 	        else if (hasOwn(this.form, 'properties') && isObject$2(this.form.properties)) {
 	            this.jsf.schema = _.cloneDeep(this.form);
 	        }
-	        else if (isObject$2(this.form)) {
-	        }
+	        else if (isObject$2(this.form)) ;
 	        if (!isEmpty(this.jsf.schema)) {
 	            if (inArray('object', this.jsf.schema.type)) {
 	                this.jsf.schema.type = 'object';

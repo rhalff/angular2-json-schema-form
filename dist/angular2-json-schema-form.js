@@ -1,7 +1,7 @@
 import * as Ajv from 'ajv';
 
 import { Injectable, Directive, ElementRef, Input, NgZone, ChangeDetectionStrategy, Component, ComponentFactoryResolver, ViewChild, ViewContainerRef, Inject, ChangeDetectorRef, EventEmitter, forwardRef, Output, NgModule } from '@angular/core';
-import { isEqual, cloneDeep, uniqueId, filter, map } from 'lodash';
+import { isEqual, cloneDeep, filter, map, uniqueId } from 'lodash';
 import { FormArray, FormControl, FormGroup, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as Ajv from 'ajv';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -8579,8 +8579,7 @@ class JsonSchemaFormComponent {
         else if (hasOwn(this.form, 'properties') && isObject$2(this.form.properties)) {
             this.jsf.schema = cloneDeep(this.form);
         }
-        else if (isObject$2(this.form)) {
-        }
+        else if (isObject$2(this.form)) ;
         if (!isEmpty(this.jsf.schema)) {
             if (inArray('object', this.jsf.schema.type)) {
                 this.jsf.schema.type = 'object';
