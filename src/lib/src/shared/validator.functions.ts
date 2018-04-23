@@ -1,7 +1,7 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { fromPromise } from 'rxjs/observable/fromPromise';
-import { toPromise } from 'rxjs/operator/toPromise';
+import { Observable } from 'rxjs-compat/Observable';
+import { fromPromise } from 'rxjs-compat/observable/fromPromise';
+import { toPromise } from 'rxjs-compat/operator/toPromise';
 
 /**
  * Validator utility function library:
