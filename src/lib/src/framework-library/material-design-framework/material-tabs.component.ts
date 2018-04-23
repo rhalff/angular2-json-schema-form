@@ -52,7 +52,7 @@ export class MaterialTabsComponent implements OnInit {
         dataIndex: this.dataIndex.concat(index)
       });
       this.updateControl();
-    };
+    }
     this.selectedItem = index;
   }
 

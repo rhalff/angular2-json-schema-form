@@ -258,7 +258,7 @@ export class Bootstrap4FrameworkComponent implements OnInit, OnChanges {
         this.formControl.statusChanges.subscribe(status => this.updateHelpBlock(status));
 
         if (this.options.debug) {
-          let vars: any[] = [];
+          const vars: any[] = [];
           this.debugOutput = _.map(vars, thisVar => JSON.stringify(thisVar, null, 2)).join('\n');
         }
       }

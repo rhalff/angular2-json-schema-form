@@ -16,7 +16,7 @@ import * as _ from 'lodash';
  * @param  { OptionObject = {} } options - options: parent schema changed?, schema draft number?
  * @return { object } - JSON schema (draft 6)
  */
-export interface OptionObject { changed?: boolean, draft?: number };
+export interface OptionObject { changed?: boolean; draft?: number; }
 export function convertSchemaToDraft6(schema, options: OptionObject = {}) {
   let draft: number = options.draft || null;
   let changed: boolean = options.changed || false;
@@ -228,7 +228,7 @@ export function convertSchemaToDraft6(schema, options: OptionObject = {}) {
     if (typeof newSchema.description === 'string' && newSchema.description.length) {
       newSchema.description += '\n' + addToDescription;
     } else {
-      newSchema.description = addToDescription
+      newSchema.description = addToDescription;
     }
     delete newSchema.$schema;
   }

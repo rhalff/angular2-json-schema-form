@@ -63,7 +63,7 @@ export class TabsComponent implements OnInit {
         dataIndex: this.dataIndex.concat(index)
       });
       this.updateControl();
-    };
+    }
     this.selectedItem = index;
   }
 

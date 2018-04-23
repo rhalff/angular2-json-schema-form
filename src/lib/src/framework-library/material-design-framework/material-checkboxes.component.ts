@@ -79,7 +79,7 @@ export class MaterialCheckboxesComponent implements OnInit {
     );
     if (this.boundControl) {
       const formArray = this.jsf.getFormControl(this);
-      for (let checkboxItem of this.checkboxList) {
+      for (const checkboxItem of this.checkboxList) {
         checkboxItem.checked = formArray.value.includes(checkboxItem.value);
       }
     }

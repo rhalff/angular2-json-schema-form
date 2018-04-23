@@ -27,8 +27,8 @@ export function addClasses(
   if (badType(newClasses)) { return oldClasses; }
   if (badType(oldClasses)) { oldClasses = ''; }
   const toSet = i => isSet(i) ? i : isArray(i) ? new Set(i) : new Set(i.split(' '));
-  let combinedSet: Set<any> = toSet(oldClasses);
-  let newSet: Set<any> = toSet(newClasses);
+  const combinedSet: Set<any> = toSet(oldClasses);
+  const newSet: Set<any> = toSet(newClasses);
   newSet.forEach(c => combinedSet.add(c));
   if (isSet(oldClasses)) { return combinedSet; }
   if (isArray(oldClasses)) { return Array.from(combinedSet); }
@@ -85,7 +85,7 @@ export function forEach(
 ): void {
   if (isEmpty(object)) { return; }
   if ((isObject(object) || isArray(object)) && typeof fn === 'function') {
-    for (let key of Object.keys(object)) {
+    for (const key of Object.keys(object)) {
       const value = object[key];
       if (recurse === 'bottom-up' && (isObject(value) || isArray(value))) {
         forEach(value, fn, recurse, rootObject);
@@ -129,8 +129,8 @@ export function forEachCopy(
 ): any {
   if (!hasValue(object)) { return; }
   if ((isObject(object) || isArray(object)) && typeof object !== 'function') {
-    let newObject: any = isArray(object) ? [] : {};
-    for (let key of Object.keys(object)) {
+    const newObject: any = isArray(object) ? [] : {};
+    for (const key of Object.keys(object)) {
       newObject[key] = fn(object[key], key, object);
     }
     return newObject;
@@ -193,7 +193,7 @@ export function mergeFilteredObject(
 ): PlainObject {
   if (!isObject(sourceObject)) { return targetObject; }
   if (!isObject(targetObject)) { targetObject = {}; }
-  for (let key of Object.keys(sourceObject)) {
+  for (const key of Object.keys(sourceObject)) {
     if (!inArray(key, excludeKeys) && isDefined(sourceObject[key])) {
       targetObject[keyFn(key)] = valFn(sourceObject[key]);
     }
@@ -309,4 +309,4 @@ export function toTitleCase(input: string, forceWords?: string|string[]): string
       return newWord;
     }
   });
-};
+}

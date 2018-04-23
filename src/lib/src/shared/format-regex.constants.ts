@@ -55,7 +55,7 @@ export const jsonSchemaFormatTests = {
     try {
       new RegExp(str);
       return true;
-    } catch(e) {
+    } catch (e) {
       return false;
     }
   }

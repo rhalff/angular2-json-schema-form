@@ -44,7 +44,7 @@ export type JavaScriptType =
   'map' | 'set' | 'arguments' | 'date' | 'error' | 'function' | 'json' |
   'math' | 'regexp'; // Note: this list is incomplete
 export type PrimitiveValue = string | number | boolean | null | undefined;
-export interface PlainObject { [k: string]: any };
+export interface PlainObject { [k: string]: any; }
 
 export type IValidatorFn = (c: AbstractControl, i?: boolean) => PlainObject;
 export type AsyncIValidatorFn = (c: AbstractControl, i?: boolean) => any;
@@ -92,10 +92,10 @@ export function _executeAsyncValidators(control, validators, invert = false) {
  * @return { PlainObject } - merged object
  */
 export function _mergeObjects(...objects) {
-  let mergedObject: PlainObject = { };
-  for (let currentObject of objects) {
+  const mergedObject: PlainObject = { };
+  for (const currentObject of objects) {
     if (isObject(currentObject)) {
-      for (let key of Object.keys(currentObject)) {
+      for (const key of Object.keys(currentObject)) {
         const currentValue = currentObject[key];
         const mergedValue = mergedObject[key];
         mergedObject[key] = !isDefined(mergedValue) ? currentValue :
@@ -465,11 +465,11 @@ export function toSchemaType(value, types) {
     return value;
   }
   if ((<SchemaPrimitiveType[]>types).includes('integer')) {
-    let testValue = toJavaScriptType(value, 'integer');
+    const testValue = toJavaScriptType(value, 'integer');
     if (testValue !== null) { return +testValue; }
   }
   if ((<SchemaPrimitiveType[]>types).includes('number')) {
-    let testValue = toJavaScriptType(value, 'number');
+    const testValue = toJavaScriptType(value, 'number');
     if (testValue !== null) { return +testValue; }
   }
   if (
@@ -483,7 +483,7 @@ export function toSchemaType(value, types) {
   }
   if ((<SchemaPrimitiveType[]>types).includes('string')) { // Convert null & boolean to string
     if (value === null) { return ''; }
-    let testValue = toJavaScriptType(value, 'string');
+    const testValue = toJavaScriptType(value, 'string');
     if (testValue !== null) { return testValue; }
   }
   if ((
@@ -494,11 +494,11 @@ export function toSchemaType(value, types) {
     if (value === false || value === null || value === '') { return 0; }
   }
   if ((<SchemaPrimitiveType[]>types).includes('number')) { // Convert mixed string to number
-    let testValue = parseFloat(<string>value);
+    const testValue = parseFloat(<string>value);
     if (!!testValue) { return testValue; }
   }
   if ((<SchemaPrimitiveType[]>types).includes('integer')) { // Convert string or number to integer
-    let testValue = parseInt(<string>value, 10);
+    const testValue = parseInt(<string>value, 10);
     if (!!testValue) { return testValue; }
   }
   if ((<SchemaPrimitiveType[]>types).includes('boolean')) { // Convert anything to boolean

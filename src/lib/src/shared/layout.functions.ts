@@ -37,9 +37,9 @@ import { buildFormGroupTemplate, getControl } from './form-group.functions';
  */
 export function buildLayout(jsf, widgetLibrary) {
   let hasSubmitButton = !JsonPointer.get(jsf, '/formOptions/addSubmit');
-  let formLayout = mapLayout(jsf.layout, (layoutItem, index, layoutPointer) => {
-    let currentIndex = index;
-    let newNode: any = {
+  const formLayout = mapLayout(jsf.layout, (layoutItem, index, layoutPointer) => {
+    const currentIndex = index;
+    const newNode: any = {
       _id: _.uniqueId(),
       options: {},
     };
@@ -130,7 +130,7 @@ export function buildLayout(jsf, widgetLibrary) {
           if (items === null || typeof items !== 'object') { return; }
           if (hasOwn(items, 'dataPointer')) { return items.dataPointer; }
           if (isArray(items.items)) {
-            for (let item of items.items) {
+            for (const item of items.items) {
               if (hasOwn(item, 'dataPointer') && item.dataPointer.indexOf('/-') !== -1) {
                 return item.dataPointer;
               }
@@ -238,7 +238,7 @@ export function buildLayout(jsf, widgetLibrary) {
             nodeDataMap.set('listItems', newNode.options.listItems);
           }
           if (!jsf.arrayMap.has(shortDataPointer)) {
-            jsf.arrayMap.set(shortDataPointer, newNode.options.tupleItems)
+            jsf.arrayMap.set(shortDataPointer, newNode.options.tupleItems);
           }
         }
         if (isInputRequired(jsf.schema, schemaPointer)) {
@@ -272,7 +272,7 @@ export function buildLayout(jsf, widgetLibrary) {
       if (newNode.dataType === 'array' &&
         (hasOwn(newNode, 'items') || hasOwn(newNode, 'additionalItems'))
       ) {
-        let itemRefPointer = removeRecursiveReferences(
+        const itemRefPointer = removeRecursiveReferences(
           newNode.dataPointer + '/-', jsf.dataRecursiveRefMap, jsf.arrayMap
         );
         if (!jsf.dataMap.has(itemRefPointer)) {
@@ -282,15 +282,15 @@ export function buildLayout(jsf, widgetLibrary) {
 
         // Fix insufficiently nested array item groups
         if (newNode.items.length > 1) {
-          let arrayItemGroup = [];
-          let arrayItemGroupTemplate = [];
+          const arrayItemGroup = [];
+          const arrayItemGroupTemplate = [];
           let newIndex = 0;
           for (let i = newNode.items.length - 1; i >= 0; i--) {
-            let subItem = newNode.items[i];
+            const subItem = newNode.items[i];
             if (hasOwn(subItem, 'dataPointer') &&
               subItem.dataPointer.slice(0, itemRefPointer.length) === itemRefPointer
             ) {
-              let arrayItem = newNode.items.splice(i, 1)[0];
+              const arrayItem = newNode.items.splice(i, 1)[0];
               arrayItem.dataPointer = newNode.dataPointer + '/-' +
                 arrayItem.dataPointer.slice(itemRefPointer.length);
               arrayItemGroup.unshift(arrayItem);
@@ -589,7 +589,7 @@ export function buildLayoutFromSchema(
 
   } else if (newNode.dataType === 'array') {
     newNode.items = [];
-    let templateArray: any[] = [];
+    const templateArray: any[] = [];
     newNode.options.maxItems = Math.min(
       schema.maxItems || 1000, newNode.options.maxItems || 1000
     );
@@ -620,7 +620,7 @@ export function buildLayoutFromSchema(
       nodeDataMap.set('listItems', newNode.options.listItems);
     }
     if (!jsf.arrayMap.has(shortDataPointer)) {
-      jsf.arrayMap.set(shortDataPointer, newNode.options.tupleItems)
+      jsf.arrayMap.set(shortDataPointer, newNode.options.tupleItems);
     }
     removable = newNode.options.removable !== false;
     let additionalItemsSchemaPointer: string = null;
@@ -838,8 +838,8 @@ export function mapLayout(layout, fn, layoutPointer = '', rootLayout = layout) {
   let indexPad = 0;
   let newLayout: any[] = [];
   forEach(layout, (item, index) => {
-    let realIndex = +index + indexPad;
-    let newLayoutPointer = layoutPointer + '/' + realIndex;
+    const realIndex = +index + indexPad;
+    const newLayoutPointer = layoutPointer + '/' + realIndex;
     let newNode: any = copy(item);
     let itemsArray: any[] = [];
     if (isObject(item)) {
@@ -863,7 +863,7 @@ export function mapLayout(layout, fn, layoutPointer = '', rootLayout = layout) {
     }
   });
   return newLayout;
-};
+}
 
 /**
  * 'getLayoutNode' function
@@ -940,7 +940,7 @@ export function buildTitleMap(
   if (titleMap) {
     if (isArray(titleMap)) {
       if (enumList) {
-        for (let i of Object.keys(titleMap)) {
+        for (const i of Object.keys(titleMap)) {
           if (isObject(titleMap[i])) { // JSON Form style
             const value = titleMap[i].value;
             if (enumList.includes(value)) {
@@ -966,25 +966,25 @@ export function buildTitleMap(
         }
       }
     } else if (enumList) { // Alternate JSON Form style, with enum list
-      for (let i of Object.keys(enumList)) {
-        let value = enumList[i];
+      for (const i of Object.keys(enumList)) {
+        const value = enumList[i];
         if (hasOwn(titleMap, value)) {
-          let name = titleMap[value];
+          const name = titleMap[value];
           newTitleMap.push({ name, value });
           if (value === undefined || value === null) { hasEmptyValue = true; }
         }
       }
     } else { // Alternate JSON Form style, without enum list
-      for (let value of Object.keys(titleMap)) {
-        let name = titleMap[value];
+      for (const value of Object.keys(titleMap)) {
+        const name = titleMap[value];
         newTitleMap.push({ name, value });
         if (value === undefined || value === null) { hasEmptyValue = true; }
       }
     }
   } else if (enumList) { // Build map from enum list alone
-    for (let i of Object.keys(enumList)) {
-      let name = enumList[i];
-      let value = enumList[i];
+    for (const i of Object.keys(enumList)) {
+      const name = enumList[i];
+      const value = enumList[i];
       newTitleMap.push({ name, value});
       if (value === undefined || value === null) { hasEmptyValue = true; }
     }

@@ -91,7 +91,7 @@ export class CheckboxesComponent implements OnInit {
   }
 
   updateValue(event) {
-    for (let checkboxItem of this.checkboxList) {
+    for (const checkboxItem of this.checkboxList) {
       if (event.target.value === checkboxItem.value) {
         checkboxItem.checked = event.target.checked;
       }
