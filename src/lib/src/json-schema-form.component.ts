@@ -20,6 +20,7 @@ import { JsonPointer } from './shared/jsonpointer.functions';
 
 export const JSON_SCHEMA_FORM_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
+  // tslint:disable-next-line no-use-before-declare
   useExisting: forwardRef(() => JsonSchemaFormComponent),
   multi: true,
 };
@@ -131,8 +132,10 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
   }
 
   // Outputs
+  // tslint:disable no-output-on-prefix
   @Output() onChanges = new EventEmitter<any>(); // Live unvalidated internal form data
   @Output() onSubmit = new EventEmitter<any>(); // Complete validated form data
+  // tslint:enable no-output-on-prefix
   @Output() isValid = new EventEmitter<boolean>(); // Is current data valid?
   @Output() validationErrors = new EventEmitter<any>(); // Validation errors (if any)
   @Output() formSchema = new EventEmitter<any>(); // Final schema used to create form

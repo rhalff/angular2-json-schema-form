@@ -1,3 +1,4 @@
+// tslint:disable max-line-length
 // updated from AJV fast format regular expressions:
 // https://github.com/epoberezkin/ajv/blob/master/lib/compile/formats.js
 
@@ -53,6 +54,7 @@ export const jsonSchemaFormatTests = {
   'regex': function(str) {
     if (/[^\\]\\Z/.test(str)) { return false; }
     try {
+      // tslint:disable-next-line no-unused-expression
       new RegExp(str);
       return true;
     } catch (e) {
