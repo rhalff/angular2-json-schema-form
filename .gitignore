@@ -2,7 +2,7 @@
 
 # compiled output
 compiled
-dist
+# dist
 docs/api
 out-ngc
 tmp
