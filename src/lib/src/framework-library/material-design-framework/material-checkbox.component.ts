@@ -9,7 +9,7 @@ import { hasOwn } from './../../shared/utility.functions';
   template: `
     <mat-checkbox *ngIf="boundControl && !showSlideToggle"
       [formControl]="formControl"
-      align="left"
+      labelPosition="left"
       [color]="options?.color || 'primary'"
       [id]="'control' + layoutNode?._id"
       labelPosition="after"
@@ -21,7 +21,7 @@ import { hasOwn } from './../../shared/utility.functions';
         [innerHTML]="options?.title"></span>
     </mat-checkbox>
     <mat-checkbox *ngIf="!boundControl && !showSlideToggle"
-      align="left"
+      labelPosition="left"
       [color]="options?.color || 'primary'"
       [disabled]="controlDisabled || options?.readonly"
       [id]="'control' + layoutNode?._id"

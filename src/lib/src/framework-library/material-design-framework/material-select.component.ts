@@ -9,7 +9,7 @@ import { buildTitleMap, isArray } from '../../shared';
   template: `
     <mat-form-field
       [class]="options?.htmlClass || ''"
-      [floatPlaceholder]="options?.floatPlaceholder || (options?.notitle ? 'never' : 'auto')"
+      [floatLabel]="options?.floatPlaceholder || (options?.notitle ? 'never' : 'auto')"
       [style.width]="'100%'">
       <span matPrefix *ngIf="options?.prefix || options?.fieldAddonLeft"
         [innerHTML]="options?.prefix || options?.fieldAddonLeft"></span>
@@ -48,7 +48,7 @@ import { buildTitleMap, isArray } from '../../shared';
         [style.width]="'100%'"
         [value]="controlValue"
         (blur)="options.showErrors = true"
-        (change)="updateValue($event)">
+        (selectionChange)="updateValue($event)">
         <ng-template ngFor let-selectItem [ngForOf]="selectList">
           <mat-option *ngIf="!isArray(selectItem?.items)"
             [attr.selected]="selectItem?.value === controlValue"
