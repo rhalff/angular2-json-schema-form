@@ -47,8 +47,7 @@ import { dateToString, hasOwn, stringToDate } from '../../shared';
         align="end" [innerHTML]="options?.description"></mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     </mat-form-field>
-    <mat-datepicker #picker
-      (selectedChanged)="updateValue($event)"></mat-datepicker>
+    <mat-datepicker #picker></mat-datepicker>
     <mat-error *ngIf="options?.showErrors && options?.errorMessage"
       [innerHTML]="options?.errorMessage"></mat-error>`,
   styles: [`
