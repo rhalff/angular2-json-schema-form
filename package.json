@@ -45,14 +45,14 @@
     "docs": "typedoc src/lib/src/",
     "clean": "rimraf out-ngc dist/*",
     "prebuild": "npm run clean",
-    "build": "node build.js",
+    "build": "ts-node build.ts",
     "postbuild": "rimraf out-ngc",
     "prepublishOnly": "npm run build",
     "publish": "cd dist && npm publish",
     "preng-build": "rimraf dist/*",
     "ng-build": "ng build",
-    "predeploy": "npm run ng-build",
-    "deploy": "firebase deploy"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages --dist dist/angular2-json-schema-form/ --branch angular-6-dist"
   },
   "dependencies": {
     "ajv": "^6.4.0",
