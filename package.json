@@ -28,10 +28,10 @@
   "bugs": {
     "url": "https://github.com/dschnelldavis/angular2-json-schema-form/issues"
   },
-  "main": "./dist/bundles/angular2-json-schema-form.umd.js",
-  "module": "./dist/angular2-json-schema-form.es5.js",
-  "es2015": "./dist/angular2-json-schema-form.js",
-  "typings": "./dist/angular2-json-schema-form.d.ts",
+  "main": "./bundles/angular2-json-schema-form.umd.js",
+  "module": "./angular2-json-schema-form.es5.js",
+  "es2015": "./angular2-json-schema-form.js",
+  "typings": "./angular2-json-schema-form.d.ts",
   "engines": {
     "node": ">= 6.9.0",
     "npm": ">= 3.0.0"
@@ -51,8 +51,8 @@
     "publish": "cd dist && npm publish",
     "preng-build": "rimraf dist/*",
     "ng-build": "ng build",
-    "predeploy": "npm run ng-build",
-    "deploy": "firebase deploy"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages --dist dist/ --branch angular-5-dist"
   },
   "dependencies": {
     "ajv": "^6.4.0",
@@ -93,6 +93,7 @@
     "codelyzer": "^4.3.0",
     "concurrently": "^3.5.1",
     "core-js": "^2.5.5",
+    "gh-pages": "^1.1.0",
     "glob": "^7.1.2",
     "hammerjs": "2.x",
     "jasmine-core": "^3.1.0",
