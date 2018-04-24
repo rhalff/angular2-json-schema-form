@@ -28,10 +28,10 @@
   "bugs": {
     "url": "https://github.com/dschnelldavis/angular2-json-schema-form/issues"
   },
-  "main": "./dist/bundles/angular2-json-schema-form.umd.js",
-  "module": "./dist/angular2-json-schema-form.es5.js",
-  "es2015": "./dist/angular2-json-schema-form.js",
-  "typings": "./dist/angular2-json-schema-form.d.ts",
+  "main": "./bundles/angular2-json-schema-form.umd.js",
+  "module": "./angular2-json-schema-form.es5.js",
+  "es2015": "./angular2-json-schema-form.js",
+  "typings": "./angular2-json-schema-form.d.ts",
   "engines": {
     "node": ">= 6.9.0",
     "npm": ">= 3.0.0"
