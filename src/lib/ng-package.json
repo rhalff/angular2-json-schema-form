@@ -1,0 +1,21 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/angular2-json-schema-form",
+  "lib": {
+    "entryFile": "src/public_api.ts",
+    "languageLevel": ["dom", "es2017"],
+    "umdModuleIds": {
+      "lodash": "_",
+      "rxjs-compat/BehaviorSubject": "rxjs.BehaviorSubject",
+      "rxjs-compat/observable/forkJoin": "rxjs.observable.forkJoin",
+      "rxjs-compat/observable/fromPromise": "rxjs.observable.fromPromise",
+      "rxjs-compat/operator/map": "rxjs.operator.map",
+      "rxjs-compat/operator/toPromise": "rxjs.operator.toPromise",
+      "rxjs-compat/operators/filter": "rxjs.operators.filter",
+      "rxjs-compat/Observable": "rxjs.Observable",
+      "rxjs-compat/Subject": "rxjs.Subject",
+      "hammerjs": "hammerjs",
+      "ajv": "Ajv"
+    }
+  }
+}

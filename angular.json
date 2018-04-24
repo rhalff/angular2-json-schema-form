@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular2-json-schema-form": {
+    "angular2-json-schema-form-demo": {
       "root": "",
       "projectType": "application",
       "architect": {
@@ -55,18 +55,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular2-json-schema-form:build"
+            "browserTarget": "angular2-json-schema-form-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular2-json-schema-form:build:production"
+              "browserTarget": "angular2-json-schema-form-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular2-json-schema-form:build"
+            "browserTarget": "angular2-json-schema-form-demo:build"
           }
         },
         "test": {
@@ -99,6 +99,44 @@
           "options": {
             "tsConfig": [],
             "exclude": []
+          }
+        }
+      }
+    },
+    "angular2-json-schema-form": {
+      "root": "src/lib",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "project": "src/lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "src/lib/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/lib/src/test.ts",
+            "tsConfig": "src/lib/tsconfig.spec.json",
+            "karmaConfig": "src/lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/lib/tsconfig.lint.json",
+              "src/lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
