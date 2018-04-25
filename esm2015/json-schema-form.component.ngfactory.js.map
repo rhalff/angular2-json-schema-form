@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "json-schema-form.component.ngfactory.js",
+  "sources": [
+    "ng://angular2-json-schema-form/src/lib/src/json-schema-form.component.ts.JsonSchemaFormComponent.html"
+  ],
+  "sourcesContent": [
+    "\n    <div *ngFor=\"let stylesheet of stylesheets\">\n      <link rel=\"stylesheet\" [href]=\"stylesheet\">\n    </div>\n    <div *ngFor=\"let script of scripts\">\n      <script type=\"text/javascript\" [src]=\"script\"></script>\n    </div>\n    <form class=\"json-schema-form\" (ngSubmit)=\"submitForm()\">\n      <root-widget [layout]=\"jsf?.layout\"></root-widget>\n    </form>\n    <div *ngIf=\"debug || jsf?.formOptions?.debug\">\n      Debug output: <pre>{{debugOutput}}</pre>\n    </div>"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;;;;;;;;;;;;;kEACI,4EAA4C,KAC1C,8GAA2C,gCAApB,kBAAmB,oBAA1C,YAA2C,EAApB,SAAmB;kEAE5C,4EAAoC;kEAMpC,4EAA8C,KAAA,4CAC9B,MAAA,4EAAK,KAAA,iJAAe;yEAVpC,qNAA4C,IAG5C,qNAAoC,IAGpC;;;;;wBAAyD;MAA1B;;wBAAyB;MAAxD,qWAAyD,IACvD,2OAAoC,IAEtC,wLAA8C,iDATzC,mBAAsC,cAA3C,YAA4C,EAAvC,SAAsC,GAGtC,mBAA8B,UAAnC,YAAoC,EAA/B,SAA8B,GAIpB,+CAAsB,cAAnC,aAAoC,EAAvB,SAAsB,GAEhC,sGAAwC,2BAA7C,aAA8C,EAAzC,UAAwC,2BAH7C,iaAAyD"
+}

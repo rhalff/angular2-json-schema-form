@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "no.framework.ngfactory.js",
+  "sourceRoot": "",
+  "sources": [
+    "ng://angular2-json-schema-form/src/lib/src/framework-library/no-framework/no.framework.ngfactory.ts"
+  ],
+  "names": [],
+  "mappings": "",
+  "sourcesContent": [
+    "import * as i0 from '@angular/core';\ni0.ComponentFactory;\n"
+  ]
+}

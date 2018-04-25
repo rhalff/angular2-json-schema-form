@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "tabs.component.ngfactory.js",
+  "sources": [
+    "ng://angular2-json-schema-form/src/lib/src/widget-library/tabs.component.ts.TabsComponent.html"
+  ],
+  "sourcesContent": [
+    "\n    <ul\n      [class]=\"options?.labelHtmlClass || ''\">\n      <li *ngFor=\"let item of layoutNode?.items; let i = index\"\n        [class]=\"(options?.itemLabelHtmlClass || '') + (selectedItem === i ?\n          (' ' + (options?.activeClass || '') + ' ' + (options?.style?.selected || '')) :\n          (' ' + options?.style?.unselected))\"\n        role=\"presentation\"\n        data-tabs>\n        <a *ngIf=\"showAddTab || item.type !== '$ref'\"\n           [class]=\"'nav-link' + (selectedItem === i ? (' ' + options?.activeClass + ' ' + options?.style?.selected) :\n            (' ' + options?.style?.unselected))\"\n          [innerHTML]=\"setTabTitle(item, i)\"\n          (click)=\"select(i)\"></a>\n      </li>\n    </ul>\n\n    <div *ngFor=\"let layoutItem of layoutNode?.items; let i = index\"\n      [class]=\"options?.htmlClass || ''\">\n\n      <select-framework-widget *ngIf=\"selectedItem === i\"\n        [class]=\"(options?.fieldHtmlClass || '') +\n          ' ' + (options?.activeClass || '') +\n          ' ' + (options?.style?.selected || '')\"\n        [dataIndex]=\"layoutNode?.dataType === 'array' ? (dataIndex || []).concat(i) : dataIndex\"\n        [layoutIndex]=\"(layoutIndex || []).concat(i)\"\n        [layoutNode]=\"layoutItem\"></select-framework-widget>\n\n    </div>"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;;;;;;;;;wDASQ,oKAIsB,YAApB;;wBAAmB;MAJrB,wBAIsB,wDAHnB,kVACqC,gCACtC,+DAAkC,wBAHpC,YAIsB,EAHnB,SACqC,EACtC,SAAkC;wDATtC,uIAKY,KACV,6KAIsB,iDAJnB,wEAA0C,IAA7C,YAIsB,EAJnB,SAA0C,mDAL7C,wZAEsC,gCAHxC,YAKY,EAJV,SAEsC;wDAcxC,4YAM4B,iDAA1B,kBAAyB,2BADzB,8DAA6C,wBAD7C,qKAAwF,aAJ1F,YAM4B,EAA1B,SAAyB,EADzB,SAA6C,EAD7C,SAAwF,mDAHxF,qRAEyC,IAH3C,YAM4B,EAL1B,SAEyC;wDAN7C,6FACqC,KAEnC,6KAM4B,iDANH,wCAA0B,iBAAnD,YAM4B,EANH,SAA0B,mDAFnD,6EAAkC,GADpC,YACqC,EAAnC,SAAkC;+DAjBpC,4FAC0C,KACxC,2MAKY,IASd,2MACqC,iDAf/B,sDAAqD,oBAAzD,YAKY,EALR,SAAqD,GActD,sDAA2D,oBAAhE,YACqC,EADhC,SAA2D,mDAf9D,kFAAuC,GADzC,YAC0C,EAAxC,SAAuC"
+}

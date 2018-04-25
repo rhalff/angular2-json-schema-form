@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "root.component.ngfactory.js",
+  "sources": [
+    "ng://angular2-json-schema-form/src/lib/src/widget-library/root.component.ts.RootComponent.html"
+  ],
+  "sourcesContent": [
+    "\n    <div *ngFor=\"let layoutItem of layout; let i = index\"\n      [class.form-flex-item]=\"isFlexItem\"\n      [style.align-self]=\"(layoutItem.options || {})['align-self']\"\n      [style.flex-basis]=\"getFlexAttribute(layoutItem, 'flex-basis')\"\n      [style.flex-grow]=\"getFlexAttribute(layoutItem, 'flex-grow')\"\n      [style.flex-shrink]=\"getFlexAttribute(layoutItem, 'flex-shrink')\"\n      [style.order]=\"(layoutItem.options || {}).order\">\n      <div\n        [dataIndex]=\"layoutItem?.arrayItem ? (dataIndex || []).concat(i) : (dataIndex || [])\"\n        [layoutIndex]=\"(layoutIndex || []).concat(i)\"\n        [layoutNode]=\"layoutItem\"\n        [orderable]=\"isDraggable(layoutItem)\">\n        <select-framework-widget *ngIf=\"showWidget(layoutItem)\"\n          [dataIndex]=\"layoutItem?.arrayItem ? (dataIndex || []).concat(i) : (dataIndex || [])\"\n          [layoutIndex]=\"(layoutIndex || []).concat(i)\"\n          [layoutNode]=\"layoutItem\"></select-framework-widget>\n      </div>\n    </div>"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;;;;;;;;;;wDAaQ,2XAG4B,iDAA1B,kBAAyB,2BADzB,8DAA6C,wBAD7C,gNAAqF,IADvF,YAG4B,EAA1B,SAAyB,EADzB,SAA6C,EAD7C,SAAqF;wDAb3F,6NAMmD,KACjD,0TAIwC,IACtC,6KAG4B,iDAJ5B,kCAAqC,qBADrC,kBAAyB,oBADzB,8DAA6C,iBAD7C,2LAAqF,IADvF,YAIwC,EAAtC,SAAqC,EADrC,SAAyB,EADzB,SAA6C,EAD7C,SAAqF,GAI5D,kCAA8B,qBAAvD,YAG4B,EAHH,UAA8B,mDAXzD,mBAAmC,aACnC,4EAA6D,GAC7D,uEAA+D,GAC/D,sEAA6D,GAC7D,wEAAiE,GACjE,8DAAgD,SANlD,YAMmD,EALjD,SAAmC,EACnC,SAA6D,EAC7D,SAA+D,EAC/D,SAA6D,EAC7D,SAAiE,EACjE,SAAgD;+DANlD,2MAMmD,iDAN9C,mBAAgD,SAArD,YAMmD,EAN9C,SAAgD"
+}

@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "select-framework.component.ngfactory.js",
+  "sources": [
+    "ng://angular2-json-schema-form/src/lib/src/widget-library/select-framework.component.ts.SelectFrameworkComponent.html"
+  ],
+  "sourcesContent": [
+    "<div #widgetContainer></div>"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;;;;;;yHAAA,+GAAsB"
+}

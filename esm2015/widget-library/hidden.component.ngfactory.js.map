@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "hidden.component.ngfactory.js",
+  "sources": [
+    "ng://angular2-json-schema-form/src/lib/src/widget-library/hidden.component.ts.HiddenComponent.html"
+  ],
+  "sourcesContent": [
+    "\n    <input *ngIf=\"boundControl\"\n      [formControl]=\"formControl\"\n      [id]=\"'control' + layoutNode?._id\"\n      [name]=\"controlName\"\n      type=\"hidden\">\n    <input *ngIf=\"!boundControl\"\n      [disabled]=\"controlDisabled\"\n      [name]=\"controlName\"\n      [id]=\"'control' + layoutNode?._id\"\n      type=\"hidden\"\n      [value]=\"controlValue\">"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;;;;;;;;0DACI;;;;;;;;;;;;8kBAIgB,iDAHd,mBAA2B,cAD7B,YAIgB,EAHd,SAA2B,mDAC3B,mEAAkC,mBAClC,mBAAoB,cAHtB,oVAIgB,EAFd,SAAkC,EAClC,SAAoB,EAHtB,2EAIgB;0DAChB,+JAKyB,wDAJvB,mBAA4B,kBAC5B,mBAAoB,cACpB,mEAAkC,mBAElC,mBAAsB,eALxB,YAKyB,EAJvB,SAA4B,EAC5B,SAAoB,EACpB,SAAkC,EAElC,SAAsB;iEAVxB,+KAIgB,IAChB,+KAKyB,iDAVlB,mBAAoB,eAA3B,YAIgB,EAJT,SAAoB,GAKpB,oBAAqB,eAA5B,YAKyB,EALlB,SAAqB"
+}

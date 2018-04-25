@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "jsonpointer.functions.ngfactory.js",
+  "sourceRoot": "",
+  "sources": [
+    "ng://angular2-json-schema-form/src/lib/src/shared/jsonpointer.functions.ngfactory.ts"
+  ],
+  "names": [],
+  "mappings": "",
+  "sourcesContent": [
+    "import * as i0 from '@angular/core';\ni0.ComponentFactory;\n"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "no-framework.component.ngfactory.js",
+  "sources": [
+    "ng://angular2-json-schema-form/src/lib/src/framework-library/no-framework/no-framework.component.ts.NoFrameworkComponent.html"
+  ],
+  "sourcesContent": [
+    "\n    <select-widget-widget\n      [dataIndex]=\"dataIndex\"\n      [layoutIndex]=\"layoutIndex\"\n      [layoutNode]=\"layoutNode\"></select-widget-widget>"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;;;;;;;;sEACI,+WAG4B,iDAA1B,mBAAyB,aADzB,mBAA2B,cAD3B,mBAAuB,YADzB,YAG4B,EAA1B,SAAyB,EADzB,SAA2B,EAD3B,SAAuB"
+}

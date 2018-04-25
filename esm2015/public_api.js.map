@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "public_api.js",
+  "sources": [
+    "ng://angular2-json-schema-form/src/lib/src/public_api.ts"
+  ],
+  "sourcesContent": [
+    "/*\n * Public API Surface of angular2-json-schema-form\n */\n\nexport * from './json-schema-form.service';\nexport * from './json-schema-form.component';\nexport * from './json-schema-form.module';\n"
+  ],
+  "names": [],
+  "mappings": ";;;AAIA,cAAc,4BAA4B,CAAC;AAC3C,cAAc,8BAA8B,CAAC;AAC7C,cAAc,2BAA2B,CAAC"
+}

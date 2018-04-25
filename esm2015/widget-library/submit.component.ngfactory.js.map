@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "submit.component.ngfactory.js",
+  "sources": [
+    "ng://angular2-json-schema-form/src/lib/src/widget-library/submit.component.ts.SubmitComponent.html"
+  ],
+  "sourcesContent": [
+    "\n    <div\n      [class]=\"options?.htmlClass || ''\">\n      <input\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [attr.required]=\"options?.required\"\n        [class]=\"options?.fieldHtmlClass || ''\"\n        [disabled]=\"controlDisabled\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [type]=\"layoutNode?.type\"\n        [value]=\"controlValue\"\n        (click)=\"updateValue($event)\">\n    </div>"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;;;;;;iEACI,6FACqC,KACnC,0SAUgC,YAA9B;;wBAA6B;MAV/B,wBAUgC,wDAXhC,6EAAkC,GADpC,YACqC,EAAnC,SAAkC,GAEhC,gGAAgE,GAChE,0FAAuD,GACvD,mDAAmC,oBACnC,kFAAuC,GACvC,mBAA4B,kBAC5B,mEAAkC,mBAClC,mBAAoB,cACpB,sDAAyB,mBACzB,mBAAsB,eATxB,YAUgC,EAT9B,SAAgE,EAChE,SAAuD,EACvD,SAAmC,EACnC,SAAuC,EACvC,SAA4B,EAC5B,SAAkC,EAClC,SAAoB,EACpB,SAAyB,EACzB,SAAsB"
+}
