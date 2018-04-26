@@ -1,16 +1,18 @@
 import { __values, __spread, __read, __extends } from 'tslib';
 import { Observable } from 'rxjs-compat/Observable';
 import { fromPromise } from 'rxjs-compat/observable/fromPromise';
-import 'rxjs-compat/operator/toPromise';
-import { Injectable, ChangeDetectionStrategy, Component, Input, Directive, ElementRef, NgZone, ComponentFactoryResolver, ViewChild, ViewContainerRef, Inject, ChangeDetectorRef, EventEmitter, forwardRef, Output, NgModule } from '@angular/core';
-import { cloneDeep, isEqual, filter, map, uniqueId } from 'lodash';
+import { toPromise } from 'rxjs-compat/operator/toPromise';
+import { Injectable, Directive, ElementRef, Input, NgZone, ChangeDetectionStrategy, Component, ComponentFactoryResolver, ViewChild, ViewContainerRef, Inject, ChangeDetectorRef, EventEmitter, forwardRef, Output, NgModule } from '@angular/core';
 import { forkJoin } from 'rxjs-compat/observable/forkJoin';
-import { map as map$1 } from 'rxjs-compat/operator/map';
+import { map } from 'rxjs-compat/operator/map';
+import { isEqual, cloneDeep, filter, map as map$1, uniqueId } from 'lodash';
 import { FormArray, FormControl, FormGroup, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subject } from 'rxjs-compat/Subject';
 import * as Ajv from 'ajv';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatNativeDateModule, MatRadioModule, MatSelectModule, MatSliderModule, MatSlideToggleModule, MatStepperModule, MatTabsModule, MatTooltipModule } from '@angular/material';
 
 /**
  * '_executeValidators' utility function
@@ -220,6 +222,9 @@ function isBoolean(value, option) {
     }
     return value === true || value === 1 || value === 'true' || value === '1' ||
         value === false || value === 0 || value === 'false' || value === '0';
+}
+function isFunction(item) {
+    return typeof item === 'function';
 }
 function isObject(item) {
     return item !== null && typeof item === 'object' &&
@@ -558,6 +563,15 @@ function isObservable(object) {
     return !!object && typeof object.subscribe === 'function';
 }
 /**
+ * '_toPromise' function
+ *
+ * @param  { object } object
+ * @return { Promise<any> }
+ */
+function _toPromise(object) {
+    return isPromise(object) ? object : toPromise.call(object);
+}
+/**
  * 'toObservable' function
  *
  * @param  { object } object
@@ -609,6 +623,41 @@ function xor(value1, value2) {
     return (!!value1 && !value2) || (!value1 && !!value2);
 }
 
+/**
+ * Utility function library:
+ *
+ * addClasses, copy, forEach, forEachCopy, hasOwn, mergeFilteredObject,
+ * uniqueItems, commonItems, fixTitle, toTitleCase
+*/
+/**
+ * 'addClasses' function
+ *
+ * Merges two space-delimited lists of CSS classes and removes duplicates.
+ *
+ * @param {string | string[] | Set<string>} oldClasses
+ * @param {string | string[] | Set<string>} newClasses
+ * @return {string | string[] | Set<string>} - Combined classes
+ */
+function addClasses(oldClasses, newClasses) {
+    var badType = function (i) { return !isSet(i) && !isArray(i) && !isString(i); };
+    if (badType(newClasses)) {
+        return oldClasses;
+    }
+    if (badType(oldClasses)) {
+        oldClasses = '';
+    }
+    var toSet = function (i) { return isSet(i) ? i : isArray(i) ? new Set(i) : new Set(i.split(' ')); };
+    var combinedSet = toSet(oldClasses);
+    var newSet = toSet(newClasses);
+    newSet.forEach(function (c) { return combinedSet.add(c); });
+    if (isSet(oldClasses)) {
+        return combinedSet;
+    }
+    if (isArray(oldClasses)) {
+        return Array.from(combinedSet);
+    }
+    return Array.from(combinedSet).join(' ');
+}
 /**
  * 'copy' function
  *
@@ -2006,6 +2055,979 @@ JsonPointer.decorators = [
     { type: Injectable },
 ];
 
+// tslint:disable max-line-length
+// updated from AJV fast format regular expressions:
+// https://github.com/epoberezkin/ajv/blob/master/lib/compile/formats.js
+var jsonSchemaFormatTests = {
+    'date': /^\d\d\d\d-[0-1]\d-[0-3]\d$/,
+    'time': /^[0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?(?:z|[+-]\d\d:\d\d)?$/i,
+    // Modified to allow incomplete entries, such as
+    // "2000-03-14T01:59:26.535" (needs "Z") or "2000-03-14T01:59" (needs ":00Z")
+    'date-time': /^\d\d\d\d-[0-1]\d-[0-3]\d[t\s][0-2]\d:[0-5]\d(?::[0-5]\d)?(?:\.\d+)?(?:z|[+-]\d\d:\d\d)?$/i,
+    // email (sources from jsen validator):
+    // http://stackoverflow.com/questions/201323/using-a-regular-expression-to-validate-an-email-address#answer-8829363
+    // http://www.w3.org/TR/html5/forms.html#valid-e-mail-address (search for 'willful violation')
+    'email': /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*$/i,
+    'hostname': /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[-0-9a-z]{0,61}[0-9a-z])?)*$/i,
+    // optimized https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9780596802837/ch07s16.html
+    'ipv4': /^(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)$/,
+    // optimized http://stackoverflow.com/questions/53497/regular-expression-that-matches-valid-ipv6-addresses
+    'ipv6': /^\s*(?:(?:(?:[0-9a-f]{1,4}:){7}(?:[0-9a-f]{1,4}|:))|(?:(?:[0-9a-f]{1,4}:){6}(?::[0-9a-f]{1,4}|(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(?:(?:[0-9a-f]{1,4}:){5}(?:(?:(?::[0-9a-f]{1,4}){1,2})|:(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(?:(?:[0-9a-f]{1,4}:){4}(?:(?:(?::[0-9a-f]{1,4}){1,3})|(?:(?::[0-9a-f]{1,4})?:(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(?:(?:[0-9a-f]{1,4}:){3}(?:(?:(?::[0-9a-f]{1,4}){1,4})|(?:(?::[0-9a-f]{1,4}){0,2}:(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(?:(?:[0-9a-f]{1,4}:){2}(?:(?:(?::[0-9a-f]{1,4}){1,5})|(?:(?::[0-9a-f]{1,4}){0,3}:(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(?:(?:[0-9a-f]{1,4}:){1}(?:(?:(?::[0-9a-f]{1,4}){1,6})|(?:(?::[0-9a-f]{1,4}){0,4}:(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(?::(?:(?:(?::[0-9a-f]{1,4}){1,7})|(?:(?::[0-9a-f]{1,4}){0,5}:(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(?:%.+)?\s*$/i,
+    // uri: https://github.com/mafintosh/is-my-json-valid/blob/master/formats.js
+    'uri': /^(?:[a-z][a-z0-9+-.]*)(?::|\/)\/?[^\s]*$/i,
+    // uri fragment: https://tools.ietf.org/html/rfc3986#appendix-A
+    'uri-reference': /^(?:(?:[a-z][a-z0-9+-.]*:)?\/\/)?[^\s]*$/i,
+    // uri-template: https://tools.ietf.org/html/rfc6570
+    'uri-template': /^(?:(?:[^\x00-\x20"'<>%\\^`{|}]|%[0-9a-f]{2})|\{[+#./;?&=,!@|]?(?:[a-z0-9_]|%[0-9a-f]{2})+(?::[1-9][0-9]{0,3}|\*)?(?:,(?:[a-z0-9_]|%[0-9a-f]{2})+(?::[1-9][0-9]{0,3}|\*)?)*\})*$/i,
+    // For the source: https://gist.github.com/dperini/729294
+    // For test cases: https://mathiasbynens.be/demo/url-regex
+    // @todo Delete current URL in favour of the commented out URL rule when this ajv issue is fixed https://github.com/eslint/eslint/issues/7983.
+    // URL: /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u{00a1}-\u{ffff}0-9]+-?)*[a-z\u{00a1}-\u{ffff}0-9]+)(?:\.(?:[a-z\u{00a1}-\u{ffff}0-9]+-?)*[a-z\u{00a1}-\u{ffff}0-9]+)*(?:\.(?:[a-z\u{00a1}-\u{ffff}]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/iu,
+    'url': /^(?:(?:http[s\u017F]?|ftp):\/\/)(?:(?:[\0-\x08\x0E-\x1F!-\x9F\xA1-\u167F\u1681-\u1FFF\u200B-\u2027\u202A-\u202E\u2030-\u205E\u2060-\u2FFF\u3001-\uD7FF\uE000-\uFEFE\uFF00-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+(?::(?:[\0-\x08\x0E-\x1F!-\x9F\xA1-\u167F\u1681-\u1FFF\u200B-\u2027\u202A-\u202E\u2030-\u205E\u2060-\u2FFF\u3001-\uD7FF\uE000-\uFEFE\uFF00-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])*)?@)?(?:(?!10(?:\.[0-9]{1,3}){3})(?!127(?:\.[0-9]{1,3}){3})(?!169\.254(?:\.[0-9]{1,3}){2})(?!192\.168(?:\.[0-9]{1,3}){2})(?!172\.(?:1[6-9]|2[0-9]|3[01])(?:\.[0-9]{1,3}){2})(?:[1-9][0-9]?|1[0-9][0-9]|2[01][0-9]|22[0-3])(?:\.(?:1?[0-9]{1,2}|2[0-4][0-9]|25[0-5])){2}(?:\.(?:[1-9][0-9]?|1[0-9][0-9]|2[0-4][0-9]|25[0-4]))|(?:(?:(?:[0-9KSa-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+-?)*(?:[0-9KSa-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+)(?:\.(?:(?:[0-9KSa-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+-?)*(?:[0-9KSa-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+)*(?:\.(?:(?:[KSa-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]){2,})))(?::[0-9]{2,5})?(?:\/(?:[\0-\x08\x0E-\x1F!-\x9F\xA1-\u167F\u1681-\u1FFF\u200B-\u2027\u202A-\u202E\u2030-\u205E\u2060-\u2FFF\u3001-\uD7FF\uE000-\uFEFE\uFF00-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])*)?$/i,
+    // uuid: http://tools.ietf.org/html/rfc4122
+    'uuid': /^(?:urn:uuid:)?[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i,
+    // optimized https://gist.github.com/olmokramer/82ccce673f86db7cda5e
+    'color': /^\s*(#(?:[\da-f]{3}){1,2}|rgb\((?:\d{1,3},\s*){2}\d{1,3}\)|rgba\((?:\d{1,3},\s*){3}\d*\.?\d+\)|hsl\(\d{1,3}(?:,\s*\d{1,3}%){2}\)|hsla\(\d{1,3}(?:,\s*\d{1,3}%){2},\s*\d*\.?\d+\))\s*$/gi,
+    // JSON-pointer: https://tools.ietf.org/html/rfc6901
+    'json-pointer': /^(?:\/(?:[^~/]|~0|~1)*)*$|^#(?:\/(?:[a-z0-9_\-.!$&'()*+,;:=@]|%[0-9a-f]{2}|~0|~1)*)*$/i,
+    'relative-json-pointer': /^(?:0|[1-9][0-9]*)(?:#|(?:\/(?:[^~/]|~0|~1)*)*)$/,
+    'regex': function (str) {
+        if (/[^\\]\\Z/.test(str)) {
+            return false;
+        }
+        try {
+            return true;
+        }
+        catch (e) {
+            return false;
+        }
+    }
+};
+
+/**
+ * 'JsonValidators' class
+ *
+ * Provides an extended set of validators to be used by form controls,
+ * compatible with standard JSON Schema validation options.
+ * http://json-schema.org/latest/json-schema-validation.html
+ *
+ * Note: This library is designed as a drop-in replacement for the Angular
+ * Validators library, and except for one small breaking change to the 'pattern'
+ * validator (described below) it can even be imported as a substitute, like so:
+ *
+ *   import { JsonValidators as Validators } from 'json-validators';
+ *
+ * and it should work with existing code as a complete replacement.
+ *
+ * The one exception is the 'pattern' validator, which has been changed to
+ * matche partial values by default (the standard 'pattern' validator wrapped
+ * all patterns in '^' and '$', forcing them to always match an entire value).
+ * However, the old behavior can be restored by simply adding '^' and '$'
+ * around your patterns, or by passing an optional second parameter of TRUE.
+ * This change is to make the 'pattern' validator match the behavior of a
+ * JSON Schema pattern, which allows partial matches, rather than the behavior
+ * of an HTML input control pattern, which does not.
+ *
+ * This library replaces Angular's validators and combination functions
+ * with the following validators and transformation functions:
+ *
+ * Validators:
+ *   For all formControls:     required (*), type, enum, const
+ *   For text formControls:    minLength (*), maxLength (*), pattern (*), format
+ *   For numeric formControls: maximum, exclusiveMaximum,
+ *                             minimum, exclusiveMinimum, multipleOf
+ *   For formGroup objects:    minProperties, maxProperties, dependencies
+ *   For formArray arrays:     minItems, maxItems, uniqueItems, contains
+ *   Not used by JSON Schema:  min (*), max (*), requiredTrue (*), email (*)
+ * (Validators originally included with Angular are maked with (*).)
+ *
+ * NOTE / TODO: The dependencies validator is not complete.
+ * NOTE / TODO: The contains validator is not complete.
+ *
+ * Validators not used by JSON Schema (but included for compatibility)
+ * and their JSON Schema equivalents:
+ *
+ *   Angular validator | JSON Schema equivalent
+ *   ------------------|-----------------------
+ *     min(number)     |   minimum(number)
+ *     max(number)     |   maximum(number)
+ *     requiredTrue()  |   const(true)
+ *     email()         |   format('email')
+ *
+ * Validator transformation functions:
+ *   composeAnyOf, composeOneOf, composeAllOf, composeNot
+ * (Angular's original combination funciton, 'compose', is also included for
+ * backward compatibility, though it is functionally equivalent to composeAllOf,
+ * asside from its more generic error message.)
+ *
+ * All validators have also been extended to accept an optional second argument
+ * which, if passed a TRUE value, causes the validator to perform the opposite
+ * of its original finction. (This is used internally to enable 'not' and
+ * 'composeOneOf' to function and return useful error messages.)
+ *
+ * The 'required' validator has also been overloaded so that if called with
+ * a boolean parameter (or no parameters) it returns the original validator
+ * function (rather than executing it). However, if it is called with an
+ * AbstractControl parameter (as was previously required), it behaves
+ * exactly as before.
+ *
+ * This enables all validators (including 'required') to be constructed in
+ * exactly the same way, so they can be automatically applied using the
+ * equivalent key names and values taken directly from a JSON Schema.
+ *
+ * This source code is partially derived from Angular,
+ * which is Copyright (c) 2014-2017 Google, Inc.
+ * Use of this source code is therefore governed by the same MIT-style license
+ * that can be found in the LICENSE file at https://angular.io/license
+ *
+ * Original Angular Validators:
+ * https://github.com/angular/angular/blob/master/packages/forms/src/validators.ts
+ */
+var JsonValidators = /** @class */ (function () {
+    function JsonValidators() {
+    }
+    JsonValidators.required = function (input) {
+        if (input === undefined) {
+            input = true;
+        }
+        switch (input) {
+            case true:
+                // Return required function (do not execute it yet)
+                return function (control, invert) {
+                    if (invert === void 0) { invert = false; }
+                    if (invert) {
+                        return null;
+                    } // if not required, always return valid
+                    return hasValue(control.value) ? null : { 'required': true };
+                };
+            case false:
+                // Do nothing (if field is not required, it is always valid)
+                return JsonValidators.nullValidator;
+            default:
+                // Execute required function
+                return hasValue(input.value) ? null : { 'required': true };
+        }
+    };
+    /**
+       * 'type' validator
+       *
+       * Requires a control to only accept values of a specified type,
+       * or one of an array of types.
+       *
+       * Note: SchemaPrimitiveType = 'string'|'number'|'integer'|'boolean'|'null'
+       *
+       * @param {SchemaPrimitiveType|SchemaPrimitiveType[]} type - type(s) to accept
+       * @return {IValidatorFn}
+       */
+    JsonValidators.type = function (requiredType) {
+        if (!hasValue(requiredType)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var currentValue = control.value;
+            var isValid = isArray(requiredType) ?
+                requiredType.some(function (type) { return isType(currentValue, type); }) :
+                isType(currentValue, requiredType);
+            return xor(isValid, invert) ?
+                null : { 'type': { requiredType: requiredType, currentValue: currentValue } };
+        };
+    };
+    /**
+       * 'enum' validator
+       *
+       * Requires a control to have a value from an enumerated list of values.
+       *
+       * Converts types as needed to allow string inputs to still correctly
+       * match number, boolean, and null enum values.
+       *
+       * @param {any[]} allowedValues - array of acceptable values
+       * @return {IValidatorFn}
+       */
+    JsonValidators.enum = function (allowedValues) {
+        if (!isArray(allowedValues)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var currentValue = control.value;
+            var isEqual$$1 = function (enumValue, inputValue) { return enumValue === inputValue ||
+                (isNumber(enumValue) && +inputValue === +enumValue) ||
+                (isBoolean(enumValue, 'strict') &&
+                    toJavaScriptType(inputValue, 'boolean') === enumValue) ||
+                (enumValue === null && !hasValue(inputValue)) ||
+                isEqual(enumValue, inputValue); };
+            var isValid = isArray(currentValue) ?
+                currentValue.every(function (inputValue) { return allowedValues.some(function (enumValue) { return isEqual$$1(enumValue, inputValue); }); }) :
+                allowedValues.some(function (enumValue) { return isEqual$$1(enumValue, currentValue); });
+            return xor(isValid, invert) ?
+                null : { 'enum': { allowedValues: allowedValues, currentValue: currentValue } };
+        };
+    };
+    /**
+       * 'const' validator
+       *
+       * Requires a control to have a specific value.
+       *
+       * Converts types as needed to allow string inputs to still correctly
+       * match number, boolean, and null values.
+       *
+       * TODO: modify to work with objects
+       *
+       * @param {any[]} requiredValue - required value
+       * @return {IValidatorFn}
+       */
+    JsonValidators.const = function (requiredValue) {
+        if (!hasValue(requiredValue)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var currentValue = control.value;
+            var isEqual$$1 = function (constValue, inputValue) { return constValue === inputValue ||
+                isNumber(constValue) && +inputValue === +constValue ||
+                isBoolean(constValue, 'strict') &&
+                    toJavaScriptType(inputValue, 'boolean') === constValue ||
+                constValue === null && !hasValue(inputValue); };
+            var isValid = isEqual$$1(requiredValue, currentValue);
+            return xor(isValid, invert) ?
+                null : { 'const': { requiredValue: requiredValue, currentValue: currentValue } };
+        };
+    };
+    /**
+       * 'minLength' validator
+       *
+       * Requires a control's text value to be greater than a specified length.
+       *
+       * @param {number} minimumLength - minimum allowed string length
+       * @param {boolean = false} invert - instead return error object only if valid
+       * @return {IValidatorFn}
+       */
+    JsonValidators.minLength = function (minimumLength) {
+        if (!hasValue(minimumLength)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var currentLength = isString(control.value) ? control.value.length : 0;
+            var isValid = currentLength >= minimumLength;
+            return xor(isValid, invert) ?
+                null : { 'minLength': { minimumLength: minimumLength, currentLength: currentLength } };
+        };
+    };
+    /**
+       * 'maxLength' validator
+       *
+       * Requires a control's text value to be less than a specified length.
+       *
+       * @param {number} maximumLength - maximum allowed string length
+       * @param {boolean = false} invert - instead return error object only if valid
+       * @return {IValidatorFn}
+       */
+    JsonValidators.maxLength = function (maximumLength) {
+        if (!hasValue(maximumLength)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            var currentLength = isString(control.value) ? control.value.length : 0;
+            var isValid = currentLength <= maximumLength;
+            return xor(isValid, invert) ?
+                null : { 'maxLength': { maximumLength: maximumLength, currentLength: currentLength } };
+        };
+    };
+    /**
+       * 'pattern' validator
+       *
+       * Note: NOT the same as Angular's default pattern validator.
+       *
+       * Requires a control's value to match a specified regular expression pattern.
+       *
+       * This validator changes the behavior of default pattern validator
+       * by replacing RegExp(`^${pattern}$`) with RegExp(`${pattern}`),
+       * which allows for partial matches.
+       *
+       * To return to the default funcitonality, and match the entire string,
+       * pass TRUE as the optional second parameter.
+       *
+       * @param {string} pattern - regular expression pattern
+       * @param {boolean = false} wholeString - match whole value string?
+       * @return {IValidatorFn}
+       */
+    JsonValidators.pattern = function (pattern, wholeString) {
+        if (wholeString === void 0) { wholeString = false; }
+        if (!hasValue(pattern)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var regex;
+            var requiredPattern;
+            if (typeof pattern === 'string') {
+                requiredPattern = (wholeString) ? "^" + pattern + "$" : pattern;
+                regex = new RegExp(requiredPattern);
+            }
+            else {
+                requiredPattern = pattern.toString();
+                regex = pattern;
+            }
+            var currentValue = control.value;
+            var isValid = isString(currentValue) ? regex.test(currentValue) : false;
+            return xor(isValid, invert) ?
+                null : { 'pattern': { requiredPattern: requiredPattern, currentValue: currentValue } };
+        };
+    };
+    /**
+       * 'format' validator
+       *
+       * Requires a control to have a value of a certain format.
+       *
+       * This validator currently checks the following formsts:
+       *   date, time, date-time, email, hostname, ipv4, ipv6,
+       *   uri, uri-reference, uri-template, url, uuid, color,
+       *   json-pointer, relative-json-pointer, regex
+       *
+       * Fast format regular expressions copied from AJV:
+       * https://github.com/epoberezkin/ajv/blob/master/lib/compile/formats.js
+       *
+       * @param {JsonSchemaFormatNames} requiredFormat - format to check
+       * @return {IValidatorFn}
+       */
+    JsonValidators.format = function (requiredFormat) {
+        if (!hasValue(requiredFormat)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var isValid;
+            var currentValue = control.value;
+            if (isString(currentValue)) {
+                var formatTest = jsonSchemaFormatTests[requiredFormat];
+                if (typeof formatTest === 'object') {
+                    isValid = formatTest.test(currentValue);
+                }
+                else if (typeof formatTest === 'function') {
+                    isValid = formatTest(currentValue);
+                }
+                else {
+                    console.error("format validator error: \"" + requiredFormat + "\" is not a recognized format.");
+                    isValid = true;
+                }
+            }
+            else {
+                // Allow JavaScript Date objects
+                isValid = ['date', 'time', 'date-time'].includes(requiredFormat) &&
+                    Object.prototype.toString.call(currentValue) === '[object Date]';
+            }
+            return xor(isValid, invert) ?
+                null : { 'format': { requiredFormat: requiredFormat, currentValue: currentValue } };
+        };
+    };
+    /**
+       * 'minimum' validator
+       *
+       * Requires a control's numeric value to be greater than or equal to
+       * a minimum amount.
+       *
+       * Any non-numeric value is also valid (according to the HTML forms spec,
+       * a non-numeric value doesn't have a minimum).
+       * https://www.w3.org/TR/html5/forms.html#attr-input-max
+       *
+       * @param {number} minimum - minimum allowed value
+       * @return {IValidatorFn}
+       */
+    JsonValidators.minimum = function (minimumValue) {
+        if (!hasValue(minimumValue)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var currentValue = control.value;
+            var isValid = !isNumber(currentValue) || currentValue >= minimumValue;
+            return xor(isValid, invert) ?
+                null : { 'minimum': { minimumValue: minimumValue, currentValue: currentValue } };
+        };
+    };
+    /**
+       * 'exclusiveMinimum' validator
+       *
+       * Requires a control's numeric value to be less than a maximum amount.
+       *
+       * Any non-numeric value is also valid (according to the HTML forms spec,
+       * a non-numeric value doesn't have a maximum).
+       * https://www.w3.org/TR/html5/forms.html#attr-input-max
+       *
+       * @param {number} exclusiveMinimumValue - maximum allowed value
+       * @return {IValidatorFn}
+       */
+    JsonValidators.exclusiveMinimum = function (exclusiveMinimumValue) {
+        if (!hasValue(exclusiveMinimumValue)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var currentValue = control.value;
+            var isValid = !isNumber(currentValue) || +currentValue < exclusiveMinimumValue;
+            return xor(isValid, invert) ?
+                null : { 'exclusiveMinimum': { exclusiveMinimumValue: exclusiveMinimumValue, currentValue: currentValue } };
+        };
+    };
+    /**
+       * 'maximum' validator
+       *
+       * Requires a control's numeric value to be less than or equal to
+       * a maximum amount.
+       *
+       * Any non-numeric value is also valid (according to the HTML forms spec,
+       * a non-numeric value doesn't have a maximum).
+       * https://www.w3.org/TR/html5/forms.html#attr-input-max
+       *
+       * @param {number} maximumValue - maximum allowed value
+       * @return {IValidatorFn}
+       */
+    JsonValidators.maximum = function (maximumValue) {
+        if (!hasValue(maximumValue)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var currentValue = control.value;
+            var isValid = !isNumber(currentValue) || +currentValue <= maximumValue;
+            return xor(isValid, invert) ?
+                null : { 'maximum': { maximumValue: maximumValue, currentValue: currentValue } };
+        };
+    };
+    /**
+       * 'exclusiveMaximum' validator
+       *
+       * Requires a control's numeric value to be less than a maximum amount.
+       *
+       * Any non-numeric value is also valid (according to the HTML forms spec,
+       * a non-numeric value doesn't have a maximum).
+       * https://www.w3.org/TR/html5/forms.html#attr-input-max
+       *
+       * @param {number} exclusiveMaximumValue - maximum allowed value
+       * @return {IValidatorFn}
+       */
+    JsonValidators.exclusiveMaximum = function (exclusiveMaximumValue) {
+        if (!hasValue(exclusiveMaximumValue)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var currentValue = control.value;
+            var isValid = !isNumber(currentValue) || +currentValue < exclusiveMaximumValue;
+            return xor(isValid, invert) ?
+                null : { 'exclusiveMaximum': { exclusiveMaximumValue: exclusiveMaximumValue, currentValue: currentValue } };
+        };
+    };
+    /**
+       * 'multipleOf' validator
+       *
+       * Requires a control to have a numeric value that is a multiple
+       * of a specified number.
+       *
+       * @param {number} multipleOfValue - number value must be a multiple of
+       * @return {IValidatorFn}
+       */
+    JsonValidators.multipleOf = function (multipleOfValue) {
+        if (!hasValue(multipleOfValue)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var currentValue = control.value;
+            var isValid = isNumber(currentValue) &&
+                currentValue % multipleOfValue === 0;
+            return xor(isValid, invert) ?
+                null : { 'multipleOf': { multipleOfValue: multipleOfValue, currentValue: currentValue } };
+        };
+    };
+    /**
+       * 'minProperties' validator
+       *
+       * Requires a form group to have a minimum number of properties (i.e. have
+       * values entered in a minimum number of controls within the group).
+       *
+       * @param {number} minimumProperties - minimum number of properties allowed
+       * @return {IValidatorFn}
+       */
+    JsonValidators.minProperties = function (minimumProperties) {
+        if (!hasValue(minimumProperties)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var currentProperties = Object.keys(control.value).length || 0;
+            var isValid = currentProperties >= minimumProperties;
+            return xor(isValid, invert) ?
+                null : { 'minProperties': { minimumProperties: minimumProperties, currentProperties: currentProperties } };
+        };
+    };
+    /**
+       * 'maxProperties' validator
+       *
+       * Requires a form group to have a maximum number of properties (i.e. have
+       * values entered in a maximum number of controls within the group).
+       *
+       * Note: Has no effect if the form group does not contain more than the
+       * maximum number of controls.
+       *
+       * @param {number} maximumProperties - maximum number of properties allowed
+       * @return {IValidatorFn}
+       */
+    JsonValidators.maxProperties = function (maximumProperties) {
+        if (!hasValue(maximumProperties)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            var currentProperties = Object.keys(control.value).length || 0;
+            var isValid = currentProperties <= maximumProperties;
+            return xor(isValid, invert) ?
+                null : { 'maxProperties': { maximumProperties: maximumProperties, currentProperties: currentProperties } };
+        };
+    };
+    /**
+       * 'dependencies' validator
+       *
+       * Requires the controls in a form group to meet additional validation
+       * criteria, depending on the values of other controls in the group.
+       *
+       * Examples:
+       * https://spacetelescope.github.io/understanding-json-schema/reference/object.html#dependencies
+       *
+       * @param {any} dependencies - required dependencies
+       * @return {IValidatorFn}
+       */
+    JsonValidators.dependencies = function (dependencies) {
+        if (getType(dependencies) !== 'object' || isEmpty(dependencies)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var allErrors = _mergeObjects(forEachCopy(dependencies, function (value, requiringField) {
+                if (!hasValue(control.value[requiringField])) {
+                    return null;
+                }
+                var requiringFieldErrors = {};
+                var requiredFields;
+                var properties = {};
+                if (getType(dependencies[requiringField]) === 'array') {
+                    requiredFields = dependencies[requiringField];
+                }
+                else if (getType(dependencies[requiringField]) === 'object') {
+                    requiredFields = dependencies[requiringField]['required'] || [];
+                    properties = dependencies[requiringField]['properties'] || {};
+                }
+                try {
+                    // Validate property dependencies
+                    for (var requiredFields_1 = __values(requiredFields), requiredFields_1_1 = requiredFields_1.next(); !requiredFields_1_1.done; requiredFields_1_1 = requiredFields_1.next()) {
+                        var requiredField = requiredFields_1_1.value;
+                        if (xor(!hasValue(control.value[requiredField]), invert)) {
+                            requiringFieldErrors[requiredField] = { 'required': true };
+                        }
+                    }
+                }
+                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                finally {
+                    try {
+                        if (requiredFields_1_1 && !requiredFields_1_1.done && (_a = requiredFields_1.return)) _a.call(requiredFields_1);
+                    }
+                    finally { if (e_1) throw e_1.error; }
+                }
+                // Validate schema dependencies
+                requiringFieldErrors = _mergeObjects(requiringFieldErrors, forEachCopy(properties, function (requirements, requiredField) {
+                    var requiredFieldErrors = _mergeObjects(forEachCopy(requirements, function (requirement, parameter) {
+                        var validator = null;
+                        if (requirement === 'maximum' || requirement === 'minimum') {
+                            var exclusive = !!requirements['exclusiveM' + requirement.slice(1)];
+                            validator = JsonValidators[requirement](parameter, exclusive);
+                        }
+                        else if (typeof JsonValidators[requirement] === 'function') {
+                            validator = JsonValidators[requirement](parameter);
+                        }
+                        return !isDefined(validator) ?
+                            null : validator(control.value[requiredField]);
+                    }));
+                    return isEmpty(requiredFieldErrors) ?
+                        null : (_a = {}, _a[requiredField] = requiredFieldErrors, _a);
+                    var _a;
+                }));
+                return isEmpty(requiringFieldErrors) ?
+                    null : (_b = {}, _b[requiringField] = requiringFieldErrors, _b);
+                var e_1, _a, _b;
+            }));
+            return isEmpty(allErrors) ? null : allErrors;
+        };
+    };
+    /**
+       * 'minItems' validator
+       *
+       * Requires a form array to have a minimum number of values.
+       *
+       * @param {number} minimumItems - minimum number of items allowed
+       * @return {IValidatorFn}
+       */
+    JsonValidators.minItems = function (minimumItems) {
+        if (!hasValue(minimumItems)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var currentItems = isArray(control.value) ? control.value.length : 0;
+            var isValid = currentItems >= minimumItems;
+            return xor(isValid, invert) ?
+                null : { 'minItems': { minimumItems: minimumItems, currentItems: currentItems } };
+        };
+    };
+    /**
+       * 'maxItems' validator
+       *
+       * Requires a form array to have a maximum number of values.
+       *
+       * @param {number} maximumItems - maximum number of items allowed
+       * @return {IValidatorFn}
+       */
+    JsonValidators.maxItems = function (maximumItems) {
+        if (!hasValue(maximumItems)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            var currentItems = isArray(control.value) ? control.value.length : 0;
+            var isValid = currentItems <= maximumItems;
+            return xor(isValid, invert) ?
+                null : { 'maxItems': { maximumItems: maximumItems, currentItems: currentItems } };
+        };
+    };
+    /**
+       * 'uniqueItems' validator
+       *
+       * Requires values in a form array to be unique.
+       *
+       * @param {boolean = true} unique? - true to validate, false to disable
+       * @return {IValidatorFn}
+       */
+    JsonValidators.uniqueItems = function (unique) {
+        if (unique === void 0) { unique = true; }
+        if (!unique) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var sorted = control.value.slice().sort();
+            var duplicateItems = [];
+            for (var i = 1; i < sorted.length; i++) {
+                if (sorted[i - 1] === sorted[i] && duplicateItems.includes(sorted[i])) {
+                    duplicateItems.push(sorted[i]);
+                }
+            }
+            var isValid = !duplicateItems.length;
+            return xor(isValid, invert) ?
+                null : { 'uniqueItems': { duplicateItems: duplicateItems } };
+        };
+    };
+    /**
+       * 'contains' validator
+       *
+       * TODO: Complete this validator
+       *
+       * Requires values in a form array to be unique.
+       *
+       * @param {boolean = true} unique? - true to validate, false to disable
+       * @return {IValidatorFn}
+       */
+    JsonValidators.contains = function (requiredItem) {
+        if (requiredItem === void 0) { requiredItem = true; }
+        if (!requiredItem) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value) || !isArray(control.value)) {
+                return null;
+            }
+            var currentItems = control.value;
+            // const isValid = currentItems.some(item =>
+            //
+            // );
+            var isValid = true;
+            return xor(isValid, invert) ?
+                null : { 'contains': { requiredItem: requiredItem, currentItems: currentItems } };
+        };
+    };
+    /**
+       * No-op validator. Included for backward compatibility.
+       */
+    JsonValidators.nullValidator = function (control) {
+        return null;
+    };
+    /**
+       * Validator transformation functions:
+       * composeAnyOf, composeOneOf, composeAllOf, composeNot,
+       * compose, composeAsync
+       *
+       * TODO: Add composeAnyOfAsync, composeOneOfAsync,
+       *           composeAllOfAsync, composeNotAsync
+       */
+    /**
+       * 'composeAnyOf' validator combination function
+       *
+       * Accepts an array of validators and returns a single validator that
+       * evaluates to valid if any one or more of the submitted validators are
+       * valid. If every validator is invalid, it returns combined errors from
+       * all validators.
+       *
+       * @param {IValidatorFn[]} validators - array of validators to combine
+       * @return {IValidatorFn} - single combined validator function
+       */
+    JsonValidators.composeAnyOf = function (validators) {
+        if (!validators) {
+            return null;
+        }
+        var presentValidators = validators.filter(isDefined);
+        if (presentValidators.length === 0) {
+            return null;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            var arrayOfErrors = _executeValidators(control, presentValidators, invert).filter(isDefined);
+            var isValid = validators.length > arrayOfErrors.length;
+            return xor(isValid, invert) ?
+                null : _mergeObjects.apply(void 0, __spread(arrayOfErrors, [{ 'anyOf': !invert }]));
+        };
+    };
+    /**
+       * 'composeOneOf' validator combination function
+       *
+       * Accepts an array of validators and returns a single validator that
+       * evaluates to valid only if exactly one of the submitted validators
+       * is valid. Otherwise returns combined information from all validators,
+       * both valid and invalid.
+       *
+       * @param {IValidatorFn[]} validators - array of validators to combine
+       * @return {IValidatorFn} - single combined validator function
+       */
+    JsonValidators.composeOneOf = function (validators) {
+        if (!validators) {
+            return null;
+        }
+        var presentValidators = validators.filter(isDefined);
+        if (presentValidators.length === 0) {
+            return null;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            var arrayOfErrors = _executeValidators(control, presentValidators);
+            var validControls = validators.length - arrayOfErrors.filter(isDefined).length;
+            var isValid = validControls === 1;
+            if (xor(isValid, invert)) {
+                return null;
+            }
+            var arrayOfValids = _executeValidators(control, presentValidators, invert);
+            return _mergeObjects.apply(void 0, __spread(arrayOfErrors, arrayOfValids, [{ 'oneOf': !invert }]));
+        };
+    };
+    /**
+       * 'composeAllOf' validator combination function
+       *
+       * Accepts an array of validators and returns a single validator that
+       * evaluates to valid only if all the submitted validators are individually
+       * valid. Otherwise it returns combined errors from all invalid validators.
+       *
+       * @param {IValidatorFn[]} validators - array of validators to combine
+       * @return {IValidatorFn} - single combined validator function
+       */
+    JsonValidators.composeAllOf = function (validators) {
+        if (!validators) {
+            return null;
+        }
+        var presentValidators = validators.filter(isDefined);
+        if (presentValidators.length === 0) {
+            return null;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            var combinedErrors = _mergeErrors(_executeValidators(control, presentValidators, invert));
+            var isValid = combinedErrors === null;
+            return (xor(isValid, invert)) ?
+                null : _mergeObjects(combinedErrors, { 'allOf': !invert });
+        };
+    };
+    /**
+       * 'composeNot' validator inversion function
+       *
+       * Accepts a single validator function and inverts its result.
+       * Returns valid if the submitted validator is invalid, and
+       * returns invalid if the submitted validator is valid.
+       * (Note: this function can itself be inverted
+       *   - e.g. composeNot(composeNot(validator)) -
+       *   but this can be confusing and is therefore not recommended.)
+       *
+       * @param {IValidatorFn[]} validators - validator(s) to invert
+       * @return {IValidatorFn} - new validator function that returns opposite result
+       */
+    JsonValidators.composeNot = function (validator) {
+        if (!validator) {
+            return null;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            if (isEmpty(control.value)) {
+                return null;
+            }
+            var error = validator(control, !invert);
+            var isValid = error === null;
+            return (xor(isValid, invert)) ?
+                null : _mergeObjects(error, { 'not': !invert });
+        };
+    };
+    /**
+       * 'compose' validator combination function
+       *
+       * @param {IValidatorFn[]} validators - array of validators to combine
+       * @return {IValidatorFn} - single combined validator function
+       */
+    JsonValidators.compose = function (validators) {
+        if (!validators) {
+            return null;
+        }
+        var presentValidators = validators.filter(isDefined);
+        if (presentValidators.length === 0) {
+            return null;
+        }
+        return function (control, invert) {
+            if (invert === void 0) { invert = false; }
+            return _mergeErrors(_executeValidators(control, presentValidators, invert));
+        };
+    };
+    /**
+       * 'composeAsync' async validator combination function
+       *
+       * @param {AsyncIValidatorFn[]} async validators - array of async validators
+       * @return {AsyncIValidatorFn} - single combined async validator function
+       */
+    JsonValidators.composeAsync = function (validators) {
+        if (!validators) {
+            return null;
+        }
+        var presentValidators = validators.filter(isDefined);
+        if (presentValidators.length === 0) {
+            return null;
+        }
+        return function (control) {
+            var observables = _executeAsyncValidators(control, presentValidators).map(toObservable);
+            return map.call(forkJoin(observables), _mergeErrors);
+        };
+    };
+    // Additional angular validators (not used by Angualr JSON Schema Form)
+    // From https://github.com/angular/angular/blob/master/packages/forms/src/validators.ts
+    /**
+       * Validator that requires controls to have a value greater than a number.
+       */
+    JsonValidators.min = function (min) {
+        if (!hasValue(min)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control) {
+            // don't validate empty values to allow optional controls
+            if (isEmpty(control.value) || isEmpty(min)) {
+                return null;
+            }
+            var value = parseFloat(control.value);
+            var actual = control.value;
+            // Controls with NaN values after parsing should be treated as not having a
+            // minimum, per the HTML forms spec: https://www.w3.org/TR/html5/forms.html#attr-input-min
+            return isNaN(value) || value >= min ? null : { 'min': { min: min, actual: actual } };
+        };
+    };
+    /**
+       * Validator that requires controls to have a value less than a number.
+       */
+    JsonValidators.max = function (max) {
+        if (!hasValue(max)) {
+            return JsonValidators.nullValidator;
+        }
+        return function (control) {
+            // don't validate empty values to allow optional controls
+            if (isEmpty(control.value) || isEmpty(max)) {
+                return null;
+            }
+            var value = parseFloat(control.value);
+            var actual = control.value;
+            // Controls with NaN values after parsing should be treated as not having a
+            // maximum, per the HTML forms spec: https://www.w3.org/TR/html5/forms.html#attr-input-max
+            return isNaN(value) || value <= max ? null : { 'max': { max: max, actual: actual } };
+        };
+    };
+    /**
+       * Validator that requires control value to be true.
+       */
+    JsonValidators.requiredTrue = function (control) {
+        if (!control) {
+            return JsonValidators.nullValidator;
+        }
+        return control.value === true ? null : { 'required': true };
+    };
+    /**
+       * Validator that performs email validation.
+       */
+    JsonValidators.email = function (control) {
+        if (!control) {
+            return JsonValidators.nullValidator;
+        }
+        var EMAIL_REGEXP = /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/;
+        return EMAIL_REGEXP.test(control.value) ? null : { 'email': true };
+    };
+    return JsonValidators;
+}());
+
 /**
  * 'mergeSchemas' function
  *
@@ -3244,978 +4266,317 @@ function fixRequiredArrayProperties(schema) {
     return schema;
 }
 
-// tslint:disable max-line-length
-// updated from AJV fast format regular expressions:
-// https://github.com/epoberezkin/ajv/blob/master/lib/compile/formats.js
-var jsonSchemaFormatTests = {
-    'date': /^\d\d\d\d-[0-1]\d-[0-3]\d$/,
-    'time': /^[0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?(?:z|[+-]\d\d:\d\d)?$/i,
-    // Modified to allow incomplete entries, such as
-    // "2000-03-14T01:59:26.535" (needs "Z") or "2000-03-14T01:59" (needs ":00Z")
-    'date-time': /^\d\d\d\d-[0-1]\d-[0-3]\d[t\s][0-2]\d:[0-5]\d(?::[0-5]\d)?(?:\.\d+)?(?:z|[+-]\d\d:\d\d)?$/i,
-    // email (sources from jsen validator):
-    // http://stackoverflow.com/questions/201323/using-a-regular-expression-to-validate-an-email-address#answer-8829363
-    // http://www.w3.org/TR/html5/forms.html#valid-e-mail-address (search for 'willful violation')
-    'email': /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*$/i,
-    'hostname': /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[-0-9a-z]{0,61}[0-9a-z])?)*$/i,
-    // optimized https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9780596802837/ch07s16.html
-    'ipv4': /^(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)$/,
-    // optimized http://stackoverflow.com/questions/53497/regular-expression-that-matches-valid-ipv6-addresses
-    'ipv6': /^\s*(?:(?:(?:[0-9a-f]{1,4}:){7}(?:[0-9a-f]{1,4}|:))|(?:(?:[0-9a-f]{1,4}:){6}(?::[0-9a-f]{1,4}|(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(?:(?:[0-9a-f]{1,4}:){5}(?:(?:(?::[0-9a-f]{1,4}){1,2})|:(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(?:(?:[0-9a-f]{1,4}:){4}(?:(?:(?::[0-9a-f]{1,4}){1,3})|(?:(?::[0-9a-f]{1,4})?:(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(?:(?:[0-9a-f]{1,4}:){3}(?:(?:(?::[0-9a-f]{1,4}){1,4})|(?:(?::[0-9a-f]{1,4}){0,2}:(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(?:(?:[0-9a-f]{1,4}:){2}(?:(?:(?::[0-9a-f]{1,4}){1,5})|(?:(?::[0-9a-f]{1,4}){0,3}:(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(?:(?:[0-9a-f]{1,4}:){1}(?:(?:(?::[0-9a-f]{1,4}){1,6})|(?:(?::[0-9a-f]{1,4}){0,4}:(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(?::(?:(?:(?::[0-9a-f]{1,4}){1,7})|(?:(?::[0-9a-f]{1,4}){0,5}:(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(?:%.+)?\s*$/i,
-    // uri: https://github.com/mafintosh/is-my-json-valid/blob/master/formats.js
-    'uri': /^(?:[a-z][a-z0-9+-.]*)(?::|\/)\/?[^\s]*$/i,
-    // uri fragment: https://tools.ietf.org/html/rfc3986#appendix-A
-    'uri-reference': /^(?:(?:[a-z][a-z0-9+-.]*:)?\/\/)?[^\s]*$/i,
-    // uri-template: https://tools.ietf.org/html/rfc6570
-    'uri-template': /^(?:(?:[^\x00-\x20"'<>%\\^`{|}]|%[0-9a-f]{2})|\{[+#./;?&=,!@|]?(?:[a-z0-9_]|%[0-9a-f]{2})+(?::[1-9][0-9]{0,3}|\*)?(?:,(?:[a-z0-9_]|%[0-9a-f]{2})+(?::[1-9][0-9]{0,3}|\*)?)*\})*$/i,
-    // For the source: https://gist.github.com/dperini/729294
-    // For test cases: https://mathiasbynens.be/demo/url-regex
-    // @todo Delete current URL in favour of the commented out URL rule when this ajv issue is fixed https://github.com/eslint/eslint/issues/7983.
-    // URL: /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u{00a1}-\u{ffff}0-9]+-?)*[a-z\u{00a1}-\u{ffff}0-9]+)(?:\.(?:[a-z\u{00a1}-\u{ffff}0-9]+-?)*[a-z\u{00a1}-\u{ffff}0-9]+)*(?:\.(?:[a-z\u{00a1}-\u{ffff}]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/iu,
-    'url': /^(?:(?:http[s\u017F]?|ftp):\/\/)(?:(?:[\0-\x08\x0E-\x1F!-\x9F\xA1-\u167F\u1681-\u1FFF\u200B-\u2027\u202A-\u202E\u2030-\u205E\u2060-\u2FFF\u3001-\uD7FF\uE000-\uFEFE\uFF00-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+(?::(?:[\0-\x08\x0E-\x1F!-\x9F\xA1-\u167F\u1681-\u1FFF\u200B-\u2027\u202A-\u202E\u2030-\u205E\u2060-\u2FFF\u3001-\uD7FF\uE000-\uFEFE\uFF00-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])*)?@)?(?:(?!10(?:\.[0-9]{1,3}){3})(?!127(?:\.[0-9]{1,3}){3})(?!169\.254(?:\.[0-9]{1,3}){2})(?!192\.168(?:\.[0-9]{1,3}){2})(?!172\.(?:1[6-9]|2[0-9]|3[01])(?:\.[0-9]{1,3}){2})(?:[1-9][0-9]?|1[0-9][0-9]|2[01][0-9]|22[0-3])(?:\.(?:1?[0-9]{1,2}|2[0-4][0-9]|25[0-5])){2}(?:\.(?:[1-9][0-9]?|1[0-9][0-9]|2[0-4][0-9]|25[0-4]))|(?:(?:(?:[0-9KSa-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+-?)*(?:[0-9KSa-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+)(?:\.(?:(?:[0-9KSa-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+-?)*(?:[0-9KSa-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+)*(?:\.(?:(?:[KSa-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]){2,})))(?::[0-9]{2,5})?(?:\/(?:[\0-\x08\x0E-\x1F!-\x9F\xA1-\u167F\u1681-\u1FFF\u200B-\u2027\u202A-\u202E\u2030-\u205E\u2060-\u2FFF\u3001-\uD7FF\uE000-\uFEFE\uFF00-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])*)?$/i,
-    // uuid: http://tools.ietf.org/html/rfc4122
-    'uuid': /^(?:urn:uuid:)?[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i,
-    // optimized https://gist.github.com/olmokramer/82ccce673f86db7cda5e
-    'color': /^\s*(#(?:[\da-f]{3}){1,2}|rgb\((?:\d{1,3},\s*){2}\d{1,3}\)|rgba\((?:\d{1,3},\s*){3}\d*\.?\d+\)|hsl\(\d{1,3}(?:,\s*\d{1,3}%){2}\)|hsla\(\d{1,3}(?:,\s*\d{1,3}%){2},\s*\d*\.?\d+\))\s*$/gi,
-    // JSON-pointer: https://tools.ietf.org/html/rfc6901
-    'json-pointer': /^(?:\/(?:[^~/]|~0|~1)*)*$|^#(?:\/(?:[a-z0-9_\-.!$&'()*+,;:=@]|%[0-9a-f]{2}|~0|~1)*)*$/i,
-    'relative-json-pointer': /^(?:0|[1-9][0-9]*)(?:#|(?:\/(?:[^~/]|~0|~1)*)*)$/,
-    'regex': function (str) {
-        if (/[^\\]\\Z/.test(str)) {
-            return false;
+function convertSchemaToDraft6(schema, options) {
+    if (options === void 0) { options = {}; }
+    var draft = options.draft || null;
+    var changed = options.changed || false;
+    if (typeof schema !== 'object') {
+        return schema;
+    }
+    if (typeof schema.map === 'function') {
+        return __spread(schema.map(function (subSchema) { return convertSchemaToDraft6(subSchema, { changed: changed, draft: draft }); }));
+    }
+    var newSchema = Object.assign({}, schema);
+    var simpleTypes = ['array', 'boolean', 'integer', 'null', 'number', 'object', 'string'];
+    if (typeof newSchema.$schema === 'string' &&
+        /http\:\/\/json\-schema\.org\/draft\-0\d\/schema\#/.test(newSchema.$schema)) {
+        draft = newSchema.$schema[30];
+    }
+    // Convert v1-v2 'contentEncoding' to 'media.binaryEncoding'
+    // Note: This is only used in JSON hyper-schema (not regular JSON schema)
+    if (newSchema.contentEncoding) {
+        newSchema.media = { binaryEncoding: newSchema.contentEncoding };
+        delete newSchema.contentEncoding;
+        changed = true;
+    }
+    // Convert v1-v3 'extends' to 'allOf'
+    if (typeof newSchema.extends === 'object') {
+        newSchema.allOf = typeof newSchema.extends.map === 'function' ?
+            newSchema.extends.map(function (subSchema) { return convertSchemaToDraft6(subSchema, { changed: changed, draft: draft }); }) :
+            [convertSchemaToDraft6(newSchema.extends, { changed: changed, draft: draft })];
+        delete newSchema.extends;
+        changed = true;
+    }
+    // Convert v1-v3 'disallow' to 'not'
+    if (newSchema.disallow) {
+        if (typeof newSchema.disallow === 'string') {
+            newSchema.not = { type: newSchema.disallow };
         }
-        try {
-            return true;
+        else if (typeof newSchema.disallow.map === 'function') {
+            newSchema.not = {
+                anyOf: newSchema.disallow
+                    .map(function (type) { return typeof type === 'object' ? type : { type: type }; })
+            };
         }
-        catch (e) {
-            return false;
+        delete newSchema.disallow;
+        changed = true;
+    }
+    // Convert v3 string 'dependencies' properties to arrays
+    if (typeof newSchema.dependencies === 'object' &&
+        Object.keys(newSchema.dependencies)
+            .some(function (key) { return typeof newSchema.dependencies[key] === 'string'; })) {
+        newSchema.dependencies = Object.assign({}, newSchema.dependencies);
+        Object.keys(newSchema.dependencies)
+            .filter(function (key) { return typeof newSchema.dependencies[key] === 'string'; })
+            .forEach(function (key) { return newSchema.dependencies[key] = [newSchema.dependencies[key]]; });
+        changed = true;
+    }
+    // Convert v1 'maxDecimal' to 'multipleOf'
+    if (typeof newSchema.maxDecimal === 'number') {
+        newSchema.multipleOf = 1 / Math.pow(10, newSchema.maxDecimal);
+        delete newSchema.divisibleBy;
+        changed = true;
+        if (!draft || draft === 2) {
+            draft = 1;
         }
     }
-};
-
-/**
- * 'JsonValidators' class
- *
- * Provides an extended set of validators to be used by form controls,
- * compatible with standard JSON Schema validation options.
- * http://json-schema.org/latest/json-schema-validation.html
- *
- * Note: This library is designed as a drop-in replacement for the Angular
- * Validators library, and except for one small breaking change to the 'pattern'
- * validator (described below) it can even be imported as a substitute, like so:
- *
- *   import { JsonValidators as Validators } from 'json-validators';
- *
- * and it should work with existing code as a complete replacement.
- *
- * The one exception is the 'pattern' validator, which has been changed to
- * matche partial values by default (the standard 'pattern' validator wrapped
- * all patterns in '^' and '$', forcing them to always match an entire value).
- * However, the old behavior can be restored by simply adding '^' and '$'
- * around your patterns, or by passing an optional second parameter of TRUE.
- * This change is to make the 'pattern' validator match the behavior of a
- * JSON Schema pattern, which allows partial matches, rather than the behavior
- * of an HTML input control pattern, which does not.
- *
- * This library replaces Angular's validators and combination functions
- * with the following validators and transformation functions:
- *
- * Validators:
- *   For all formControls:     required (*), type, enum, const
- *   For text formControls:    minLength (*), maxLength (*), pattern (*), format
- *   For numeric formControls: maximum, exclusiveMaximum,
- *                             minimum, exclusiveMinimum, multipleOf
- *   For formGroup objects:    minProperties, maxProperties, dependencies
- *   For formArray arrays:     minItems, maxItems, uniqueItems, contains
- *   Not used by JSON Schema:  min (*), max (*), requiredTrue (*), email (*)
- * (Validators originally included with Angular are maked with (*).)
- *
- * NOTE / TODO: The dependencies validator is not complete.
- * NOTE / TODO: The contains validator is not complete.
- *
- * Validators not used by JSON Schema (but included for compatibility)
- * and their JSON Schema equivalents:
- *
- *   Angular validator | JSON Schema equivalent
- *   ------------------|-----------------------
- *     min(number)     |   minimum(number)
- *     max(number)     |   maximum(number)
- *     requiredTrue()  |   const(true)
- *     email()         |   format('email')
- *
- * Validator transformation functions:
- *   composeAnyOf, composeOneOf, composeAllOf, composeNot
- * (Angular's original combination funciton, 'compose', is also included for
- * backward compatibility, though it is functionally equivalent to composeAllOf,
- * asside from its more generic error message.)
- *
- * All validators have also been extended to accept an optional second argument
- * which, if passed a TRUE value, causes the validator to perform the opposite
- * of its original finction. (This is used internally to enable 'not' and
- * 'composeOneOf' to function and return useful error messages.)
- *
- * The 'required' validator has also been overloaded so that if called with
- * a boolean parameter (or no parameters) it returns the original validator
- * function (rather than executing it). However, if it is called with an
- * AbstractControl parameter (as was previously required), it behaves
- * exactly as before.
- *
- * This enables all validators (including 'required') to be constructed in
- * exactly the same way, so they can be automatically applied using the
- * equivalent key names and values taken directly from a JSON Schema.
- *
- * This source code is partially derived from Angular,
- * which is Copyright (c) 2014-2017 Google, Inc.
- * Use of this source code is therefore governed by the same MIT-style license
- * that can be found in the LICENSE file at https://angular.io/license
- *
- * Original Angular Validators:
- * https://github.com/angular/angular/blob/master/packages/forms/src/validators.ts
- */
-var JsonValidators = /** @class */ (function () {
-    function JsonValidators() {
+    // Convert v2-v3 'divisibleBy' to 'multipleOf'
+    if (typeof newSchema.divisibleBy === 'number') {
+        newSchema.multipleOf = newSchema.divisibleBy;
+        delete newSchema.divisibleBy;
+        changed = true;
     }
-    JsonValidators.required = function (input) {
-        if (input === undefined) {
-            input = true;
+    // Convert v1-v2 boolean 'minimumCanEqual' to 'exclusiveMinimum'
+    if (typeof newSchema.minimum === 'number' && newSchema.minimumCanEqual === false) {
+        newSchema.exclusiveMinimum = newSchema.minimum;
+        delete newSchema.minimum;
+        changed = true;
+        if (!draft) {
+            draft = 2;
         }
-        switch (input) {
-            case true:
-                // Return required function (do not execute it yet)
-                return function (control, invert) {
-                    if (invert === void 0) { invert = false; }
-                    if (invert) {
-                        return null;
-                    } // if not required, always return valid
-                    return hasValue(control.value) ? null : { 'required': true };
-                };
-            case false:
-                // Do nothing (if field is not required, it is always valid)
-                return JsonValidators.nullValidator;
-            default:
-                // Execute required function
-                return hasValue(input.value) ? null : { 'required': true };
+    }
+    else if (typeof newSchema.minimumCanEqual === 'boolean') {
+        delete newSchema.minimumCanEqual;
+        changed = true;
+        if (!draft) {
+            draft = 2;
         }
-    };
-    /**
-       * 'type' validator
-       *
-       * Requires a control to only accept values of a specified type,
-       * or one of an array of types.
-       *
-       * Note: SchemaPrimitiveType = 'string'|'number'|'integer'|'boolean'|'null'
-       *
-       * @param {SchemaPrimitiveType|SchemaPrimitiveType[]} type - type(s) to accept
-       * @return {IValidatorFn}
-       */
-    JsonValidators.type = function (requiredType) {
-        if (!hasValue(requiredType)) {
-            return JsonValidators.nullValidator;
+    }
+    // Convert v3-v4 boolean 'exclusiveMinimum' to numeric
+    if (typeof newSchema.minimum === 'number' && newSchema.exclusiveMinimum === true) {
+        newSchema.exclusiveMinimum = newSchema.minimum;
+        delete newSchema.minimum;
+        changed = true;
+    }
+    else if (typeof newSchema.exclusiveMinimum === 'boolean') {
+        delete newSchema.exclusiveMinimum;
+        changed = true;
+    }
+    // Convert v1-v2 boolean 'maximumCanEqual' to 'exclusiveMaximum'
+    if (typeof newSchema.maximum === 'number' && newSchema.maximumCanEqual === false) {
+        newSchema.exclusiveMaximum = newSchema.maximum;
+        delete newSchema.maximum;
+        changed = true;
+        if (!draft) {
+            draft = 2;
         }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
+    }
+    else if (typeof newSchema.maximumCanEqual === 'boolean') {
+        delete newSchema.maximumCanEqual;
+        changed = true;
+        if (!draft) {
+            draft = 2;
+        }
+    }
+    // Convert v3-v4 boolean 'exclusiveMaximum' to numeric
+    if (typeof newSchema.maximum === 'number' && newSchema.exclusiveMaximum === true) {
+        newSchema.exclusiveMaximum = newSchema.maximum;
+        delete newSchema.maximum;
+        changed = true;
+    }
+    else if (typeof newSchema.exclusiveMaximum === 'boolean') {
+        delete newSchema.exclusiveMaximum;
+        changed = true;
+    }
+    // Search object 'properties' for 'optional', 'required', and 'requires' items,
+    // and convert them into object 'required' arrays and 'dependencies' objects
+    if (typeof newSchema.properties === 'object') {
+        var properties_1 = Object.assign({}, newSchema.properties);
+        var requiredKeys_1 = Array.isArray(newSchema.required) ?
+            new Set(newSchema.required) : new Set();
+        // Convert v1-v2 boolean 'optional' properties to 'required' array
+        if (draft === 1 || draft === 2 ||
+            Object.keys(properties_1).some(function (key) { return properties_1[key].optional === true; })) {
+            Object.keys(properties_1)
+                .filter(function (key) { return properties_1[key].optional !== true; })
+                .forEach(function (key) { return requiredKeys_1.add(key); });
+            changed = true;
+            if (!draft) {
+                draft = 2;
             }
-            var currentValue = control.value;
-            var isValid = isArray(requiredType) ?
-                requiredType.some(function (type) { return isType(currentValue, type); }) :
-                isType(currentValue, requiredType);
-            return xor(isValid, invert) ?
-                null : { 'type': { requiredType: requiredType, currentValue: currentValue } };
-        };
-    };
-    /**
-       * 'enum' validator
-       *
-       * Requires a control to have a value from an enumerated list of values.
-       *
-       * Converts types as needed to allow string inputs to still correctly
-       * match number, boolean, and null enum values.
-       *
-       * @param {any[]} allowedValues - array of acceptable values
-       * @return {IValidatorFn}
-       */
-    JsonValidators.enum = function (allowedValues) {
-        if (!isArray(allowedValues)) {
-            return JsonValidators.nullValidator;
         }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
+        // Convert v3 boolean 'required' properties to 'required' array
+        if (Object.keys(properties_1).some(function (key) { return properties_1[key].required === true; })) {
+            Object.keys(properties_1)
+                .filter(function (key) { return properties_1[key].required === true; })
+                .forEach(function (key) { return requiredKeys_1.add(key); });
+            changed = true;
+        }
+        if (requiredKeys_1.size) {
+            newSchema.required = Array.from(requiredKeys_1);
+        }
+        // Convert v1-v2 array or string 'requires' properties to 'dependencies' object
+        if (Object.keys(properties_1).some(function (key) { return properties_1[key].requires; })) {
+            var dependencies_1 = typeof newSchema.dependencies === 'object' ? Object.assign({}, newSchema.dependencies) : {};
+            Object.keys(properties_1)
+                .filter(function (key) { return properties_1[key].requires; })
+                .forEach(function (key) { return dependencies_1[key] =
+                typeof properties_1[key].requires === 'string' ?
+                    [properties_1[key].requires] : properties_1[key].requires; });
+            newSchema.dependencies = dependencies_1;
+            changed = true;
+            if (!draft) {
+                draft = 2;
             }
-            var currentValue = control.value;
-            var isEqual$$1 = function (enumValue, inputValue) { return enumValue === inputValue ||
-                (isNumber(enumValue) && +inputValue === +enumValue) ||
-                (isBoolean(enumValue, 'strict') &&
-                    toJavaScriptType(inputValue, 'boolean') === enumValue) ||
-                (enumValue === null && !hasValue(inputValue)) ||
-                isEqual(enumValue, inputValue); };
-            var isValid = isArray(currentValue) ?
-                currentValue.every(function (inputValue) { return allowedValues.some(function (enumValue) { return isEqual$$1(enumValue, inputValue); }); }) :
-                allowedValues.some(function (enumValue) { return isEqual$$1(enumValue, currentValue); });
-            return xor(isValid, invert) ?
-                null : { 'enum': { allowedValues: allowedValues, currentValue: currentValue } };
-        };
-    };
-    /**
-       * 'const' validator
-       *
-       * Requires a control to have a specific value.
-       *
-       * Converts types as needed to allow string inputs to still correctly
-       * match number, boolean, and null values.
-       *
-       * TODO: modify to work with objects
-       *
-       * @param {any[]} requiredValue - required value
-       * @return {IValidatorFn}
-       */
-    JsonValidators.const = function (requiredValue) {
-        if (!hasValue(requiredValue)) {
-            return JsonValidators.nullValidator;
         }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
-            }
-            var currentValue = control.value;
-            var isEqual$$1 = function (constValue, inputValue) { return constValue === inputValue ||
-                isNumber(constValue) && +inputValue === +constValue ||
-                isBoolean(constValue, 'strict') &&
-                    toJavaScriptType(inputValue, 'boolean') === constValue ||
-                constValue === null && !hasValue(inputValue); };
-            var isValid = isEqual$$1(requiredValue, currentValue);
-            return xor(isValid, invert) ?
-                null : { 'const': { requiredValue: requiredValue, currentValue: currentValue } };
-        };
-    };
-    /**
-       * 'minLength' validator
-       *
-       * Requires a control's text value to be greater than a specified length.
-       *
-       * @param {number} minimumLength - minimum allowed string length
-       * @param {boolean = false} invert - instead return error object only if valid
-       * @return {IValidatorFn}
-       */
-    JsonValidators.minLength = function (minimumLength) {
-        if (!hasValue(minimumLength)) {
-            return JsonValidators.nullValidator;
+        newSchema.properties = properties_1;
+    }
+    // Revove v1-v2 boolean 'optional' key
+    if (typeof newSchema.optional === 'boolean') {
+        delete newSchema.optional;
+        changed = true;
+        if (!draft) {
+            draft = 2;
         }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
-            }
-            var currentLength = isString(control.value) ? control.value.length : 0;
-            var isValid = currentLength >= minimumLength;
-            return xor(isValid, invert) ?
-                null : { 'minLength': { minimumLength: minimumLength, currentLength: currentLength } };
-        };
-    };
-    /**
-       * 'maxLength' validator
-       *
-       * Requires a control's text value to be less than a specified length.
-       *
-       * @param {number} maximumLength - maximum allowed string length
-       * @param {boolean = false} invert - instead return error object only if valid
-       * @return {IValidatorFn}
-       */
-    JsonValidators.maxLength = function (maximumLength) {
-        if (!hasValue(maximumLength)) {
-            return JsonValidators.nullValidator;
+    }
+    // Revove v1-v2 'requires' key
+    if (newSchema.requires) {
+        delete newSchema.requires;
+    }
+    // Revove v3 boolean 'required' key
+    if (typeof newSchema.required === 'boolean') {
+        delete newSchema.required;
+    }
+    // Convert id to $id
+    if (typeof newSchema.id === 'string' && !newSchema.$id) {
+        if (newSchema.id.slice(-1) === '#') {
+            newSchema.id = newSchema.id.slice(0, -1);
         }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            var currentLength = isString(control.value) ? control.value.length : 0;
-            var isValid = currentLength <= maximumLength;
-            return xor(isValid, invert) ?
-                null : { 'maxLength': { maximumLength: maximumLength, currentLength: currentLength } };
-        };
-    };
-    /**
-       * 'pattern' validator
-       *
-       * Note: NOT the same as Angular's default pattern validator.
-       *
-       * Requires a control's value to match a specified regular expression pattern.
-       *
-       * This validator changes the behavior of default pattern validator
-       * by replacing RegExp(`^${pattern}$`) with RegExp(`${pattern}`),
-       * which allows for partial matches.
-       *
-       * To return to the default funcitonality, and match the entire string,
-       * pass TRUE as the optional second parameter.
-       *
-       * @param {string} pattern - regular expression pattern
-       * @param {boolean = false} wholeString - match whole value string?
-       * @return {IValidatorFn}
-       */
-    JsonValidators.pattern = function (pattern, wholeString) {
-        if (wholeString === void 0) { wholeString = false; }
-        if (!hasValue(pattern)) {
-            return JsonValidators.nullValidator;
+        newSchema.$id = newSchema.id + '-CONVERTED-TO-DRAFT-06#';
+        delete newSchema.id;
+        changed = true;
+    }
+    // Check if v1-v3 'any' or object types will be converted
+    if (newSchema.type && (typeof newSchema.type.every === 'function' ?
+        !newSchema.type.every(function (type) { return simpleTypes.includes(type); }) :
+        !simpleTypes.includes(newSchema.type))) {
+        changed = true;
+    }
+    // If schema changed, update or remove $schema identifier
+    if (typeof newSchema.$schema === 'string' &&
+        /http\:\/\/json\-schema\.org\/draft\-0[1-4]\/schema\#/.test(newSchema.$schema)) {
+        newSchema.$schema = 'http://json-schema.org/draft-06/schema#';
+        changed = true;
+    }
+    else if (changed && typeof newSchema.$schema === 'string') {
+        var addToDescription = 'Converted to draft 6 from ' + newSchema.$schema;
+        if (typeof newSchema.description === 'string' && newSchema.description.length) {
+            newSchema.description += '\n' + addToDescription;
         }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
-            }
-            var regex;
-            var requiredPattern;
-            if (typeof pattern === 'string') {
-                requiredPattern = (wholeString) ? "^" + pattern + "$" : pattern;
-                regex = new RegExp(requiredPattern);
+        else {
+            newSchema.description = addToDescription;
+        }
+        delete newSchema.$schema;
+    }
+    // Convert v1-v3 'any' and object types
+    if (newSchema.type && (typeof newSchema.type.every === 'function' ?
+        !newSchema.type.every(function (type) { return simpleTypes.includes(type); }) :
+        !simpleTypes.includes(newSchema.type))) {
+        if (newSchema.type.length === 1) {
+            newSchema.type = newSchema.type[0];
+        }
+        if (typeof newSchema.type === 'string') {
+            // Convert string 'any' type to array of all standard types
+            if (newSchema.type === 'any') {
+                newSchema.type = simpleTypes;
+                // Delete non-standard string type
             }
             else {
-                requiredPattern = pattern.toString();
-                regex = pattern;
+                delete newSchema.type;
             }
-            var currentValue = control.value;
-            var isValid = isString(currentValue) ? regex.test(currentValue) : false;
-            return xor(isValid, invert) ?
-                null : { 'pattern': { requiredPattern: requiredPattern, currentValue: currentValue } };
-        };
-    };
-    /**
-       * 'format' validator
-       *
-       * Requires a control to have a value of a certain format.
-       *
-       * This validator currently checks the following formsts:
-       *   date, time, date-time, email, hostname, ipv4, ipv6,
-       *   uri, uri-reference, uri-template, url, uuid, color,
-       *   json-pointer, relative-json-pointer, regex
-       *
-       * Fast format regular expressions copied from AJV:
-       * https://github.com/epoberezkin/ajv/blob/master/lib/compile/formats.js
-       *
-       * @param {JsonSchemaFormatNames} requiredFormat - format to check
-       * @return {IValidatorFn}
-       */
-    JsonValidators.format = function (requiredFormat) {
-        if (!hasValue(requiredFormat)) {
-            return JsonValidators.nullValidator;
         }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
-            }
-            var isValid;
-            var currentValue = control.value;
-            if (isString(currentValue)) {
-                var formatTest = jsonSchemaFormatTests[requiredFormat];
-                if (typeof formatTest === 'object') {
-                    isValid = formatTest.test(currentValue);
+        else if (typeof newSchema.type === 'object') {
+            if (typeof newSchema.type.every === 'function') {
+                // If array of strings, only allow standard types
+                if (newSchema.type.every(function (type) { return typeof type === 'string'; })) {
+                    newSchema.type = newSchema.type.some(function (type) { return type === 'any'; }) ?
+                        newSchema.type = simpleTypes :
+                        newSchema.type.filter(function (type) { return simpleTypes.includes(type); });
+                    // If type is an array with objects, convert the current schema to an 'anyOf' array
                 }
-                else if (typeof formatTest === 'function') {
-                    isValid = formatTest(currentValue);
+                else if (newSchema.type.length > 1) {
+                    var arrayKeys = ['additionalItems', 'items', 'maxItems', 'minItems', 'uniqueItems', 'contains'];
+                    var numberKeys = ['multipleOf', 'maximum', 'exclusiveMaximum', 'minimum', 'exclusiveMinimum'];
+                    var objectKeys = ['maxProperties', 'minProperties', 'required', 'additionalProperties',
+                        'properties', 'patternProperties', 'dependencies', 'propertyNames'];
+                    var stringKeys = ['maxLength', 'minLength', 'pattern', 'format'];
+                    var filterKeys_1 = {
+                        'array': __spread(numberKeys, objectKeys, stringKeys),
+                        'integer': __spread(arrayKeys, objectKeys, stringKeys),
+                        'number': __spread(arrayKeys, objectKeys, stringKeys),
+                        'object': __spread(arrayKeys, numberKeys, stringKeys),
+                        'string': __spread(arrayKeys, numberKeys, objectKeys),
+                        'all': __spread(arrayKeys, numberKeys, objectKeys, stringKeys),
+                    };
+                    var anyOf = [];
+                    var _loop_1 = function (type) {
+                        var newType = typeof type === 'string' ? { type: type } : Object.assign({}, type);
+                        Object.keys(newSchema)
+                            .filter(function (key) { return !newType.hasOwnProperty(key) &&
+                            !__spread((filterKeys_1[newType.type] || filterKeys_1.all), ['type', 'default']).includes(key); })
+                            .forEach(function (key) { return newType[key] = newSchema[key]; });
+                        anyOf.push(newType);
+                    };
+                    try {
+                        for (var _a = __values(newSchema.type), _b = _a.next(); !_b.done; _b = _a.next()) {
+                            var type = _b.value;
+                            _loop_1(type);
+                        }
+                    }
+                    catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                    finally {
+                        try {
+                            if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
+                        }
+                        finally { if (e_1) throw e_1.error; }
+                    }
+                    newSchema = newSchema.hasOwnProperty('default') ?
+                        { anyOf: anyOf, default: newSchema.default } : { anyOf: anyOf };
+                    // If type is an object, merge it with the current schema
                 }
                 else {
-                    console.error("format validator error: \"" + requiredFormat + "\" is not a recognized format.");
-                    isValid = true;
+                    var typeSchema = newSchema.type;
+                    delete newSchema.type;
+                    Object.assign(newSchema, typeSchema);
                 }
             }
-            else {
-                // Allow JavaScript Date objects
-                isValid = ['date', 'time', 'date-time'].includes(requiredFormat) &&
-                    Object.prototype.toString.call(currentValue) === '[object Date]';
-            }
-            return xor(isValid, invert) ?
-                null : { 'format': { requiredFormat: requiredFormat, currentValue: currentValue } };
-        };
-    };
-    /**
-       * 'minimum' validator
-       *
-       * Requires a control's numeric value to be greater than or equal to
-       * a minimum amount.
-       *
-       * Any non-numeric value is also valid (according to the HTML forms spec,
-       * a non-numeric value doesn't have a minimum).
-       * https://www.w3.org/TR/html5/forms.html#attr-input-max
-       *
-       * @param {number} minimum - minimum allowed value
-       * @return {IValidatorFn}
-       */
-    JsonValidators.minimum = function (minimumValue) {
-        if (!hasValue(minimumValue)) {
-            return JsonValidators.nullValidator;
         }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
-            }
-            var currentValue = control.value;
-            var isValid = !isNumber(currentValue) || currentValue >= minimumValue;
-            return xor(isValid, invert) ?
-                null : { 'minimum': { minimumValue: minimumValue, currentValue: currentValue } };
-        };
-    };
-    /**
-       * 'exclusiveMinimum' validator
-       *
-       * Requires a control's numeric value to be less than a maximum amount.
-       *
-       * Any non-numeric value is also valid (according to the HTML forms spec,
-       * a non-numeric value doesn't have a maximum).
-       * https://www.w3.org/TR/html5/forms.html#attr-input-max
-       *
-       * @param {number} exclusiveMinimumValue - maximum allowed value
-       * @return {IValidatorFn}
-       */
-    JsonValidators.exclusiveMinimum = function (exclusiveMinimumValue) {
-        if (!hasValue(exclusiveMinimumValue)) {
-            return JsonValidators.nullValidator;
+        else {
+            delete newSchema.type;
         }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
-            }
-            var currentValue = control.value;
-            var isValid = !isNumber(currentValue) || +currentValue < exclusiveMinimumValue;
-            return xor(isValid, invert) ?
-                null : { 'exclusiveMinimum': { exclusiveMinimumValue: exclusiveMinimumValue, currentValue: currentValue } };
-        };
-    };
-    /**
-       * 'maximum' validator
-       *
-       * Requires a control's numeric value to be less than or equal to
-       * a maximum amount.
-       *
-       * Any non-numeric value is also valid (according to the HTML forms spec,
-       * a non-numeric value doesn't have a maximum).
-       * https://www.w3.org/TR/html5/forms.html#attr-input-max
-       *
-       * @param {number} maximumValue - maximum allowed value
-       * @return {IValidatorFn}
-       */
-    JsonValidators.maximum = function (maximumValue) {
-        if (!hasValue(maximumValue)) {
-            return JsonValidators.nullValidator;
+    }
+    // Convert sub schemas
+    Object.keys(newSchema)
+        .filter(function (key) { return typeof newSchema[key] === 'object'; })
+        .forEach(function (key) {
+        if (['definitions', 'dependencies', 'properties', 'patternProperties']
+            .includes(key) && typeof newSchema[key].map !== 'function') {
+            var newKey_1 = {};
+            Object.keys(newSchema[key]).forEach(function (subKey) { return newKey_1[subKey] =
+                convertSchemaToDraft6(newSchema[key][subKey], { changed: changed, draft: draft }); });
+            newSchema[key] = newKey_1;
         }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
-            }
-            var currentValue = control.value;
-            var isValid = !isNumber(currentValue) || +currentValue <= maximumValue;
-            return xor(isValid, invert) ?
-                null : { 'maximum': { maximumValue: maximumValue, currentValue: currentValue } };
-        };
-    };
-    /**
-       * 'exclusiveMaximum' validator
-       *
-       * Requires a control's numeric value to be less than a maximum amount.
-       *
-       * Any non-numeric value is also valid (according to the HTML forms spec,
-       * a non-numeric value doesn't have a maximum).
-       * https://www.w3.org/TR/html5/forms.html#attr-input-max
-       *
-       * @param {number} exclusiveMaximumValue - maximum allowed value
-       * @return {IValidatorFn}
-       */
-    JsonValidators.exclusiveMaximum = function (exclusiveMaximumValue) {
-        if (!hasValue(exclusiveMaximumValue)) {
-            return JsonValidators.nullValidator;
+        else if (['items', 'additionalItems', 'additionalProperties',
+            'allOf', 'anyOf', 'oneOf', 'not'].includes(key)) {
+            newSchema[key] = convertSchemaToDraft6(newSchema[key], { changed: changed, draft: draft });
         }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
-            }
-            var currentValue = control.value;
-            var isValid = !isNumber(currentValue) || +currentValue < exclusiveMaximumValue;
-            return xor(isValid, invert) ?
-                null : { 'exclusiveMaximum': { exclusiveMaximumValue: exclusiveMaximumValue, currentValue: currentValue } };
-        };
-    };
-    /**
-       * 'multipleOf' validator
-       *
-       * Requires a control to have a numeric value that is a multiple
-       * of a specified number.
-       *
-       * @param {number} multipleOfValue - number value must be a multiple of
-       * @return {IValidatorFn}
-       */
-    JsonValidators.multipleOf = function (multipleOfValue) {
-        if (!hasValue(multipleOfValue)) {
-            return JsonValidators.nullValidator;
+        else {
+            newSchema[key] = cloneDeep(newSchema[key]);
         }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
-            }
-            var currentValue = control.value;
-            var isValid = isNumber(currentValue) &&
-                currentValue % multipleOfValue === 0;
-            return xor(isValid, invert) ?
-                null : { 'multipleOf': { multipleOfValue: multipleOfValue, currentValue: currentValue } };
-        };
-    };
-    /**
-       * 'minProperties' validator
-       *
-       * Requires a form group to have a minimum number of properties (i.e. have
-       * values entered in a minimum number of controls within the group).
-       *
-       * @param {number} minimumProperties - minimum number of properties allowed
-       * @return {IValidatorFn}
-       */
-    JsonValidators.minProperties = function (minimumProperties) {
-        if (!hasValue(minimumProperties)) {
-            return JsonValidators.nullValidator;
-        }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
-            }
-            var currentProperties = Object.keys(control.value).length || 0;
-            var isValid = currentProperties >= minimumProperties;
-            return xor(isValid, invert) ?
-                null : { 'minProperties': { minimumProperties: minimumProperties, currentProperties: currentProperties } };
-        };
-    };
-    /**
-       * 'maxProperties' validator
-       *
-       * Requires a form group to have a maximum number of properties (i.e. have
-       * values entered in a maximum number of controls within the group).
-       *
-       * Note: Has no effect if the form group does not contain more than the
-       * maximum number of controls.
-       *
-       * @param {number} maximumProperties - maximum number of properties allowed
-       * @return {IValidatorFn}
-       */
-    JsonValidators.maxProperties = function (maximumProperties) {
-        if (!hasValue(maximumProperties)) {
-            return JsonValidators.nullValidator;
-        }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            var currentProperties = Object.keys(control.value).length || 0;
-            var isValid = currentProperties <= maximumProperties;
-            return xor(isValid, invert) ?
-                null : { 'maxProperties': { maximumProperties: maximumProperties, currentProperties: currentProperties } };
-        };
-    };
-    /**
-       * 'dependencies' validator
-       *
-       * Requires the controls in a form group to meet additional validation
-       * criteria, depending on the values of other controls in the group.
-       *
-       * Examples:
-       * https://spacetelescope.github.io/understanding-json-schema/reference/object.html#dependencies
-       *
-       * @param {any} dependencies - required dependencies
-       * @return {IValidatorFn}
-       */
-    JsonValidators.dependencies = function (dependencies) {
-        if (getType(dependencies) !== 'object' || isEmpty(dependencies)) {
-            return JsonValidators.nullValidator;
-        }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
-            }
-            var allErrors = _mergeObjects(forEachCopy(dependencies, function (value, requiringField) {
-                if (!hasValue(control.value[requiringField])) {
-                    return null;
-                }
-                var requiringFieldErrors = {};
-                var requiredFields;
-                var properties = {};
-                if (getType(dependencies[requiringField]) === 'array') {
-                    requiredFields = dependencies[requiringField];
-                }
-                else if (getType(dependencies[requiringField]) === 'object') {
-                    requiredFields = dependencies[requiringField]['required'] || [];
-                    properties = dependencies[requiringField]['properties'] || {};
-                }
-                try {
-                    // Validate property dependencies
-                    for (var requiredFields_1 = __values(requiredFields), requiredFields_1_1 = requiredFields_1.next(); !requiredFields_1_1.done; requiredFields_1_1 = requiredFields_1.next()) {
-                        var requiredField = requiredFields_1_1.value;
-                        if (xor(!hasValue(control.value[requiredField]), invert)) {
-                            requiringFieldErrors[requiredField] = { 'required': true };
-                        }
-                    }
-                }
-                catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                finally {
-                    try {
-                        if (requiredFields_1_1 && !requiredFields_1_1.done && (_a = requiredFields_1.return)) _a.call(requiredFields_1);
-                    }
-                    finally { if (e_1) throw e_1.error; }
-                }
-                // Validate schema dependencies
-                requiringFieldErrors = _mergeObjects(requiringFieldErrors, forEachCopy(properties, function (requirements, requiredField) {
-                    var requiredFieldErrors = _mergeObjects(forEachCopy(requirements, function (requirement, parameter) {
-                        var validator = null;
-                        if (requirement === 'maximum' || requirement === 'minimum') {
-                            var exclusive = !!requirements['exclusiveM' + requirement.slice(1)];
-                            validator = JsonValidators[requirement](parameter, exclusive);
-                        }
-                        else if (typeof JsonValidators[requirement] === 'function') {
-                            validator = JsonValidators[requirement](parameter);
-                        }
-                        return !isDefined(validator) ?
-                            null : validator(control.value[requiredField]);
-                    }));
-                    return isEmpty(requiredFieldErrors) ?
-                        null : (_a = {}, _a[requiredField] = requiredFieldErrors, _a);
-                    var _a;
-                }));
-                return isEmpty(requiringFieldErrors) ?
-                    null : (_b = {}, _b[requiringField] = requiringFieldErrors, _b);
-                var e_1, _a, _b;
-            }));
-            return isEmpty(allErrors) ? null : allErrors;
-        };
-    };
-    /**
-       * 'minItems' validator
-       *
-       * Requires a form array to have a minimum number of values.
-       *
-       * @param {number} minimumItems - minimum number of items allowed
-       * @return {IValidatorFn}
-       */
-    JsonValidators.minItems = function (minimumItems) {
-        if (!hasValue(minimumItems)) {
-            return JsonValidators.nullValidator;
-        }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
-            }
-            var currentItems = isArray(control.value) ? control.value.length : 0;
-            var isValid = currentItems >= minimumItems;
-            return xor(isValid, invert) ?
-                null : { 'minItems': { minimumItems: minimumItems, currentItems: currentItems } };
-        };
-    };
-    /**
-       * 'maxItems' validator
-       *
-       * Requires a form array to have a maximum number of values.
-       *
-       * @param {number} maximumItems - maximum number of items allowed
-       * @return {IValidatorFn}
-       */
-    JsonValidators.maxItems = function (maximumItems) {
-        if (!hasValue(maximumItems)) {
-            return JsonValidators.nullValidator;
-        }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            var currentItems = isArray(control.value) ? control.value.length : 0;
-            var isValid = currentItems <= maximumItems;
-            return xor(isValid, invert) ?
-                null : { 'maxItems': { maximumItems: maximumItems, currentItems: currentItems } };
-        };
-    };
-    /**
-       * 'uniqueItems' validator
-       *
-       * Requires values in a form array to be unique.
-       *
-       * @param {boolean = true} unique? - true to validate, false to disable
-       * @return {IValidatorFn}
-       */
-    JsonValidators.uniqueItems = function (unique) {
-        if (unique === void 0) { unique = true; }
-        if (!unique) {
-            return JsonValidators.nullValidator;
-        }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
-            }
-            var sorted = control.value.slice().sort();
-            var duplicateItems = [];
-            for (var i = 1; i < sorted.length; i++) {
-                if (sorted[i - 1] === sorted[i] && duplicateItems.includes(sorted[i])) {
-                    duplicateItems.push(sorted[i]);
-                }
-            }
-            var isValid = !duplicateItems.length;
-            return xor(isValid, invert) ?
-                null : { 'uniqueItems': { duplicateItems: duplicateItems } };
-        };
-    };
-    /**
-       * 'contains' validator
-       *
-       * TODO: Complete this validator
-       *
-       * Requires values in a form array to be unique.
-       *
-       * @param {boolean = true} unique? - true to validate, false to disable
-       * @return {IValidatorFn}
-       */
-    JsonValidators.contains = function (requiredItem) {
-        if (requiredItem === void 0) { requiredItem = true; }
-        if (!requiredItem) {
-            return JsonValidators.nullValidator;
-        }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value) || !isArray(control.value)) {
-                return null;
-            }
-            var currentItems = control.value;
-            // const isValid = currentItems.some(item =>
-            //
-            // );
-            var isValid = true;
-            return xor(isValid, invert) ?
-                null : { 'contains': { requiredItem: requiredItem, currentItems: currentItems } };
-        };
-    };
-    /**
-       * No-op validator. Included for backward compatibility.
-       */
-    JsonValidators.nullValidator = function (control) {
-        return null;
-    };
-    /**
-       * Validator transformation functions:
-       * composeAnyOf, composeOneOf, composeAllOf, composeNot,
-       * compose, composeAsync
-       *
-       * TODO: Add composeAnyOfAsync, composeOneOfAsync,
-       *           composeAllOfAsync, composeNotAsync
-       */
-    /**
-       * 'composeAnyOf' validator combination function
-       *
-       * Accepts an array of validators and returns a single validator that
-       * evaluates to valid if any one or more of the submitted validators are
-       * valid. If every validator is invalid, it returns combined errors from
-       * all validators.
-       *
-       * @param {IValidatorFn[]} validators - array of validators to combine
-       * @return {IValidatorFn} - single combined validator function
-       */
-    JsonValidators.composeAnyOf = function (validators) {
-        if (!validators) {
-            return null;
-        }
-        var presentValidators = validators.filter(isDefined);
-        if (presentValidators.length === 0) {
-            return null;
-        }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            var arrayOfErrors = _executeValidators(control, presentValidators, invert).filter(isDefined);
-            var isValid = validators.length > arrayOfErrors.length;
-            return xor(isValid, invert) ?
-                null : _mergeObjects.apply(void 0, __spread(arrayOfErrors, [{ 'anyOf': !invert }]));
-        };
-    };
-    /**
-       * 'composeOneOf' validator combination function
-       *
-       * Accepts an array of validators and returns a single validator that
-       * evaluates to valid only if exactly one of the submitted validators
-       * is valid. Otherwise returns combined information from all validators,
-       * both valid and invalid.
-       *
-       * @param {IValidatorFn[]} validators - array of validators to combine
-       * @return {IValidatorFn} - single combined validator function
-       */
-    JsonValidators.composeOneOf = function (validators) {
-        if (!validators) {
-            return null;
-        }
-        var presentValidators = validators.filter(isDefined);
-        if (presentValidators.length === 0) {
-            return null;
-        }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            var arrayOfErrors = _executeValidators(control, presentValidators);
-            var validControls = validators.length - arrayOfErrors.filter(isDefined).length;
-            var isValid = validControls === 1;
-            if (xor(isValid, invert)) {
-                return null;
-            }
-            var arrayOfValids = _executeValidators(control, presentValidators, invert);
-            return _mergeObjects.apply(void 0, __spread(arrayOfErrors, arrayOfValids, [{ 'oneOf': !invert }]));
-        };
-    };
-    /**
-       * 'composeAllOf' validator combination function
-       *
-       * Accepts an array of validators and returns a single validator that
-       * evaluates to valid only if all the submitted validators are individually
-       * valid. Otherwise it returns combined errors from all invalid validators.
-       *
-       * @param {IValidatorFn[]} validators - array of validators to combine
-       * @return {IValidatorFn} - single combined validator function
-       */
-    JsonValidators.composeAllOf = function (validators) {
-        if (!validators) {
-            return null;
-        }
-        var presentValidators = validators.filter(isDefined);
-        if (presentValidators.length === 0) {
-            return null;
-        }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            var combinedErrors = _mergeErrors(_executeValidators(control, presentValidators, invert));
-            var isValid = combinedErrors === null;
-            return (xor(isValid, invert)) ?
-                null : _mergeObjects(combinedErrors, { 'allOf': !invert });
-        };
-    };
-    /**
-       * 'composeNot' validator inversion function
-       *
-       * Accepts a single validator function and inverts its result.
-       * Returns valid if the submitted validator is invalid, and
-       * returns invalid if the submitted validator is valid.
-       * (Note: this function can itself be inverted
-       *   - e.g. composeNot(composeNot(validator)) -
-       *   but this can be confusing and is therefore not recommended.)
-       *
-       * @param {IValidatorFn[]} validators - validator(s) to invert
-       * @return {IValidatorFn} - new validator function that returns opposite result
-       */
-    JsonValidators.composeNot = function (validator) {
-        if (!validator) {
-            return null;
-        }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            if (isEmpty(control.value)) {
-                return null;
-            }
-            var error = validator(control, !invert);
-            var isValid = error === null;
-            return (xor(isValid, invert)) ?
-                null : _mergeObjects(error, { 'not': !invert });
-        };
-    };
-    /**
-       * 'compose' validator combination function
-       *
-       * @param {IValidatorFn[]} validators - array of validators to combine
-       * @return {IValidatorFn} - single combined validator function
-       */
-    JsonValidators.compose = function (validators) {
-        if (!validators) {
-            return null;
-        }
-        var presentValidators = validators.filter(isDefined);
-        if (presentValidators.length === 0) {
-            return null;
-        }
-        return function (control, invert) {
-            if (invert === void 0) { invert = false; }
-            return _mergeErrors(_executeValidators(control, presentValidators, invert));
-        };
-    };
-    /**
-       * 'composeAsync' async validator combination function
-       *
-       * @param {AsyncIValidatorFn[]} async validators - array of async validators
-       * @return {AsyncIValidatorFn} - single combined async validator function
-       */
-    JsonValidators.composeAsync = function (validators) {
-        if (!validators) {
-            return null;
-        }
-        var presentValidators = validators.filter(isDefined);
-        if (presentValidators.length === 0) {
-            return null;
-        }
-        return function (control) {
-            var observables = _executeAsyncValidators(control, presentValidators).map(toObservable);
-            return map$1.call(forkJoin(observables), _mergeErrors);
-        };
-    };
-    // Additional angular validators (not used by Angualr JSON Schema Form)
-    // From https://github.com/angular/angular/blob/master/packages/forms/src/validators.ts
-    /**
-       * Validator that requires controls to have a value greater than a number.
-       */
-    JsonValidators.min = function (min) {
-        if (!hasValue(min)) {
-            return JsonValidators.nullValidator;
-        }
-        return function (control) {
-            // don't validate empty values to allow optional controls
-            if (isEmpty(control.value) || isEmpty(min)) {
-                return null;
-            }
-            var value = parseFloat(control.value);
-            var actual = control.value;
-            // Controls with NaN values after parsing should be treated as not having a
-            // minimum, per the HTML forms spec: https://www.w3.org/TR/html5/forms.html#attr-input-min
-            return isNaN(value) || value >= min ? null : { 'min': { min: min, actual: actual } };
-        };
-    };
-    /**
-       * Validator that requires controls to have a value less than a number.
-       */
-    JsonValidators.max = function (max) {
-        if (!hasValue(max)) {
-            return JsonValidators.nullValidator;
-        }
-        return function (control) {
-            // don't validate empty values to allow optional controls
-            if (isEmpty(control.value) || isEmpty(max)) {
-                return null;
-            }
-            var value = parseFloat(control.value);
-            var actual = control.value;
-            // Controls with NaN values after parsing should be treated as not having a
-            // maximum, per the HTML forms spec: https://www.w3.org/TR/html5/forms.html#attr-input-max
-            return isNaN(value) || value <= max ? null : { 'max': { max: max, actual: actual } };
-        };
-    };
-    /**
-       * Validator that requires control value to be true.
-       */
-    JsonValidators.requiredTrue = function (control) {
-        if (!control) {
-            return JsonValidators.nullValidator;
-        }
-        return control.value === true ? null : { 'required': true };
-    };
-    /**
-       * Validator that performs email validation.
-       */
-    JsonValidators.email = function (control) {
-        if (!control) {
-            return JsonValidators.nullValidator;
-        }
-        var EMAIL_REGEXP = /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/;
-        return EMAIL_REGEXP.test(control.value) ? null : { 'email': true };
-    };
-    return JsonValidators;
-}());
+    });
+    return newSchema;
+    var e_1, _c;
+}
 
 /**
  * FormGroup function library:
@@ -4435,7 +4796,7 @@ function buildFormGroup(template) {
                 });
                 return new FormGroup(groupControls_1, validatorFn);
             case 'FormArray':
-                return new FormArray(filter(map(template.controls, function (controls) { return buildFormGroup(controls); })), validatorFn);
+                return new FormArray(filter(map$1(template.controls, function (controls) { return buildFormGroup(controls); })), validatorFn);
             case 'FormControl':
                 return new FormControl(template.value, validatorFns);
         }
@@ -5690,6 +6051,129 @@ function buildTitleMap(titleMap, enumList, fieldRequired, flatList) {
     var e_2, _c, e_3, _f, e_4, _j, e_5, _m;
 }
 
+/**
+ * 'dateToString' function
+ *
+ * @param  { Date | string } date
+ * @param  { any } options
+ * @return { string }
+ */
+function dateToString(date, options) {
+    if (options === void 0) { options = {}; }
+    var dateFormat = options.dateFormat || 'YYYY-MM-DD';
+    // TODO: Use options.locale to change default format and names
+    // const locale = options.locale || 'en-US';
+    if (typeof date === 'string') {
+        date = stringToDate(date);
+    }
+    if (Object.prototype.toString.call(date) !== '[object Date]') {
+        return null;
+    }
+    var longMonths = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
+    var shortMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var longDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var shortDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    return dateFormat
+        .replace(/YYYY/ig, date.getFullYear() + '')
+        .replace(/YY/ig, (date.getFullYear() + '').slice(-2))
+        .replace(/MMMM/ig, longMonths[date.getMonth()])
+        .replace(/MMM/ig, shortMonths[date.getMonth()])
+        .replace(/MM/ig, ('0' + (date.getMonth() + 1)).slice(-2))
+        .replace(/M/ig, (date.getMonth() + 1) + '')
+        .replace(/DDDD/ig, longDays[date.getDay()])
+        .replace(/DDD/ig, shortDays[date.getDay()])
+        .replace(/DD/ig, ('0' + date.getDate()).slice(-2))
+        .replace(/D/ig, date.getDate() + '')
+        .replace(/S/ig, ordinal(date.getDate()));
+}
+function ordinal(number) {
+    if (typeof number === 'number') {
+        number = number + '';
+    }
+    var last = number.slice(-1);
+    var nextToLast = number.slice(-2, 1);
+    return (nextToLast !== '1' && { '1': 'st', '2': 'nd', '3': 'rd' }[last]) || 'th';
+}
+/**
+ * 'stringToDate' function
+ *
+ * @param  { string } dateString
+ * @return { Date }
+ */
+function stringToDate(dateString) {
+    var getDate = findDate(dateString);
+    if (!getDate) {
+        return null;
+    }
+    var dateParts = [];
+    // Split x-y-z to [x, y, z]
+    if (/^\d+[^\d]\d+[^\d]\d+$/.test(getDate)) {
+        dateParts = getDate.split(/[^\d]/).map(function (part) { return +part; });
+        // Split xxxxyyzz to [xxxx, yy, zz]
+    }
+    else if (/^\d{8}$/.test(getDate)) {
+        dateParts = [+getDate.slice(0, 4), +getDate.slice(4, 6), +getDate.slice(6)];
+    }
+    var thisYear = +(new Date().getFullYear() + '').slice(-2);
+    // Check for [YYYY, MM, DD]
+    if (dateParts[0] > 1000 && dateParts[0] < 2100 && dateParts[1] <= 12 && dateParts[2] <= 31) {
+        return new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+        // Check for [MM, DD, YYYY]
+    }
+    else if (dateParts[0] <= 12 && dateParts[1] <= 31 && dateParts[2] > 1000 && dateParts[2] < 2100) {
+        return new Date(dateParts[2], dateParts[0] - 1, dateParts[1]);
+        // Check for [MM, DD, YY]
+    }
+    else if (dateParts[0] <= 12 && dateParts[1] <= 31 && dateParts[2] < 100) {
+        var year = (dateParts[2] <= thisYear ? 2000 : 1900) + dateParts[2];
+        return new Date(year, dateParts[0] - 1, dateParts[1]);
+        // Check for [YY, MM, DD]
+    }
+    else if (dateParts[0] < 100 && dateParts[1] <= 12 && dateParts[2] <= 31) {
+        var year = (dateParts[0] <= thisYear ? 2000 : 1900) + dateParts[0];
+        return new Date(year, dateParts[1] - 1, dateParts[2]);
+    }
+    return null;
+}
+/**
+ * 'findDate' function
+ *
+ * @param  { string } text
+ * @return { string }
+ */
+function findDate(text) {
+    if (!text) {
+        return null;
+    }
+    var foundDate;
+    // Match ...YYYY-MM-DD...
+    foundDate = text.match(/(?:19|20)\d\d[-_\\\/\. ](?:0?\d|1[012])[-_\\\/\. ](?:[012]?\d|3[01])(?!\d)/);
+    if (foundDate) {
+        return foundDate[0];
+    }
+    // Match ...MM-DD-YYYY...
+    foundDate = text.match(/(?:[012]?\d|3[01])[-_\\\/\. ](?:0?\d|1[012])[-_\\\/\. ](?:19|20)\d\d(?!\d)/);
+    if (foundDate) {
+        return foundDate[0];
+    }
+    // Match MM-DD-YY...
+    foundDate = text.match(/^(?:[012]?\d|3[01])[-_\\\/\. ](?:0?\d|1[012])[-_\\\/\. ]\d\d(?!\d)/);
+    if (foundDate) {
+        return foundDate[0];
+    }
+    // Match YY-MM-DD...
+    foundDate = text.match(/^\d\d[-_\\\/\. ](?:[012]?\d|3[01])[-_\\\/\. ](?:0?\d|1[012])(?!\d)/);
+    if (foundDate) {
+        return foundDate[0];
+    }
+    // Match YYYYMMDD...
+    foundDate = text.match(/^(?:19|20)\d\d(?:0\d|1[012])(?:[012]\d|3[01])/);
+    if (foundDate) {
+        return foundDate[0];
+    }
+}
+
 var enValidationMessages = {
     // Default English error messages
     required: 'This field is required.',
@@ -6487,6 +6971,127 @@ JsonSchemaFormService.decorators = [
 /** @nocollapse */
 JsonSchemaFormService.ctorParameters = function () { return []; };
 
+/**
+ * OrderableDirective
+ *
+ * Enables array elements to be reordered by dragging and dropping.
+ *
+ * Only works for arrays that have at least two elements.
+ *
+ * Also detects arrays-within-arrays, and correctly moves either
+ * the child array element or the parent array element,
+ * depending on the drop targert.
+ *
+ * Listeners for movable element being dragged:
+ * - dragstart: add 'dragging' class to element, set effectAllowed = 'move'
+ * - dragover: set dropEffect = 'move'
+ * - dragend: remove 'dragging' class from element
+ *
+ * Listeners for stationary items being dragged over:
+ * - dragenter: add 'drag-target-...' classes to element
+ * - dragleave: remove 'drag-target-...' classes from element
+ * - drop: remove 'drag-target-...' classes from element, move dropped array item
+ */
+var OrderableDirective = /** @class */ (function () {
+    function OrderableDirective(elementRef, jsf, ngZone) {
+        this.elementRef = elementRef;
+        this.jsf = jsf;
+        this.ngZone = ngZone;
+        this.overParentElement = false;
+        this.overChildElement = false;
+    }
+    OrderableDirective.prototype.ngOnInit = function () {
+        var _this = this;
+        if (this.orderable && this.layoutNode && this.layoutIndex && this.dataIndex) {
+            this.element = this.elementRef.nativeElement;
+            this.element.draggable = true;
+            this.arrayLayoutIndex = 'move:' + this.layoutIndex.slice(0, -1).toString();
+            this.ngZone.runOutsideAngular(function () {
+                // Listeners for movable element being dragged:
+                _this.element.addEventListener('dragstart', function (event) {
+                    event.dataTransfer.effectAllowed = 'move';
+                    // Hack to bypass stupid HTML drag-and-drop dataTransfer protection
+                    // so drag source info will be available on dragenter
+                    var sourceArrayIndex = _this.dataIndex[_this.dataIndex.length - 1];
+                    sessionStorage.setItem(_this.arrayLayoutIndex, sourceArrayIndex + '');
+                });
+                _this.element.addEventListener('dragover', function (event) {
+                    if (event.preventDefault) {
+                        event.preventDefault();
+                    }
+                    event.dataTransfer.dropEffect = 'move';
+                    return false;
+                });
+                // Listeners for stationary items being dragged over:
+                _this.element.addEventListener('dragenter', function (event) {
+                    // Part 1 of a hack, inspired by Dragster, to simulate mouseover and mouseout
+                    // behavior while dragging items - http://bensmithett.github.io/dragster/
+                    if (_this.overParentElement) {
+                        return _this.overChildElement = true;
+                    }
+                    else {
+                        _this.overParentElement = true;
+                    }
+                    var sourceArrayIndex = sessionStorage.getItem(_this.arrayLayoutIndex);
+                    if (sourceArrayIndex !== null) {
+                        if (_this.dataIndex[_this.dataIndex.length - 1] < +sourceArrayIndex) {
+                            _this.element.classList.add('drag-target-top');
+                        }
+                        else if (_this.dataIndex[_this.dataIndex.length - 1] > +sourceArrayIndex) {
+                            _this.element.classList.add('drag-target-bottom');
+                        }
+                    }
+                });
+                _this.element.addEventListener('dragleave', function (event) {
+                    // Part 2 of the Dragster hack
+                    if (_this.overChildElement) {
+                        _this.overChildElement = false;
+                    }
+                    else if (_this.overParentElement) {
+                        _this.overParentElement = false;
+                    }
+                    var sourceArrayIndex = sessionStorage.getItem(_this.arrayLayoutIndex);
+                    if (!_this.overParentElement && !_this.overChildElement && sourceArrayIndex !== null) {
+                        _this.element.classList.remove('drag-target-top');
+                        _this.element.classList.remove('drag-target-bottom');
+                    }
+                });
+                _this.element.addEventListener('drop', function (event) {
+                    _this.element.classList.remove('drag-target-top');
+                    _this.element.classList.remove('drag-target-bottom');
+                    // Confirm that drop target is another item in the same array as source item
+                    var sourceArrayIndex = sessionStorage.getItem(_this.arrayLayoutIndex);
+                    var destArrayIndex = _this.dataIndex[_this.dataIndex.length - 1];
+                    if (sourceArrayIndex !== null && +sourceArrayIndex !== destArrayIndex) {
+                        // Move array item
+                        _this.jsf.moveArrayItem(_this, +sourceArrayIndex, destArrayIndex);
+                    }
+                    sessionStorage.removeItem(_this.arrayLayoutIndex);
+                    return false;
+                });
+            });
+        }
+    };
+    return OrderableDirective;
+}());
+OrderableDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[orderable]',
+            },] },
+];
+/** @nocollapse */
+OrderableDirective.ctorParameters = function () { return [
+    { type: ElementRef, },
+    { type: JsonSchemaFormService, },
+    { type: NgZone, },
+]; };
+OrderableDirective.propDecorators = {
+    "orderable": [{ type: Input },],
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
 var AddReferenceComponent = /** @class */ (function () {
     function AddReferenceComponent(jsf) {
         this.jsf = jsf;
@@ -6645,447 +7250,6 @@ CheckboxComponent.ctorParameters = function () { return [
     { type: JsonSchemaFormService, },
 ]; };
 CheckboxComponent.propDecorators = {
-    "layoutNode": [{ type: Input },],
-    "layoutIndex": [{ type: Input },],
-    "dataIndex": [{ type: Input },],
-};
-
-function convertSchemaToDraft6(schema, options) {
-    if (options === void 0) { options = {}; }
-    var draft = options.draft || null;
-    var changed = options.changed || false;
-    if (typeof schema !== 'object') {
-        return schema;
-    }
-    if (typeof schema.map === 'function') {
-        return __spread(schema.map(function (subSchema) { return convertSchemaToDraft6(subSchema, { changed: changed, draft: draft }); }));
-    }
-    var newSchema = Object.assign({}, schema);
-    var simpleTypes = ['array', 'boolean', 'integer', 'null', 'number', 'object', 'string'];
-    if (typeof newSchema.$schema === 'string' &&
-        /http\:\/\/json\-schema\.org\/draft\-0\d\/schema\#/.test(newSchema.$schema)) {
-        draft = newSchema.$schema[30];
-    }
-    // Convert v1-v2 'contentEncoding' to 'media.binaryEncoding'
-    // Note: This is only used in JSON hyper-schema (not regular JSON schema)
-    if (newSchema.contentEncoding) {
-        newSchema.media = { binaryEncoding: newSchema.contentEncoding };
-        delete newSchema.contentEncoding;
-        changed = true;
-    }
-    // Convert v1-v3 'extends' to 'allOf'
-    if (typeof newSchema.extends === 'object') {
-        newSchema.allOf = typeof newSchema.extends.map === 'function' ?
-            newSchema.extends.map(function (subSchema) { return convertSchemaToDraft6(subSchema, { changed: changed, draft: draft }); }) :
-            [convertSchemaToDraft6(newSchema.extends, { changed: changed, draft: draft })];
-        delete newSchema.extends;
-        changed = true;
-    }
-    // Convert v1-v3 'disallow' to 'not'
-    if (newSchema.disallow) {
-        if (typeof newSchema.disallow === 'string') {
-            newSchema.not = { type: newSchema.disallow };
-        }
-        else if (typeof newSchema.disallow.map === 'function') {
-            newSchema.not = {
-                anyOf: newSchema.disallow
-                    .map(function (type) { return typeof type === 'object' ? type : { type: type }; })
-            };
-        }
-        delete newSchema.disallow;
-        changed = true;
-    }
-    // Convert v3 string 'dependencies' properties to arrays
-    if (typeof newSchema.dependencies === 'object' &&
-        Object.keys(newSchema.dependencies)
-            .some(function (key) { return typeof newSchema.dependencies[key] === 'string'; })) {
-        newSchema.dependencies = Object.assign({}, newSchema.dependencies);
-        Object.keys(newSchema.dependencies)
-            .filter(function (key) { return typeof newSchema.dependencies[key] === 'string'; })
-            .forEach(function (key) { return newSchema.dependencies[key] = [newSchema.dependencies[key]]; });
-        changed = true;
-    }
-    // Convert v1 'maxDecimal' to 'multipleOf'
-    if (typeof newSchema.maxDecimal === 'number') {
-        newSchema.multipleOf = 1 / Math.pow(10, newSchema.maxDecimal);
-        delete newSchema.divisibleBy;
-        changed = true;
-        if (!draft || draft === 2) {
-            draft = 1;
-        }
-    }
-    // Convert v2-v3 'divisibleBy' to 'multipleOf'
-    if (typeof newSchema.divisibleBy === 'number') {
-        newSchema.multipleOf = newSchema.divisibleBy;
-        delete newSchema.divisibleBy;
-        changed = true;
-    }
-    // Convert v1-v2 boolean 'minimumCanEqual' to 'exclusiveMinimum'
-    if (typeof newSchema.minimum === 'number' && newSchema.minimumCanEqual === false) {
-        newSchema.exclusiveMinimum = newSchema.minimum;
-        delete newSchema.minimum;
-        changed = true;
-        if (!draft) {
-            draft = 2;
-        }
-    }
-    else if (typeof newSchema.minimumCanEqual === 'boolean') {
-        delete newSchema.minimumCanEqual;
-        changed = true;
-        if (!draft) {
-            draft = 2;
-        }
-    }
-    // Convert v3-v4 boolean 'exclusiveMinimum' to numeric
-    if (typeof newSchema.minimum === 'number' && newSchema.exclusiveMinimum === true) {
-        newSchema.exclusiveMinimum = newSchema.minimum;
-        delete newSchema.minimum;
-        changed = true;
-    }
-    else if (typeof newSchema.exclusiveMinimum === 'boolean') {
-        delete newSchema.exclusiveMinimum;
-        changed = true;
-    }
-    // Convert v1-v2 boolean 'maximumCanEqual' to 'exclusiveMaximum'
-    if (typeof newSchema.maximum === 'number' && newSchema.maximumCanEqual === false) {
-        newSchema.exclusiveMaximum = newSchema.maximum;
-        delete newSchema.maximum;
-        changed = true;
-        if (!draft) {
-            draft = 2;
-        }
-    }
-    else if (typeof newSchema.maximumCanEqual === 'boolean') {
-        delete newSchema.maximumCanEqual;
-        changed = true;
-        if (!draft) {
-            draft = 2;
-        }
-    }
-    // Convert v3-v4 boolean 'exclusiveMaximum' to numeric
-    if (typeof newSchema.maximum === 'number' && newSchema.exclusiveMaximum === true) {
-        newSchema.exclusiveMaximum = newSchema.maximum;
-        delete newSchema.maximum;
-        changed = true;
-    }
-    else if (typeof newSchema.exclusiveMaximum === 'boolean') {
-        delete newSchema.exclusiveMaximum;
-        changed = true;
-    }
-    // Search object 'properties' for 'optional', 'required', and 'requires' items,
-    // and convert them into object 'required' arrays and 'dependencies' objects
-    if (typeof newSchema.properties === 'object') {
-        var properties_1 = Object.assign({}, newSchema.properties);
-        var requiredKeys_1 = Array.isArray(newSchema.required) ?
-            new Set(newSchema.required) : new Set();
-        // Convert v1-v2 boolean 'optional' properties to 'required' array
-        if (draft === 1 || draft === 2 ||
-            Object.keys(properties_1).some(function (key) { return properties_1[key].optional === true; })) {
-            Object.keys(properties_1)
-                .filter(function (key) { return properties_1[key].optional !== true; })
-                .forEach(function (key) { return requiredKeys_1.add(key); });
-            changed = true;
-            if (!draft) {
-                draft = 2;
-            }
-        }
-        // Convert v3 boolean 'required' properties to 'required' array
-        if (Object.keys(properties_1).some(function (key) { return properties_1[key].required === true; })) {
-            Object.keys(properties_1)
-                .filter(function (key) { return properties_1[key].required === true; })
-                .forEach(function (key) { return requiredKeys_1.add(key); });
-            changed = true;
-        }
-        if (requiredKeys_1.size) {
-            newSchema.required = Array.from(requiredKeys_1);
-        }
-        // Convert v1-v2 array or string 'requires' properties to 'dependencies' object
-        if (Object.keys(properties_1).some(function (key) { return properties_1[key].requires; })) {
-            var dependencies_1 = typeof newSchema.dependencies === 'object' ? Object.assign({}, newSchema.dependencies) : {};
-            Object.keys(properties_1)
-                .filter(function (key) { return properties_1[key].requires; })
-                .forEach(function (key) { return dependencies_1[key] =
-                typeof properties_1[key].requires === 'string' ?
-                    [properties_1[key].requires] : properties_1[key].requires; });
-            newSchema.dependencies = dependencies_1;
-            changed = true;
-            if (!draft) {
-                draft = 2;
-            }
-        }
-        newSchema.properties = properties_1;
-    }
-    // Revove v1-v2 boolean 'optional' key
-    if (typeof newSchema.optional === 'boolean') {
-        delete newSchema.optional;
-        changed = true;
-        if (!draft) {
-            draft = 2;
-        }
-    }
-    // Revove v1-v2 'requires' key
-    if (newSchema.requires) {
-        delete newSchema.requires;
-    }
-    // Revove v3 boolean 'required' key
-    if (typeof newSchema.required === 'boolean') {
-        delete newSchema.required;
-    }
-    // Convert id to $id
-    if (typeof newSchema.id === 'string' && !newSchema.$id) {
-        if (newSchema.id.slice(-1) === '#') {
-            newSchema.id = newSchema.id.slice(0, -1);
-        }
-        newSchema.$id = newSchema.id + '-CONVERTED-TO-DRAFT-06#';
-        delete newSchema.id;
-        changed = true;
-    }
-    // Check if v1-v3 'any' or object types will be converted
-    if (newSchema.type && (typeof newSchema.type.every === 'function' ?
-        !newSchema.type.every(function (type) { return simpleTypes.includes(type); }) :
-        !simpleTypes.includes(newSchema.type))) {
-        changed = true;
-    }
-    // If schema changed, update or remove $schema identifier
-    if (typeof newSchema.$schema === 'string' &&
-        /http\:\/\/json\-schema\.org\/draft\-0[1-4]\/schema\#/.test(newSchema.$schema)) {
-        newSchema.$schema = 'http://json-schema.org/draft-06/schema#';
-        changed = true;
-    }
-    else if (changed && typeof newSchema.$schema === 'string') {
-        var addToDescription = 'Converted to draft 6 from ' + newSchema.$schema;
-        if (typeof newSchema.description === 'string' && newSchema.description.length) {
-            newSchema.description += '\n' + addToDescription;
-        }
-        else {
-            newSchema.description = addToDescription;
-        }
-        delete newSchema.$schema;
-    }
-    // Convert v1-v3 'any' and object types
-    if (newSchema.type && (typeof newSchema.type.every === 'function' ?
-        !newSchema.type.every(function (type) { return simpleTypes.includes(type); }) :
-        !simpleTypes.includes(newSchema.type))) {
-        if (newSchema.type.length === 1) {
-            newSchema.type = newSchema.type[0];
-        }
-        if (typeof newSchema.type === 'string') {
-            // Convert string 'any' type to array of all standard types
-            if (newSchema.type === 'any') {
-                newSchema.type = simpleTypes;
-                // Delete non-standard string type
-            }
-            else {
-                delete newSchema.type;
-            }
-        }
-        else if (typeof newSchema.type === 'object') {
-            if (typeof newSchema.type.every === 'function') {
-                // If array of strings, only allow standard types
-                if (newSchema.type.every(function (type) { return typeof type === 'string'; })) {
-                    newSchema.type = newSchema.type.some(function (type) { return type === 'any'; }) ?
-                        newSchema.type = simpleTypes :
-                        newSchema.type.filter(function (type) { return simpleTypes.includes(type); });
-                    // If type is an array with objects, convert the current schema to an 'anyOf' array
-                }
-                else if (newSchema.type.length > 1) {
-                    var arrayKeys = ['additionalItems', 'items', 'maxItems', 'minItems', 'uniqueItems', 'contains'];
-                    var numberKeys = ['multipleOf', 'maximum', 'exclusiveMaximum', 'minimum', 'exclusiveMinimum'];
-                    var objectKeys = ['maxProperties', 'minProperties', 'required', 'additionalProperties',
-                        'properties', 'patternProperties', 'dependencies', 'propertyNames'];
-                    var stringKeys = ['maxLength', 'minLength', 'pattern', 'format'];
-                    var filterKeys_1 = {
-                        'array': __spread(numberKeys, objectKeys, stringKeys),
-                        'integer': __spread(arrayKeys, objectKeys, stringKeys),
-                        'number': __spread(arrayKeys, objectKeys, stringKeys),
-                        'object': __spread(arrayKeys, numberKeys, stringKeys),
-                        'string': __spread(arrayKeys, numberKeys, objectKeys),
-                        'all': __spread(arrayKeys, numberKeys, objectKeys, stringKeys),
-                    };
-                    var anyOf = [];
-                    var _loop_1 = function (type) {
-                        var newType = typeof type === 'string' ? { type: type } : Object.assign({}, type);
-                        Object.keys(newSchema)
-                            .filter(function (key) { return !newType.hasOwnProperty(key) &&
-                            !__spread((filterKeys_1[newType.type] || filterKeys_1.all), ['type', 'default']).includes(key); })
-                            .forEach(function (key) { return newType[key] = newSchema[key]; });
-                        anyOf.push(newType);
-                    };
-                    try {
-                        for (var _a = __values(newSchema.type), _b = _a.next(); !_b.done; _b = _a.next()) {
-                            var type = _b.value;
-                            _loop_1(type);
-                        }
-                    }
-                    catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                    finally {
-                        try {
-                            if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
-                        }
-                        finally { if (e_1) throw e_1.error; }
-                    }
-                    newSchema = newSchema.hasOwnProperty('default') ?
-                        { anyOf: anyOf, default: newSchema.default } : { anyOf: anyOf };
-                    // If type is an object, merge it with the current schema
-                }
-                else {
-                    var typeSchema = newSchema.type;
-                    delete newSchema.type;
-                    Object.assign(newSchema, typeSchema);
-                }
-            }
-        }
-        else {
-            delete newSchema.type;
-        }
-    }
-    // Convert sub schemas
-    Object.keys(newSchema)
-        .filter(function (key) { return typeof newSchema[key] === 'object'; })
-        .forEach(function (key) {
-        if (['definitions', 'dependencies', 'properties', 'patternProperties']
-            .includes(key) && typeof newSchema[key].map !== 'function') {
-            var newKey_1 = {};
-            Object.keys(newSchema[key]).forEach(function (subKey) { return newKey_1[subKey] =
-                convertSchemaToDraft6(newSchema[key][subKey], { changed: changed, draft: draft }); });
-            newSchema[key] = newKey_1;
-        }
-        else if (['items', 'additionalItems', 'additionalProperties',
-            'allOf', 'anyOf', 'oneOf', 'not'].includes(key)) {
-            newSchema[key] = convertSchemaToDraft6(newSchema[key], { changed: changed, draft: draft });
-        }
-        else {
-            newSchema[key] = cloneDeep(newSchema[key]);
-        }
-    });
-    return newSchema;
-    var e_1, _c;
-}
-
-/**
- * 'dateToString' function
- *
- * @param  { Date | string } date
- * @param  { any } options
- * @return { string }
- */
-
-/**
- * OrderableDirective
- *
- * Enables array elements to be reordered by dragging and dropping.
- *
- * Only works for arrays that have at least two elements.
- *
- * Also detects arrays-within-arrays, and correctly moves either
- * the child array element or the parent array element,
- * depending on the drop targert.
- *
- * Listeners for movable element being dragged:
- * - dragstart: add 'dragging' class to element, set effectAllowed = 'move'
- * - dragover: set dropEffect = 'move'
- * - dragend: remove 'dragging' class from element
- *
- * Listeners for stationary items being dragged over:
- * - dragenter: add 'drag-target-...' classes to element
- * - dragleave: remove 'drag-target-...' classes from element
- * - drop: remove 'drag-target-...' classes from element, move dropped array item
- */
-var OrderableDirective = /** @class */ (function () {
-    function OrderableDirective(elementRef, jsf, ngZone) {
-        this.elementRef = elementRef;
-        this.jsf = jsf;
-        this.ngZone = ngZone;
-        this.overParentElement = false;
-        this.overChildElement = false;
-    }
-    OrderableDirective.prototype.ngOnInit = function () {
-        var _this = this;
-        if (this.orderable && this.layoutNode && this.layoutIndex && this.dataIndex) {
-            this.element = this.elementRef.nativeElement;
-            this.element.draggable = true;
-            this.arrayLayoutIndex = 'move:' + this.layoutIndex.slice(0, -1).toString();
-            this.ngZone.runOutsideAngular(function () {
-                // Listeners for movable element being dragged:
-                _this.element.addEventListener('dragstart', function (event) {
-                    event.dataTransfer.effectAllowed = 'move';
-                    // Hack to bypass stupid HTML drag-and-drop dataTransfer protection
-                    // so drag source info will be available on dragenter
-                    var sourceArrayIndex = _this.dataIndex[_this.dataIndex.length - 1];
-                    sessionStorage.setItem(_this.arrayLayoutIndex, sourceArrayIndex + '');
-                });
-                _this.element.addEventListener('dragover', function (event) {
-                    if (event.preventDefault) {
-                        event.preventDefault();
-                    }
-                    event.dataTransfer.dropEffect = 'move';
-                    return false;
-                });
-                // Listeners for stationary items being dragged over:
-                _this.element.addEventListener('dragenter', function (event) {
-                    // Part 1 of a hack, inspired by Dragster, to simulate mouseover and mouseout
-                    // behavior while dragging items - http://bensmithett.github.io/dragster/
-                    if (_this.overParentElement) {
-                        return _this.overChildElement = true;
-                    }
-                    else {
-                        _this.overParentElement = true;
-                    }
-                    var sourceArrayIndex = sessionStorage.getItem(_this.arrayLayoutIndex);
-                    if (sourceArrayIndex !== null) {
-                        if (_this.dataIndex[_this.dataIndex.length - 1] < +sourceArrayIndex) {
-                            _this.element.classList.add('drag-target-top');
-                        }
-                        else if (_this.dataIndex[_this.dataIndex.length - 1] > +sourceArrayIndex) {
-                            _this.element.classList.add('drag-target-bottom');
-                        }
-                    }
-                });
-                _this.element.addEventListener('dragleave', function (event) {
-                    // Part 2 of the Dragster hack
-                    if (_this.overChildElement) {
-                        _this.overChildElement = false;
-                    }
-                    else if (_this.overParentElement) {
-                        _this.overParentElement = false;
-                    }
-                    var sourceArrayIndex = sessionStorage.getItem(_this.arrayLayoutIndex);
-                    if (!_this.overParentElement && !_this.overChildElement && sourceArrayIndex !== null) {
-                        _this.element.classList.remove('drag-target-top');
-                        _this.element.classList.remove('drag-target-bottom');
-                    }
-                });
-                _this.element.addEventListener('drop', function (event) {
-                    _this.element.classList.remove('drag-target-top');
-                    _this.element.classList.remove('drag-target-bottom');
-                    // Confirm that drop target is another item in the same array as source item
-                    var sourceArrayIndex = sessionStorage.getItem(_this.arrayLayoutIndex);
-                    var destArrayIndex = _this.dataIndex[_this.dataIndex.length - 1];
-                    if (sourceArrayIndex !== null && +sourceArrayIndex !== destArrayIndex) {
-                        // Move array item
-                        _this.jsf.moveArrayItem(_this, +sourceArrayIndex, destArrayIndex);
-                    }
-                    sessionStorage.removeItem(_this.arrayLayoutIndex);
-                    return false;
-                });
-            });
-        }
-    };
-    return OrderableDirective;
-}());
-OrderableDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[orderable]',
-            },] },
-];
-/** @nocollapse */
-OrderableDirective.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: JsonSchemaFormService, },
-    { type: NgZone, },
-]; };
-OrderableDirective.propDecorators = {
-    "orderable": [{ type: Input },],
     "layoutNode": [{ type: Input },],
     "layoutIndex": [{ type: Input },],
     "dataIndex": [{ type: Input },],
@@ -8973,13 +9137,1583 @@ JsonSchemaFormModule.decorators = [
             },] },
 ];
 
-/*
- * Public API Surface of angular2-json-schema-form
+var FlexLayoutRootComponent = /** @class */ (function () {
+    function FlexLayoutRootComponent(jsf) {
+        this.jsf = jsf;
+        this.isFlexItem = false;
+    }
+    FlexLayoutRootComponent.prototype.removeItem = function (item) {
+        this.jsf.removeItem(item);
+    };
+    // Set attributes for flexbox child
+    // (container attributes are set in flex-layout-section.component)
+    FlexLayoutRootComponent.prototype.getFlexAttribute = function (node, attribute) {
+        var index = ['flex-grow', 'flex-shrink', 'flex-basis'].indexOf(attribute);
+        return ((node.options || {}).flex || '').split(/\s+/)[index] ||
+            (node.options || {})[attribute] || ['1', '1', 'auto'][index];
+    };
+    FlexLayoutRootComponent.prototype.showWidget = function (layoutNode) {
+        return this.jsf.evaluateCondition(layoutNode, this.dataIndex);
+    };
+    return FlexLayoutRootComponent;
+}());
+FlexLayoutRootComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'flex-layout-root-widget',
+                template: "\n    <div *ngFor=\"let layoutNode of layout; let i = index\"\n      [class.form-flex-item]=\"isFlexItem\"\n      [style.flex-grow]=\"getFlexAttribute(layoutNode, 'flex-grow')\"\n      [style.flex-shrink]=\"getFlexAttribute(layoutNode, 'flex-shrink')\"\n      [style.flex-basis]=\"getFlexAttribute(layoutNode, 'flex-basis')\"\n      [style.align-self]=\"(layoutNode?.options || {})['align-self']\"\n      [style.order]=\"layoutNode?.options?.order\"\n      [fxFlex]=\"layoutNode?.options?.fxFlex\"\n      [fxFlexOrder]=\"layoutNode?.options?.fxFlexOrder\"\n      [fxFlexOffset]=\"layoutNode?.options?.fxFlexOffset\"\n      [fxFlexAlign]=\"layoutNode?.options?.fxFlexAlign\">\n      <select-framework-widget *ngIf=\"showWidget(layoutNode)\"\n        [dataIndex]=\"layoutNode?.arrayItem ? (dataIndex || []).concat(i) : (dataIndex || [])\"\n        [layoutIndex]=\"(layoutIndex || []).concat(i)\"\n        [layoutNode]=\"layoutNode\"></select-framework-widget>\n    <div>",
+                changeDetection: ChangeDetectionStrategy.Default,
+            },] },
+];
+/** @nocollapse */
+FlexLayoutRootComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+FlexLayoutRootComponent.propDecorators = {
+    "dataIndex": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "layout": [{ type: Input },],
+    "isFlexItem": [{ type: Input },],
+};
+
+var FlexLayoutSectionComponent = /** @class */ (function () {
+    function FlexLayoutSectionComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+        this.expanded = true;
+        this.containerType = 'div';
+    }
+    Object.defineProperty(FlexLayoutSectionComponent.prototype, "sectionTitle", {
+        get: function () {
+            return this.options.notitle ? null : this.jsf.setItemTitle(this);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    FlexLayoutSectionComponent.prototype.ngOnInit = function () {
+        this.jsf.initializeControl(this);
+        this.options = this.layoutNode.options || {};
+        this.expanded = typeof this.options.expanded === 'boolean' ?
+            this.options.expanded : !this.options.expandable;
+        switch (this.layoutNode.type) {
+            case 'section':
+            case 'array':
+            case 'fieldset':
+            case 'advancedfieldset':
+            case 'authfieldset':
+            case 'optionfieldset':
+            case 'selectfieldset':
+                this.containerType = 'fieldset';
+                break;
+            case 'card':
+                this.containerType = 'card';
+                break;
+            case 'expansion-panel':
+                this.containerType = 'expansion-panel';
+                break;
+            default:
+                // 'div', 'flex', 'tab', 'conditional', 'actions'
+                this.containerType = 'div';
+        }
+    };
+    FlexLayoutSectionComponent.prototype.toggleExpanded = function () {
+        if (this.options.expandable) {
+            this.expanded = !this.expanded;
+        }
+    };
+    // Set attributes for flexbox container
+    // (child attributes are set in flex-layout-root.component)
+    FlexLayoutSectionComponent.prototype.getFlexAttribute = function (attribute) {
+        var flexActive = this.layoutNode.type === 'flex' ||
+            !!this.options.displayFlex ||
+            this.options.display === 'flex';
+        // if (attribute !== 'flex' && !flexActive) { return null; }
+        switch (attribute) {
+            case 'is-flex':
+                return flexActive;
+            case 'display':
+                return flexActive ? 'flex' : 'initial';
+            case 'flex-direction':
+            case 'flex-wrap':
+                var index = ['flex-direction', 'flex-wrap'].indexOf(attribute);
+                return (this.options['flex-flow'] || '').split(/\s+/)[index] ||
+                    this.options[attribute] || ['column', 'nowrap'][index];
+            case 'justify-content':
+            case 'align-items':
+            case 'align-content':
+                return this.options[attribute];
+            case 'layout':
+                return (this.options.fxLayout || 'row') +
+                    this.options.fxLayoutWrap ? ' ' + this.options.fxLayoutWrap : '';
+        }
+    };
+    return FlexLayoutSectionComponent;
+}());
+FlexLayoutSectionComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'flex-layout-section-widget',
+                template: "\n    <div *ngIf=\"containerType === 'div'\"\n      [class]=\"options?.htmlClass || ''\"\n      [class.expandable]=\"options?.expandable && !expanded\"\n      [class.expanded]=\"options?.expandable && expanded\">\n      <label *ngIf=\"sectionTitle\"\n        [class]=\"'legend ' + (options?.labelHtmlClass || '')\"\n        [innerHTML]=\"sectionTitle\"\n        (click)=\"toggleExpanded()\"></label>\n      <flex-layout-root-widget *ngIf=\"expanded\"\n        [layout]=\"layoutNode.items\"\n        [dataIndex]=\"dataIndex\"\n        [layoutIndex]=\"layoutIndex\"\n        [isFlexItem]=\"getFlexAttribute('is-flex')\"\n        [class.form-flex-column]=\"getFlexAttribute('flex-direction') === 'column'\"\n        [class.form-flex-row]=\"getFlexAttribute('flex-direction') === 'row'\"\n        [style.display]=\"getFlexAttribute('display')\"\n        [style.flex-direction]=\"getFlexAttribute('flex-direction')\"\n        [style.flex-wrap]=\"getFlexAttribute('flex-wrap')\"\n        [style.justify-content]=\"getFlexAttribute('justify-content')\"\n        [style.align-items]=\"getFlexAttribute('align-items')\"\n        [style.align-content]=\"getFlexAttribute('align-content')\"\n        [fxLayout]=\"getFlexAttribute('layout')\"\n        [fxLayoutGap]=\"options?.fxLayoutGap\"\n        [fxLayoutAlign]=\"options?.fxLayoutAlign\"\n        [attr.fxFlexFill]=\"options?.fxLayoutAlign\"></flex-layout-root-widget>\n      <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n        [innerHTML]=\"options?.errorMessage\"></mat-error>\n    </div>\n\n    <fieldset *ngIf=\"containerType === 'fieldset'\"\n      [class]=\"options?.htmlClass || ''\"\n      [class.expandable]=\"options?.expandable && !expanded\"\n      [class.expanded]=\"options?.expandable && expanded\"\n      [disabled]=\"options?.readonly\">\n      <legend *ngIf=\"sectionTitle\"\n        [class]=\"'legend ' + (options?.labelHtmlClass || '')\"\n        [innerHTML]=\"sectionTitle\"\n        (click)=\"toggleExpanded()\"></legend>\n      <flex-layout-root-widget *ngIf=\"expanded\"\n        [layout]=\"layoutNode.items\"\n        [dataIndex]=\"dataIndex\"\n        [layoutIndex]=\"layoutIndex\"\n        [isFlexItem]=\"getFlexAttribute('is-flex')\"\n        [class.form-flex-column]=\"getFlexAttribute('flex-direction') === 'column'\"\n        [class.form-flex-row]=\"getFlexAttribute('flex-direction') === 'row'\"\n        [style.display]=\"getFlexAttribute('display')\"\n        [style.flex-direction]=\"getFlexAttribute('flex-direction')\"\n        [style.flex-wrap]=\"getFlexAttribute('flex-wrap')\"\n        [style.justify-content]=\"getFlexAttribute('justify-content')\"\n        [style.align-items]=\"getFlexAttribute('align-items')\"\n        [style.align-content]=\"getFlexAttribute('align-content')\"\n        [fxLayout]=\"getFlexAttribute('layout')\"\n        [fxLayoutGap]=\"options?.fxLayoutGap\"\n        [fxLayoutAlign]=\"options?.fxLayoutAlign\"\n        [attr.fxFlexFill]=\"options?.fxLayoutAlign\"></flex-layout-root-widget>\n      <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n        [innerHTML]=\"options?.errorMessage\"></mat-error>\n    </fieldset>\n\n    <mat-card *ngIf=\"containerType === 'card'\"\n      [class]=\"options?.htmlClass || ''\"\n      [class.expandable]=\"options?.expandable && !expanded\"\n      [class.expanded]=\"options?.expandable && expanded\">\n      <mat-card-header *ngIf=\"sectionTitle\">\n        <legend\n          [class]=\"'legend ' + (options?.labelHtmlClass || '')\"\n          [innerHTML]=\"sectionTitle\"\n          (click)=\"toggleExpanded()\"></legend>\n      </mat-card-header>\n      <mat-card-content *ngIf=\"expanded\">\n        <fieldset [disabled]=\"options?.readonly\">\n          <flex-layout-root-widget *ngIf=\"expanded\"\n            [layout]=\"layoutNode.items\"\n            [dataIndex]=\"dataIndex\"\n            [layoutIndex]=\"layoutIndex\"\n            [isFlexItem]=\"getFlexAttribute('is-flex')\"\n            [class.form-flex-column]=\"getFlexAttribute('flex-direction') === 'column'\"\n            [class.form-flex-row]=\"getFlexAttribute('flex-direction') === 'row'\"\n            [style.display]=\"getFlexAttribute('display')\"\n            [style.flex-direction]=\"getFlexAttribute('flex-direction')\"\n            [style.flex-wrap]=\"getFlexAttribute('flex-wrap')\"\n            [style.justify-content]=\"getFlexAttribute('justify-content')\"\n            [style.align-items]=\"getFlexAttribute('align-items')\"\n            [style.align-content]=\"getFlexAttribute('align-content')\"\n            [fxLayout]=\"getFlexAttribute('layout')\"\n            [fxLayoutGap]=\"options?.fxLayoutGap\"\n            [fxLayoutAlign]=\"options?.fxLayoutAlign\"\n            [attr.fxFlexFill]=\"options?.fxLayoutAlign\"></flex-layout-root-widget>\n          </fieldset>\n      </mat-card-content>\n      <mat-card-footer>\n        <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n          [innerHTML]=\"options?.errorMessage\"></mat-error>\n      </mat-card-footer>\n    </mat-card>\n\n    <mat-expansion-panel *ngIf=\"containerType === 'expansion-panel'\"\n      [expanded]=\"expanded\"\n      [hideToggle]=\"!options?.expandable\">\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          <legend *ngIf=\"sectionTitle\"\n            [class]=\"options?.labelHtmlClass\"\n            [innerHTML]=\"sectionTitle\"\n            (click)=\"toggleExpanded()\"></legend>\n        </mat-panel-title>\n      </mat-expansion-panel-header>\n      <fieldset [disabled]=\"options?.readonly\">\n        <flex-layout-root-widget *ngIf=\"expanded\"\n          [layout]=\"layoutNode.items\"\n          [dataIndex]=\"dataIndex\"\n          [layoutIndex]=\"layoutIndex\"\n          [isFlexItem]=\"getFlexAttribute('is-flex')\"\n          [class.form-flex-column]=\"getFlexAttribute('flex-direction') === 'column'\"\n          [class.form-flex-row]=\"getFlexAttribute('flex-direction') === 'row'\"\n          [style.display]=\"getFlexAttribute('display')\"\n          [style.flex-direction]=\"getFlexAttribute('flex-direction')\"\n          [style.flex-wrap]=\"getFlexAttribute('flex-wrap')\"\n          [style.justify-content]=\"getFlexAttribute('justify-content')\"\n          [style.align-items]=\"getFlexAttribute('align-items')\"\n          [style.align-content]=\"getFlexAttribute('align-content')\"\n          [fxLayout]=\"getFlexAttribute('layout')\"\n          [fxLayoutGap]=\"options?.fxLayoutGap\"\n          [fxLayoutAlign]=\"options?.fxLayoutAlign\"\n          [attr.fxFlexFill]=\"options?.fxLayoutAlign\"></flex-layout-root-widget>\n      </fieldset>\n      <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n        [innerHTML]=\"options?.errorMessage\"></mat-error>\n    </mat-expansion-panel>",
+                styles: ["\n    fieldset { border: 0; margin: 0; padding: 0; }\n    .legend { font-weight: bold; }\n    .expandable > .legend:before { content: '\u25B6'; padding-right: .3em; }\n    .expanded > .legend:before { content: '\u25BC'; padding-right: .2em; }\n  "],
+            },] },
+];
+/** @nocollapse */
+FlexLayoutSectionComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+FlexLayoutSectionComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var MaterialAddReferenceComponent = /** @class */ (function () {
+    function MaterialAddReferenceComponent(jsf) {
+        this.jsf = jsf;
+    }
+    MaterialAddReferenceComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+    };
+    Object.defineProperty(MaterialAddReferenceComponent.prototype, "showAddButton", {
+        get: function () {
+            return !this.layoutNode.arrayItem ||
+                this.layoutIndex[this.layoutIndex.length - 1] < this.options.maxItems;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MaterialAddReferenceComponent.prototype.addItem = function (event) {
+        event.preventDefault();
+        this.jsf.addItem(this);
+    };
+    Object.defineProperty(MaterialAddReferenceComponent.prototype, "buttonText", {
+        get: function () {
+            var parent = {
+                dataIndex: this.dataIndex.slice(0, -1),
+                layoutIndex: this.layoutIndex.slice(0, -1),
+                layoutNode: this.jsf.getParentNode(this),
+            };
+            return parent.layoutNode.add ||
+                this.jsf.setArrayItemTitle(parent, this.layoutNode, this.itemCount);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return MaterialAddReferenceComponent;
+}());
+MaterialAddReferenceComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-add-reference-widget',
+                template: "\n    <section [class]=\"options?.htmlClass || ''\" align=\"end\">\n      <button mat-raised-button *ngIf=\"showAddButton\"\n        [color]=\"options?.color || 'accent'\"\n        [disabled]=\"options?.readonly\"\n        (click)=\"addItem($event)\">\n        <span *ngIf=\"options?.icon\" [class]=\"options?.icon\"></span>\n        <span *ngIf=\"options?.title\" [innerHTML]=\"buttonText\"></span>\n      </button>\n    </section>",
+                changeDetection: ChangeDetectionStrategy.Default,
+            },] },
+];
+/** @nocollapse */
+MaterialAddReferenceComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialAddReferenceComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+// TODO: Add this control
+var MaterialOneOfComponent = /** @class */ (function () {
+    function MaterialOneOfComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+    }
+    MaterialOneOfComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+        this.jsf.initializeControl(this);
+    };
+    MaterialOneOfComponent.prototype.updateValue = function (event) {
+        this.jsf.updateValue(this, event.target.value);
+    };
+    return MaterialOneOfComponent;
+}());
+MaterialOneOfComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-one-of-widget',
+                template: "",
+            },] },
+];
+/** @nocollapse */
+MaterialOneOfComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialOneOfComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var MaterialButtonComponent = /** @class */ (function () {
+    function MaterialButtonComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+    }
+    MaterialButtonComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.options = this.layoutNode.options || {};
+        this.jsf.initializeControl(this);
+        if (hasOwn(this.options, 'disabled')) {
+            this.controlDisabled = this.options.disabled;
+        }
+        else if (this.jsf.formOptions.disableInvalidSubmit) {
+            this.controlDisabled = !this.jsf.isValid;
+            this.jsf.isValidChanges.subscribe(function (isValid) { return _this.controlDisabled = !isValid; });
+        }
+    };
+    MaterialButtonComponent.prototype.updateValue = function (event) {
+        if (typeof this.options.onClick === 'function') {
+            this.options.onClick(event);
+        }
+        else {
+            this.jsf.updateValue(this, event.target.value);
+        }
+    };
+    return MaterialButtonComponent;
+}());
+MaterialButtonComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-button-widget',
+                template: "\n    <div class=\"button-row\" [class]=\"options?.htmlClass || ''\">\n      <button mat-raised-button\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [color]=\"options?.color || 'primary'\"\n        [disabled]=\"controlDisabled || options?.readonly\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [type]=\"layoutNode?.type\"\n        [value]=\"controlValue\"\n        (click)=\"updateValue($event)\">\n        <mat-icon *ngIf=\"options?.icon\" class=\"mat-24\">{{options?.icon}}</mat-icon>\n        <span *ngIf=\"options?.title\" [innerHTML]=\"options?.title\"></span>\n      </button>\n    </div>",
+                styles: [" button { margin-top: 10px; } "],
+            },] },
+];
+/** @nocollapse */
+MaterialButtonComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialButtonComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var MaterialButtonGroupComponent = /** @class */ (function () {
+    function MaterialButtonGroupComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+        this.radiosList = [];
+        this.vertical = false;
+    }
+    MaterialButtonGroupComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+        this.radiosList = buildTitleMap(this.options.titleMap || this.options.enumNames, this.options.enum, true);
+        this.jsf.initializeControl(this);
+    };
+    MaterialButtonGroupComponent.prototype.updateValue = function (value) {
+        this.options.showErrors = true;
+        this.jsf.updateValue(this, value);
+    };
+    return MaterialButtonGroupComponent;
+}());
+MaterialButtonGroupComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-button-group-widget',
+                template: "\n    <div>\n      <div *ngIf=\"options?.title\">\n        <label\n          [attr.for]=\"'control' + layoutNode?._id\"\n          [class]=\"options?.labelHtmlClass || ''\"\n          [style.display]=\"options?.notitle ? 'none' : ''\"\n          [innerHTML]=\"options?.title\"></label>\n      </div>\n      <mat-button-toggle-group\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [attr.required]=\"options?.required\"\n        [disabled]=\"controlDisabled || options?.readonly\"\n        [name]=\"controlName\"\n        [value]=\"controlValue\"\n        [vertical]=\"!!options.vertical\">\n        <mat-button-toggle *ngFor=\"let radioItem of radiosList\"\n          [id]=\"'control' + layoutNode?._id + '/' + radioItem?.name\"\n          [value]=\"radioItem?.value\"\n          (click)=\"updateValue(radioItem?.value)\">\n          <span [innerHTML]=\"radioItem?.name\"></span>\n        </mat-button-toggle>\n      </mat-button-toggle-group>\n      <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n        [innerHTML]=\"options?.errorMessage\"></mat-error>\n    </div>",
+                styles: [" mat-error { font-size: 75%; } "],
+            },] },
+];
+/** @nocollapse */
+MaterialButtonGroupComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialButtonGroupComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var MaterialCheckboxComponent = /** @class */ (function () {
+    function MaterialCheckboxComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+        this.trueValue = true;
+        this.falseValue = false;
+        this.showSlideToggle = false;
+    }
+    MaterialCheckboxComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+        this.jsf.initializeControl(this, !this.options.readonly);
+        if (this.controlValue === null || this.controlValue === undefined) {
+            this.controlValue = false;
+            this.jsf.updateValue(this, this.falseValue);
+        }
+        if (this.layoutNode.type === 'slide-toggle' ||
+            this.layoutNode.format === 'slide-toggle') {
+            this.showSlideToggle = true;
+        }
+    };
+    MaterialCheckboxComponent.prototype.updateValue = function (event) {
+        this.options.showErrors = true;
+        this.jsf.updateValue(this, event.checked ? this.trueValue : this.falseValue);
+    };
+    Object.defineProperty(MaterialCheckboxComponent.prototype, "isChecked", {
+        get: function () {
+            return this.jsf.getFormControlValue(this) === this.trueValue;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return MaterialCheckboxComponent;
+}());
+MaterialCheckboxComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-checkbox-widget',
+                template: "\n    <mat-checkbox *ngIf=\"boundControl && !showSlideToggle\"\n      [formControl]=\"formControl\"\n      labelPosition=\"left\"\n      [color]=\"options?.color || 'primary'\"\n      [id]=\"'control' + layoutNode?._id\"\n      labelPosition=\"after\"\n      [name]=\"controlName\"\n      (blur)=\"options.showErrors = true\">\n      <span *ngIf=\"options?.title\"\n        class=\"checkbox-name\"\n        [style.display]=\"options?.notitle ? 'none' : ''\"\n        [innerHTML]=\"options?.title\"></span>\n    </mat-checkbox>\n    <mat-checkbox *ngIf=\"!boundControl && !showSlideToggle\"\n      labelPosition=\"left\"\n      [color]=\"options?.color || 'primary'\"\n      [disabled]=\"controlDisabled || options?.readonly\"\n      [id]=\"'control' + layoutNode?._id\"\n      labelPosition=\"after\"\n      [name]=\"controlName\"\n      [checked]=\"isChecked\"\n      (blur)=\"options.showErrors = true\"\n      (change)=\"updateValue($event)\">\n      <span *ngIf=\"options?.title\"\n        class=\"checkbox-name\"\n        [style.display]=\"options?.notitle ? 'none' : ''\"\n        [innerHTML]=\"options?.title\"></span>\n    </mat-checkbox>\n    <mat-slide-toggle *ngIf=\"boundControl && showSlideToggle\"\n      [formControl]=\"formControl\"\n      align=\"left\"\n      [color]=\"options?.color || 'primary'\"\n      [id]=\"'control' + layoutNode?._id\"\n      labelPosition=\"after\"\n      [name]=\"controlName\"\n      (blur)=\"options.showErrors = true\">\n      <span *ngIf=\"options?.title\"\n        class=\"checkbox-name\"\n        [style.display]=\"options?.notitle ? 'none' : ''\"\n        [innerHTML]=\"options?.title\"></span>\n    </mat-slide-toggle>\n    <mat-slide-toggle *ngIf=\"!boundControl && showSlideToggle\"\n      align=\"left\"\n      [color]=\"options?.color || 'primary'\"\n      [disabled]=\"controlDisabled || options?.readonly\"\n      [id]=\"'control' + layoutNode?._id\"\n      labelPosition=\"after\"\n      [name]=\"controlName\"\n      [checked]=\"isChecked\"\n      (blur)=\"options.showErrors = true\"\n      (change)=\"updateValue($event)\">\n      <span *ngIf=\"options?.title\"\n        class=\"checkbox-name\"\n        [style.display]=\"options?.notitle ? 'none' : ''\"\n        [innerHTML]=\"options?.title\"></span>\n    </mat-slide-toggle>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                styles: ["\n    .checkbox-name { white-space: nowrap; }\n    mat-error { font-size: 75%; }\n  "],
+            },] },
+];
+/** @nocollapse */
+MaterialCheckboxComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialCheckboxComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+// TODO: Change this to use a Selection List instead?
+// https://material.angular.io/components/list/overview
+var MaterialCheckboxesComponent = /** @class */ (function () {
+    function MaterialCheckboxesComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+        this.horizontalList = false;
+        this.checkboxList = [];
+    }
+    MaterialCheckboxesComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+        this.horizontalList = this.layoutNode.type === 'checkboxes-inline' ||
+            this.layoutNode.type === 'checkboxbuttons';
+        this.jsf.initializeControl(this);
+        this.checkboxList = buildTitleMap(this.options.titleMap || this.options.enumNames, this.options.enum, true);
+        if (this.boundControl) {
+            var formArray = this.jsf.getFormControl(this);
+            try {
+                for (var _a = __values(this.checkboxList), _b = _a.next(); !_b.done; _b = _a.next()) {
+                    var checkboxItem = _b.value;
+                    checkboxItem.checked = formArray.value.includes(checkboxItem.value);
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+        }
+        var e_1, _c;
+    };
+    Object.defineProperty(MaterialCheckboxesComponent.prototype, "allChecked", {
+        get: function () {
+            return this.checkboxList.filter(function (t) { return t.checked; }).length === this.checkboxList.length;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MaterialCheckboxesComponent.prototype, "someChecked", {
+        get: function () {
+            var checkedItems = this.checkboxList.filter(function (t) { return t.checked; }).length;
+            return checkedItems > 0 && checkedItems < this.checkboxList.length;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MaterialCheckboxesComponent.prototype.updateValue = function () {
+        this.options.showErrors = true;
+        if (this.boundControl) {
+            this.jsf.updateArrayCheckboxList(this, this.checkboxList);
+        }
+    };
+    MaterialCheckboxesComponent.prototype.updateAllValues = function (event) {
+        this.options.showErrors = true;
+        this.checkboxList.forEach(function (t) { return t.checked = event.checked; });
+        this.updateValue();
+    };
+    return MaterialCheckboxesComponent;
+}());
+MaterialCheckboxesComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-checkboxes-widget',
+                template: "\n    <div>\n      <mat-checkbox type=\"checkbox\"\n        [checked]=\"allChecked\"\n        [color]=\"options?.color || 'primary'\"\n        [disabled]=\"controlDisabled || options?.readonly\"\n        [indeterminate]=\"someChecked\"\n        [name]=\"options?.name\"\n        (blur)=\"options.showErrors = true\"\n        (change)=\"updateAllValues($event)\">\n        <span class=\"checkbox-name\" [innerHTML]=\"options?.name\"></span>\n      </mat-checkbox>\n      <label *ngIf=\"options?.title\"\n        class=\"title\"\n        [class]=\"options?.labelHtmlClass || ''\"\n        [style.display]=\"options?.notitle ? 'none' : ''\"\n        [innerHTML]=\"options?.title\"></label>\n      <ul class=\"checkbox-list\" [class.horizontal-list]=\"horizontalList\">\n        <li *ngFor=\"let checkboxItem of checkboxList\"\n          [class]=\"options?.htmlClass || ''\">\n          <mat-checkbox type=\"checkbox\"\n            [(ngModel)]=\"checkboxItem.checked\"\n            [color]=\"options?.color || 'primary'\"\n            [disabled]=\"controlDisabled || options?.readonly\"\n            [name]=\"checkboxItem?.name\"\n            (blur)=\"options.showErrors = true\"\n            (change)=\"updateValue()\">\n            <span class=\"checkbox-name\" [innerHTML]=\"checkboxItem?.name\"></span>\n          </mat-checkbox>\n        </li>\n      </ul>\n      <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n        [innerHTML]=\"options?.errorMessage\"></mat-error>\n    </div>",
+                styles: ["\n    .title { font-weight: bold; }\n    .checkbox-list { list-style-type: none; }\n    .horizontal-list > li { display: inline-block; margin-right: 10px; zoom: 1; }\n    .checkbox-name { white-space: nowrap; }\n    mat-error { font-size: 75%; }\n  "],
+            },] },
+];
+/** @nocollapse */
+MaterialCheckboxesComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialCheckboxesComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+// TODO: Add this control
+var MaterialChipListComponent = /** @class */ (function () {
+    function MaterialChipListComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+    }
+    MaterialChipListComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+        this.jsf.initializeControl(this);
+    };
+    MaterialChipListComponent.prototype.updateValue = function (event) {
+        this.jsf.updateValue(this, event.target.value);
+    };
+    return MaterialChipListComponent;
+}());
+MaterialChipListComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-chip-list-widget',
+                template: "",
+            },] },
+];
+/** @nocollapse */
+MaterialChipListComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialChipListComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var MaterialDatepickerComponent = /** @class */ (function () {
+    function MaterialDatepickerComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+        this.autoCompleteList = [];
+    }
+    MaterialDatepickerComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+        this.jsf.initializeControl(this, !this.options.readonly);
+        this.setControlDate(this.controlValue);
+        if (!this.options.notitle && !this.options.description && this.options.placeholder) {
+            this.options.description = this.options.placeholder;
+        }
+    };
+    MaterialDatepickerComponent.prototype.ngOnChanges = function () {
+        this.setControlDate(this.controlValue);
+    };
+    MaterialDatepickerComponent.prototype.setControlDate = function (dateString) {
+        this.dateValue = stringToDate(dateString);
+    };
+    MaterialDatepickerComponent.prototype.updateValue = function (event) {
+        this.options.showErrors = true;
+        this.jsf.updateValue(this, dateToString(event, this.options));
+    };
+    return MaterialDatepickerComponent;
+}());
+MaterialDatepickerComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-datepicker-widget',
+                template: "\n    <mat-form-field [style.width]=\"'100%'\">\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <input matInput *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [id]=\"'control' + layoutNode?._id\"\n        [max]=\"options?.maximum\"\n        [matDatepicker]=\"picker\"\n        [min]=\"options?.minimum\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        (blur)=\"options.showErrors = true\">\n      <input matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [disabled]=\"controlDisabled || options?.readonly\"\n        [id]=\"'control' + layoutNode?._id\"\n        [max]=\"options?.maximum\"\n        [matDatepicker]=\"picker\"\n        [min]=\"options?.minimum\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [value]=\"dateValue\"\n        (blur)=\"options.showErrors = true\"\n        (change)=\"updateValue($event)\"\n        (input)=\"updateValue($event)\">\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n      <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n    </mat-form-field>\n    <mat-datepicker #picker></mat-datepicker>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                styles: ["\n    mat-error { font-size: 75%; margin-top: -1rem; margin-bottom: 0.5rem; }\n    ::ng-deep mat-form-field .mat-form-field-wrapper .mat-form-field-flex\n      .mat-form-field-infix { width: initial; }\n  "],
+            },] },
+];
+/** @nocollapse */
+MaterialDatepickerComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialDatepickerComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+// TODO: Add this control
+var MaterialFileComponent = /** @class */ (function () {
+    function MaterialFileComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+    }
+    MaterialFileComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+        this.jsf.initializeControl(this);
+    };
+    MaterialFileComponent.prototype.updateValue = function (event) {
+        this.jsf.updateValue(this, event.target.value);
+    };
+    return MaterialFileComponent;
+}());
+MaterialFileComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-file-widget',
+                template: "",
+            },] },
+];
+/** @nocollapse */
+MaterialFileComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialFileComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var MaterialInputComponent = /** @class */ (function () {
+    function MaterialInputComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+        this.autoCompleteList = [];
+    }
+    MaterialInputComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+        this.jsf.initializeControl(this);
+        if (!this.options.notitle && !this.options.description && this.options.placeholder) {
+            this.options.description = this.options.placeholder;
+        }
+    };
+    MaterialInputComponent.prototype.updateValue = function (event) {
+        this.jsf.updateValue(this, event.target.value);
+    };
+    return MaterialInputComponent;
+}());
+MaterialInputComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-input-widget',
+                template: "\n    <mat-form-field\n      [class]=\"options?.htmlClass || ''\"\n      [floatLabel]=\"options?.floatPlaceholder || (options?.notitle ? 'never' : 'auto')\"\n      [style.width]=\"'100%'\">\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <input matInput *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.maxlength]=\"options?.maxLength\"\n        [attr.minlength]=\"options?.minLength\"\n        [attr.pattern]=\"options?.pattern\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [type]=\"layoutNode?.type\"\n        (blur)=\"options.showErrors = true\">\n      <input matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.maxlength]=\"options?.maxLength\"\n        [attr.minlength]=\"options?.minLength\"\n        [attr.pattern]=\"options?.pattern\"\n        [disabled]=\"controlDisabled\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [type]=\"layoutNode?.type\"\n        [value]=\"controlValue\"\n        (input)=\"updateValue($event)\"\n        (blur)=\"options.showErrors = true\">\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n      <mat-autocomplete *ngIf=\"options?.typeahead?.source\">\n        <mat-option *ngFor=\"let word of options?.typeahead?.source\"\n          [value]=\"word\">{{word}}</mat-option>\n      </mat-autocomplete>\n    </mat-form-field>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                styles: ["\n    mat-error { font-size: 75%; margin-top: -1rem; margin-bottom: 0.5rem; }\n    ::ng-deep mat-form-field .mat-form-field-wrapper .mat-form-field-flex\n      .mat-form-field-infix { width: initial; }\n  "],
+            },] },
+];
+/** @nocollapse */
+MaterialInputComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialInputComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var MaterialNumberComponent = /** @class */ (function () {
+    function MaterialNumberComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+        this.allowNegative = true;
+        this.allowDecimal = true;
+        this.allowExponents = false;
+        this.lastValidNumber = '';
+    }
+    MaterialNumberComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+        this.jsf.initializeControl(this);
+        if (this.layoutNode.dataType === 'integer') {
+            this.allowDecimal = false;
+        }
+        if (!this.options.notitle && !this.options.description && this.options.placeholder) {
+            this.options.description = this.options.placeholder;
+        }
+    };
+    MaterialNumberComponent.prototype.updateValue = function (event) {
+        this.jsf.updateValue(this, event.target.value);
+    };
+    return MaterialNumberComponent;
+}());
+MaterialNumberComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-number-widget',
+                template: "\n    <mat-form-field\n      [class]=\"options?.htmlClass || ''\"\n      [floatLabel]=\"options?.floatPlaceholder || (options?.notitle ? 'never' : 'auto')\"\n      [style.width]=\"'100%'\">\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <input matInput *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.max]=\"options?.maximum\"\n        [attr.min]=\"options?.minimum\"\n        [attr.step]=\"options?.multipleOf || options?.step || 'any'\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [type]=\"'number'\"\n        (blur)=\"options.showErrors = true\">\n      <input matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.max]=\"options?.maximum\"\n        [attr.min]=\"options?.minimum\"\n        [attr.step]=\"options?.multipleOf || options?.step || 'any'\"\n        [disabled]=\"controlDisabled\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [type]=\"'number'\"\n        [value]=\"controlValue\"\n        (input)=\"updateValue($event)\"\n        (blur)=\"options.showErrors = true\">\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"layoutNode?.type === 'range'\" align=\"start\"\n        [innerHTML]=\"controlValue\"></mat-hint>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n    </mat-form-field>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                styles: ["\n    mat-error { font-size: 75%; margin-top: -1rem; margin-bottom: 0.5rem; }\n    ::ng-deep mat-form-field .mat-form-field-wrapper .mat-form-field-flex\n      .mat-form-field-infix { width: initial; }\n  "],
+            },] },
+];
+/** @nocollapse */
+MaterialNumberComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialNumberComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var MaterialRadiosComponent = /** @class */ (function () {
+    function MaterialRadiosComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+        this.flexDirection = 'column';
+        this.radiosList = [];
+    }
+    MaterialRadiosComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+        if (this.layoutNode.type === 'radios-inline') {
+            this.flexDirection = 'row';
+        }
+        this.radiosList = buildTitleMap(this.options.titleMap || this.options.enumNames, this.options.enum, true);
+        this.jsf.initializeControl(this, !this.options.readonly);
+    };
+    MaterialRadiosComponent.prototype.updateValue = function (value) {
+        this.options.showErrors = true;
+        this.jsf.updateValue(this, value);
+    };
+    return MaterialRadiosComponent;
+}());
+MaterialRadiosComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-radios-widget',
+                template: "\n    <div>\n      <div *ngIf=\"options?.title\">\n        <label\n          [attr.for]=\"'control' + layoutNode?._id\"\n          [class]=\"options?.labelHtmlClass || ''\"\n          [style.display]=\"options?.notitle ? 'none' : ''\"\n          [innerHTML]=\"options?.title\"></label>\n      </div>\n      <mat-radio-group *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [attr.required]=\"options?.required\"\n        [style.flex-direction]=\"flexDirection\"\n        [name]=\"controlName\"\n        (blur)=\"options.showErrors = true\">\n        <mat-radio-button *ngFor=\"let radioItem of radiosList\"\n          [id]=\"'control' + layoutNode?._id + '/' + radioItem?.name\"\n          [value]=\"radioItem?.value\">\n          <span [innerHTML]=\"radioItem?.name\"></span>\n        </mat-radio-button>\n      </mat-radio-group>\n      <mat-radio-group *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [attr.required]=\"options?.required\"\n        [style.flex-direction]=\"flexDirection\"\n        [disabled]=\"controlDisabled || options?.readonly\"\n        [name]=\"controlName\"\n        [value]=\"controlValue\">\n        <mat-radio-button *ngFor=\"let radioItem of radiosList\"\n          [id]=\"'control' + layoutNode?._id + '/' + radioItem?.name\"\n          [value]=\"radioItem?.value\"\n          (click)=\"updateValue(radioItem?.value)\">\n          <span [innerHTML]=\"radioItem?.name\"></span>\n        </mat-radio-button>\n      </mat-radio-group>\n      <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n        [innerHTML]=\"options?.errorMessage\"></mat-error>\n    </div>",
+                styles: ["\n    mat-radio-group { display: inline-flex; }\n    mat-radio-button { margin: 2px; }\n    mat-error { font-size: 75%; }\n  "]
+            },] },
+];
+/** @nocollapse */
+MaterialRadiosComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialRadiosComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var MaterialSelectComponent = /** @class */ (function () {
+    function MaterialSelectComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+        this.selectList = [];
+        this.isArray = isArray;
+    }
+    MaterialSelectComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+        this.selectList = buildTitleMap(this.options.titleMap || this.options.enumNames, this.options.enum, !!this.options.required, !!this.options.flatList);
+        this.jsf.initializeControl(this, !this.options.readonly);
+        if (!this.options.notitle && !this.options.description && this.options.placeholder) {
+            this.options.description = this.options.placeholder;
+        }
+    };
+    MaterialSelectComponent.prototype.updateValue = function (event) {
+        this.options.showErrors = true;
+        this.jsf.updateValue(this, event.value);
+    };
+    return MaterialSelectComponent;
+}());
+MaterialSelectComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-select-widget',
+                template: "\n    <mat-form-field\n      [class]=\"options?.htmlClass || ''\"\n      [floatLabel]=\"options?.floatPlaceholder || (options?.notitle ? 'never' : 'auto')\"\n      [style.width]=\"'100%'\">\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <mat-select *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.name]=\"controlName\"\n        [id]=\"'control' + layoutNode?._id\"\n        [multiple]=\"options?.multiple\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        (blur)=\"options.showErrors = true\">\n        <ng-template ngFor let-selectItem [ngForOf]=\"selectList\">\n          <mat-option *ngIf=\"!isArray(selectItem?.items)\"\n            [value]=\"selectItem?.value\">\n            <span [innerHTML]=\"selectItem?.name\"></span>\n          </mat-option>\n          <mat-optgroup *ngIf=\"isArray(selectItem?.items)\"\n            [label]=\"selectItem?.group\">\n            <mat-option *ngFor=\"let subItem of selectItem.items\"\n              [value]=\"subItem?.value\">\n              <span [innerHTML]=\"subItem?.name\"></span>\n            </mat-option>\n          </mat-optgroup>\n        </ng-template>\n      </mat-select>\n      <mat-select *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.name]=\"controlName\"\n        [disabled]=\"controlDisabled || options?.readonly\"\n        [id]=\"'control' + layoutNode?._id\"\n        [multiple]=\"options?.multiple\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [value]=\"controlValue\"\n        (blur)=\"options.showErrors = true\"\n        (selectionChange)=\"updateValue($event)\">\n        <ng-template ngFor let-selectItem [ngForOf]=\"selectList\">\n          <mat-option *ngIf=\"!isArray(selectItem?.items)\"\n            [attr.selected]=\"selectItem?.value === controlValue\"\n            [value]=\"selectItem?.value\">\n            <span [innerHTML]=\"selectItem?.name\"></span>\n          </mat-option>\n          <mat-optgroup *ngIf=\"isArray(selectItem?.items)\"\n            [label]=\"selectItem?.group\">\n            <mat-option *ngFor=\"let subItem of selectItem.items\"\n              [attr.selected]=\"subItem?.value === controlValue\"\n              [value]=\"subItem?.value\">\n              <span [innerHTML]=\"subItem?.name\"></span>\n            </mat-option>\n          </mat-optgroup>\n        </ng-template>\n      </mat-select>\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n    </mat-form-field>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                styles: ["\n    mat-error { font-size: 75%; margin-top: -1rem; margin-bottom: 0.5rem; }\n    ::ng-deep mat-form-field .mat-form-field-wrapper .mat-form-field-flex\n      .mat-form-field-infix { width: initial; }\n  "],
+            },] },
+];
+/** @nocollapse */
+MaterialSelectComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialSelectComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var MaterialSliderComponent = /** @class */ (function () {
+    function MaterialSliderComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+        this.allowNegative = true;
+        this.allowDecimal = true;
+        this.allowExponents = false;
+        this.lastValidNumber = '';
+    }
+    MaterialSliderComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+        this.jsf.initializeControl(this, !this.options.readonly);
+    };
+    MaterialSliderComponent.prototype.updateValue = function (event) {
+        this.options.showErrors = true;
+        this.jsf.updateValue(this, event.value);
+    };
+    return MaterialSliderComponent;
+}());
+MaterialSliderComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-slider-widget',
+                template: "\n    <mat-slider thumbLabel *ngIf=\"boundControl\"\n      [formControl]=\"formControl\"\n      [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n      [id]=\"'control' + layoutNode?._id\"\n      [max]=\"options?.maximum\"\n      [min]=\"options?.minimum\"\n      [step]=\"options?.multipleOf || options?.step || 'any'\"\n      [style.width]=\"'100%'\"\n      (blur)=\"options.showErrors = true\"></mat-slider>\n    <mat-slider thumbLabel *ngIf=\"!boundControl\"\n      [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n      [disabled]=\"controlDisabled || options?.readonly\"\n      [id]=\"'control' + layoutNode?._id\"\n      [max]=\"options?.maximum\"\n      [min]=\"options?.minimum\"\n      [step]=\"options?.multipleOf || options?.step || 'any'\"\n      [style.width]=\"'100%'\"\n      [value]=\"controlValue\"\n      (blur)=\"options.showErrors = true\"\n      (change)=\"updateValue($event)\"></mat-slider>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                styles: [" mat-error { font-size: 75%; } "],
+            },] },
+];
+/** @nocollapse */
+MaterialSliderComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialSliderComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+// TODO: Add this control
+var MaterialStepperComponent = /** @class */ (function () {
+    function MaterialStepperComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+    }
+    MaterialStepperComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+        this.jsf.initializeControl(this);
+    };
+    MaterialStepperComponent.prototype.updateValue = function (event) {
+        this.jsf.updateValue(this, event.target.value);
+    };
+    return MaterialStepperComponent;
+}());
+MaterialStepperComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-stepper-widget',
+                template: "",
+            },] },
+];
+/** @nocollapse */
+MaterialStepperComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialStepperComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var MaterialTabsComponent = /** @class */ (function () {
+    function MaterialTabsComponent(jsf) {
+        this.jsf = jsf;
+        this.selectedItem = 0;
+        this.showAddTab = true;
+    }
+    MaterialTabsComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+        this.itemCount = this.layoutNode.items.length - 1;
+        this.updateControl();
+    };
+    MaterialTabsComponent.prototype.select = function (index) {
+        if (this.layoutNode.items[index].type === '$ref') {
+            this.jsf.addItem({
+                layoutNode: this.layoutNode.items[index],
+                layoutIndex: this.layoutIndex.concat(index),
+                dataIndex: this.dataIndex.concat(index)
+            });
+            this.updateControl();
+        }
+        this.selectedItem = index;
+    };
+    MaterialTabsComponent.prototype.updateControl = function () {
+        this.itemCount = this.layoutNode.items.length - 1;
+        var lastItem = this.layoutNode.items[this.layoutNode.items.length - 1];
+        this.showAddTab = lastItem.type === '$ref' &&
+            this.itemCount < (lastItem.options.maxItems || 1000);
+    };
+    MaterialTabsComponent.prototype.setTabTitle = function (item, index) {
+        return this.jsf.setArrayItemTitle(this, item, index);
+    };
+    return MaterialTabsComponent;
+}());
+MaterialTabsComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-tabs-widget',
+                template: "\n    <nav mat-tab-nav-bar\n      [attr.aria-label]=\"options?.label || options?.title || ''\"\n      [style.width]=\"'100%'\">\n        <a mat-tab-link *ngFor=\"let item of layoutNode?.items; let i = index\"\n          [active]=\"selectedItem === i\"\n          (click)=\"select(i)\">\n          <span *ngIf=\"showAddTab || item.type !== '$ref'\"\n            [innerHTML]=\"setTabTitle(item, i)\"></span>\n        </a>\n    </nav>\n    <div *ngFor=\"let layoutItem of layoutNode?.items; let i = index\"\n      [class]=\"options?.htmlClass || ''\">\n      <select-framework-widget *ngIf=\"selectedItem === i\"\n        [class]=\"(options?.fieldHtmlClass || '') + ' ' + (options?.activeClass || '') + ' ' + (options?.style?.selected || '')\"\n        [dataIndex]=\"layoutNode?.dataType === 'array' ? (dataIndex || []).concat(i) : dataIndex\"\n        [layoutIndex]=\"(layoutIndex || []).concat(i)\"\n        [layoutNode]=\"layoutItem\"></select-framework-widget>\n    </div>",
+                styles: [" a { cursor: pointer; } "],
+            },] },
+];
+/** @nocollapse */
+MaterialTabsComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialTabsComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var MaterialTextareaComponent = /** @class */ (function () {
+    function MaterialTextareaComponent(jsf) {
+        this.jsf = jsf;
+        this.controlDisabled = false;
+        this.boundControl = false;
+    }
+    MaterialTextareaComponent.prototype.ngOnInit = function () {
+        this.options = this.layoutNode.options || {};
+        this.jsf.initializeControl(this);
+        if (!this.options.notitle && !this.options.description && this.options.placeholder) {
+            this.options.description = this.options.placeholder;
+        }
+    };
+    MaterialTextareaComponent.prototype.updateValue = function (event) {
+        this.jsf.updateValue(this, event.target.value);
+    };
+    return MaterialTextareaComponent;
+}());
+MaterialTextareaComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-textarea-widget',
+                template: "\n    <mat-form-field\n      [class]=\"options?.htmlClass || ''\"\n      [floatLabel]=\"options?.floatPlaceholder || (options?.notitle ? 'never' : 'auto')\"\n      [style.width]=\"'100%'\">\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <textarea matInput *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.maxlength]=\"options?.maxLength\"\n        [attr.minlength]=\"options?.minLength\"\n        [attr.pattern]=\"options?.pattern\"\n        [required]=\"options?.required\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [style.width]=\"'100%'\"\n        (blur)=\"options.showErrors = true\"></textarea>\n      <textarea matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.maxlength]=\"options?.maxLength\"\n        [attr.minlength]=\"options?.minLength\"\n        [attr.pattern]=\"options?.pattern\"\n        [required]=\"options?.required\"\n        [disabled]=\"controlDisabled\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [style.width]=\"'100%'\"\n        [value]=\"controlValue\"\n        (input)=\"updateValue($event)\"\n        (blur)=\"options.showErrors = true\"></textarea>\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n    </mat-form-field>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                styles: ["\n    mat-error { font-size: 75%; margin-top: -1rem; margin-bottom: 0.5rem; }\n    ::ng-deep mat-form-field .mat-form-field-wrapper .mat-form-field-flex\n      .mat-form-field-infix { width: initial; }\n  "],
+            },] },
+];
+/** @nocollapse */
+MaterialTextareaComponent.ctorParameters = function () { return [
+    { type: JsonSchemaFormService, },
+]; };
+MaterialTextareaComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var MaterialDesignFrameworkComponent = /** @class */ (function () {
+    function MaterialDesignFrameworkComponent(changeDetector, jsf) {
+        this.changeDetector = changeDetector;
+        this.jsf = jsf;
+        this.frameworkInitialized = false;
+        this.formControl = null;
+        this.parentArray = null;
+        this.isOrderable = false;
+        this.dynamicTitle = null;
+    }
+    Object.defineProperty(MaterialDesignFrameworkComponent.prototype, "showRemoveButton", {
+        get: function () {
+            if (!this.layoutNode || !this.widgetOptions.removable ||
+                this.widgetOptions.readonly || this.layoutNode.type === '$ref') {
+                return false;
+            }
+            if (this.layoutNode.recursiveReference) {
+                return true;
+            }
+            if (!this.layoutNode.arrayItem || !this.parentArray) {
+                return false;
+            }
+            // If array length <= minItems, don't allow removing any items
+            return this.parentArray.items.length - 1 <= this.parentArray.options.minItems ? false :
+                // For removable list items, allow removing any item
+                this.layoutNode.arrayItemType === 'list' ? true :
+                    // For removable tuple items, only allow removing last item in list
+                    this.layoutIndex[this.layoutIndex.length - 1] === this.parentArray.items.length - 2;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MaterialDesignFrameworkComponent.prototype.ngOnInit = function () {
+        this.initializeFramework();
+    };
+    MaterialDesignFrameworkComponent.prototype.ngOnChanges = function () {
+        if (!this.frameworkInitialized) {
+            this.initializeFramework();
+        }
+        if (this.dynamicTitle) {
+            this.updateTitle();
+        }
+    };
+    MaterialDesignFrameworkComponent.prototype.initializeFramework = function () {
+        if (this.layoutNode) {
+            this.options = cloneDeep(this.layoutNode.options || {});
+            this.widgetLayoutNode = Object.assign({}, this.layoutNode, { options: cloneDeep(this.layoutNode.options || {}) });
+            this.widgetOptions = this.widgetLayoutNode.options;
+            this.formControl = this.jsf.getFormControl(this);
+            if (isDefined(this.widgetOptions.minimum) &&
+                isDefined(this.widgetOptions.maximum) &&
+                this.widgetOptions.multipleOf >= 1) {
+                this.layoutNode.type = 'range';
+            }
+            if (!['$ref', 'advancedfieldset', 'authfieldset', 'button', 'card',
+                'checkbox', 'expansion-panel', 'help', 'message', 'msg', 'section',
+                'submit', 'tabarray', 'tabs'].includes(this.layoutNode.type) &&
+                /{{.+?}}/.test(this.widgetOptions.title || '')) {
+                this.dynamicTitle = this.widgetOptions.title;
+                this.updateTitle();
+            }
+            if (this.layoutNode.arrayItem && this.layoutNode.type !== '$ref') {
+                this.parentArray = this.jsf.getParentNode(this);
+                if (this.parentArray) {
+                    this.isOrderable =
+                        this.parentArray.type.slice(0, 3) !== 'tab' &&
+                            this.layoutNode.arrayItemType === 'list' &&
+                            !this.widgetOptions.readonly &&
+                            this.parentArray.options.orderable;
+                }
+            }
+            this.frameworkInitialized = true;
+        }
+        else {
+            this.options = {};
+        }
+    };
+    MaterialDesignFrameworkComponent.prototype.updateTitle = function () {
+        this.widgetLayoutNode.options.title = this.jsf.parseText(this.dynamicTitle, this.jsf.getFormControlValue(this), this.jsf.getFormControlGroup(this).value, this.dataIndex[this.dataIndex.length - 1]);
+    };
+    MaterialDesignFrameworkComponent.prototype.removeItem = function () {
+        this.jsf.removeItem(this);
+    };
+    return MaterialDesignFrameworkComponent;
+}());
+MaterialDesignFrameworkComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'material-design-framework',
+                template: "\n    <div\n      [class.array-item]=\"widgetLayoutNode?.arrayItem && widgetLayoutNode?.type !== '$ref'\"\n      [orderable]=\"isOrderable\"\n      [dataIndex]=\"dataIndex\"\n      [layoutIndex]=\"layoutIndex\"\n      [layoutNode]=\"widgetLayoutNode\">\n      <svg *ngIf=\"showRemoveButton\"\n        xmlns=\"http://www.w3.org/2000/svg\"\n        height=\"18\" width=\"18\" viewBox=\"0 0 24 24\"\n        class=\"close-button\"\n        (click)=\"removeItem()\">\n        <path d=\"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z\"/>\n      </svg>\n      <select-widget-widget\n        [dataIndex]=\"dataIndex\"\n        [layoutIndex]=\"layoutIndex\"\n        [layoutNode]=\"widgetLayoutNode\"></select-widget-widget>\n    </div>\n    <div class=\"spacer\" *ngIf=\"widgetLayoutNode?.arrayItem && widgetLayoutNode?.type !== '$ref'\"></div>",
+                styles: ["\n    .array-item {\n      border-radius: 2px;\n      box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),\n                  0 2px 2px  0   rgba(0,0,0,.14),\n                  0 1px 5px  0   rgba(0,0,0,.12);\n      padding: 6px;\n      position: relative;\n      transition: all 280ms cubic-bezier(.4, 0, .2, 1);\n    }\n    .close-button {\n      cursor: pointer;\n      position: absolute;\n      top: 6px;\n      right: 6px;\n      fill: rgba(0,0,0,.4);\n      visibility: hidden;\n      z-index: 500;\n    }\n    .close-button:hover { fill: rgba(0,0,0,.8); }\n    .array-item:hover > .close-button { visibility: visible; }\n    .spacer { margin: 6px 0; }\n    [draggable=true]:hover {\n      box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),\n                  0 8px 10px 1px rgba(0,0,0,.14),\n                  0 3px 14px 2px rgba(0,0,0,.12);\n      cursor: move;\n      z-index: 10;\n    }\n    [draggable=true].drag-target-top {\n      box-shadow: 0 -2px 0 #000;\n      position: relative; z-index: 20;\n    }\n    [draggable=true].drag-target-bottom {\n      box-shadow: 0 2px 0 #000;\n      position: relative; z-index: 20;\n    }\n  "],
+            },] },
+];
+/** @nocollapse */
+MaterialDesignFrameworkComponent.ctorParameters = function () { return [
+    { type: ChangeDetectorRef, },
+    { type: JsonSchemaFormService, },
+]; };
+MaterialDesignFrameworkComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var MaterialDesignFramework = /** @class */ (function (_super) {
+    __extends(MaterialDesignFramework, _super);
+    function MaterialDesignFramework() {
+        var _this = _super.apply(this, __spread(arguments)) || this;
+        _this.name = 'material-design';
+        _this.framework = MaterialDesignFrameworkComponent;
+        _this.stylesheets = [
+            '//fonts.googleapis.com/icon?family=Material+Icons',
+            '//fonts.googleapis.com/css?family=Roboto:300,400,500,700',
+        ];
+        _this.widgets = {
+            'root': FlexLayoutRootComponent,
+            'section': FlexLayoutSectionComponent,
+            '$ref': MaterialAddReferenceComponent,
+            'button': MaterialButtonComponent,
+            'button-group': MaterialButtonGroupComponent,
+            'checkbox': MaterialCheckboxComponent,
+            'checkboxes': MaterialCheckboxesComponent,
+            'chip-list': MaterialChipListComponent,
+            'date': MaterialDatepickerComponent,
+            'file': MaterialFileComponent,
+            'number': MaterialNumberComponent,
+            'one-of': MaterialOneOfComponent,
+            'radios': MaterialRadiosComponent,
+            'select': MaterialSelectComponent,
+            'slider': MaterialSliderComponent,
+            'stepper': MaterialStepperComponent,
+            'tabs': MaterialTabsComponent,
+            'text': MaterialInputComponent,
+            'textarea': MaterialTextareaComponent,
+            'alt-date': 'date',
+            'any-of': 'one-of',
+            'card': 'section',
+            'color': 'text',
+            'expansion-panel': 'section',
+            'hidden': 'none',
+            'image': 'none',
+            'integer': 'number',
+            'radiobuttons': 'button-group',
+            'range': 'slider',
+            'submit': 'button',
+            'tagsinput': 'chip-list',
+            'wizard': 'stepper',
+        };
+        return _this;
+    }
+    return MaterialDesignFramework;
+}(Framework));
+MaterialDesignFramework.decorators = [
+    { type: Injectable },
+];
+
+var MATERIAL_FRAMEWORK_COMPONENTS = [
+    FlexLayoutRootComponent, FlexLayoutSectionComponent,
+    MaterialAddReferenceComponent, MaterialOneOfComponent,
+    MaterialButtonComponent, MaterialButtonGroupComponent,
+    MaterialCheckboxComponent, MaterialCheckboxesComponent,
+    MaterialChipListComponent, MaterialDatepickerComponent,
+    MaterialFileComponent, MaterialInputComponent, MaterialNumberComponent,
+    MaterialRadiosComponent, MaterialSelectComponent, MaterialSliderComponent,
+    MaterialStepperComponent, MaterialTabsComponent, MaterialTextareaComponent,
+    MaterialDesignFrameworkComponent
+];
+
+var ANGULAR_MATERIAL_MODULES = [
+    MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule,
+    MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatExpansionModule,
+    MatFormFieldModule, MatIconModule, MatInputModule, MatNativeDateModule,
+    MatRadioModule, MatSelectModule, MatSliderModule, MatSlideToggleModule,
+    MatStepperModule, MatTabsModule, MatTooltipModule,
+];
+var MaterialDesignFrameworkModule = /** @class */ (function () {
+    function MaterialDesignFrameworkModule() {
+    }
+    MaterialDesignFrameworkModule.forRoot = function () {
+        return {
+            ngModule: MaterialDesignFrameworkModule,
+            providers: [
+                { provide: Framework, useClass: MaterialDesignFramework, multi: true }
+            ]
+        };
+    };
+    return MaterialDesignFrameworkModule;
+}());
+MaterialDesignFrameworkModule.decorators = [
+    { type: NgModule, args: [{
+                imports: __spread([
+                    CommonModule, FormsModule, ReactiveFormsModule, FlexLayoutModule
+                ], ANGULAR_MATERIAL_MODULES, [
+                    WidgetLibraryModule
+                ]),
+                declarations: __spread(MATERIAL_FRAMEWORK_COMPONENTS),
+                exports: __spread(MATERIAL_FRAMEWORK_COMPONENTS),
+                entryComponents: __spread(MATERIAL_FRAMEWORK_COMPONENTS)
+            },] },
+];
+
+/**
+ * Bootstrap 3 framework for Angular JSON Schema Form.
+ *
  */
+var Bootstrap3FrameworkComponent = /** @class */ (function () {
+    function Bootstrap3FrameworkComponent(changeDetector, jsf) {
+        this.changeDetector = changeDetector;
+        this.jsf = jsf;
+        this.frameworkInitialized = false;
+        this.formControl = null;
+        this.debugOutput = '';
+        this.debug = '';
+        this.parentArray = null;
+        this.isOrderable = false;
+    }
+    Object.defineProperty(Bootstrap3FrameworkComponent.prototype, "showRemoveButton", {
+        get: function () {
+            if (!this.options.removable || this.options.readonly ||
+                this.layoutNode.type === '$ref') {
+                return false;
+            }
+            if (this.layoutNode.recursiveReference) {
+                return true;
+            }
+            if (!this.layoutNode.arrayItem || !this.parentArray) {
+                return false;
+            }
+            // If array length <= minItems, don't allow removing any items
+            return this.parentArray.items.length - 1 <= this.parentArray.options.minItems ? false :
+                // For removable list items, allow removing any item
+                this.layoutNode.arrayItemType === 'list' ? true :
+                    // For removable tuple items, only allow removing last item in list
+                    this.layoutIndex[this.layoutIndex.length - 1] === this.parentArray.items.length - 2;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Bootstrap3FrameworkComponent.prototype.ngOnInit = function () {
+        this.initializeFramework();
+        if (this.layoutNode.arrayItem && this.layoutNode.type !== '$ref') {
+            this.parentArray = this.jsf.getParentNode(this);
+            if (this.parentArray) {
+                this.isOrderable = this.layoutNode.arrayItemType === 'list' &&
+                    !this.options.readonly && this.parentArray.options.orderable;
+            }
+        }
+    };
+    Bootstrap3FrameworkComponent.prototype.ngOnChanges = function () {
+        if (!this.frameworkInitialized) {
+            this.initializeFramework();
+        }
+    };
+    Bootstrap3FrameworkComponent.prototype.initializeFramework = function () {
+        var _this = this;
+        if (this.layoutNode) {
+            this.options = cloneDeep(this.layoutNode.options);
+            this.widgetLayoutNode = Object.assign({}, this.layoutNode, { options: cloneDeep(this.layoutNode.options) });
+            this.widgetOptions = this.widgetLayoutNode.options;
+            this.formControl = this.jsf.getFormControl(this);
+            this.options.isInputWidget = inArray(this.layoutNode.type, [
+                'button', 'checkbox', 'checkboxes-inline', 'checkboxes', 'color',
+                'date', 'datetime-local', 'datetime', 'email', 'file', 'hidden',
+                'image', 'integer', 'month', 'number', 'password', 'radio',
+                'radiobuttons', 'radios-inline', 'radios', 'range', 'reset', 'search',
+                'select', 'submit', 'tel', 'text', 'textarea', 'time', 'url', 'week'
+            ]);
+            this.options.title = this.setTitle();
+            this.options.htmlClass =
+                addClasses(this.options.htmlClass, 'schema-form-' + this.layoutNode.type);
+            if (this.layoutNode.type !== 'flex') {
+                this.options.htmlClass =
+                    this.layoutNode.type === 'array' ?
+                        addClasses(this.options.htmlClass, 'list-group') :
+                        this.layoutNode.arrayItem && this.layoutNode.type !== '$ref' ?
+                            addClasses(this.options.htmlClass, 'list-group-item') :
+                            addClasses(this.options.htmlClass, 'form-group');
+            }
+            this.widgetOptions.htmlClass = '';
+            this.options.labelHtmlClass =
+                addClasses(this.options.labelHtmlClass, 'control-label');
+            this.widgetOptions.activeClass =
+                addClasses(this.widgetOptions.activeClass, 'active');
+            this.options.fieldAddonLeft =
+                this.options.fieldAddonLeft || this.options.prepend;
+            this.options.fieldAddonRight =
+                this.options.fieldAddonRight || this.options.append;
+            // Add asterisk to titles if required
+            if (this.options.title && this.layoutNode.type !== 'tab' &&
+                !this.options.notitle && this.options.required &&
+                !this.options.title.includes('*')) {
+                this.options.title += ' <strong class="text-danger">*</strong>';
+            }
+            // Set miscelaneous styles and settings for each control type
+            switch (this.layoutNode.type) {
+                // Checkbox controls
+                case 'checkbox':
+                case 'checkboxes':
+                    this.widgetOptions.htmlClass = addClasses(this.widgetOptions.htmlClass, 'checkbox');
+                    break;
+                case 'checkboxes-inline':
+                    this.widgetOptions.htmlClass = addClasses(this.widgetOptions.htmlClass, 'checkbox');
+                    this.widgetOptions.itemLabelHtmlClass = addClasses(this.widgetOptions.itemLabelHtmlClass, 'checkbox-inline');
+                    break;
+                // Radio controls
+                case 'radio':
+                case 'radios':
+                    this.widgetOptions.htmlClass = addClasses(this.widgetOptions.htmlClass, 'radio');
+                    break;
+                case 'radios-inline':
+                    this.widgetOptions.htmlClass = addClasses(this.widgetOptions.htmlClass, 'radio');
+                    this.widgetOptions.itemLabelHtmlClass = addClasses(this.widgetOptions.itemLabelHtmlClass, 'radio-inline');
+                    break;
+                // Button sets - checkboxbuttons and radiobuttons
+                case 'checkboxbuttons':
+                case 'radiobuttons':
+                    this.widgetOptions.htmlClass = addClasses(this.widgetOptions.htmlClass, 'btn-group');
+                    this.widgetOptions.itemLabelHtmlClass = addClasses(this.widgetOptions.itemLabelHtmlClass, 'btn');
+                    this.widgetOptions.itemLabelHtmlClass = addClasses(this.widgetOptions.itemLabelHtmlClass, this.options.style || 'btn-default');
+                    this.widgetOptions.fieldHtmlClass = addClasses(this.widgetOptions.fieldHtmlClass, 'sr-only');
+                    break;
+                // Single button controls
+                case 'button':
+                case 'submit':
+                    this.widgetOptions.fieldHtmlClass = addClasses(this.widgetOptions.fieldHtmlClass, 'btn');
+                    this.widgetOptions.fieldHtmlClass = addClasses(this.widgetOptions.fieldHtmlClass, this.options.style || 'btn-info');
+                    break;
+                // Containers - arrays and fieldsets
+                case 'array':
+                case 'fieldset':
+                case 'section':
+                case 'conditional':
+                case 'advancedfieldset':
+                case 'authfieldset':
+                case 'selectfieldset':
+                case 'optionfieldset':
+                    this.options.messageLocation = 'top';
+                    break;
+                case 'tabarray':
+                case 'tabs':
+                    this.widgetOptions.htmlClass = addClasses(this.widgetOptions.htmlClass, 'tab-content');
+                    this.widgetOptions.fieldHtmlClass = addClasses(this.widgetOptions.fieldHtmlClass, 'tab-pane');
+                    this.widgetOptions.labelHtmlClass = addClasses(this.widgetOptions.labelHtmlClass, 'nav nav-tabs');
+                    break;
+                // 'Add' buttons - references
+                case '$ref':
+                    this.widgetOptions.fieldHtmlClass = addClasses(this.widgetOptions.fieldHtmlClass, 'btn pull-right');
+                    this.widgetOptions.fieldHtmlClass = addClasses(this.widgetOptions.fieldHtmlClass, this.options.style || 'btn-default');
+                    this.options.icon = 'glyphicon glyphicon-plus';
+                    break;
+                // Default - including regular inputs
+                default:
+                    this.widgetOptions.fieldHtmlClass = addClasses(this.widgetOptions.fieldHtmlClass, 'form-control');
+            }
+            if (this.formControl) {
+                this.updateHelpBlock(this.formControl.status);
+                this.formControl.statusChanges.subscribe(function (status) { return _this.updateHelpBlock(status); });
+                if (this.options.debug) {
+                    var vars = [];
+                    this.debugOutput = map$1(vars, function (thisVar) { return JSON.stringify(thisVar, null, 2); }).join('\n');
+                }
+            }
+            this.frameworkInitialized = true;
+        }
+    };
+    Bootstrap3FrameworkComponent.prototype.updateHelpBlock = function (status) {
+        this.options.helpBlock = status === 'INVALID' &&
+            this.options.enableErrorState && this.formControl.errors &&
+            (this.formControl.dirty || this.options.feedbackOnRender) ?
+            this.jsf.formatErrors(this.formControl.errors, this.options.validationMessages) :
+            this.options.description || this.options.help || null;
+    };
+    Bootstrap3FrameworkComponent.prototype.setTitle = function () {
+        switch (this.layoutNode.type) {
+            case 'button':
+            case 'checkbox':
+            case 'section':
+            case 'help':
+            case 'msg':
+            case 'submit':
+            case 'message':
+            case 'tabarray':
+            case 'tabs':
+            case '$ref':
+                return null;
+            case 'advancedfieldset':
+                this.widgetOptions.expandable = true;
+                this.widgetOptions.title = 'Advanced options';
+                return null;
+            case 'authfieldset':
+                this.widgetOptions.expandable = true;
+                this.widgetOptions.title = 'Authentication settings';
+                return null;
+            case 'fieldset':
+                this.widgetOptions.title = this.options.title;
+                return null;
+            default:
+                this.widgetOptions.title = null;
+                return this.jsf.setItemTitle(this);
+        }
+    };
+    Bootstrap3FrameworkComponent.prototype.removeItem = function () {
+        this.jsf.removeItem(this);
+    };
+    return Bootstrap3FrameworkComponent;
+}());
+Bootstrap3FrameworkComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'bootstrap-3-framework',
+                template: "\n    <div\n      [class]=\"options?.htmlClass || ''\"\n      [class.has-feedback]=\"options?.feedback && options?.isInputWidget &&\n        (formControl?.dirty || options?.feedbackOnRender)\"\n      [class.has-error]=\"options?.enableErrorState && formControl?.errors &&\n        (formControl?.dirty || options?.feedbackOnRender)\"\n      [class.has-success]=\"options?.enableSuccessState && !formControl?.errors &&\n        (formControl?.dirty || options?.feedbackOnRender)\">\n\n      <button *ngIf=\"showRemoveButton\"\n        class=\"close pull-right\"\n        type=\"button\"\n        (click)=\"removeItem()\">\n        <span aria-hidden=\"true\">&times;</span>\n        <span class=\"sr-only\">Close</span>\n      </button>\n      <div *ngIf=\"options?.messageLocation === 'top'\">\n          <p *ngIf=\"options?.helpBlock\"\n          class=\"help-block\"\n          [innerHTML]=\"options?.helpBlock\"></p>\n      </div>\n\n      <label *ngIf=\"options?.title && layoutNode?.type !== 'tab'\"\n        [attr.for]=\"'control' + layoutNode?._id\"\n        [class]=\"options?.labelHtmlClass || ''\"\n        [class.sr-only]=\"options?.notitle\"\n        [innerHTML]=\"options?.title\"></label>\n      <p *ngIf=\"layoutNode?.type === 'submit' && jsf?.formOptions?.fieldsRequired\">\n        <strong class=\"text-danger\">*</strong> = required fields\n      </p>\n      <div [class.input-group]=\"options?.fieldAddonLeft || options?.fieldAddonRight\">\n        <span *ngIf=\"options?.fieldAddonLeft\"\n          class=\"input-group-addon\"\n          [innerHTML]=\"options?.fieldAddonLeft\"></span>\n\n        <select-widget-widget\n          [layoutNode]=\"widgetLayoutNode\"\n          [dataIndex]=\"dataIndex\"\n          [layoutIndex]=\"layoutIndex\"></select-widget-widget>\n\n        <span *ngIf=\"options?.fieldAddonRight\"\n          class=\"input-group-addon\"\n          [innerHTML]=\"options?.fieldAddonRight\"></span>\n      </div>\n\n      <span *ngIf=\"options?.feedback && options?.isInputWidget &&\n          !options?.fieldAddonRight && !layoutNode.arrayItem &&\n          (formControl?.dirty || options?.feedbackOnRender)\"\n        [class.glyphicon-ok]=\"options?.enableSuccessState && !formControl?.errors\"\n        [class.glyphicon-remove]=\"options?.enableErrorState && formControl?.errors\"\n        aria-hidden=\"true\"\n        class=\"form-control-feedback glyphicon\"></span>\n      <div *ngIf=\"options?.messageLocation !== 'top'\">\n        <p *ngIf=\"options?.helpBlock\"\n          class=\"help-block\"\n          [innerHTML]=\"options?.helpBlock\"></p>\n      </div>\n    </div>\n\n    <div *ngIf=\"debug && debugOutput\">debug: <pre>{{debugOutput}}</pre></div>\n  ",
+                styles: ["\n    :host /deep/ .list-group-item .form-control-feedback { top: 40; }\n    :host /deep/ .checkbox,\n    :host /deep/ .radio { margin-top: 0; margin-bottom: 0; }\n    :host /deep/ .checkbox-inline,\n    :host /deep/ .checkbox-inline + .checkbox-inline,\n    :host /deep/ .checkbox-inline + .radio-inline,\n    :host /deep/ .radio-inline,\n    :host /deep/ .radio-inline + .radio-inline,\n    :host /deep/ .radio-inline + .checkbox-inline { margin-left: 0; margin-right: 10px; }\n    :host /deep/ .checkbox-inline:last-child,\n    :host /deep/ .radio-inline:last-child { margin-right: 0; }\n    :host /deep/ .ng-invalid.ng-touched { border: 1px solid #f44336; }\n  "],
+            },] },
+];
+/** @nocollapse */
+Bootstrap3FrameworkComponent.ctorParameters = function () { return [
+    { type: ChangeDetectorRef, },
+    { type: JsonSchemaFormService, },
+]; };
+Bootstrap3FrameworkComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var Bootstrap3Framework = /** @class */ (function (_super) {
+    __extends(Bootstrap3Framework, _super);
+    function Bootstrap3Framework() {
+        var _this = _super.apply(this, __spread(arguments)) || this;
+        _this.name = 'bootstrap-3';
+        _this.framework = Bootstrap3FrameworkComponent;
+        _this.stylesheets = [
+            '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
+            '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css',
+        ];
+        _this.scripts = [
+            '//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js',
+            '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js',
+            '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
+        ];
+        return _this;
+    }
+    return Bootstrap3Framework;
+}(Framework));
+Bootstrap3Framework.decorators = [
+    { type: Injectable },
+];
+
+var Bootstrap3FrameworkModule = /** @class */ (function () {
+    function Bootstrap3FrameworkModule() {
+    }
+    Bootstrap3FrameworkModule.forRoot = function () {
+        return {
+            ngModule: Bootstrap3FrameworkModule,
+            providers: [
+                { provide: Framework, useClass: Bootstrap3Framework, multi: true }
+            ]
+        };
+    };
+    return Bootstrap3FrameworkModule;
+}());
+Bootstrap3FrameworkModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, WidgetLibraryModule],
+                declarations: [Bootstrap3FrameworkComponent],
+                exports: [Bootstrap3FrameworkComponent],
+                entryComponents: [Bootstrap3FrameworkComponent]
+            },] },
+];
+
+/**
+ * Bootstrap 4 framework for Angular JSON Schema Form.
+ *
+ */
+var Bootstrap4FrameworkComponent = /** @class */ (function () {
+    function Bootstrap4FrameworkComponent(changeDetector, jsf) {
+        this.changeDetector = changeDetector;
+        this.jsf = jsf;
+        this.frameworkInitialized = false;
+        this.formControl = null;
+        this.debugOutput = '';
+        this.debug = '';
+        this.parentArray = null;
+        this.isOrderable = false;
+    }
+    Object.defineProperty(Bootstrap4FrameworkComponent.prototype, "showRemoveButton", {
+        get: function () {
+            if (!this.options.removable || this.options.readonly ||
+                this.layoutNode.type === '$ref') {
+                return false;
+            }
+            if (this.layoutNode.recursiveReference) {
+                return true;
+            }
+            if (!this.layoutNode.arrayItem || !this.parentArray) {
+                return false;
+            }
+            // If array length <= minItems, don't allow removing any items
+            return this.parentArray.items.length - 1 <= this.parentArray.options.minItems ? false :
+                // For removable list items, allow removing any item
+                this.layoutNode.arrayItemType === 'list' ? true :
+                    // For removable tuple items, only allow removing last item in list
+                    this.layoutIndex[this.layoutIndex.length - 1] === this.parentArray.items.length - 2;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Bootstrap4FrameworkComponent.prototype.ngOnInit = function () {
+        this.initializeFramework();
+        if (this.layoutNode.arrayItem && this.layoutNode.type !== '$ref') {
+            this.parentArray = this.jsf.getParentNode(this);
+            if (this.parentArray) {
+                this.isOrderable = this.layoutNode.arrayItemType === 'list' &&
+                    !this.options.readonly && this.parentArray.options.orderable;
+            }
+        }
+    };
+    Bootstrap4FrameworkComponent.prototype.ngOnChanges = function () {
+        if (!this.frameworkInitialized) {
+            this.initializeFramework();
+        }
+    };
+    Bootstrap4FrameworkComponent.prototype.initializeFramework = function () {
+        var _this = this;
+        if (this.layoutNode) {
+            this.options = cloneDeep(this.layoutNode.options);
+            this.widgetLayoutNode = Object.assign({}, this.layoutNode, { options: cloneDeep(this.layoutNode.options) });
+            this.widgetOptions = this.widgetLayoutNode.options;
+            this.formControl = this.jsf.getFormControl(this);
+            this.options.isInputWidget = inArray(this.layoutNode.type, [
+                'button', 'checkbox', 'checkboxes-inline', 'checkboxes', 'color',
+                'date', 'datetime-local', 'datetime', 'email', 'file', 'hidden',
+                'image', 'integer', 'month', 'number', 'password', 'radio',
+                'radiobuttons', 'radios-inline', 'radios', 'range', 'reset', 'search',
+                'select', 'submit', 'tel', 'text', 'textarea', 'time', 'url', 'week'
+            ]);
+            this.options.title = this.setTitle();
+            this.options.htmlClass =
+                addClasses(this.options.htmlClass, 'schema-form-' + this.layoutNode.type);
+            this.options.htmlClass =
+                this.layoutNode.type === 'array' ?
+                    addClasses(this.options.htmlClass, 'list-group') :
+                    this.layoutNode.arrayItem && this.layoutNode.type !== '$ref' ?
+                        addClasses(this.options.htmlClass, 'list-group-item') :
+                        addClasses(this.options.htmlClass, 'form-group');
+            this.widgetOptions.htmlClass = '';
+            this.options.labelHtmlClass =
+                addClasses(this.options.labelHtmlClass, 'control-label');
+            this.widgetOptions.activeClass =
+                addClasses(this.widgetOptions.activeClass, 'active');
+            this.options.fieldAddonLeft =
+                this.options.fieldAddonLeft || this.options.prepend;
+            this.options.fieldAddonRight =
+                this.options.fieldAddonRight || this.options.append;
+            // Add asterisk to titles if required
+            if (this.options.title && this.layoutNode.type !== 'tab' &&
+                !this.options.notitle && this.options.required &&
+                !this.options.title.includes('*')) {
+                this.options.title += ' <strong class="text-danger">*</strong>';
+            }
+            // Set miscelaneous styles and settings for each control type
+            switch (this.layoutNode.type) {
+                // Checkbox controls
+                case 'checkbox':
+                case 'checkboxes':
+                    this.widgetOptions.htmlClass = addClasses(this.widgetOptions.htmlClass, 'checkbox');
+                    break;
+                case 'checkboxes-inline':
+                    this.widgetOptions.htmlClass = addClasses(this.widgetOptions.htmlClass, 'checkbox');
+                    this.widgetOptions.itemLabelHtmlClass = addClasses(this.widgetOptions.itemLabelHtmlClass, 'checkbox-inline');
+                    break;
+                // Radio controls
+                case 'radio':
+                case 'radios':
+                    this.widgetOptions.htmlClass = addClasses(this.widgetOptions.htmlClass, 'radio');
+                    break;
+                case 'radios-inline':
+                    this.widgetOptions.htmlClass = addClasses(this.widgetOptions.htmlClass, 'radio');
+                    this.widgetOptions.itemLabelHtmlClass = addClasses(this.widgetOptions.itemLabelHtmlClass, 'radio-inline');
+                    break;
+                // Button sets - checkboxbuttons and radiobuttons
+                case 'checkboxbuttons':
+                case 'radiobuttons':
+                    this.widgetOptions.htmlClass = addClasses(this.widgetOptions.htmlClass, 'btn-group');
+                    this.widgetOptions.itemLabelHtmlClass = addClasses(this.widgetOptions.itemLabelHtmlClass, 'btn');
+                    this.widgetOptions.itemLabelHtmlClass = addClasses(this.widgetOptions.itemLabelHtmlClass, this.options.style || 'btn-default');
+                    this.widgetOptions.fieldHtmlClass = addClasses(this.widgetOptions.fieldHtmlClass, 'sr-only');
+                    break;
+                // Single button controls
+                case 'button':
+                case 'submit':
+                    this.widgetOptions.fieldHtmlClass = addClasses(this.widgetOptions.fieldHtmlClass, 'btn');
+                    this.widgetOptions.fieldHtmlClass = addClasses(this.widgetOptions.fieldHtmlClass, this.options.style || 'btn-info');
+                    break;
+                // Containers - arrays and fieldsets
+                case 'array':
+                case 'fieldset':
+                case 'section':
+                case 'conditional':
+                case 'advancedfieldset':
+                case 'authfieldset':
+                case 'selectfieldset':
+                case 'optionfieldset':
+                    this.options.messageLocation = 'top';
+                    break;
+                case 'tabarray':
+                case 'tabs':
+                    this.widgetOptions.htmlClass = addClasses(this.widgetOptions.htmlClass, 'tab-content');
+                    this.widgetOptions.fieldHtmlClass = addClasses(this.widgetOptions.fieldHtmlClass, 'tab-pane');
+                    this.widgetOptions.labelHtmlClass = addClasses(this.widgetOptions.labelHtmlClass, 'nav nav-tabs');
+                    break;
+                // 'Add' buttons - references
+                case '$ref':
+                    this.widgetOptions.fieldHtmlClass = addClasses(this.widgetOptions.fieldHtmlClass, 'btn pull-right');
+                    this.widgetOptions.fieldHtmlClass = addClasses(this.widgetOptions.fieldHtmlClass, this.options.style || 'btn-default');
+                    this.options.icon = 'glyphicon glyphicon-plus';
+                    break;
+                // Default - including regular inputs
+                default:
+                    this.widgetOptions.fieldHtmlClass = addClasses(this.widgetOptions.fieldHtmlClass, 'form-control');
+            }
+            if (this.formControl) {
+                this.updateHelpBlock(this.formControl.status);
+                this.formControl.statusChanges.subscribe(function (status) { return _this.updateHelpBlock(status); });
+                if (this.options.debug) {
+                    var vars = [];
+                    this.debugOutput = map$1(vars, function (thisVar) { return JSON.stringify(thisVar, null, 2); }).join('\n');
+                }
+            }
+            this.frameworkInitialized = true;
+        }
+    };
+    Bootstrap4FrameworkComponent.prototype.updateHelpBlock = function (status) {
+        this.options.helpBlock = status === 'INVALID' &&
+            this.options.enableErrorState && this.formControl.errors &&
+            (this.formControl.dirty || this.options.feedbackOnRender) ?
+            this.jsf.formatErrors(this.formControl.errors, this.options.validationMessages) :
+            this.options.description || this.options.help || null;
+    };
+    Bootstrap4FrameworkComponent.prototype.setTitle = function () {
+        switch (this.layoutNode.type) {
+            case 'button':
+            case 'checkbox':
+            case 'section':
+            case 'help':
+            case 'msg':
+            case 'submit':
+            case 'message':
+            case 'tabarray':
+            case 'tabs':
+            case '$ref':
+                return null;
+            case 'advancedfieldset':
+                this.widgetOptions.expandable = true;
+                this.widgetOptions.title = 'Advanced options';
+                return null;
+            case 'authfieldset':
+                this.widgetOptions.expandable = true;
+                this.widgetOptions.title = 'Authentication settings';
+                return null;
+            case 'fieldset':
+                this.widgetOptions.title = this.options.title;
+                return null;
+            default:
+                this.widgetOptions.title = null;
+                return this.jsf.setItemTitle(this);
+        }
+    };
+    Bootstrap4FrameworkComponent.prototype.removeItem = function () {
+        this.jsf.removeItem(this);
+    };
+    return Bootstrap4FrameworkComponent;
+}());
+Bootstrap4FrameworkComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'bootstrap-4-framework',
+                template: "\n    <div\n      [class]=\"options?.htmlClass || ''\"\n      [class.has-feedback]=\"options?.feedback && options?.isInputWidget &&\n        (formControl?.dirty || options?.feedbackOnRender)\"\n      [class.has-error]=\"options?.enableErrorState && formControl?.errors &&\n        (formControl?.dirty || options?.feedbackOnRender)\"\n      [class.has-success]=\"options?.enableSuccessState && !formControl?.errors &&\n        (formControl?.dirty || options?.feedbackOnRender)\">\n\n      <button *ngIf=\"showRemoveButton\"\n        class=\"close pull-right\"\n        type=\"button\"\n        (click)=\"removeItem()\">\n        <span aria-hidden=\"true\">&times;</span>\n        <span class=\"sr-only\">Close</span>\n      </button>\n      <div *ngIf=\"options?.messageLocation === 'top'\">\n        <p *ngIf=\"options?.helpBlock\"\n          class=\"help-block\"\n          [innerHTML]=\"options?.helpBlock\"></p>\n      </div>\n\n      <label *ngIf=\"options?.title && layoutNode?.type !== 'tab'\"\n        [attr.for]=\"'control' + layoutNode?._id\"\n        [class]=\"options?.labelHtmlClass || ''\"\n        [class.sr-only]=\"options?.notitle\"\n        [innerHTML]=\"options?.title\"></label>\n      <p *ngIf=\"layoutNode?.type === 'submit' && jsf?.formOptions?.fieldsRequired\">\n        <strong class=\"text-danger\">*</strong> = required fields\n      </p>\n      <div [class.input-group]=\"options?.fieldAddonLeft || options?.fieldAddonRight\">\n        <span *ngIf=\"options?.fieldAddonLeft\"\n          class=\"input-group-addon\"\n          [innerHTML]=\"options?.fieldAddonLeft\"></span>\n\n        <select-widget-widget\n          [layoutNode]=\"widgetLayoutNode\"\n          [dataIndex]=\"dataIndex\"\n          [layoutIndex]=\"layoutIndex\"></select-widget-widget>\n\n        <span *ngIf=\"options?.fieldAddonRight\"\n          class=\"input-group-addon\"\n          [innerHTML]=\"options?.fieldAddonRight\"></span>\n      </div>\n\n      <span *ngIf=\"options?.feedback && options?.isInputWidget &&\n          !options?.fieldAddonRight && !layoutNode.arrayItem &&\n          (formControl?.dirty || options?.feedbackOnRender)\"\n        [class.glyphicon-ok]=\"options?.enableSuccessState && !formControl?.errors\"\n        [class.glyphicon-remove]=\"options?.enableErrorState && formControl?.errors\"\n        aria-hidden=\"true\"\n        class=\"form-control-feedback glyphicon\"></span>\n      <div *ngIf=\"options?.messageLocation !== 'top'\">\n        <p *ngIf=\"options?.helpBlock\"\n          class=\"help-block\"\n          [innerHTML]=\"options?.helpBlock\"></p>\n      </div>\n    </div>\n\n    <div *ngIf=\"debug && debugOutput\">debug: <pre>{{debugOutput}}</pre></div>\n  ",
+                styles: ["\n    :host /deep/ .list-group-item .form-control-feedback { top: 40px; }\n    :host /deep/ .checkbox,\n    :host /deep/ .radio { margin-top: 0; margin-bottom: 0; }\n    :host /deep/ .checkbox-inline,\n    :host /deep/ .checkbox-inline + .checkbox-inline,\n    :host /deep/ .checkbox-inline + .radio-inline,\n    :host /deep/ .radio-inline,\n    :host /deep/ .radio-inline + .radio-inline,\n    :host /deep/ .radio-inline + .checkbox-inline { margin-left: 0; margin-right: 10px; }\n    :host /deep/ .checkbox-inline:last-child,\n    :host /deep/ .radio-inline:last-child { margin-right: 0; }\n    :host /deep/ .ng-invalid.ng-touched { border: 1px solid #f44336; }\n  "],
+            },] },
+];
+/** @nocollapse */
+Bootstrap4FrameworkComponent.ctorParameters = function () { return [
+    { type: ChangeDetectorRef, },
+    { type: JsonSchemaFormService, },
+]; };
+Bootstrap4FrameworkComponent.propDecorators = {
+    "layoutNode": [{ type: Input },],
+    "layoutIndex": [{ type: Input },],
+    "dataIndex": [{ type: Input },],
+};
+
+var Bootstrap4Framework = /** @class */ (function (_super) {
+    __extends(Bootstrap4Framework, _super);
+    function Bootstrap4Framework() {
+        var _this = _super.apply(this, __spread(arguments)) || this;
+        _this.name = 'bootstrap-4';
+        _this.framework = Bootstrap4FrameworkComponent;
+        _this.stylesheets = [
+            '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'
+        ];
+        _this.scripts = [
+            '//code.jquery.com/jquery-3.2.1.slim.min.js',
+            '//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js',
+            '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js',
+        ];
+        return _this;
+    }
+    return Bootstrap4Framework;
+}(Framework));
+Bootstrap4Framework.decorators = [
+    { type: Injectable },
+];
+
+var Bootstrap4FrameworkModule = /** @class */ (function () {
+    function Bootstrap4FrameworkModule() {
+    }
+    Bootstrap4FrameworkModule.forRoot = function () {
+        return {
+            ngModule: Bootstrap4FrameworkModule,
+            providers: [
+                { provide: Framework, useClass: Bootstrap4Framework, multi: true }
+            ]
+        };
+    };
+    return Bootstrap4FrameworkModule;
+}());
+Bootstrap4FrameworkModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, WidgetLibraryModule],
+                declarations: [Bootstrap4FrameworkComponent],
+                exports: [Bootstrap4FrameworkComponent],
+                entryComponents: [Bootstrap4FrameworkComponent]
+            },] },
+];
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { Framework as ɵb, FrameworkLibraryService as ɵa, NoFrameworkComponent as ɵbd, NoFrameworkModule as ɵbc, NoFramework as ɵbe, OrderableDirective as ɵbb, AddReferenceComponent as ɵf, ButtonComponent as ɵh, CheckboxComponent as ɵi, CheckboxesComponent as ɵj, FileComponent as ɵk, HiddenComponent as ɵl, BASIC_WIDGETS as ɵe, InputComponent as ɵm, MessageComponent as ɵn, NoneComponent as ɵo, NumberComponent as ɵp, OneOfComponent as ɵg, RadiosComponent as ɵq, RootComponent as ɵr, SectionComponent as ɵs, SelectFrameworkComponent as ɵu, SelectWidgetComponent as ɵv, SelectComponent as ɵt, SubmitComponent as ɵw, TabComponent as ɵx, TabsComponent as ɵy, TemplateComponent as ɵz, TextareaComponent as ɵba, WidgetLibraryModule as ɵd, WidgetLibraryService as ɵc, JsonSchemaFormService, JSON_SCHEMA_FORM_VALUE_ACCESSOR, JsonSchemaFormComponent, JsonSchemaFormModule };
+export { MATERIAL_FRAMEWORK_COMPONENTS as ɵd, ANGULAR_MATERIAL_MODULES as ɵb, JSON_SCHEMA_FORM_VALUE_ACCESSOR as ɵa, BASIC_WIDGETS as ɵc, _executeValidators, _executeAsyncValidators, _mergeObjects, _mergeErrors, isDefined, hasValue, isEmpty, isString, isNumber, isInteger, isBoolean, isFunction, isObject, isArray, isDate, isMap, isSet, isPromise, isObservable, getType, isType, isPrimitive, toJavaScriptType, toSchemaType, _toPromise, toObservable, inArray, xor, addClasses, copy, forEach, forEachCopy, hasOwn, mergeFilteredObject, uniqueItems, commonItems, fixTitle, toTitleCase, JsonPointer, JsonValidators, buildSchemaFromLayout, buildSchemaFromData, getFromSchema, removeRecursiveReferences, getInputType, checkInlineType, isInputRequired, updateInputOptions, getTitleMapFromOneOf, getControlValidators, resolveSchemaReferences, getSubSchema, combineAllOf, fixRequiredArrayProperties, convertSchemaToDraft6, mergeSchemas, buildFormGroupTemplate, buildFormGroup, formatFormData, getControl, setRequiredFields, buildLayout, buildLayoutFromSchema, mapLayout, getLayoutNode, buildTitleMap, dateToString, stringToDate, findDate, OrderableDirective, JsonSchemaFormComponent, JsonSchemaFormService, JsonSchemaFormModule, WidgetLibraryService, WidgetLibraryModule, AddReferenceComponent, OneOfComponent, ButtonComponent, CheckboxComponent, CheckboxesComponent, FileComponent, HiddenComponent, InputComponent, MessageComponent, NoneComponent, NumberComponent, RadiosComponent, RootComponent, SectionComponent, SelectComponent, SelectFrameworkComponent, SelectWidgetComponent, SubmitComponent, TabComponent, TabsComponent, TemplateComponent, TextareaComponent, FrameworkLibraryService, Framework, NoFramework, NoFrameworkComponent, NoFrameworkModule, MaterialDesignFramework, FlexLayoutRootComponent, FlexLayoutSectionComponent, MaterialAddReferenceComponent, MaterialOneOfComponent, MaterialButtonComponent, MaterialButtonGroupComponent, MaterialCheckboxComponent, MaterialCheckboxesComponent, MaterialChipListComponent, MaterialDatepickerComponent, MaterialFileComponent, MaterialInputComponent, MaterialNumberComponent, MaterialRadiosComponent, MaterialSelectComponent, MaterialSliderComponent, MaterialStepperComponent, MaterialTabsComponent, MaterialTextareaComponent, MaterialDesignFrameworkComponent, MaterialDesignFrameworkModule, Bootstrap3Framework, Bootstrap3FrameworkComponent, Bootstrap3FrameworkModule, Bootstrap4Framework, Bootstrap4FrameworkComponent, Bootstrap4FrameworkModule };
 //# sourceMappingURL=angular2-json-schema-form.js.map
