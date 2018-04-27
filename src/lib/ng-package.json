@@ -4,7 +4,7 @@
   "lib": {
     "entryFile": "index.ts",
     "languageLevel": ["dom", "es2017"],
-    "umdModuleId": "angular2JsonSchemaForm",
+    "umdId": "angular2JsonSchemaForm",
     "umdModuleIds": {
       "lodash": "_",
       "rxjs-compat/BehaviorSubject": "rxjs.BehaviorSubject",
