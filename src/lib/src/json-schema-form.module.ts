@@ -7,32 +7,33 @@ import { WidgetLibraryModule } from './widget-library/widget-library.module';
 import { WidgetLibraryService } from './widget-library/widget-library.service';
 
 import { JsonSchemaFormComponent } from './json-schema-form.component';
-
 import { JsonSchemaFormService } from './json-schema-form.service';
 
-import { NoFrameworkComponent } from './framework-library/no-framework/no-framework.component';
 import { Framework } from './framework-library/framework';
-import { NoFramework } from './framework-library/no-framework/no.framework';
-import { NoFrameworkModule } from './framework-library/no-framework/no-framework.module';
 
 @NgModule({
   imports: [
-    CommonModule, FormsModule, ReactiveFormsModule,
-    WidgetLibraryModule, NoFrameworkModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    WidgetLibraryModule
   ],
   declarations: [ JsonSchemaFormComponent ],
   exports: [ JsonSchemaFormComponent, WidgetLibraryModule ]
 })
 export class JsonSchemaFormModule {
-  static forRoot(...frameworks): ModuleWithProviders {
-    const loadFrameworks = frameworks.length ?
-      frameworks.map(framework => framework.forRoot().providers[0]) :
-      [{ provide: Framework, useClass: NoFramework, multi: true }];
+  static forRoot(FormFramework): ModuleWithProviders {
     return {
       ngModule: JsonSchemaFormModule,
       providers: [
-        JsonSchemaFormService, FrameworkLibraryService, WidgetLibraryService,
-        ...loadFrameworks
+        JsonSchemaFormService,
+        FrameworkLibraryService,
+        WidgetLibraryService,
+        {
+          provide: Framework,
+          useClass: FormFramework,
+          multi: true
+        }
       ]
     };
   }

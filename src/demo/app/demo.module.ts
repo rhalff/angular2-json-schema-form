@@ -43,10 +43,10 @@ import { ActivatedRoute, Router } from '@angular/router';
     Bootstrap3FrameworkModule, Bootstrap4FrameworkModule,
 
     JsonSchemaFormModule.forRoot(
-      NoFrameworkModule,
-      MaterialDesignFrameworkModule,
-      Bootstrap3FrameworkModule,
-      Bootstrap4FrameworkModule
+      // NoFrameworkModule,
+      MaterialDesignFrameworkModule // .forRoot().providers[0]
+      // Bootstrap3FrameworkModule,
+      // Bootstrap4FrameworkModule
     )
   ],
   bootstrap: [ DemoRootComponent ]
