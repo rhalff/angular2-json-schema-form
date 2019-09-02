@@ -6668,6 +6668,8 @@
                 },
             };
             this.setLanguage(this.language);
+            var draft6 = require('ajv/lib/refs/json-schema-draft-06.json');
+            this.ajv.addMetaSchema(draft6);
         }
         JsonSchemaFormService.prototype.setLanguage = function (language) {
             if (language === void 0) { language = 'en-US'; }
@@ -8048,7 +8050,7 @@
             __metadata("design:type", Array)
         ], SelectFrameworkComponent.prototype, "dataIndex", void 0);
         __decorate([
-            core.ViewChild('widgetContainer', { read: core.ViewContainerRef, static: false }),
+            core.ViewChild('widgetContainer', { read: core.ViewContainerRef, static: true }),
             __metadata("design:type", core.ViewContainerRef)
         ], SelectFrameworkComponent.prototype, "widgetContainer", void 0);
         SelectFrameworkComponent = __decorate([
@@ -8108,7 +8110,7 @@
             __metadata("design:type", Array)
         ], SelectWidgetComponent.prototype, "dataIndex", void 0);
         __decorate([
-            core.ViewChild('widgetContainer', { read: core.ViewContainerRef, static: false }),
+            core.ViewChild('widgetContainer', { read: core.ViewContainerRef, static: true }),
             __metadata("design:type", core.ViewContainerRef)
         ], SelectWidgetComponent.prototype, "widgetContainer", void 0);
         SelectWidgetComponent = __decorate([
@@ -8275,7 +8277,7 @@
             __metadata("design:type", Array)
         ], TemplateComponent.prototype, "dataIndex", void 0);
         __decorate([
-            core.ViewChild('widgetContainer', { read: core.ViewContainerRef, static: false }),
+            core.ViewChild('widgetContainer', { read: core.ViewContainerRef, static: true }),
             __metadata("design:type", core.ViewContainerRef)
         ], TemplateComponent.prototype, "widgetContainer", void 0);
         TemplateComponent = __decorate([
