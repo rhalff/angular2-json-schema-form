@@ -14,7 +14,7 @@ export class SelectWidgetComponent implements OnChanges, OnInit {
   @Input() layoutNode: any;
   @Input() layoutIndex: number[];
   @Input() dataIndex: number[];
-  @ViewChild('widgetContainer', { read: ViewContainerRef })
+  @ViewChild('widgetContainer', { read: ViewContainerRef, static: false })
     widgetContainer: ViewContainerRef;
 
   constructor(

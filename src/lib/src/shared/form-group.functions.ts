@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 
 import {
   hasValue, inArray, isArray, isEmpty, isDate, isObject, isDefined, isPrimitive,
-  toJavaScriptType, toSchemaType, SchemaPrimitiveType
+  toJavaScriptType, toSchemaType, SchemaType
 } from './validator.functions';
 import { forEach, hasOwn } from './utility.functions';
 import { Pointer, JsonPointer } from './jsonpointer.functions';
@@ -402,7 +402,7 @@ export function formatFormData(
         JsonPointer.has(dataMap, [dataPointer, 'schemaType']) ? dataPointer :
           removeRecursiveReferences(dataPointer, recursiveRefMap, arrayMap);
       if (JsonPointer.has(dataMap, [genericPointer, 'schemaType'])) {
-        const schemaType: SchemaPrimitiveType | SchemaPrimitiveType[] =
+        const schemaType: SchemaType | SchemaType[] =
           dataMap.get(genericPointer).get('schemaType');
         if (schemaType === 'null') {
           JsonPointer.set(formattedData, dataPointer, null);
