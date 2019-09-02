@@ -1,0 +1,31 @@
+{
+  "name": "angular2-json-schema-form",
+  "version": "0.7.0-alpha.1",
+  "main": "bundles/angular2-json-schema-form.umd.js",
+  "peerDependencies": {
+    "@angular/cdk": "^6.0.0-rc.12",
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/flex-layout": "^6.0.0-beta.15",
+    "@angular/forms": "^6.0.0-rc.5",
+    "@angular/material": "^6.0.0-rc.12",
+    "ajv": "^6.4.0",
+    "lodash": "4.x",
+    "rxjs": "^6.0.0-uncanny-rc.7",
+    "rxjs-compat": "^6.0.0-uncanny-rc.7",
+    "zone.js": "^0.8.26"
+  },
+  "devDependencies": {},
+  "module": "fesm5/angular2-json-schema-form.js",
+  "es2015": "fesm2015/angular2-json-schema-form.js",
+  "esm5": "esm5/angular2-json-schema-form.js",
+  "esm2015": "esm2015/angular2-json-schema-form.js",
+  "fesm5": "fesm5/angular2-json-schema-form.js",
+  "fesm2015": "fesm2015/angular2-json-schema-form.js",
+  "typings": "angular2-json-schema-form.d.ts",
+  "metadata": "angular2-json-schema-form.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
+}
