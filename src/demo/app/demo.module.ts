@@ -10,10 +10,12 @@ import {
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
-import {
-  JsonSchemaFormModule, NoFrameworkModule, MaterialDesignFrameworkModule,
-  Bootstrap3FrameworkModule, Bootstrap4FrameworkModule
-} from '../../lib';
+import { JsonSchemaFormModule } from '../../lib';
+
+import { NoFrameworkModule } from '../../lib/src/framework-library/no-framework/no-framework.module';
+import { MaterialDesignFrameworkModule } from '../../lib/src/framework-library/material-design-framework/material-design-framework.module';
+import { Bootstrap3FrameworkModule } from '../../lib/src/framework-library/bootstrap-3-framework/bootstrap-3-framework.module';
+import { Bootstrap4FrameworkModule } from '../../lib/src/framework-library/bootstrap-4-framework/bootstrap-4-framework.module';
 
 // To include JsonSchemaFormModule after downloading from NPM, use this instead:
 //
