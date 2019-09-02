@@ -41,6 +41,7 @@ export class JsonSchemaFormService {
 
   ajvOptions: any = { allErrors: true, jsonPointers: true, unknownFormats: 'ignore' };
   ajv: any = new Ajv(this.ajvOptions); // AJV: Another JSON Schema Validator
+
   validateFormData: any = null; // Compiled AJV function to validate active form's schema
 
   formValues: any = {}; // Internal form data (may not have correct types)
@@ -121,6 +122,10 @@ export class JsonSchemaFormService {
 
   constructor() {
     this.setLanguage(this.language);
+
+    const draft6 = require('ajv/lib/refs/json-schema-draft-06.json');
+
+    this.ajv.addMetaSchema(draft6);
   }
 
   setLanguage(language: string = 'en-US') {

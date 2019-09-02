@@ -51,7 +51,7 @@
     "deploy": "gh-pages --dist dist/angular2-json-schema-form/ --branch angular-8-dist"
   },
   "dependencies": {
-    "ajv": "^6.10.2",
+    "ajv": "^6.5.0",
     "lodash": "^4.17.15"
   },
   "peerDependencies": {
