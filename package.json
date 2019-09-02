@@ -48,7 +48,7 @@
     "preng-build": "rimraf dist/*",
     "ng-build": "ng build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages --dist dist/angular2-json-schema-form/ --branch angular-6-dist"
+    "deploy": "gh-pages --dist dist/angular2-json-schema-form/ --branch angular-8-dist"
   },
   "dependencies": {
     "ajv": "^6.10.2",
