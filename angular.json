@@ -122,9 +122,9 @@
           },
           "configurations": {
             "production": {
-              "project": "src/lib/ng-package.prod.json"
-            ,              "tsConfig": "src/lib/tsconfig.lib.prod.json"
-}
+              "project": "src/lib/ng-package.prod.json",
+              "tsConfig": "src/lib/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -170,9 +170,291 @@
           }
         }
       }
+    },
+    "@ngsf/bootstrap3-framework": {
+      "projectType": "library",
+      "root": "projects/ngsf-bootstrap3-framework",
+      "sourceRoot": "projects/ngsf-bootstrap3-framework/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngsf-bootstrap3-framework/tsconfig.lib.json",
+            "project": "projects/ngsf-bootstrap3-framework/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngsf-bootstrap3-framework/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngsf-bootstrap3-framework/src/test.ts",
+            "tsConfig": "projects/ngsf-bootstrap3-framework/tsconfig.spec.json",
+            "karmaConfig": "projects/ngsf-bootstrap3-framework/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngsf-bootstrap3-framework/tsconfig.lib.json",
+              "projects/ngsf-bootstrap3-framework/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@ngsf/bootstrap4-framework": {
+      "projectType": "library",
+      "root": "projects/ngsf-bootstrap4-framework",
+      "sourceRoot": "projects/ngsf-bootstrap4-framework/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngsf-bootstrap4-framework/tsconfig.lib.json",
+            "project": "projects/ngsf-bootstrap4-framework/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngsf-bootstrap4-framework/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngsf-bootstrap4-framework/src/test.ts",
+            "tsConfig": "projects/ngsf-bootstrap4-framework/tsconfig.spec.json",
+            "karmaConfig": "projects/ngsf-bootstrap4-framework/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngsf-bootstrap4-framework/tsconfig.lib.json",
+              "projects/ngsf-bootstrap4-framework/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@ngsf/common": {
+      "projectType": "library",
+      "root": "projects/ngsf-common",
+      "sourceRoot": "projects/ngsf-common/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngsf-common/tsconfig.lib.json",
+            "project": "projects/ngsf-common/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngsf-common/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngsf-common/src/test.ts",
+            "tsConfig": "projects/ngsf-common/tsconfig.spec.json",
+            "karmaConfig": "projects/ngsf-common/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngsf-common/tsconfig.lib.json",
+              "projects/ngsf-common/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@ngsf/widget-library": {
+      "projectType": "library",
+      "root": "projects/ngsf-widget-library",
+      "sourceRoot": "projects/ngsf-widget-library/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngsf-widget-library/tsconfig.lib.json",
+            "project": "projects/ngsf-widget-library/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngsf-widget-library/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngsf-widget-library/src/test.ts",
+            "tsConfig": "projects/ngsf-widget-library/tsconfig.spec.json",
+            "karmaConfig": "projects/ngsf-widget-library/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngsf-widget-library/tsconfig.lib.json",
+              "projects/ngsf-widget-library/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@ngsf/no-framework": {
+      "projectType": "library",
+      "root": "projects/ngsf-no-framework",
+      "sourceRoot": "projects/ngsf-no-framework/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngsf-no-framework/tsconfig.lib.json",
+            "project": "projects/ngsf-no-framework/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngsf-no-framework/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngsf-no-framework/src/test.ts",
+            "tsConfig": "projects/ngsf-no-framework/tsconfig.spec.json",
+            "karmaConfig": "projects/ngsf-no-framework/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngsf-no-framework/tsconfig.lib.json",
+              "projects/ngsf-no-framework/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@ngsf/material-design-framework": {
+      "projectType": "library",
+      "root": "projects/ngsf-material-design-framework",
+      "sourceRoot": "projects/ngsf-material-design-framework/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngsf-material-design-framework/tsconfig.lib.json",
+            "project": "projects/ngsf-material-design-framework/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngsf-material-design-framework/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngsf-material-design-framework/src/test.ts",
+            "tsConfig": "projects/ngsf-material-design-framework/tsconfig.spec.json",
+            "karmaConfig": "projects/ngsf-material-design-framework/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngsf-material-design-framework/tsconfig.lib.json",
+              "projects/ngsf-material-design-framework/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@ngsf/json-schema-form": {
+      "projectType": "library",
+      "root": "projects/ngsf-json-schema-form",
+      "sourceRoot": "projects/ngsf-json-schema-form/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngsf-json-schema-form/tsconfig.lib.json",
+            "project": "projects/ngsf-json-schema-form/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngsf-json-schema-form/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngsf-json-schema-form/src/test.ts",
+            "tsConfig": "projects/ngsf-json-schema-form/tsconfig.spec.json",
+            "karmaConfig": "projects/ngsf-json-schema-form/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngsf-json-schema-form/tsconfig.lib.json",
+              "projects/ngsf-json-schema-form/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
-  "cli": {},
+  "cli": {
+    "analytics": false
+  },
   "schematics": {
     "@schematics/angular:component": {
       "flat": true,

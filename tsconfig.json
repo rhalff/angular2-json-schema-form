@@ -12,6 +12,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -21,13 +24,24 @@
       "es7"
     ],
     "paths": {
+      "@ngsf/*": [
+        "dist/@ngsf/*"
+      ],
       "authumn-angular": [
         "dist/authumn-angular"
+      ],
+      "bootstrap3-framework": [
+        "dist/bootstrap3-framework"
+      ],
+      "ngsf-bootstrap3-framework": [
+        "dist/ngsf-bootstrap3-framework"
+      ],
+      "ngsf-common": [
+        "dist/ngsf-common"
       ]
     }
   },
-  "angularCompilerOptions": {
-  },
+  "angularCompilerOptions": {},
   "typedocOptions": {
     "name": "Angular JSON Schema Form Library",
     "mode": "file",
@@ -42,6 +56,7 @@
     "stripInternal": "true",
     "suppressExcessPropertyErrors": "true",
     "suppressImplicitAnyIndexErrors": "true",
+    "allowSyntheticDefaultImports": true,
     "module": "commonjs"
   }
 }

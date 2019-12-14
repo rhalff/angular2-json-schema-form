@@ -1,0 +1,11 @@
+{
+  "name": "@ngsf/material-design-framework",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^9.0.0-rc.6",
+    "@angular/core": "^9.0.0-rc.6",
+    "@ngsf/common": "^0.0.1",
+    "@ngsf/widget-library": "^0.0.1",
+    "tslib": "^1.10.0"
+  }
+}

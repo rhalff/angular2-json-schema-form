@@ -1,0 +1,9 @@
+{
+  "name": "ngsf-common",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^9.0.0-rc.6",
+    "@angular/core": "^9.0.0-rc.6",
+    "tslib": "^1.10.0"
+  }
+}
