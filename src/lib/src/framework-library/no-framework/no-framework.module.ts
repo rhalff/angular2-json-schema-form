@@ -15,7 +15,7 @@ import { NoFramework } from './no.framework';
   entryComponents: [ NoFrameworkComponent ]
 })
 export class NoFrameworkModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<NoFrameworkModule> {
     return {
       ngModule: NoFrameworkModule,
       providers: [

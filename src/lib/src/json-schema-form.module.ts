@@ -22,7 +22,7 @@ import { Framework } from './framework-library/framework';
   exports: [ JsonSchemaFormComponent, WidgetLibraryModule ]
 })
 export class JsonSchemaFormModule {
-  static forRoot(FormFramework): ModuleWithProviders {
+  static forRoot(FormFramework): ModuleWithProviders<JsonSchemaFormModule> {
     return {
       ngModule: JsonSchemaFormModule,
       providers: [

@@ -3,7 +3,6 @@
   "compilerOptions": {
     "outDir": "../../out-ngc/app",
     "experimentalDecorators": true,
-    "module": "es2015",
     "baseUrl": "",
     "types": [],
     "paths": {
@@ -12,9 +11,9 @@
       ]
     }
   },
-  "exclude": [
-    "test.ts",
-    "**/*.spec.ts"
-  ],
-  "atom": { "rewriteTsconfig": false }
+  "atom": { "rewriteTsconfig": false },
+  "files": [
+    "main.ts",
+    "polyfills.ts"
+  ]
 }

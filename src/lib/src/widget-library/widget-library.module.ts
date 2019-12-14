@@ -16,7 +16,7 @@ import { BASIC_WIDGETS } from './index';
   providers:       [ JsonSchemaFormService ]
 })
 export class WidgetLibraryModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<WidgetLibraryModule> {
     return {
       ngModule: WidgetLibraryModule,
       providers: [ JsonSchemaFormService ]

@@ -14,7 +14,7 @@ import { Bootstrap3Framework } from './bootstrap-3.framework';
   entryComponents: [ Bootstrap3FrameworkComponent ]
 })
 export class Bootstrap3FrameworkModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<Bootstrap3FrameworkModule> {
     return {
       ngModule: Bootstrap3FrameworkModule,
       providers: [

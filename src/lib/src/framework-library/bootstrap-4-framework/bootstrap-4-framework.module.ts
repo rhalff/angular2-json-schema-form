@@ -14,7 +14,7 @@ import { Bootstrap4Framework } from './bootstrap-4.framework';
   entryComponents: [ Bootstrap4FrameworkComponent ]
 })
 export class Bootstrap4FrameworkModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<Bootstrap4FrameworkModule> {
     return {
       ngModule: Bootstrap4FrameworkModule,
       providers: [

@@ -40,7 +40,7 @@ import { MaterialDesignFramework } from './material-design.framework';
   entryComponents: [ ...MATERIAL_FRAMEWORK_COMPONENTS ]
 })
 export class MaterialDesignFrameworkModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<MaterialDesignFrameworkModule> {
     return {
       ngModule: MaterialDesignFrameworkModule,
       providers: [
