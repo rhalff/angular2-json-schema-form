@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostListener, Input, NgZone, OnInit} from '@angular/core'
+import {Directive, ElementRef, Input, NgZone, OnInit} from '@angular/core'
 import {JsonSchemaFormService} from '../services/json-schema-form.service'
 
 /**

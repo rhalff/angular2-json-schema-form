@@ -1,21 +1,31 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {NgModule} from '@angular/core'
+import {BrowserModule} from '@angular/platform-browser'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import {FlexLayoutModule} from '@angular/flex-layout'
+import {FormsModule} from '@angular/forms'
+import {HttpClientModule} from '@angular/common/http'
 import {
-  MatButtonModule, MatCardModule, MatCheckboxModule, MatIconModule,
-  MatMenuModule, MatSelectModule, MatToolbarModule
-} from '@angular/material';
-import { RouterModule } from '@angular/router';
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatIconModule,
+  MatMenuModule,
+  MatSelectModule,
+  MatToolbarModule
+} from '@angular/material'
+import {RouterModule} from '@angular/router'
 
-import { JsonSchemaFormModule } from '../../lib';
+import {JsonSchemaFormModule} from '@ngsf/json-schema-form'
 
-import { NoFrameworkModule } from '../../lib/src/framework-library/no-framework/no-framework.module';
-import { MaterialDesignFrameworkModule } from '../../lib/src/framework-library/material-design-framework/material-design-framework.module';
-import { Bootstrap3FrameworkModule } from '../../lib/src/framework-library/bootstrap-3-framework/bootstrap-3-framework.module';
-import { Bootstrap4FrameworkModule } from '../../lib/src/framework-library/bootstrap-4-framework/bootstrap-4-framework.module';
+import {NoFrameworkModule} from '@ngsf/no-framework'
+import {MaterialDesignFrameworkModule} from '@ngsf/material-design-framework'
+import {Bootstrap3FrameworkModule} from '@ngsf/bootstrap3-framework'
+import {Bootstrap4FrameworkModule} from '@ngsf/bootstrap4-framework'
+import {AceEditorDirective} from './ace-editor.directive'
+import {DemoComponent} from './demo.component'
+import {DemoRootComponent} from './demo-root.component'
+
+import {routes} from './demo.routes'
 
 // To include JsonSchemaFormModule after downloading from NPM, use this instead:
 //
@@ -26,23 +36,18 @@ import { Bootstrap4FrameworkModule } from '../../lib/src/framework-library/boots
 //
 //   imports: [ ... NoFrameworkModule, JsonSchemaFormModule.forRoot(NoFrameworkModule) ... ]
 
-import { AceEditorDirective } from './ace-editor.directive';
-import { DemoComponent } from './demo.component';
-import { DemoRootComponent } from './demo-root.component';
-
-import { routes } from './demo.routes';
-import { ActivatedRoute, Router } from '@angular/router';
-
 @NgModule({
-  declarations: [ AceEditorDirective, DemoComponent, DemoRootComponent ],
+  declarations: [AceEditorDirective, DemoComponent, DemoRootComponent],
   imports: [
     BrowserModule, BrowserAnimationsModule, FlexLayoutModule, FormsModule,
     HttpClientModule, MatButtonModule, MatCardModule, MatCheckboxModule,
     MatIconModule, MatMenuModule, MatSelectModule, MatToolbarModule,
     RouterModule.forRoot(routes),
 
-    NoFrameworkModule, MaterialDesignFrameworkModule,
-    Bootstrap3FrameworkModule, Bootstrap4FrameworkModule,
+    NoFrameworkModule,
+    MaterialDesignFrameworkModule,
+    // Bootstrap3FrameworkModule,
+    // Bootstrap4FrameworkModule,
 
     JsonSchemaFormModule.forRoot(
       // NoFrameworkModule,
@@ -51,7 +56,7 @@ import { ActivatedRoute, Router } from '@angular/router';
       // Bootstrap4FrameworkModule
     )
   ],
-  bootstrap: [ DemoRootComponent ]
+  bootstrap: [DemoRootComponent]
 })
 
 // Here, by loading 4 frameworks in JsonSchemaFormModule.forRoot(), the first,
@@ -63,4 +68,5 @@ import { ActivatedRoute, Router } from '@angular/router';
 //   'bootstrap-3-framework'
 //   'bootstrap-4-framework'
 
-export class DemoModule { }
+export class DemoModule {
+}

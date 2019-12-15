@@ -21,15 +21,6 @@ import {TabsComponent} from './tabs.component'
 import {TemplateComponent} from './template.component'
 import {TextareaComponent} from './textarea.component'
 
-export const BASIC_WIDGETS = [
-  AddReferenceComponent, OneOfComponent, ButtonComponent, CheckboxComponent,
-  CheckboxesComponent, FileComponent, HiddenComponent, InputComponent,
-  MessageComponent, NoneComponent, NumberComponent, RadiosComponent,
-  RootComponent, SectionComponent, SelectComponent, SelectFrameworkComponent,
-  SelectWidgetComponent, SubmitComponent, TabComponent, TabsComponent,
-  TemplateComponent, TextareaComponent
-]
-
 export {AddReferenceComponent} from './add-reference.component'
 export {OneOfComponent} from './one-of.component'
 export {ButtonComponent} from './button.component'
@@ -53,4 +44,3 @@ export {TabsComponent} from './tabs.component'
 export {TemplateComponent} from './template.component'
 export {TextareaComponent} from './textarea.component'
 
-export {buildTitleMap} from '../functions/buildTitleMap'

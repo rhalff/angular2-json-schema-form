@@ -7,17 +7,17 @@ import * as _ from 'lodash'
 
 import {
   fixTitle, forEach, hasOwn, toTitleCase,
-  hasValue, isArray, isDefined, isEmpty, isObject, isString,
+  hasValue, isArray, isDefined, isEmpty, isObject,
   JsonPointer,
   buildSchemaFromData, buildSchemaFromLayout, removeRecursiveReferences,
-  resolveSchemaReferences,
   buildFormGroup, buildFormGroupTemplate, formatFormData, getControl,
   buildLayout, getLayoutNode,
   enValidationMessages,
   frValidationMessages,
   Framework
 } from '@ngsf/common'
-import {ErrorMessages, TitleMapItem} from '../interfaces'
+import {ErrorMessages} from '../interfaces/error-messages'
+import {TitleMapItem} from '../interfaces/title-map-item'
 
 @Injectable()
 export class JsonSchemaFormService {

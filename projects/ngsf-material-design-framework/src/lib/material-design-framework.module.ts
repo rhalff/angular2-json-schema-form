@@ -1,5 +1,7 @@
 import {ModuleWithProviders, NgModule} from '@angular/core'
 import {CommonModule} from '@angular/common'
+import {WidgetLibraryModule} from '@ngsf/widget-library'
+import {Framework} from '@ngsf/common'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import {FlexLayoutModule} from '@angular/flex-layout'
 import {
@@ -23,9 +25,41 @@ import {
   MatTabsModule,
   MatTooltipModule,
 } from '@angular/material'
-import {WidgetLibraryModule} from '@ngsf/widget-library'
-import {Framework} from '@ngsf/common'
-import {MATERIAL_FRAMEWORK_COMPONENTS} from './components'
+import {
+  FlexLayoutRootComponent,
+  FlexLayoutSectionComponent,
+  MaterialAddReferenceComponent,
+  MaterialButtonComponent,
+  MaterialButtonGroupComponent,
+  MaterialCheckboxComponent,
+  MaterialCheckboxesComponent,
+  MaterialChipListComponent,
+  MaterialDatepickerComponent,
+  MaterialFileComponent,
+  MaterialInputComponent,
+  MaterialNumberComponent,
+  MaterialOneOfComponent,
+  MaterialRadiosComponent,
+  MaterialSelectComponent,
+  MaterialSliderComponent,
+  MaterialStepperComponent,
+  MaterialTabsComponent,
+  MaterialTextareaComponent,
+  MaterialDesignFrameworkComponent,
+} from './components'
+
+export const MATERIAL_FRAMEWORK_COMPONENTS = [
+  FlexLayoutRootComponent, FlexLayoutSectionComponent,
+  MaterialAddReferenceComponent, MaterialOneOfComponent,
+  MaterialButtonComponent, MaterialButtonGroupComponent,
+  MaterialCheckboxComponent, MaterialCheckboxesComponent,
+  MaterialChipListComponent, MaterialDatepickerComponent,
+  MaterialFileComponent, MaterialInputComponent, MaterialNumberComponent,
+  MaterialRadiosComponent, MaterialSelectComponent, MaterialSliderComponent,
+  MaterialStepperComponent, MaterialTabsComponent, MaterialTextareaComponent,
+  MaterialDesignFrameworkComponent
+]
+
 import {MaterialDesignFramework} from './material-design.framework'
 
 export const ANGULAR_MATERIAL_MODULES = [
@@ -45,8 +79,12 @@ export const ANGULAR_MATERIAL_MODULES = [
 
 @NgModule({
   imports: [
-    CommonModule, FormsModule, ReactiveFormsModule, FlexLayoutModule,
-    ...ANGULAR_MATERIAL_MODULES, WidgetLibraryModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    ...ANGULAR_MATERIAL_MODULES,
+    WidgetLibraryModule,
   ],
   declarations: [...MATERIAL_FRAMEWORK_COMPONENTS],
   exports: [...MATERIAL_FRAMEWORK_COMPONENTS],
@@ -57,7 +95,11 @@ export class MaterialDesignFrameworkModule {
     return {
       ngModule: MaterialDesignFrameworkModule,
       providers: [
-        {provide: Framework, useClass: MaterialDesignFramework, multi: true}
+        {
+          provide: Framework,
+          useClass: MaterialDesignFramework,
+          multi: true
+        }
       ]
     }
   }

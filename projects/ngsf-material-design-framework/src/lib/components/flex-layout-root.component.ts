@@ -19,7 +19,7 @@ import {JsonSchemaFormService} from '@ngsf/widget-library'
                                    [dataIndex]="layoutNode?.arrayItem ? (dataIndex || []).concat(i) : (dataIndex || [])"
                                    [layoutIndex]="(layoutIndex || []).concat(i)"
                                    [layoutNode]="layoutNode"></select-framework-widget>
-          <div>`,
+          </div>`,
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class FlexLayoutRootComponent {

@@ -4,10 +4,9 @@
     "outDir": "../../out-ngc/app",
     "experimentalDecorators": true,
     "baseUrl": "",
-    "types": [],
     "paths": {
-      "angular2-json-schema-form": [
-        "../../src"
+      "@ngsf/*": [
+        "../../dist/@ngsf/*"
       ]
     }
   },

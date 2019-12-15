@@ -7,10 +7,10 @@ import {JsonSchemaFormService} from '@ngsf/widget-library'
   selector: 'material-button-widget',
   template: `
       <div class="button-row" [class]="options?.htmlClass || ''">
+          <!-- [color]="options?.color || 'primary'" -->
           <button mat-raised-button
                   [attr.readonly]="options?.readonly ? 'readonly' : null"
                   [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
-                  [color]="options?.color || 'primary'"
                   [disabled]="controlDisabled || options?.readonly"
                   [id]="'control' + layoutNode?._id"
                   [name]="controlName"

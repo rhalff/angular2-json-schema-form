@@ -7,7 +7,7 @@ import {JsonSchemaFormService} from '@ngsf/widget-library'
   template: `
       <mat-checkbox *ngIf="boundControl && !showSlideToggle"
                     [formControl]="formControl"
-                    labelPosition="left"
+                    align="left"
                     [color]="options?.color || 'primary'"
                     [id]="'control' + layoutNode?._id"
                     labelPosition="after"
@@ -19,7 +19,7 @@ import {JsonSchemaFormService} from '@ngsf/widget-library'
             [innerHTML]="options?.title"></span>
       </mat-checkbox>
       <mat-checkbox *ngIf="!boundControl && !showSlideToggle"
-                    labelPosition="left"
+                    align="left"
                     [color]="options?.color || 'primary'"
                     [disabled]="controlDisabled || options?.readonly"
                     [id]="'control' + layoutNode?._id"

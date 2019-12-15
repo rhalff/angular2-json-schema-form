@@ -20,18 +20,6 @@ import {MaterialTextareaComponent} from './material-textarea.component'
 
 import {MaterialDesignFrameworkComponent} from './material-design-framework.component'
 
-export const MATERIAL_FRAMEWORK_COMPONENTS = [
-  FlexLayoutRootComponent, FlexLayoutSectionComponent,
-  MaterialAddReferenceComponent, MaterialOneOfComponent,
-  MaterialButtonComponent, MaterialButtonGroupComponent,
-  MaterialCheckboxComponent, MaterialCheckboxesComponent,
-  MaterialChipListComponent, MaterialDatepickerComponent,
-  MaterialFileComponent, MaterialInputComponent, MaterialNumberComponent,
-  MaterialRadiosComponent, MaterialSelectComponent, MaterialSliderComponent,
-  MaterialStepperComponent, MaterialTabsComponent, MaterialTextareaComponent,
-  MaterialDesignFrameworkComponent
-]
-
 export {FlexLayoutRootComponent} from './flex-layout-root.component'
 export {FlexLayoutSectionComponent} from './flex-layout-section.component'
 export {MaterialAddReferenceComponent} from './material-add-reference.component'

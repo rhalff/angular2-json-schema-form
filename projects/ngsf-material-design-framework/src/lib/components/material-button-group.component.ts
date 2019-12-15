@@ -12,12 +12,12 @@ import {buildTitleMap, JsonSchemaFormService} from '@ngsf/widget-library'
                       [class]="options?.labelHtmlClass || ''"
                       [style.display]="options?.notitle ? 'none' : ''"
                       [innerHTML]="options?.title"></label>
+              [disabled]="controlDisabled || options?.readonly"
           </div>
           <mat-button-toggle-group
                   [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
                   [attr.readonly]="options?.readonly ? 'readonly' : null"
                   [attr.required]="options?.required"
-                  [disabled]="controlDisabled || options?.readonly"
                   [name]="controlName"
                   [value]="controlValue"
                   [vertical]="!!options.vertical">

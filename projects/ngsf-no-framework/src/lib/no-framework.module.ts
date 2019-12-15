@@ -7,7 +7,10 @@ import {NoFrameworkComponent} from './no-framework.component'
 import {NoFramework} from './no-framework'
 
 @NgModule({
-  imports: [CommonModule, WidgetLibraryModule],
+  imports: [
+    CommonModule,
+    WidgetLibraryModule
+  ],
   declarations: [NoFrameworkComponent],
   exports: [NoFrameworkComponent],
   entryComponents: [NoFrameworkComponent]
@@ -17,7 +20,11 @@ export class NoFrameworkModule {
     return {
       ngModule: NoFrameworkModule,
       providers: [
-        {provide: Framework, useClass: NoFramework, multi: true}
+        {
+          provide: Framework,
+          useClass: NoFramework,
+          multi: true
+        }
       ]
     }
   }
