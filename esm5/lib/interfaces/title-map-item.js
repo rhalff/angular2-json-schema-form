@@ -1,0 +1,9 @@
+export function TitleMapItem() { }
+if (false) {
+    TitleMapItem.prototype.name;
+    TitleMapItem.prototype.value;
+    TitleMapItem.prototype.checked;
+    TitleMapItem.prototype.group;
+    TitleMapItem.prototype.items;
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGl0bGUtbWFwLWl0ZW0uanMiLCJzb3VyY2VSb290Ijoibmc6Ly9AbmdzZi93aWRnZXQtbGlicmFyeS8iLCJzb3VyY2VzIjpbImxpYi9pbnRlcmZhY2VzL3RpdGxlLW1hcC1pdGVtLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGtDQU1DOztJQUxDLDRCQUFhO0lBQ2IsNkJBQVc7SUFDWCwrQkFBaUI7SUFDakIsNkJBQWM7SUFDZCw2QkFBc0IiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgaW50ZXJmYWNlIFRpdGxlTWFwSXRlbSB7XG4gIG5hbWU/OiBzdHJpbmdcbiAgdmFsdWU/OiBhbnlcbiAgY2hlY2tlZD86IGJvb2xlYW5cbiAgZ3JvdXA/OiBzdHJpbmdcbiAgaXRlbXM/OiBUaXRsZU1hcEl0ZW1bXVxufVxuIl19
