@@ -22,6 +22,7 @@ import {FormGroup} from '@angular/forms'
  */
 export type Pointer = string | string[]
 
+// @dynamic
 @Injectable()
 export class JsonPointer {
 

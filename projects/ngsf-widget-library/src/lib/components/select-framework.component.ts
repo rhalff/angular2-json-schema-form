@@ -6,13 +6,15 @@ import {
   OnChanges,
   OnInit,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core'
 import {JsonSchemaFormService} from '../services/json-schema-form.service'
 
 @Component({
   selector: 'select-framework-widget',
-  template: `<div #widgetContainer></div>`,
+  template: `
+    <div #widgetContainer></div>
+  `,
 })
 export class SelectFrameworkComponent implements OnChanges, OnInit {
   newComponent: ComponentRef<any> = null
@@ -25,8 +27,7 @@ export class SelectFrameworkComponent implements OnChanges, OnInit {
   constructor(
     private componentFactory: ComponentFactoryResolver,
     private jsf: JsonSchemaFormService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.updateComponent()

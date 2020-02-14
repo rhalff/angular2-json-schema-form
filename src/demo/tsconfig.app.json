@@ -5,14 +5,20 @@
     "experimentalDecorators": true,
     "baseUrl": "",
     "paths": {
-      "@ngsf/*": [
-        "../../dist/@ngsf/*"
-      ]
+      "@ngsf/bootstrap3-framework": ["../../dist/@ngsf/bootstrap3-framework"],
+      "@ngsf/bootstrap4-framework": ["../../dist/@ngsf/bootstrap4-framework"],
+      "@ngsf/common": ["../../dist/@ngsf/common"],
+      "@ngsf/json-schema-form": ["../../dist/@ngsf/json-schema-form"],
+      "@ngsf/material-design-framework": [
+        "../../dist/@ngsf/material-design-framework"
+      ],
+      "@ngsf/no-framework": ["../../dist/@ngsf/no-framework"],
+      "@ngsf/widget-library": ["../../dist/@ngsf/widget-library"]
     }
   },
+  "angularCompilerOptions": {
+    "enableIvy": false
+  },
   "atom": { "rewriteTsconfig": false },
-  "files": [
-    "main.ts",
-    "polyfills.ts"
-  ]
+  "files": ["main.ts", "polyfills.ts"]
 }

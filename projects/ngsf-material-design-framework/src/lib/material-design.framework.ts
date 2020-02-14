@@ -1,29 +1,26 @@
 import {Injectable} from '@angular/core'
 import {Framework} from '@ngsf/common'
-// Material Design Framework
-// https://github.com/angular/material2
-import {
-  FlexLayoutRootComponent,
-  FlexLayoutSectionComponent,
-  MaterialAddReferenceComponent,
-  MaterialButtonComponent,
-  MaterialButtonGroupComponent,
-  MaterialCheckboxComponent,
-  MaterialCheckboxesComponent,
-  MaterialChipListComponent,
-  MaterialDatepickerComponent,
-  MaterialDesignFrameworkComponent,
-  MaterialFileComponent,
-  MaterialInputComponent,
-  MaterialNumberComponent,
-  MaterialOneOfComponent,
-  MaterialRadiosComponent,
-  MaterialSelectComponent,
-  MaterialSliderComponent,
-  MaterialStepperComponent,
-  MaterialTabsComponent,
-  MaterialTextareaComponent
-} from './components'
+
+import {FlexLayoutRootComponent} from './components/flex-layout-root.component'
+import {FlexLayoutSectionComponent} from './components/flex-layout-section.component'
+import {MaterialAddReferenceComponent} from './components/material-add-reference.component'
+import {MaterialButtonComponent} from './components/material-button.component'
+import {MaterialButtonGroupComponent} from './components/material-button-group.component'
+import {MaterialCheckboxComponent} from './components/material-checkbox.component'
+import {MaterialCheckboxesComponent} from './components/material-checkboxes.component'
+import {MaterialChipListComponent} from './components/material-chip-list.component'
+import {MaterialDatepickerComponent} from './components/material-datepicker.component'
+import {MaterialFileComponent} from './components/material-file.component'
+import {MaterialInputComponent} from './components/material-input.component'
+import {MaterialNumberComponent} from './components/material-number.component'
+import {MaterialOneOfComponent} from './components/material-one-of.component'
+import {MaterialRadiosComponent} from './components/material-radios.component'
+import {MaterialSelectComponent} from './components/material-select.component'
+import {MaterialSliderComponent} from './components/material-slider.component'
+import {MaterialStepperComponent} from './components/material-stepper.component'
+import {MaterialTabsComponent} from './components/material-tabs.component'
+import {MaterialTextareaComponent} from './components/material-textarea.component'
+import {MaterialDesignFrameworkComponent} from './components/material-design-framework.component'
 
 @Injectable()
 export class MaterialDesignFramework extends Framework {

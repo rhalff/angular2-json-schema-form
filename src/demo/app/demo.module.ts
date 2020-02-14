@@ -4,15 +4,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {FlexLayoutModule} from '@angular/flex-layout'
 import {FormsModule} from '@angular/forms'
 import {HttpClientModule} from '@angular/common/http'
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatIconModule,
-  MatMenuModule,
-  MatSelectModule,
-  MatToolbarModule
-} from '@angular/material'
+import {MatMenuModule} from '@angular/material/menu'
+import {MatButtonModule} from '@angular/material/button'
+import {MatToolbarModule} from '@angular/material/toolbar'
+import {MatCardModule} from '@angular/material/card'
+import {MatCheckboxModule} from '@angular/material/checkbox'
+import {MatIconModule} from '@angular/material/icon'
+import {MatSelectModule} from '@angular/material/select'
 import {RouterModule} from '@angular/router'
 
 import {JsonSchemaFormModule} from '@ngsf/json-schema-form'
@@ -39,24 +37,31 @@ import {routes} from './demo.routes'
 @NgModule({
   declarations: [AceEditorDirective, DemoComponent, DemoRootComponent],
   imports: [
-    BrowserModule, BrowserAnimationsModule, FlexLayoutModule, FormsModule,
-    HttpClientModule, MatButtonModule, MatCardModule, MatCheckboxModule,
-    MatIconModule, MatMenuModule, MatSelectModule, MatToolbarModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    FormsModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatToolbarModule,
     RouterModule.forRoot(routes),
-
     NoFrameworkModule,
+    Bootstrap3FrameworkModule,
+    Bootstrap4FrameworkModule,
     MaterialDesignFrameworkModule,
-    // Bootstrap3FrameworkModule,
-    // Bootstrap4FrameworkModule,
-
     JsonSchemaFormModule.forRoot(
-      // NoFrameworkModule,
-      MaterialDesignFrameworkModule // .forRoot().providers[0]
-      // Bootstrap3FrameworkModule,
-      // Bootstrap4FrameworkModule
-    )
+      NoFrameworkModule,
+      Bootstrap3FrameworkModule,
+      Bootstrap4FrameworkModule,
+      MaterialDesignFrameworkModule
+    ),
   ],
-  bootstrap: [DemoRootComponent]
+  bootstrap: [DemoRootComponent],
 })
 
 // Here, by loading 4 frameworks in JsonSchemaFormModule.forRoot(), the first,
@@ -67,6 +72,4 @@ import {routes} from './demo.routes'
 //   'material-design-framework',
 //   'bootstrap-3-framework'
 //   'bootstrap-4-framework'
-
-export class DemoModule {
-}
+export class DemoModule {}

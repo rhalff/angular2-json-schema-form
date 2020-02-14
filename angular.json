@@ -1,5 +1,5 @@
 {
-  "$schema": "./node_modules/@angular-devkit/core/src/workspace/workspace-schema.json",
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -10,7 +10,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "aot": true,
+            "aot": false,
             "outputPath": "dist/demo",
             "index": "src/demo/index.html",
             "main": "src/demo/main.ts",
@@ -28,9 +28,7 @@
                 "output": "/"
               }
             ],
-            "styles": [
-              "src/demo/styles.scss"
-            ],
+            "styles": ["src/demo/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -84,9 +82,7 @@
             "polyfills": "src/demo/polyfills.ts",
             "tsConfig": "src/demo/tsconfig.spec.json",
             "scripts": [],
-            "styles": [
-              "src/demo/styles.scss"
-            ],
+            "styles": ["src/demo/styles.scss"],
             "assets": [
               {
                 "glob": "**/*",
@@ -104,9 +100,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -144,9 +138,7 @@
               "projects/ngsf-bootstrap3-framework/tsconfig.lib.json",
               "projects/ngsf-bootstrap3-framework/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -184,9 +176,7 @@
               "projects/ngsf-bootstrap4-framework/tsconfig.lib.json",
               "projects/ngsf-bootstrap4-framework/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -224,9 +214,7 @@
               "projects/ngsf-common/tsconfig.lib.json",
               "projects/ngsf-common/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -264,9 +252,7 @@
               "projects/ngsf-widget-library/tsconfig.lib.json",
               "projects/ngsf-widget-library/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -304,9 +290,7 @@
               "projects/ngsf-no-framework/tsconfig.lib.json",
               "projects/ngsf-no-framework/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -344,9 +328,7 @@
               "projects/ngsf-material-design-framework/tsconfig.lib.json",
               "projects/ngsf-material-design-framework/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -384,9 +366,7 @@
               "projects/ngsf-json-schema-form/tsconfig.lib.json",
               "projects/ngsf-json-schema-form/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }

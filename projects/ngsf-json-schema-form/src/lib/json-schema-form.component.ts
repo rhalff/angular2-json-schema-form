@@ -7,7 +7,7 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output
+  Output,
 } from '@angular/core'
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms'
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser'
@@ -15,7 +15,7 @@ import * as _ from 'lodash'
 import {
   FrameworkLibraryService,
   JsonSchemaFormService,
-  WidgetLibraryService
+  WidgetLibraryService,
 } from '@ngsf/widget-library'
 import {
   hasValue,
@@ -27,7 +27,7 @@ import {
   hasOwn,
   JsonPointer,
   resolveSchemaReferences,
-  convertSchemaToDraft6
+  convertSchemaToDraft6,
 } from '@ngsf/common'
 
 export const JSON_SCHEMA_FORM_VALUE_ACCESSOR: any = {
@@ -38,7 +38,7 @@ export const JSON_SCHEMA_FORM_VALUE_ACCESSOR: any = {
 }
 
 /**
- * @module 'JsonSchemaFormComponent' - Angular JSON Schema Form
+ * Angular JSON Schema Form
  *
  * Root module of the Angular JSON Schema Form client-side library,
  * an Angular library which generates an HTML form from a JSON schema
@@ -74,39 +74,62 @@ export const JSON_SCHEMA_FORM_VALUE_ACCESSOR: any = {
 @Component({
   selector: 'json-schema-form',
   template: `
-      <div *ngFor="let stylesheet of stylesheets">
-          <link rel="stylesheet" [href]="stylesheet">
-      </div>
-      <div *ngFor="let script of scripts">
-          <script type="text/javascript" [src]="script"></script>
-      </div>
-      <form class="json-schema-form" (ngSubmit)="submitForm()">
-          <root-widget [layout]="jsf?.layout"></root-widget>
-      </form>
-      <div *ngIf="debug || jsf?.formOptions?.debug">
-          Debug output:
-          <pre>{{debugOutput}}</pre>
-      </div>`,
+    <div *ngFor="let stylesheet of stylesheets">
+      <link rel="stylesheet" [href]="stylesheet" />
+    </div>
+    <div *ngFor="let script of scripts">
+      <script type="text/javascript" [src]="script"></script>
+    </div>
+    <form class="json-schema-form" (ngSubmit)="submitForm()">
+      <root-widget [layout]="jsf?.layout"></root-widget>
+    </form>
+    <div *ngIf="debug || jsf?.formOptions?.debug">
+      Debug output:
+      <pre>{{ debugOutput }}</pre>
+    </div>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   // Adding 'JsonSchemaFormService' here, instead of in the module,
   // creates a separate instance of the service for each component
   providers: [JsonSchemaFormService, JSON_SCHEMA_FORM_VALUE_ACCESSOR],
 })
-export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges, OnInit {
+export class JsonSchemaFormComponent
+  implements ControlValueAccessor, OnChanges, OnInit {
   debugOutput: any // Debug information, if requested
   formValueSubscription: any = null
   formInitialized = false
   objectWrap = false // Is non-object input schema wrapped in an object?
 
   formValuesInput: string // Name of the input providing the form data
-  previousInputs: { // Previous input values, to detect which input triggers onChanges
-    schema: any, layout: any[], data: any, options: any, framework: any | string,
-    widgets: any, form: any, model: any, JSONSchema: any, UISchema: any,
-    formData: any, loadExternalAssets: boolean, debug: boolean,
+  previousInputs: {
+    // Previous input values, to detect which input triggers onChanges
+    schema: any
+    layout: any[]
+    data: any
+    options: any
+    framework: any | string
+    widgets: any
+    form: any
+    model: any
+    JSONSchema: any
+    UISchema: any
+    formData: any
+    loadExternalAssets: boolean
+    debug: boolean
   } = {
-    schema: null, layout: null, data: null, options: null, framework: null,
-    widgets: null, form: null, model: null, JSONSchema: null, UISchema: null,
-    formData: null, loadExternalAssets: null, debug: null,
+    schema: null,
+    layout: null,
+    data: null,
+    options: null,
+    framework: null,
+    widgets: null,
+    form: null,
+    model: null,
+    JSONSchema: null,
+    UISchema: null,
+    formData: null,
+    loadExternalAssets: null,
+    debug: null,
   }
 
   // Recommended inputs
@@ -154,8 +177,8 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
   // If there is no inital data, input '{}' to activate 2-way data binding.
   @Output() formDataChange = new EventEmitter<any>()
   @Output() ngModelChange = new EventEmitter<any>()
-  onChange: Function
-  onTouched: Function
+  onChange: (formValues: any) => void
+  onTouched: (formValues: any) => void
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -163,8 +186,7 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
     private widgetLibrary: WidgetLibraryService,
     public jsf: JsonSchemaFormService,
     private sanitizer: DomSanitizer
-  ) {
-  }
+  ) {}
 
   @Input()
   get value(): any {
@@ -202,11 +224,11 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
     }
   }
 
-  registerOnChange(fn: Function) {
+  registerOnChange(fn: (formValues: any) => void) {
     this.onChange = fn
   }
 
-  registerOnTouched(fn: Function) {
+  registerOnTouched(fn: (formValues: any) => void) {
     this.onTouched = fn
   }
 
@@ -218,7 +240,9 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
   }
 
   updateForm() {
-    if (!this.formInitialized || !this.formValuesInput ||
+    if (
+      !this.formInitialized ||
+      !this.formValuesInput ||
       (this.language && this.language !== this.jsf.language)
     ) {
       this.initializeForm()
@@ -228,21 +252,29 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
       }
 
       // Get names of changed inputs
-      let changedInput = Object.keys(this.previousInputs)
-        .filter(input => this.previousInputs[input] !== this[input])
+      let changedInput = Object.keys(this.previousInputs).filter(
+        input => this.previousInputs[input] !== this[input]
+      )
       let resetFirst = true
-      if (changedInput.length === 1 && changedInput[0] === 'form' &&
+      if (
+        changedInput.length === 1 &&
+        changedInput[0] === 'form' &&
         this.formValuesInput.startsWith('form.')
       ) {
         // If only 'form' input changed, get names of changed keys
         changedInput = Object.keys(this.previousInputs.form || {})
-          .filter(key => !_.isEqual(this.previousInputs.form[key], this.form[key]))
+          .filter(
+            key => !_.isEqual(this.previousInputs.form[key], this.form[key])
+          )
           .map(key => `form.${key}`)
         resetFirst = false
       }
 
       // If only input values have changed, update the form values
-      if (changedInput.length === 1 && changedInput[0] === this.formValuesInput) {
+      if (
+        changedInput.length === 1 &&
+        changedInput[0] === this.formValuesInput
+      ) {
         if (this.formValuesInput.indexOf('.') === -1) {
           this.setFormValues(this[this.formValuesInput], resetFirst)
         } else {
@@ -264,7 +296,7 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
       // Update previous inputs
       Object.keys(this.previousInputs)
         .filter(input => this.previousInputs[input] !== this[input])
-        .forEach(input => this.previousInputs[input] = this[input])
+        .forEach(input => (this.previousInputs[input] = this[input]))
     }
   }
 
@@ -318,56 +350,28 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
    */
   initializeForm() {
     if (
-      this.schema || this.layout || this.data || this.form || this.model ||
-      this.JSONSchema || this.UISchema || this.formData || this.ngModel ||
+      this.schema ||
+      this.layout ||
+      this.data ||
+      this.form ||
+      this.model ||
+      this.JSONSchema ||
+      this.UISchema ||
+      this.formData ||
+      this.ngModel ||
       this.jsf.data
     ) {
+      this.jsf.resetAllValues() // Reset all form values to defaults
+      this.initializeOptions() // Update options
+      this.initializeSchema() // Update schema, schemaRefLibrary,
+      // schemaRecursiveRefMap, & dataRecursiveRefMap
+      this.initializeLayout() // Update layout, layoutRefLibrary,
+      this.initializeData() // Update formValues
+      this.activateForm() // Update dataMap, templateRefLibrary,
+      // formGroupTemplate, formGroup
 
-      this.jsf.resetAllValues()  // Reset all form values to defaults
-      this.initializeOptions()   // Update options
-      this.initializeSchema()    // Update schema, schemaRefLibrary,
-                                  // schemaRecursiveRefMap, & dataRecursiveRefMap
-      this.initializeLayout()    // Update layout, layoutRefLibrary,
-      this.initializeData()      // Update formValues
-      this.activateForm()        // Update dataMap, templateRefLibrary,
-                                  // formGroupTemplate, formGroup
-
-      // Uncomment individual lines to output debugging information to console:
-      // (These always work.)
-      // console.log('loading form...');
-      // console.log('schema', this.jsf.schema);
-      // console.log('layout', this.jsf.layout);
-      // console.log('options', this.options);
-      // console.log('formValues', this.jsf.formValues);
-      // console.log('formGroupTemplate', this.jsf.formGroupTemplate);
-      // console.log('formGroup', this.jsf.formGroup);
-      // console.log('formGroup.value', this.jsf.formGroup.value);
-      // console.log('schemaRefLibrary', this.jsf.schemaRefLibrary);
-      // console.log('layoutRefLibrary', this.jsf.layoutRefLibrary);
-      // console.log('templateRefLibrary', this.jsf.templateRefLibrary);
-      // console.log('dataMap', this.jsf.dataMap);
-      // console.log('arrayMap', this.jsf.arrayMap);
-      // console.log('schemaRecursiveRefMap', this.jsf.schemaRecursiveRefMap);
-      // console.log('dataRecursiveRefMap', this.jsf.dataRecursiveRefMap);
-
-      // Uncomment individual lines to output debugging information to browser:
-      // (These only work if the 'debug' option has also been set to 'true'.)
       if (this.debug || this.jsf.formOptions.debug) {
         const vars: any[] = []
-        // vars.push(this.jsf.schema);
-        // vars.push(this.jsf.layout);
-        // vars.push(this.options);
-        // vars.push(this.jsf.formValues);
-        // vars.push(this.jsf.formGroup.value);
-        // vars.push(this.jsf.formGroupTemplate);
-        // vars.push(this.jsf.formGroup);
-        // vars.push(this.jsf.schemaRefLibrary);
-        // vars.push(this.jsf.layoutRefLibrary);
-        // vars.push(this.jsf.templateRefLibrary);
-        // vars.push(this.jsf.dataMap);
-        // vars.push(this.jsf.arrayMap);
-        // vars.push(this.jsf.schemaRecursiveRefMap);
-        // vars.push(this.jsf.dataRecursiveRefMap);
         this.debugOutput = vars.map(v => JSON.stringify(v, null, 2)).join('\n')
       }
       this.formInitialized = true
@@ -396,7 +400,8 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
     }
     if (isObject(this.form) && isObject(this.form.options)) {
       this.jsf.setOptions(this.form.options)
-      loadExternalAssets = this.form.options.loadExternalAssets || loadExternalAssets
+      loadExternalAssets =
+        this.form.options.loadExternalAssets || loadExternalAssets
       framework = this.form.options.framework || framework
     }
     if (isObject(this.widgets)) {
@@ -407,7 +412,10 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
     this.jsf.framework = this.frameworkLibrary.getFramework()
     if (isObject(this.jsf.formOptions.widgets)) {
       for (const widget of Object.keys(this.jsf.formOptions.widgets)) {
-        this.widgetLibrary.registerWidget(widget, this.jsf.formOptions.widgets[widget])
+        this.widgetLibrary.registerWidget(
+          widget,
+          this.jsf.formOptions.widgets[widget]
+        )
       }
     }
     if (isObject(this.form) && isObject(this.form.tpldata)) {
@@ -432,7 +440,6 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
    * 7. If data input - build schema from data
    */
   private initializeSchema() {
-
     // TODO: update to allow non-object schemas
 
     if (isObject(this.schema)) {
@@ -443,33 +450,41 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
     } else if (isObject(this.JSONSchema)) {
       this.jsf.ReactJsonSchemaFormCompatibility = true
       this.jsf.schema = _.cloneDeep(this.JSONSchema)
-    } else if (hasOwn(this.form, 'JSONSchema') && isObject(this.form.JSONSchema)) {
+    } else if (
+      hasOwn(this.form, 'JSONSchema') &&
+      isObject(this.form.JSONSchema)
+    ) {
       this.jsf.ReactJsonSchemaFormCompatibility = true
       this.jsf.schema = _.cloneDeep(this.form.JSONSchema)
-    } else if (hasOwn(this.form, 'properties') && isObject(this.form.properties)) {
+    } else if (
+      hasOwn(this.form, 'properties') &&
+      isObject(this.form.properties)
+    ) {
       this.jsf.schema = _.cloneDeep(this.form)
     } else if (isObject(this.form)) {
       // TODO: Handle other types of form input
     }
 
     if (!isEmpty(this.jsf.schema)) {
-
       // If other types also allowed, render schema as an object
       if (inArray('object', this.jsf.schema.type)) {
         this.jsf.schema.type = 'object'
       }
 
       // Wrap non-object schemas in object.
-      if (hasOwn(this.jsf.schema, 'type') && this.jsf.schema.type !== 'object') {
+      if (
+        hasOwn(this.jsf.schema, 'type') &&
+        this.jsf.schema.type !== 'object'
+      ) {
         this.jsf.schema = {
-          'type': 'object',
-          'properties': {1: this.jsf.schema}
+          type: 'object',
+          properties: {1: this.jsf.schema},
         }
         this.objectWrap = true
       } else if (!hasOwn(this.jsf.schema, 'type')) {
-
         // Add type = 'object' if missing
-        if (isObject(this.jsf.schema.properties) ||
+        if (
+          isObject(this.jsf.schema.properties) ||
           isObject(this.jsf.schema.patternProperties) ||
           isObject(this.jsf.schema.additionalProperties)
         ) {
@@ -479,8 +494,8 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
         } else {
           this.jsf.JsonFormCompatibility = true
           this.jsf.schema = {
-            'type': 'object',
-            'properties': this.jsf.schema
+            type: 'object',
+            properties: this.jsf.schema,
           }
         }
       }
@@ -494,8 +509,11 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
 
       // Create schemaRefLibrary, schemaRecursiveRefMap, dataRecursiveRefMap, & arrayMap
       this.jsf.schema = resolveSchemaReferences(
-        this.jsf.schema, this.jsf.schemaRefLibrary, this.jsf.schemaRecursiveRefMap,
-        this.jsf.dataRecursiveRefMap, this.jsf.arrayMap
+        this.jsf.schema,
+        this.jsf.schemaRefLibrary,
+        this.jsf.schemaRecursiveRefMap,
+        this.jsf.dataRecursiveRefMap,
+        this.jsf.arrayMap
       )
       if (hasOwn(this.jsf.schemaRefLibrary, '')) {
         this.jsf.hasRootReference = true
@@ -578,17 +596,20 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
    * 3. (none) no input - don't import
    */
   private initializeLayout() {
-
     // Rename JSON Form-style 'options' lists to
     // Angular Schema Form-style 'titleMap' lists.
     const fixJsonFormOptions = (layout: any): any => {
       if (isObject(layout) || isArray(layout)) {
-        forEach(layout, (value, key) => {
-          if (hasOwn(value, 'options') && isObject(value.options)) {
-            value.titleMap = value.options
-            delete value.options
-          }
-        }, 'top-down')
+        forEach(
+          layout,
+          (value, key) => {
+            if (hasOwn(value, 'options') && isObject(value.options)) {
+              value.titleMap = value.options
+              delete value.options
+            }
+          },
+          'top-down'
+        )
       }
       return layout
     }
@@ -621,7 +642,9 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
       alternateLayout = _.cloneDeep(this.form.uiSchema)
     } else if (hasOwn(this.form, 'customFormItems')) {
       this.jsf.JsonFormCompatibility = true
-      alternateLayout = fixJsonFormOptions(_.cloneDeep(this.form.customFormItems))
+      alternateLayout = fixJsonFormOptions(
+        _.cloneDeep(this.form.customFormItems)
+      )
     }
 
     // if alternate layout found, copy alternate layout options into schema
@@ -630,10 +653,16 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
         const schemaPointer = pointer
           .replace(/\//g, '/properties/')
           .replace(/\/properties\/items\/properties\//g, '/items/properties/')
-          .replace(/\/properties\/titleMap\/properties\//g, '/titleMap/properties/')
+          .replace(
+            /\/properties\/titleMap\/properties\//g,
+            '/titleMap/properties/'
+          )
         if (hasValue(value) && hasValue(pointer)) {
           let key = JsonPointer.toKey(pointer)
-          const groupPointer = (JsonPointer.parse(schemaPointer) || []).slice(0, -2)
+          const groupPointer = (JsonPointer.parse(schemaPointer) || []).slice(
+            0,
+            -2
+          )
           let itemPointer: string | string[]
 
           // If 'ui:order' object found, copy into object schema root
@@ -648,7 +677,8 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
             }
             itemPointer = [...groupPointer, 'x-schema-form', key]
           }
-          if (JsonPointer.has(this.jsf.schema, groupPointer) &&
+          if (
+            JsonPointer.has(this.jsf.schema, groupPointer) &&
             !JsonPointer.has(this.jsf.schema, itemPointer)
           ) {
             JsonPointer.set(this.jsf.schema, itemPointer, value)
@@ -672,10 +702,8 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
    * and activate the form.
    */
   private activateForm() {
-
     // If 'schema' not initialized
     if (isEmpty(this.jsf.schema)) {
-
       // TODO: If full layout input (with no '*'), build schema from layout
       // if (!this.jsf.layout.includes('*')) {
       //   this.jsf.buildSchemaFromLayout();
@@ -688,7 +716,6 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
     }
 
     if (!isEmpty(this.jsf.schema)) {
-
       // If not already initialized, initialize ajv and compile schema
       this.jsf.compileAjvSchema()
 
@@ -705,9 +732,9 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
     }
 
     if (this.jsf.formGroup) {
-
       // Reset initial form values
-      if (!isEmpty(this.jsf.formValues) &&
+      if (
+        !isEmpty(this.jsf.formValues) &&
         this.jsf.formOptions.setSchemaDefaults !== true &&
         this.jsf.formOptions.setLayoutDefaults !== true
       ) {
@@ -729,14 +756,20 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
       this.jsf.dataChanges.subscribe(data => {
         this.onChanges.emit(this.objectWrap ? data['1'] : data)
         if (this.formValuesInput && this.formValuesInput.indexOf('.') === -1) {
-          this[`${this.formValuesInput}Change`].emit(this.objectWrap ? data['1'] : data)
+          this[`${this.formValuesInput}Change`].emit(
+            this.objectWrap ? data['1'] : data
+          )
         }
       })
 
       // Trigger change detection on statusChanges to show updated errors
-      this.jsf.formGroup.statusChanges.subscribe(() => this.changeDetector.markForCheck())
+      this.jsf.formGroup.statusChanges.subscribe(() =>
+        this.changeDetector.markForCheck()
+      )
       this.jsf.isValidChanges.subscribe(isValid => this.isValid.emit(isValid))
-      this.jsf.validationErrorChanges.subscribe(err => this.validationErrors.emit(err))
+      this.jsf.validationErrorChanges.subscribe(err =>
+        this.validationErrors.emit(err)
+      )
 
       // Output final schema, final layout, and initial data
       this.formSchema.emit(this.jsf.schema)
@@ -744,15 +777,19 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
       this.onChanges.emit(this.objectWrap ? this.jsf.data['1'] : this.jsf.data)
 
       // If validateOnRender, output initial validation and any errors
-      const validateOnRender =
-        JsonPointer.get(this.jsf, '/formOptions/validateOnRender')
-      if (validateOnRender) { // validateOnRender === 'auto' || true
-        const touchAll = (control) => {
+      const validateOnRender = JsonPointer.get(
+        this.jsf,
+        '/formOptions/validateOnRender'
+      )
+      if (validateOnRender) {
+        // validateOnRender === 'auto' || true
+        const touchAll = control => {
           if (validateOnRender === true || hasValue(control.value)) {
             control.markAsTouched()
           }
-          Object.keys(control.controls || {})
-            .forEach(key => touchAll(control.controls[key]))
+          Object.keys(control.controls || {}).forEach(key =>
+            touchAll(control.controls[key])
+          )
         }
         touchAll(this.jsf.formGroup)
         this.isValid.emit(this.jsf.isValid)

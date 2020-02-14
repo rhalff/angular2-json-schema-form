@@ -15,7 +15,8 @@ export {
   uniqueItems, commonItems, fixTitle, toTitleCase
 } from './lib/functions/utility'
 
-export { Pointer, JsonPointer } from './lib/functions/jsonpointer.functions'
+// export { Pointer, JsonPointer } from './lib/functions/jsonpointer.functions'
+export * from './lib/functions/jsonpointer.functions'
 
 export { JsonValidators } from './lib/json.validators'
 
