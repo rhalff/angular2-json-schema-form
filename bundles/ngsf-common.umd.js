@@ -1,7 +1,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('rxjs'), require('rxjs-compat/observable/fromPromise'), require('@angular/core'), require('rxjs-compat/observable/forkJoin'), require('rxjs-compat/operator/map'), require('lodash'), require('@angular/forms')) :
-    typeof define === 'function' && define.amd ? define('ngsf-common', ['exports', 'rxjs', 'rxjs-compat/observable/fromPromise', '@angular/core', 'rxjs-compat/observable/forkJoin', 'rxjs-compat/operator/map', 'lodash', '@angular/forms'], factory) :
-    (global = global || self, factory(global['ngsf-common'] = {}, global.rxjs, global.fromPromise, global.ng.core, global.forkJoin, global.map, global.lodash, global.ng.forms));
+    typeof define === 'function' && define.amd ? define('@ngsf/common', ['exports', 'rxjs', 'rxjs-compat/observable/fromPromise', '@angular/core', 'rxjs-compat/observable/forkJoin', 'rxjs-compat/operator/map', 'lodash', '@angular/forms'], factory) :
+    (global = global || self, factory((global.ngsf = global.ngsf || {}, global.ngsf.common = {}), global.rxjs, global.fromPromise, global.ng.core, global.forkJoin, global.map, global.lodash, global.ng.forms));
 }(this, (function (exports, rxjs, fromPromise, core, forkJoin, map, lodash, forms) { 'use strict';
 
     function executeAsyncValidators(control, validators, invert) {
