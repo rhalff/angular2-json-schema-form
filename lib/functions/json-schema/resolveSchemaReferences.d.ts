@@ -1,0 +1,1 @@
+export declare function resolveSchemaReferences(schema: any, schemaRefLibrary: any, schemaRecursiveRefMap: Map<string, string>, dataRecursiveRefMap: Map<string, string>, arrayMap: Map<string, number>): any;

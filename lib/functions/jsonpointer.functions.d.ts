@@ -1,0 +1,30 @@
+import { FormGroup } from '@angular/forms';
+export declare type Pointer = string | string[];
+export declare class JsonPointer {
+    static get(object: any, pointer: Pointer, startSlice?: number, endSlice?: number, getBoolean?: boolean, errors?: boolean): any;
+    static getCopy(object: any, pointer: Pointer, startSlice?: number, endSlice?: number, getBoolean?: boolean, errors?: boolean): any;
+    static getFirst(items: Array<object | Pointer>, defaultValue?: any, getCopy?: boolean): any;
+    static getFirstCopy(items: Array<object | Pointer>, defaultValue?: any): any;
+    static set(object: object, pointer: Pointer, value: any, insert?: boolean): object;
+    static setCopy(object: object, pointer: Pointer, value: any, insert?: boolean): any;
+    static insert(object: object, pointer: Pointer, value: any): object;
+    static insertCopy(object: object, pointer: Pointer, value: any): any;
+    static remove(object: object, pointer: Pointer): object;
+    static has(object: object, pointer: Pointer): boolean;
+    static dict(object: object): any;
+    static forEachDeep(object: any, fn?: (v: any, p?: string, o?: any) => any, bottomUp?: boolean, pointer?: string, rootObject?: any): void;
+    static forEachDeepCopy(object: object, fn?: (v: any, p?: string, o?: any) => any, bottomUp?: boolean, pointer?: string, rootObject?: object): any;
+    static escape(key: string): string;
+    static unescape(key: string): string;
+    static parse(pointer: Pointer, errors?: boolean): string[];
+    static compile(pointer: Pointer, defaultValue?: string | number, errors?: boolean): string;
+    static toKey(pointer: Pointer, errors?: boolean): string;
+    static isJsonPointer(value: any): boolean;
+    static isSubPointer(shortPointer: Pointer, longPointer: Pointer, trueIfMatching?: boolean, errors?: boolean): boolean;
+    static toIndexedPointer(genericPointer: Pointer, indexArray: number[], arrayMap?: Map<string, number>): string;
+    static toGenericPointer(indexedPointer: Pointer, arrayMap?: Map<string, number>): string;
+    static toControlPointer(dataPointer: Pointer, formGroup: FormGroup, controlMustExist?: boolean): string;
+    static toSchemaPointer(dataPointer: Pointer, schema: any): Pointer;
+    static toDataPointer(schemaPointer: Pointer, schema: any, errors?: boolean): Pointer;
+    static parseObjectPath(path: Pointer): string[];
+}
