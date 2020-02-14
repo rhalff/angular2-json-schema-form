@@ -1,0 +1,20 @@
+{
+  "name": "@ngsf/json-schema-form",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^9.0.0-rc.6",
+    "@angular/core": "^9.0.0-rc.6",
+    "@ngsf/common": "^0.0.1",
+    "tslib": "^1.10.0"
+  },
+  "main": "bundles/ngsf-json-schema-form.umd.js",
+  "module": "fesm5/ngsf-json-schema-form.js",
+  "es2015": "fesm2015/ngsf-json-schema-form.js",
+  "esm5": "esm5/ngsf-json-schema-form.js",
+  "esm2015": "esm2015/ngsf-json-schema-form.js",
+  "fesm5": "fesm5/ngsf-json-schema-form.js",
+  "fesm2015": "fesm2015/ngsf-json-schema-form.js",
+  "typings": "ngsf-json-schema-form.d.ts",
+  "metadata": "ngsf-json-schema-form.metadata.json",
+  "sideEffects": false
+}
