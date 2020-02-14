@@ -1,0 +1,25 @@
+{
+  "name": "@ngsf/material-design-framework",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^9.0.0-rc.6",
+    "@angular/core": "^9.0.0-rc.6",
+    "@angular/flex-layout": "^8.0.0-beta.27",
+    "@angular/forms": "^9.0.0-rc.6",
+    "@angular/material": "^8.2.3",
+    "@ngsf/common": "^0.0.1",
+    "@ngsf/widget-library": "^0.0.1",
+    "lodash": "^4.17.15",
+    "tslib": "^1.10.0"
+  },
+  "main": "bundles/ngsf-material-design-framework.umd.js",
+  "module": "fesm5/ngsf-material-design-framework.js",
+  "es2015": "fesm2015/ngsf-material-design-framework.js",
+  "esm5": "esm5/ngsf-material-design-framework.js",
+  "esm2015": "esm2015/ngsf-material-design-framework.js",
+  "fesm5": "fesm5/ngsf-material-design-framework.js",
+  "fesm2015": "fesm2015/ngsf-material-design-framework.js",
+  "typings": "ngsf-material-design-framework.d.ts",
+  "metadata": "ngsf-material-design-framework.metadata.json",
+  "sideEffects": false
+}
