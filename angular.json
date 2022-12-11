@@ -47,26 +47,35 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "fileReplacements": [
                 {
                   "replace": "src/demo/environments/environment.ts",
                   "with": "src/demo/environments/environment.prod.ts"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "angular2-json-schema-form-demo:build"
-          },
           "configurations": {
             "production": {
               "browserTarget": "angular2-json-schema-form-demo:build:production"
+            },
+            "development": {
+              "browserTarget": "angular2-json-schema-form-demo:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -379,7 +388,7 @@
     "@schematics/angular:component": {
       "flat": true,
       "prefix": "",
-      "styleext": "scss"
+      "style": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": ""

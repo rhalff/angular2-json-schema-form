@@ -35,7 +35,7 @@ export const Examples: any = {
       // { name: 'JSON Meta-Schema - Draft 1',    file: 'json-schema-draft01', },
     ]
   },
-  'asf': {
+  asf: {
     name: 'Angular Schema Form (AngularJS) examples',
     url: 'http://schemaform.io/examples/bootstrap-example.html',
     schemas: [
@@ -50,7 +50,7 @@ export const Examples: any = {
       {name: 'Hack: Conditional Required', file: 'asf-hack-conditional-required',},
     ]
   },
-  'rjsf': {
+  rjsf: {
     name: 'React JSON Schema Form examples',
     url: 'https://mozilla-services.github.io/react-jsonschema-form/',
     schemas: [
@@ -72,7 +72,7 @@ export const Examples: any = {
       {name: 'Alternatives', file: 'rjsf-alternatives',},
     ]
   },
-  'jsf': {
+  jsf: {
     name: 'JSONForm (jQuery) examples',
     url: 'http://ulion.github.io/jsonform/playground/',
     schemas: [
