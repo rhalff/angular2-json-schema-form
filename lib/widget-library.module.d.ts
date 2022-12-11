@@ -1,0 +1,33 @@
+import { ModuleWithProviders } from '@angular/core';
+import * as i0 from "@angular/core";
+import * as i1 from "./components/add-reference.component";
+import * as i2 from "./components/one-of.component";
+import * as i3 from "./components/button.component";
+import * as i4 from "./components/checkbox.component";
+import * as i5 from "./components/checkboxes.component";
+import * as i6 from "./components/file.component";
+import * as i7 from "./components/hidden.component";
+import * as i8 from "./components/input.component";
+import * as i9 from "./components/message.component";
+import * as i10 from "./components/none.component";
+import * as i11 from "./components/number.component";
+import * as i12 from "./components/radios.component";
+import * as i13 from "./components/root.component";
+import * as i14 from "./components/section.component";
+import * as i15 from "./components/select.component";
+import * as i16 from "./components/select-framework.component";
+import * as i17 from "./components/select-widget.component";
+import * as i18 from "./components/submit.component";
+import * as i19 from "./components/tab.component";
+import * as i20 from "./components/tabs.component";
+import * as i21 from "./components/template.component";
+import * as i22 from "./components/textarea.component";
+import * as i23 from "./directives/orderable.directive";
+import * as i24 from "@angular/common";
+import * as i25 from "@angular/forms";
+export declare class WidgetLibraryModule {
+    static forRoot(): ModuleWithProviders<WidgetLibraryModule>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<WidgetLibraryModule, never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<WidgetLibraryModule, [typeof i1.AddReferenceComponent, typeof i2.OneOfComponent, typeof i3.ButtonComponent, typeof i4.CheckboxComponent, typeof i5.CheckboxesComponent, typeof i6.FileComponent, typeof i7.HiddenComponent, typeof i8.InputComponent, typeof i9.MessageComponent, typeof i10.NoneComponent, typeof i11.NumberComponent, typeof i12.RadiosComponent, typeof i13.RootComponent, typeof i14.SectionComponent, typeof i15.SelectComponent, typeof i16.SelectFrameworkComponent, typeof i17.SelectWidgetComponent, typeof i18.SubmitComponent, typeof i19.TabComponent, typeof i20.TabsComponent, typeof i21.TemplateComponent, typeof i22.TextareaComponent, typeof i23.OrderableDirective], [typeof i24.CommonModule, typeof i25.FormsModule, typeof i25.ReactiveFormsModule], [typeof i1.AddReferenceComponent, typeof i2.OneOfComponent, typeof i3.ButtonComponent, typeof i4.CheckboxComponent, typeof i5.CheckboxesComponent, typeof i6.FileComponent, typeof i7.HiddenComponent, typeof i8.InputComponent, typeof i9.MessageComponent, typeof i10.NoneComponent, typeof i11.NumberComponent, typeof i12.RadiosComponent, typeof i13.RootComponent, typeof i14.SectionComponent, typeof i15.SelectComponent, typeof i16.SelectFrameworkComponent, typeof i17.SelectWidgetComponent, typeof i18.SubmitComponent, typeof i19.TabComponent, typeof i20.TabsComponent, typeof i21.TemplateComponent, typeof i22.TextareaComponent, typeof i23.OrderableDirective]>;
+    static ɵinj: i0.ɵɵInjectorDeclaration<WidgetLibraryModule>;
+}
