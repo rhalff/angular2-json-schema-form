@@ -42,13 +42,13 @@
     "preng-build": "rimraf dist/*",
     "ng-build": "ng build",
     "predeploy": "npm run build",
-    "deploy:bootstrap3-framework": "gh-pages --dist dist/@ngsf/bootstrap3-framework/ --branch angular-9-bootstrap3-framework-dist",
-    "deploy:bootstrap4-framework": "gh-pages --dist dist/@ngsf/bootstrap4-framework/ --branch angular-9-bootstrap4-framework-dist",
-    "deploy:common": "gh-pages --dist dist/@ngsf/common/ --branch angular-9-common-dist",
-    "deploy:json-schema-form": "gh-pages --dist dist/@ngsf/json-schema-form/ --branch angular-9-json-schema-form-dist",
-    "deploy:material-design-framework": "gh-pages --dist dist/@ngsf/material-design-framework/ --branch angular-9-material-design-framework-dist",
-    "deploy:no-framework": "gh-pages --dist dist/@ngsf/no-framework/ --branch angular-9-no-framework-dist",
-    "deploy:widget-library": "gh-pages --dist dist/@ngsf/widget-library/ --branch angular-9-widget-library-dist"
+    "deploy:bootstrap3-framework": "gh-pages --dist dist/@ngsf/bootstrap3-framework/ --branch angular-15-bootstrap3-framework-dist",
+    "deploy:bootstrap4-framework": "gh-pages --dist dist/@ngsf/bootstrap4-framework/ --branch angular-15-bootstrap4-framework-dist",
+    "deploy:common": "gh-pages --dist dist/@ngsf/common/ --branch angular-15-common-dist",
+    "deploy:json-schema-form": "gh-pages --dist dist/@ngsf/json-schema-form/ --branch angular-15-json-schema-form-dist",
+    "deploy:material-design-framework": "gh-pages --dist dist/@ngsf/material-design-framework/ --branch angular-15-material-design-framework-dist",
+    "deploy:no-framework": "gh-pages --dist dist/@ngsf/no-framework/ --branch angular-15-no-framework-dist",
+    "deploy:widget-library": "gh-pages --dist dist/@ngsf/widget-library/ --branch angular-15-widget-library-dist"
   },
   "peerDependencies": {
     "@angular/animations": "^9.0.1",
