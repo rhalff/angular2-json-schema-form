@@ -1,0 +1,36 @@
+{
+  "name": "@ngsf/no-framework",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^15.0.3",
+    "@angular/core": "^15.0.3",
+    "@ngsf/common": "^0.0.1",
+    "@ngsf/widget-library": "^0.0.1"
+  },
+  "module": "fesm2015/ngsf-no-framework.mjs",
+  "es2020": "fesm2020/ngsf-no-framework.mjs",
+  "esm2020": "esm2020/ngsf-no-framework.mjs",
+  "fesm2020": "fesm2020/ngsf-no-framework.mjs",
+  "fesm2015": "fesm2015/ngsf-no-framework.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2020": "./esm2020/ngsf-no-framework.mjs",
+      "es2020": "./fesm2020/ngsf-no-framework.mjs",
+      "es2015": "./fesm2015/ngsf-no-framework.mjs",
+      "node": "./fesm2015/ngsf-no-framework.mjs",
+      "default": "./fesm2020/ngsf-no-framework.mjs"
+    }
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^2.4.1"
+  },
+  "scripts": {
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by Ivy in full compilation mode. This is not allowed.\\nPlease delete and rebuild the package with Ivy partial compilation mode, before attempting to publish.\\n')\" && exit 1"
+  }
+}
