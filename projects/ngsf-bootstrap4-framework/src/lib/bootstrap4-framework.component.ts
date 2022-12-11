@@ -74,32 +74,32 @@ import {JsonSchemaFormService} from '@ngsf/widget-library'
       </div>
   `,
   styles: [`
-      :host /deep/ .list-group-item .form-control-feedback {
+      :host ::ng-deep .list-group-item .form-control-feedback {
           top: 40px;
       }
 
-      :host /deep/ .checkbox,
-      :host /deep/ .radio {
+      :host ::ng-deep .checkbox,
+      :host ::ng-deep .radio {
           margin-top: 0;
           margin-bottom: 0;
       }
 
-      :host /deep/ .checkbox-inline,
-      :host /deep/ .checkbox-inline + .checkbox-inline,
-      :host /deep/ .checkbox-inline + .radio-inline,
-      :host /deep/ .radio-inline,
-      :host /deep/ .radio-inline + .radio-inline,
-      :host /deep/ .radio-inline + .checkbox-inline {
+      :host ::ng-deep .checkbox-inline,
+      :host ::ng-deep .checkbox-inline + .checkbox-inline,
+      :host ::ng-deep .checkbox-inline + .radio-inline,
+      :host ::ng-deep .radio-inline,
+      :host ::ng-deep .radio-inline + .radio-inline,
+      :host ::ng-deep .radio-inline + .checkbox-inline {
           margin-left: 0;
           margin-right: 10px;
       }
 
-      :host /deep/ .checkbox-inline:last-child,
-      :host /deep/ .radio-inline:last-child {
+      :host ::ng-deep .checkbox-inline:last-child,
+      :host ::ng-deep .radio-inline:last-child {
           margin-right: 0;
       }
 
-      :host /deep/ .ng-invalid.ng-touched {
+      :host ::ng-deep .ng-invalid.ng-touched {
           border: 1px solid #f44336;
       }
   `],

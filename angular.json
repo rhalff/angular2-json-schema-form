@@ -112,7 +112,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngsf-bootstrap3-framework/tsconfig.lib.json",
             "project": "projects/ngsf-bootstrap3-framework/ng-package.json"
@@ -150,7 +150,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngsf-bootstrap4-framework/tsconfig.lib.json",
             "project": "projects/ngsf-bootstrap4-framework/ng-package.json"
@@ -188,7 +188,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngsf-common/tsconfig.lib.json",
             "project": "projects/ngsf-common/ng-package.json"
@@ -226,7 +226,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngsf-widget-library/tsconfig.lib.json",
             "project": "projects/ngsf-widget-library/ng-package.json"
@@ -264,7 +264,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngsf-no-framework/tsconfig.lib.json",
             "project": "projects/ngsf-no-framework/ng-package.json"
@@ -302,7 +302,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngsf-material-design-framework/tsconfig.lib.json",
             "project": "projects/ngsf-material-design-framework/ng-package.json"
@@ -340,7 +340,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngsf-json-schema-form/tsconfig.lib.json",
             "project": "projects/ngsf-json-schema-form/ng-package.json"
