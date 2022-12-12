@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common'
 import {WidgetLibraryModule} from '@ngsf/widget-library'
 import {Framework} from '@ngsf/common'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
-import {FlexLayoutModule} from '@angular/flex-layout'
+import {FlexLayoutModule, LayoutGapStyleBuilder} from '@angular/flex-layout'
 import {FlexLayoutRootComponent} from './components/flex-layout-root.component'
 import {FlexLayoutSectionComponent} from './components/flex-layout-section.component'
 import {MaterialAddReferenceComponent} from './components/material-add-reference.component'
@@ -46,6 +46,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle'
 import {MatStepperModule} from '@angular/material/stepper'
 import {MatTabsModule} from '@angular/material/tabs'
 import {MatTooltipModule} from '@angular/material/tooltip'
+import {CustomLayoutGapStyleBuilder} from './fix/custom_layout_gap_style_builder'
 
 /**
  * unused @angular/material modules:
@@ -153,6 +154,12 @@ import {MatTooltipModule} from '@angular/material/tooltip'
     MaterialTabsComponent,
     MaterialTextareaComponent,
     MaterialDesignFrameworkComponent,
+  ],
+  providers: [
+    {
+      provide: LayoutGapStyleBuilder,
+      useClass: CustomLayoutGapStyleBuilder,
+    },
   ],
 })
 export class MaterialDesignFrameworkModule {
