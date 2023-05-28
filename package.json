@@ -1,0 +1,34 @@
+{
+  "name": "ngsf-common",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^16.0.3",
+    "@angular/core": "^16.0.3",
+    "@ngsf/common": "^0.0.1",
+    "@ngsf/widget-library": "^0.0.1",
+    "@angular/forms": "^16.0.3",
+    "rxjs": "^7.8.1",
+    "rxjs-compat": "^6.6.7",
+    "lodash": "^4.17.21"
+  },
+  "dependencies": {
+    "tslib": "^2.5.2"
+  },
+  "module": "fesm2022/ngsf-common.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2022": "./esm2022/ngsf-common.mjs",
+      "esm": "./esm2022/ngsf-common.mjs",
+      "default": "./fesm2022/ngsf-common.mjs"
+    }
+  },
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by Ivy in full compilation mode. This is not allowed.\\nPlease delete and rebuild the package with Ivy partial compilation mode, before attempting to publish.\\n')\" && exit 1"
+  }
+}
