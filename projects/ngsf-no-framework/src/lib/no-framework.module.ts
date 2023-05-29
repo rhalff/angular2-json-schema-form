@@ -12,8 +12,7 @@ import {NoFramework} from './no-framework'
     WidgetLibraryModule
   ],
   declarations: [NoFrameworkComponent],
-  exports: [NoFrameworkComponent],
-  entryComponents: [NoFrameworkComponent]
+  exports: [NoFrameworkComponent]
 })
 export class NoFrameworkModule {
   static forRoot(): ModuleWithProviders<NoFrameworkModule> {

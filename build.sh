@@ -1,8 +1,8 @@
-suffix=--prod
-ng build @ngsf/common $suffix
-ng build @ngsf/widget-library $suffix
-ng build @ngsf/no-framework $suffix
-ng build @ngsf/bootstrap3-framework $suffix
-ng build @ngsf/bootstrap4-framework $suffix
-ng build @ngsf/material-design-framework $suffix
-ng build @ngsf/json-schema-form $suffix
+environment="production"
+ng build @ngsf/common --configuration "$environment"
+ng build @ngsf/widget-library --configuration "$environment"
+ng build @ngsf/no-framework --configuration "$environment"
+ng build @ngsf/bootstrap3-framework --configuration "$environment"
+ng build @ngsf/bootstrap4-framework --configuration "$environment"
+ng build @ngsf/material-design-framework --configuration "$environment"
+ng build @ngsf/json-schema-form --configuration "$environment"

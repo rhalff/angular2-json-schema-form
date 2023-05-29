@@ -11,8 +11,7 @@ import {Bootstrap4Framework} from './bootstrap4-framework'
     WidgetLibraryModule
   ],
   declarations: [Bootstrap4FrameworkComponent],
-  exports: [Bootstrap4FrameworkComponent],
-  entryComponents: [Bootstrap4FrameworkComponent]
+  exports: [Bootstrap4FrameworkComponent]
 })
 export class Bootstrap4FrameworkModule {
   static forRoot(): ModuleWithProviders<Bootstrap4FrameworkModule> {

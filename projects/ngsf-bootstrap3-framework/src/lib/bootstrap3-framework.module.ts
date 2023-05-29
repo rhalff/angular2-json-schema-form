@@ -11,8 +11,7 @@ import {Bootstrap3Framework} from './bootstrap3-framework'
     WidgetLibraryModule
   ],
   declarations: [Bootstrap3FrameworkComponent],
-  exports: [Bootstrap3FrameworkComponent],
-  entryComponents: [Bootstrap3FrameworkComponent]
+  exports: [Bootstrap3FrameworkComponent]
 })
 export class Bootstrap3FrameworkModule {
   static forRoot(): ModuleWithProviders<Bootstrap3FrameworkModule> {

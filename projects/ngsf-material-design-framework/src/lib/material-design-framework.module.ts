@@ -4,7 +4,7 @@ import {CommonModule} from '@angular/common'
 import {WidgetLibraryModule} from '@ngsf/widget-library'
 import {Framework} from '@ngsf/common'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
-import {FlexLayoutModule} from '@angular/flex-layout'
+import {FlexLayoutModule} from '@ngbracket/ngx-layout'
 import {FlexLayoutRootComponent} from './components/flex-layout-root.component'
 import {FlexLayoutSectionComponent} from './components/flex-layout-section.component'
 import {MaterialAddReferenceComponent} from './components/material-add-reference.component'
@@ -131,30 +131,7 @@ import {MatTooltipModule} from '@angular/material/tooltip'
     MaterialTabsComponent,
     MaterialTextareaComponent,
     MaterialDesignFrameworkComponent,
-  ],
-  entryComponents: [
-    // MATERIAL_FRAMEWORK_COMPONENTS
-    FlexLayoutRootComponent,
-    FlexLayoutSectionComponent,
-    MaterialAddReferenceComponent,
-    MaterialOneOfComponent,
-    MaterialButtonComponent,
-    MaterialButtonGroupComponent,
-    MaterialCheckboxComponent,
-    MaterialCheckboxesComponent,
-    MaterialChipListComponent,
-    MaterialDatepickerComponent,
-    MaterialFileComponent,
-    MaterialInputComponent,
-    MaterialNumberComponent,
-    MaterialRadiosComponent,
-    MaterialSelectComponent,
-    MaterialSliderComponent,
-    MaterialStepperComponent,
-    MaterialTabsComponent,
-    MaterialTextareaComponent,
-    MaterialDesignFrameworkComponent,
-  ],
+  ]
 })
 export class MaterialDesignFrameworkModule {
   static forRoot(): ModuleWithProviders<MaterialDesignFrameworkModule> {
