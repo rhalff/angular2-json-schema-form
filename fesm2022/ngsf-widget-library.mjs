@@ -4,6 +4,7 @@ import { Subject } from 'rxjs-compat/Subject';
 import * as draft6 from 'ajv/lib/refs/json-schema-draft-06.json';
 import Ajv from 'ajv';
 import * as _ from 'lodash';
+import addFormats from 'ajv-formats';
 import { frValidationMessages, enValidationMessages, forEach, formatFormData, buildFormGroupTemplate, buildFormGroup, buildLayout, isObject, hasOwn, buildSchemaFromData, buildSchemaFromLayout, JsonPointer, isArray, toTitleCase, hasValue, isEmpty, getControl, removeRecursiveReferences, isDefined, getLayoutNode, fixTitle, isString, Framework } from '@ngsf/common';
 import * as i2 from '@angular/common';
 import { CommonModule } from '@angular/common';
@@ -78,6 +79,8 @@ class JsonSchemaFormService {
     constructor() {
         this.setLanguage(this.language);
         this.ajv.addMetaSchema(draft6);
+        const ajv = new Ajv();
+        addFormats(ajv);
     }
     setLanguage(language = 'en-US') {
         this.language = language;
