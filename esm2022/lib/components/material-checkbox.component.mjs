@@ -7,88 +7,6 @@ import * as i3 from "@angular/forms";
 import * as i4 from "@angular/material/checkbox";
 import * as i5 from "@angular/material/form-field";
 import * as i6 from "@angular/material/slide-toggle";
-function MaterialCheckboxComponent_mat_checkbox_0_span_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "span", 5);
-} if (rf & 2) {
-    const ctx_r5 = i0.ɵɵnextContext(2);
-    i0.ɵɵstyleProp("display", (ctx_r5.options == null ? null : ctx_r5.options.notitle) ? "none" : "");
-    i0.ɵɵproperty("innerHTML", ctx_r5.options == null ? null : ctx_r5.options.title, i0.ɵɵsanitizeHtml);
-} }
-function MaterialCheckboxComponent_mat_checkbox_0_Template(rf, ctx) { if (rf & 1) {
-    const _r7 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "mat-checkbox", 3);
-    i0.ɵɵlistener("blur", function MaterialCheckboxComponent_mat_checkbox_0_Template_mat_checkbox_blur_0_listener() { i0.ɵɵrestoreView(_r7); const ctx_r6 = i0.ɵɵnextContext(); return i0.ɵɵresetView(ctx_r6.options.showErrors = true); });
-    i0.ɵɵtemplate(1, MaterialCheckboxComponent_mat_checkbox_0_span_1_Template, 1, 3, "span", 4);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵproperty("formControl", ctx_r0.formControl)("color", (ctx_r0.options == null ? null : ctx_r0.options.color) || "primary")("id", "control" + (ctx_r0.layoutNode == null ? null : ctx_r0.layoutNode._id))("name", ctx_r0.controlName);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r0.options == null ? null : ctx_r0.options.title);
-} }
-function MaterialCheckboxComponent_mat_checkbox_1_span_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "span", 5);
-} if (rf & 2) {
-    const ctx_r8 = i0.ɵɵnextContext(2);
-    i0.ɵɵstyleProp("display", (ctx_r8.options == null ? null : ctx_r8.options.notitle) ? "none" : "");
-    i0.ɵɵproperty("innerHTML", ctx_r8.options == null ? null : ctx_r8.options.title, i0.ɵɵsanitizeHtml);
-} }
-function MaterialCheckboxComponent_mat_checkbox_1_Template(rf, ctx) { if (rf & 1) {
-    const _r10 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "mat-checkbox", 6);
-    i0.ɵɵlistener("blur", function MaterialCheckboxComponent_mat_checkbox_1_Template_mat_checkbox_blur_0_listener() { i0.ɵɵrestoreView(_r10); const ctx_r9 = i0.ɵɵnextContext(); return i0.ɵɵresetView(ctx_r9.options.showErrors = true); })("change", function MaterialCheckboxComponent_mat_checkbox_1_Template_mat_checkbox_change_0_listener($event) { i0.ɵɵrestoreView(_r10); const ctx_r11 = i0.ɵɵnextContext(); return i0.ɵɵresetView(ctx_r11.updateValue($event)); });
-    i0.ɵɵtemplate(1, MaterialCheckboxComponent_mat_checkbox_1_span_1_Template, 1, 3, "span", 4);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r1 = i0.ɵɵnextContext();
-    i0.ɵɵproperty("color", (ctx_r1.options == null ? null : ctx_r1.options.color) || "primary")("disabled", ctx_r1.controlDisabled || (ctx_r1.options == null ? null : ctx_r1.options.readonly))("id", "control" + (ctx_r1.layoutNode == null ? null : ctx_r1.layoutNode._id))("name", ctx_r1.controlName)("checked", ctx_r1.isChecked);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r1.options == null ? null : ctx_r1.options.title);
-} }
-function MaterialCheckboxComponent_mat_slide_toggle_2_span_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "span", 5);
-} if (rf & 2) {
-    const ctx_r12 = i0.ɵɵnextContext(2);
-    i0.ɵɵstyleProp("display", (ctx_r12.options == null ? null : ctx_r12.options.notitle) ? "none" : "");
-    i0.ɵɵproperty("innerHTML", ctx_r12.options == null ? null : ctx_r12.options.title, i0.ɵɵsanitizeHtml);
-} }
-function MaterialCheckboxComponent_mat_slide_toggle_2_Template(rf, ctx) { if (rf & 1) {
-    const _r14 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "mat-slide-toggle", 3);
-    i0.ɵɵlistener("blur", function MaterialCheckboxComponent_mat_slide_toggle_2_Template_mat_slide_toggle_blur_0_listener() { i0.ɵɵrestoreView(_r14); const ctx_r13 = i0.ɵɵnextContext(); return i0.ɵɵresetView(ctx_r13.options.showErrors = true); });
-    i0.ɵɵtemplate(1, MaterialCheckboxComponent_mat_slide_toggle_2_span_1_Template, 1, 3, "span", 4);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r2 = i0.ɵɵnextContext();
-    i0.ɵɵproperty("formControl", ctx_r2.formControl)("color", (ctx_r2.options == null ? null : ctx_r2.options.color) || "primary")("id", "control" + (ctx_r2.layoutNode == null ? null : ctx_r2.layoutNode._id))("name", ctx_r2.controlName);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r2.options == null ? null : ctx_r2.options.title);
-} }
-function MaterialCheckboxComponent_mat_slide_toggle_3_span_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "span", 5);
-} if (rf & 2) {
-    const ctx_r15 = i0.ɵɵnextContext(2);
-    i0.ɵɵstyleProp("display", (ctx_r15.options == null ? null : ctx_r15.options.notitle) ? "none" : "");
-    i0.ɵɵproperty("innerHTML", ctx_r15.options == null ? null : ctx_r15.options.title, i0.ɵɵsanitizeHtml);
-} }
-function MaterialCheckboxComponent_mat_slide_toggle_3_Template(rf, ctx) { if (rf & 1) {
-    const _r17 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "mat-slide-toggle", 6);
-    i0.ɵɵlistener("blur", function MaterialCheckboxComponent_mat_slide_toggle_3_Template_mat_slide_toggle_blur_0_listener() { i0.ɵɵrestoreView(_r17); const ctx_r16 = i0.ɵɵnextContext(); return i0.ɵɵresetView(ctx_r16.options.showErrors = true); })("change", function MaterialCheckboxComponent_mat_slide_toggle_3_Template_mat_slide_toggle_change_0_listener($event) { i0.ɵɵrestoreView(_r17); const ctx_r18 = i0.ɵɵnextContext(); return i0.ɵɵresetView(ctx_r18.updateValue($event)); });
-    i0.ɵɵtemplate(1, MaterialCheckboxComponent_mat_slide_toggle_3_span_1_Template, 1, 3, "span", 4);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r3 = i0.ɵɵnextContext();
-    i0.ɵɵproperty("color", (ctx_r3.options == null ? null : ctx_r3.options.color) || "primary")("disabled", ctx_r3.controlDisabled || (ctx_r3.options == null ? null : ctx_r3.options.readonly))("id", "control" + (ctx_r3.layoutNode == null ? null : ctx_r3.layoutNode._id))("name", ctx_r3.controlName)("checked", ctx_r3.isChecked);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r3.options == null ? null : ctx_r3.options.title);
-} }
-function MaterialCheckboxComponent_mat_error_4_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "mat-error", 7);
-} if (rf & 2) {
-    const ctx_r4 = i0.ɵɵnextContext();
-    i0.ɵɵproperty("innerHTML", ctx_r4.options == null ? null : ctx_r4.options.errorMessage, i0.ɵɵsanitizeHtml);
-} }
 class MaterialCheckboxComponent {
     jsf;
     formControl;
@@ -125,29 +43,71 @@ class MaterialCheckboxComponent {
         this.options.showErrors = true;
         this.jsf.updateValue(this, event.checked ? this.trueValue : this.falseValue);
     }
-    static ɵfac = function MaterialCheckboxComponent_Factory(t) { return new (t || MaterialCheckboxComponent)(i0.ɵɵdirectiveInject(i1.JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: MaterialCheckboxComponent, selectors: [["material-checkbox-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 5, vars: 5, consts: [["align", "left", "labelPosition", "after", 3, "formControl", "color", "id", "name", "blur", 4, "ngIf"], ["align", "left", "labelPosition", "after", 3, "color", "disabled", "id", "name", "checked", "blur", "change", 4, "ngIf"], [3, "innerHTML", 4, "ngIf"], ["align", "left", "labelPosition", "after", 3, "formControl", "color", "id", "name", "blur"], ["class", "checkbox-name", 3, "display", "innerHTML", 4, "ngIf"], [1, "checkbox-name", 3, "innerHTML"], ["align", "left", "labelPosition", "after", 3, "color", "disabled", "id", "name", "checked", "blur", "change"], [3, "innerHTML"]], template: function MaterialCheckboxComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵtemplate(0, MaterialCheckboxComponent_mat_checkbox_0_Template, 2, 5, "mat-checkbox", 0);
-            i0.ɵɵtemplate(1, MaterialCheckboxComponent_mat_checkbox_1_Template, 2, 6, "mat-checkbox", 1);
-            i0.ɵɵtemplate(2, MaterialCheckboxComponent_mat_slide_toggle_2_Template, 2, 5, "mat-slide-toggle", 0);
-            i0.ɵɵtemplate(3, MaterialCheckboxComponent_mat_slide_toggle_3_Template, 2, 6, "mat-slide-toggle", 1);
-            i0.ɵɵtemplate(4, MaterialCheckboxComponent_mat_error_4_Template, 1, 1, "mat-error", 2);
-        } if (rf & 2) {
-            i0.ɵɵproperty("ngIf", ctx.boundControl && !ctx.showSlideToggle);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", !ctx.boundControl && !ctx.showSlideToggle);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.boundControl && ctx.showSlideToggle);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", !ctx.boundControl && ctx.showSlideToggle);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", (ctx.options == null ? null : ctx.options.showErrors) && (ctx.options == null ? null : ctx.options.errorMessage));
-        } }, dependencies: [i2.NgIf, i3.NgControlStatus, i3.FormControlDirective, i4.MatCheckbox, i5.MatError, i6.MatSlideToggle], styles: [".checkbox-name[_ngcontent-%COMP%]{white-space:nowrap}mat-error[_ngcontent-%COMP%]{font-size:75%}"] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: MaterialCheckboxComponent, deps: [{ token: i1.JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: MaterialCheckboxComponent, selector: "material-checkbox-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+      <mat-checkbox *ngIf="boundControl && !showSlideToggle"
+                    [formControl]="formControl"
+                    align="left"
+                    [color]="options?.color || 'primary'"
+                    [id]="'control' + layoutNode?._id"
+                    labelPosition="after"
+                    [name]="controlName"
+                    (blur)="options.showErrors = true">
+      <span *ngIf="options?.title"
+            class="checkbox-name"
+            [style.display]="options?.notitle ? 'none' : ''"
+            [innerHTML]="options?.title"></span>
+      </mat-checkbox>
+      <mat-checkbox *ngIf="!boundControl && !showSlideToggle"
+                    align="left"
+                    [color]="options?.color || 'primary'"
+                    [disabled]="controlDisabled || options?.readonly"
+                    [id]="'control' + layoutNode?._id"
+                    labelPosition="after"
+                    [name]="controlName"
+                    [checked]="isChecked"
+                    (blur)="options.showErrors = true"
+                    (change)="updateValue($event)">
+      <span *ngIf="options?.title"
+            class="checkbox-name"
+            [style.display]="options?.notitle ? 'none' : ''"
+            [innerHTML]="options?.title"></span>
+      </mat-checkbox>
+      <mat-slide-toggle *ngIf="boundControl && showSlideToggle"
+                        [formControl]="formControl"
+                        align="left"
+                        [color]="options?.color || 'primary'"
+                        [id]="'control' + layoutNode?._id"
+                        labelPosition="after"
+                        [name]="controlName"
+                        (blur)="options.showErrors = true">
+      <span *ngIf="options?.title"
+            class="checkbox-name"
+            [style.display]="options?.notitle ? 'none' : ''"
+            [innerHTML]="options?.title"></span>
+      </mat-slide-toggle>
+      <mat-slide-toggle *ngIf="!boundControl && showSlideToggle"
+                        align="left"
+                        [color]="options?.color || 'primary'"
+                        [disabled]="controlDisabled || options?.readonly"
+                        [id]="'control' + layoutNode?._id"
+                        labelPosition="after"
+                        [name]="controlName"
+                        [checked]="isChecked"
+                        (blur)="options.showErrors = true"
+                        (change)="updateValue($event)">
+      <span *ngIf="options?.title"
+            class="checkbox-name"
+            [style.display]="options?.notitle ? 'none' : ''"
+            [innerHTML]="options?.title"></span>
+      </mat-slide-toggle>
+      <mat-error *ngIf="options?.showErrors && options?.errorMessage"
+                 [innerHTML]="options?.errorMessage"></mat-error>`, isInline: true, styles: [".checkbox-name{white-space:nowrap}mat-error{font-size:75%}\n"], dependencies: [{ kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.FormControlDirective, selector: "[formControl]", inputs: ["formControl", "disabled", "ngModel"], outputs: ["ngModelChange"], exportAs: ["ngForm"] }, { kind: "component", type: i4.MatCheckbox, selector: "mat-checkbox", inputs: ["disableRipple", "color", "tabIndex"], exportAs: ["matCheckbox"] }, { kind: "directive", type: i5.MatError, selector: "mat-error, [matError]", inputs: ["id"] }, { kind: "component", type: i6.MatSlideToggle, selector: "mat-slide-toggle", inputs: ["disabled", "disableRipple", "color", "tabIndex"], exportAs: ["matSlideToggle"] }] });
 }
 export { MaterialCheckboxComponent };
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(MaterialCheckboxComponent, [{
-        type: Component,
-        args: [{ selector: 'material-checkbox-widget', template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: MaterialCheckboxComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'material-checkbox-widget', template: `
       <mat-checkbox *ngIf="boundControl && !showSlideToggle"
                     [formControl]="formControl"
                     align="left"
@@ -206,11 +166,11 @@ export { MaterialCheckboxComponent };
       </mat-slide-toggle>
       <mat-error *ngIf="options?.showErrors && options?.errorMessage"
                  [innerHTML]="options?.errorMessage"></mat-error>`, styles: [".checkbox-name{white-space:nowrap}mat-error{font-size:75%}\n"] }]
-    }], function () { return [{ type: i1.JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWF0ZXJpYWwtY2hlY2tib3guY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vcHJvamVjdHMvbmdzZi1tYXRlcmlhbC1kZXNpZ24tZnJhbWV3b3JrL3NyYy9saWIvY29tcG9uZW50cy9tYXRlcmlhbC1jaGVja2JveC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFDLFNBQVMsRUFBRSxLQUFLLEVBQVMsTUFBTSxlQUFlLENBQUE7QUFFdEQsT0FBTyxFQUFDLHFCQUFxQixFQUFDLE1BQU0sc0JBQXNCLENBQUE7Ozs7Ozs7OztJQWFwRCwwQkFHMEM7OztJQURwQyxpR0FBZ0Q7SUFDaEQsbUdBQTRCOzs7O0lBWGxDLHVDQU9pRDtJQUFuQyxtTEFBUSwyQ0FBcUIsSUFBSSxDQUFBLElBQUM7SUFDaEQsMkZBRzBDO0lBQzFDLGlCQUFlOzs7SUFYRCxnREFBMkIsOEVBQUEsOEVBQUEsNEJBQUE7SUFPbEMsZUFBb0I7SUFBcEIsMkVBQW9COzs7SUFlM0IsMEJBRzBDOzs7SUFEcEMsaUdBQWdEO0lBQ2hELG1HQUE0Qjs7OztJQWJsQyx1Q0FTNkM7SUFEL0Isb0xBQVEsMkNBQXFCLElBQUksQ0FBQSxJQUFDLGtMQUN4QixlQUFBLDJCQUFtQixDQUFBLElBREs7SUFFaEQsMkZBRzBDO0lBQzFDLGlCQUFlOzs7SUFaRCwyRkFBcUMsaUdBQUEsOEVBQUEsNEJBQUEsNkJBQUE7SUFRNUMsZUFBb0I7SUFBcEIsMkVBQW9COzs7SUFhM0IsMEJBRzBDOzs7SUFEcEMsbUdBQWdEO0lBQ2hELHFHQUE0Qjs7OztJQVhsQywyQ0FPcUQ7SUFBbkMsNkxBQVEsNENBQXFCLElBQUksQ0FBQSxJQUFDO0lBQ3BELCtGQUcwQztJQUMxQyxpQkFBbUI7OztJQVhELGdEQUEyQiw4RUFBQSw4RUFBQSw0QkFBQTtJQU90QyxlQUFvQjtJQUFwQiwyRUFBb0I7OztJQWUzQiwwQkFHMEM7OztJQURwQyxt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Z3VsYXIvY29yZSdcbmltcG9ydCB7QWJzdHJhY3RDb250cm9sfSBmcm9tICdAYW5ndWxhci9mb3JtcydcbmltcG9ydCB7SnNvblNjaGVtYUZvcm1TZXJ2aWNlfSBmcm9tICdAbmdzZi93aWRnZXQtbGlicmFyeSdcblxuQENvbXBvbmVudCh7XG4gIHNlbGVjdG9yOiAnbWF0ZXJpYWwtY2hlY2tib3gtd2lkZ2V0JyxcbiAgdGVtcGxhdGU6IGBcbiAgICAgIDxtYXQtY2hlY2tib3ggKm5nSWY9XCJib3VuZENvbnRyb2wgJiYgIXNob3dTbGlkZVRvZ2dsZVwiXG4gICAgICAgICAgICAgICAgICAgIFtmb3JtQ29udHJvbF09XCJmb3JtQ29udHJvbFwiXG4gICAgICAgICAgICAgICAgICAgIGFsaWduPVwibGVmdFwiXG4gICAgICAgICAgICAgICAgICAgIFtjb2xvcl09XCJvcHRpb25zPy5jb2xvciB8fCAncHJpbWFyeSdcIlxuICAgICAgICAgICAgICAgICAgICBbaWRdPVwiJ2NvbnRyb2wnICsgbGF5b3V0Tm9kZT8uX2lkXCJcbiAgICAgICAgICAgICAgICAgICAgbGFiZWxQb3NpdGlvbj1cImFmdGVyXCJcbiAgICAgICAgICAgICAgICAgICAgW25hbWVdPVwiY29udHJvbE5hbWVcIlxuICAgICAgICAgICAgICAgICAgICAoYmx1cik9XCJvcHRpb25zLnNob3dFcnJvcnMgPSB0cnVlXCI+XG4gICAgICA8c3BhbiAqbmdJZj1cIm9wdGlvbnM/LnRpdGxlXCJcbiAgICAgICAgICAgIGNsYXNzPVwiY2hlY2tib3gtbmFtZVwiXG4gICAgICAgICAgICBbc3R5bGUuZGlzcGxheV09XCJvcHRpb25zPy5ub3RpdGxlID8gJ25vbmUnIDogJydcIlxuICAgICAgICAgICAgW2lubmVySFRNTF09XCJvcHRpb25zPy50aXRsZVwiPjwvc3Bhbj5cbiAgICAgIDwvbWF0LWNoZWNrYm94PlxuICAgICAgPG1hdC1jaGVja2JveCAqbmdJZj1cIiFib3VuZENvbnRyb2wgJiYgIXNob3dTbGlkZVRvZ2dsZVwiXG4gICAgICAgICAgICAgICAgICAgIGFsaWduPVwibGVmdFwiXG4gICAgICAgICAgICAgICAgICAgIFtjb2xvcl09XCJvcHRpb25zPy5jb2xvciB8fCAncHJpbWFyeSdcIlxuICAgICAgICAgICAgICAgICAgICBbZGlzYWJsZWRdPVwiY29udHJvbERpc2FibGVkIHx8IG9wdGlvbnM/LnJlYWRvbmx5XCJcbiAgICAgICAgICAgICAgICAgICAgW2lkXT1cIidjb250cm9sJyArIGxheW91dE5vZGU/Ll9pZFwiXG4gICAgICAgICAgICAgICAgICAgIGxhYmVsUG9zaXRpb249XCJhZnRlclwiXG4gICAgICAgICAgICAgICAgICAgIFtuYW1lXT1cImNvbnRyb2xOYW1lXCJcbiAgICAgICAgICAgICAgICAgICAgW2NoZWNrZWRdPVwiaXNDaGVja2VkXCJcbiAgICAgICAgICAgICAgICAgICAgKGJsdXIpPVwib3B0aW9ucy5zaG93RXJyb3JzID0gdHJ1ZVwiXG4gICAgICAgICAgICAgICAgICAgIChjaGFuZ2UpPVwidXBkYXRlVmFsdWUoJGV2ZW50KVwiPlxuICAgICAgPHNwYW4gKm5nSWY9XCJvcHRpb25zPy50aXRsZVwiXG4gICAgICAgICAgICBjbGFzcz1cImNoZWNrYm94LW5hbWVcIlxuICAgICAgICAgICAgW3N0eWxlLmRpc3BsYXldPVwib3B0aW9ucz8ubm90aXRsZSA/ICdub25lJyA6ICcnXCJcbiAgICAgICAgICAgIFtpbm5lckhUTUxdPVwib3B0aW9ucz8udGl0bGVcIj48L3NwYW4+XG4gICAgICA8L21hdC1jaGVja2JveD5cbiAgICAgIDxtYXQtc2xpZGUtdG9nZ2xlICpuZ0lmPVwiYm91bmRDb250cm9sICYmIHNob3dTbGlkZVRvZ2dsZVwiXG4gICAgICAgICAgICAgICAgICAgICAgICBbZm9ybUNvbnRyb2xdPVwiZm9ybUNvbnRyb2xcIlxuICAgICAgICAgICAgICAgICAgICAgICAgYWxpZ249XCJsZWZ0XCJcbiAgICAgICAgICAgICAgICAgICAgICAgIFtjb2xvcl09XCJvcHRpb25zPy5jb2xvciB8fCAncHJpbWFyeSdcIlxuICAgICAgICAgICAgICAgICAgICAgICAgW2lkXT1cIidjb250cm9sJyArIGxheW91dE5vZGU/Ll9pZFwiXG4gICAgICAgICAgICAgICAgICAgICAgICBsYWJlbFBvc2l0aW9uPVwiYWZ0ZXJcIlxuICAgICAgICAgICAgICAgICAgICAgICAgW25hbWVdPVwiY29udHJvbE5hbWVcIlxuICAgICAgICAgICAgICAgICAgICAgICAgKGJsdXIpPVwib3B0aW9ucy5zaG93RXJyb3JzID0gdHJ1ZVwiPlxuICAgICAgPHNwYW4gKm5nSWY9XCJvcHRpb25zPy50aXRsZVwiXG4gICAgICAgICAgICBjbGFzcz1cImNoZWNrYm94LW5hbWVcIlxuICAgICAgICAgICAgW3N0eWxlLmRpc3BsYXldPVwib3B0aW9ucz8ubm90aXRsZSA/ICdub25lJyA6ICcnXCJcbiAgICAgICAgICAgIFtpbm5lckhUTUxdPVwib3B0aW9ucz8udGl0bGVcIj48L3NwYW4+XG4gICAgICA8L21hdC1zbGlkZS10b2dnbGU+XG4gICAgICA8bWF0LXNsaWRlLXRvZ2dsZSAqbmdJZj1cIiFib3VuZENvbnRyb2wgJiYgc2hvd1NsaWRlVG9nZ2xlXCJcbiAgICAgICAgICAgICAgICAgICAgICAgIGFsaWduPVwibGVmdFwiXG4gICAgICAgICAgICAgICAgICAgICAgICBbY29sb3JdPVwib3B0aW9ucz8uY29sb3IgfHwgJ3ByaW1hcnknXCJcbiAgICAgICAgICAgICAgICAgICAgICAgIFtkaXNhYmxlZF09XCJjb250cm9sRGlzYWJsZWQgfHwgb3B0aW9ucz8ucmVhZG9ubHlcIlxuICAgICAgICAgICAgICAgICAgICAgICAgW2lkXT1cIidjb250cm9sJyArIGxheW91dE5vZGU/Ll9pZFwiXG4gICAgICAgICAgICAgICAgICAgICAgICBsYWJlbFBvc2l0aW9uPVwiYWZ0ZXJcIlxuICAgICAgICAgICAgICAgICAgICAgICAgW25hbWVdPVwiY29udHJvbE5hbWVcIlxuICAgICAgICAgICAgICAgICAgICAgICAgW2NoZWNrZWRdPVwiaXNDaGVja2VkXCJcbiAgICAgICAgICAgICAgICAgICAgICAgIChibHVyKT1cIm9wdGlvbnMuc2hvd0Vycm9ycyA9IHRydWVcIlxuICAgICAgICAgICAgICAgICAgICAgICAgKGNoYW5nZSk9XCJ1cGRhdGVWYWx1ZSgkZXZlbnQpXCI+XG4gICAgICA8c3BhbiAqbmdJZj1cIm9wdGlvbnM/LnRpdGxlXCJcbiAgICAgICAgICAgIGNsYXNzPVwiY2hlY2tib3gtbmFtZVwiXG4gICAgICAgICAgICBbc3R5bGUuZGlzcGxheV09XCJvcHRpb25zPy5ub3RpdGxlID8gJ25vbmUnIDogJydcIlxuICAgICAgICAgICAgW2lubmVySFRNTF09XCJvcHRpb25zPy50aXRsZVwiPjwvc3Bhbj5cbiAgICAgIDwvbWF0LXNsaWRlLXRvZ2dsZT5cbiAgICAgIDxtYXQtZXJyb3IgKm5nSWY9XCJvcHRpb25zPy5zaG93RXJyb3JzICYmIG9wdGlvbnM/LmVycm9yTWVzc2FnZVwiXG4gICAgICAgICAgICAgICAgIFtpbm5lckhUTUxdPVwib3B0aW9ucz8uZXJyb3JNZXNzYWdlXCI+PC9tYXQtZXJyb3I+YCxcbiAgc3R5bGVzOiBbYFxuICAgICAgLmNoZWNrYm94LW5hbWUge1xuICAgICAgICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gICAgICB9XG5cbiAgICAgIG1hdC1lcnJvciB7XG4gICAgICAgICAgZm9udC1zaXplOiA3NSU7XG4gICAgICB9XG4gIGBdLFxufSlcbmV4cG9ydCBjbGFzcyBNYXRlcmlhbENoZWNrYm94Q29tcG9uZW50IGltcGxlbWVudHMgT25Jbml0IHtcbiAgZm9ybUNvbnRyb2w6IEFic3RyYWN0Q29udHJvbFxuICBjb250cm9sTmFtZTogc3RyaW5nXG4gIGNvbnRyb2xWYWx1ZTogYW55XG4gIGNvbnRyb2xEaXNhYmxlZCA9IGZhbHNlXG4gIGJvdW5kQ29udHJvbCA9IGZhbHNlXG4gIG9wdGlvbnM6IGFueVxuICB0cnVlVmFsdWU6IGFueSA9IHRydWVcbiAgZmFsc2VWYWx1ZTogYW55ID0gZmFsc2VcbiAgc2hvd1NsaWRlVG9nZ2xlID0gZmFsc2VcbiAgQElucHV0KCkgbGF5b3V0Tm9kZTogYW55XG4gIEBJbnB1dCgpIGxheW91dEluZGV4OiBudW1iZXJbXVxuICBASW5wdXQoKSBkYXRhSW5kZXg6IG51bWJlcltdXG5cbiAgY29uc3RydWN0b3IoXG4gICAgcHJpdmF0ZSBqc2Y6IEpzb25TY2hlbWFGb3JtU2VydmljZVxuICApIHtcbiAgfVxuXG4gIGdldCBpc0NoZWNrZWQoKSB7XG4gICAgcmV0dXJuIHRoaXMuanNmLmdldEZvcm1Db250cm9sVmFsdWUodGhpcykgPT09IHRoaXMudHJ1ZVZhbHVlXG4gIH1cblxuICBuZ09uSW5pdCgpIHtcbiAgICB0aGlzLm9wdGlvbnMgPSB0aGlzLmxheW91dE5vZGUub3B0aW9ucyB8fCB7fVxuICAgIHRoaXMuanNmLmluaXRpYWxpemVDb250cm9sKHRoaXMsICF0aGlzLm9wdGlvbnMucmVhZG9ubHkpXG4gICAgaWYgKHRoaXMuY29udHJvbFZhbHVlID09PSBudWxsIHx8IHRoaXMuY29udHJvbFZhbHVlID09PSB1bmRlZmluZWQpIHtcbiAgICAgIHRoaXMuY29udHJvbFZhbHVlID0gZmFsc2VcbiAgICAgIHRoaXMuanNmLnVwZGF0ZVZhbHVlKHRoaXMsIHRoaXMuZmFsc2VWYWx1ZSlcbiAgICB9XG4gICAgaWYgKHRoaXMubGF5b3V0Tm9kZS50eXBlID09PSAnc2xpZGUtdG9nZ2xlJyB8fFxuICAgICAgdGhpcy5sYXlvdXROb2RlLmZvcm1hdCA9PT0gJ3NsaWRlLXRvZ2dsZSdcbiAgICApIHtcbiAgICAgIHRoaXMuc2hvd1NsaWRlVG9nZ2xlID0gdHJ1ZVxuICAgIH1cbiAgfVxuXG4gIHVwZGF0ZVZhbHVlKGV2ZW50KSB7XG4gICAgdGhpcy5vcHRpb25zLnNob3dFcnJvcnMgPSB0cnVlXG4gICAgdGhpcy5qc2YudXBkYXRlVmFsdWUodGhpcywgZXZlbnQuY2hlY2tlZCA/IHRoaXMudHJ1ZVZhbHVlIDogdGhpcy5mYWxzZVZhbHVlKVxuICB9XG59XG4iXX0=
+        }], ctorParameters: function () { return [{ type: i1.JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWF0ZXJpYWwtY2hlY2tib3guY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vcHJvamVjdHMvbmdzZi1tYXRlcmlhbC1kZXNpZ24tZnJhbWV3b3JrL3NyYy9saWIvY29tcG9uZW50cy9tYXRlcmlhbC1jaGVja2JveC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFDLFNBQVMsRUFBRSxLQUFLLEVBQVMsTUFBTSxlQUFlLENBQUE7QUFFdEQsT0FBTyxFQUFDLHFCQUFxQixFQUFDLE1BQU0sc0JBQXNCLENBQUE7Ozs7Ozs7O0FBRTFELE1BdUVhLHlCQUF5QjtJQWUxQjtJQWRWLFdBQVcsQ0FBaUI7SUFDNUIsV0FBVyxDQUFRO0lBQ25CLFlBQVksQ0FBSztJQUNqQixlQUFlLEdBQUcsS0FBSyxDQUFBO0lBQ3ZCLFlBQVksR0FBRyxLQUFLLENBQUE7SUFDcEIsT0FBTyxDQUFLO0lBQ1osU0FBUyxHQUFRLElBQUksQ0FBQTtJQUNyQixVQUFVLEdBQVEsS0FBSyxDQUFBO0lBQ3ZCLGVBQWUsR0FBRyxLQUFLLENBQUE7SUFDZCxVQUFVLENBQUs7SUFDZixXQUFXLENBQVU7SUFDckIsU0FBUyxDQUFVO0lBRTVCLFlBQ1UsR0FBMEI7UUFBMUIsUUFBRyxHQUFILEdBQUcsQ0FBdUI7SUFFcEMsQ0FBQztJQUVELElBQUksU0FBUztRQUNYLE9BQU8sSUFBSSxDQUFDLEdBQUcsQ0FBQyxtQkFBbUIsQ0FBQyxJQUFJLENBQUMsS0FBSyxJQUFJLENBQUMsU0FBUyxDQUFBO0lBQzlELENBQUM7SUFFRCxRQUFRO1FBQ04sSUFBSSxDQUFDLE9BQU8sR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLE9BQU8sSUFBSSxFQUFFLENBQUE7UUFDNUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLEVBQUUsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLFFBQVEsQ0FBQyxDQUFBO1FBQ3hELElBQUksSUFBSSxDQUFDLFlBQVksS0FBSyxJQUFJLElBQUksSUFBSSxDQUFDLFlBQVksS0FBSyxTQUFTLEVBQUU7WUFDakUsSUFBSSxDQUFDLFlBQVksR0FBRyxLQUFLLENBQUE7WUFDekIsSUFBSSxDQUFDLEdBQUcsQ0FBQyxXQUFXLENBQUMsSUFBSSxFQUFFLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQTtTQUM1QztRQUNELElBQUksSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLEtBQUssY0FBYztZQUN6QyxJQUFJLENBQUMsVUFBVSxDQUFDLE1BQU0sS0FBSyxjQUFjLEVBQ3pDO1lBQ0EsSUFBSSxDQUFDLGVBQWUsR0FBRyxJQUFJLENBQUE7U0FDNUI7SUFDSCxDQUFDO0lBRUQsV0FBVyxDQUFDLEtBQUs7UUFDZixJQUFJLENBQUMsT0FBTyxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUE7UUFDOUIsSUFBSSxDQUFDLEdBQUcsQ0FBQyxXQUFXLENBQUMsSUFBSSxFQUFFLEtBQUssQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQTtJQUM5RSxDQUFDO3VHQXhDVSx5QkFBeUI7MkZBQXpCLHlCQUF5QiwwSkFyRTFCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O2tFQTBEc0Q7O1NBV3JELHlCQUF5QjsyRkFBekIseUJBQXlCO2tCQXZFckMsU0FBUzsrQkFDRSwwQkFBMEIsWUFDMUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7a0VBMERzRDs0R0FxQnZELFVBQVU7c0JBQWxCLEtBQUs7Z0JBQ0csV0FBVztzQkFBbkIsS0FBSztnQkFDRyxTQUFTO3NCQUFqQixLQUFLIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHtDb21wb25lbnQsIElucHV0LCBPbkluaXR9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnXG5pbXBvcnQge0Fic3RyYWN0Q29udHJvbH0gZnJvbSAnQGFuZ3VsYXIvZm9ybXMnXG5pbXBvcnQge0pzb25TY2hlbWFGb3JtU2VydmljZX0gZnJvbSAnQG5nc2Yvd2lkZ2V0LWxpYnJhcnknXG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ21hdGVyaWFsLWNoZWNrYm94LXdpZGdldCcsXG4gIHRlbXBsYXRlOiBgXG4gICAgICA8bWF0LWNoZWNrYm94ICpuZ0lmPVwiYm91bmRDb250cm9sICYmICFzaG93U2xpZGVUb2dnbGVcIlxuICAgICAgICAgICAgICAgICAgICBbZm9ybUNvbnRyb2xdPVwiZm9ybUNvbnRyb2xcIlxuICAgICAgICAgICAgICAgICAgICBhbGlnbj1cImxlZnRcIlxuICAgICAgICAgICAgICAgICAgICBbY29sb3JdPVwib3B0aW9ucz8uY29sb3IgfHwgJ3ByaW1hcnknXCJcbiAgICAgICAgICAgICAgICAgICAgW2lkXT1cIidjb250cm9sJyArIGxheW91dE5vZGU/Ll9pZFwiXG4gICAgICAgICAgICAgICAgICAgIGxhYmVsUG9zaXRpb249XCJhZnRlclwiXG4gICAgICAgICAgICAgICAgICAgIFtuYW1lXT1cImNvbnRyb2xOYW1lXCJcbiAgICAgICAgICAgICAgICAgICAgKGJsdXIpPVwib3B0aW9ucy5zaG93RXJyb3JzID0gdHJ1ZVwiPlxuICAgICAgPHNwYW4gKm5nSWY9XCJvcHRpb25zPy50aXRsZVwiXG4gICAgICAgICAgICBjbGFzcz1cImNoZWNrYm94LW5hbWVcIlxuICAgICAgICAgICAgW3N0eWxlLmRpc3BsYXldPVwib3B0aW9ucz8ubm90aXRsZSA/ICdub25lJyA6ICcnXCJcbiAgICAgICAgICAgIFtpbm5lckhUTUxdPVwib3B0aW9ucz8udGl0bGVcIj48L3NwYW4+XG4gICAgICA8L21hdC1jaGVja2JveD5cbiAgICAgIDxtYXQtY2hlY2tib3ggKm5nSWY9XCIhYm91bmRDb250cm9sICYmICFzaG93U2xpZGVUb2dnbGVcIlxuICAgICAgICAgICAgICAgICAgICBhbGlnbj1cImxlZnRcIlxuICAgICAgICAgICAgICAgICAgICBbY29sb3JdPVwib3B0aW9ucz8uY29sb3IgfHwgJ3ByaW1hcnknXCJcbiAgICAgICAgICAgICAgICAgICAgW2Rpc2FibGVkXT1cImNvbnRyb2xEaXNhYmxlZCB8fCBvcHRpb25zPy5yZWFkb25seVwiXG4gICAgICAgICAgICAgICAgICAgIFtpZF09XCInY29udHJvbCcgKyBsYXlvdXROb2RlPy5faWRcIlxuICAgICAgICAgICAgICAgICAgICBsYWJlbFBvc2l0aW9uPVwiYWZ0ZXJcIlxuICAgICAgICAgICAgICAgICAgICBbbmFtZV09XCJjb250cm9sTmFtZVwiXG4gICAgICAgICAgICAgICAgICAgIFtjaGVja2VkXT1cImlzQ2hlY2tlZFwiXG4gICAgICAgICAgICAgICAgICAgIChibHVyKT1cIm9wdGlvbnMuc2hvd0Vycm9ycyA9IHRydWVcIlxuICAgICAgICAgICAgICAgICAgICAoY2hhbmdlKT1cInVwZGF0ZVZhbHVlKCRldmVudClcIj5cbiAgICAgIDxzcGFuICpuZ0lmPVwib3B0aW9ucz8udGl0bGVcIlxuICAgICAgICAgICAgY2xhc3M9XCJjaGVja2JveC1uYW1lXCJcbiAgICAgICAgICAgIFtzdHlsZS5kaXNwbGF5XT1cIm9wdGlvbnM/Lm5vdGl0bGUgPyAnbm9uZScgOiAnJ1wiXG4gICAgICAgICAgICBbaW5uZXJIVE1MXT1cIm9wdGlvbnM/LnRpdGxlXCI+PC9zcGFuPlxuICAgICAgPC9tYXQtY2hlY2tib3g+XG4gICAgICA8bWF0LXNsaWRlLXRvZ2dsZSAqbmdJZj1cImJvdW5kQ29udHJvbCAmJiBzaG93U2xpZGVUb2dnbGVcIlxuICAgICAgICAgICAgICAgICAgICAgICAgW2Zvcm1Db250cm9sXT1cImZvcm1Db250cm9sXCJcbiAgICAgICAgICAgICAgICAgICAgICAgIGFsaWduPVwibGVmdFwiXG4gICAgICAgICAgICAgICAgICAgICAgICBbY29sb3JdPVwib3B0aW9ucz8uY29sb3IgfHwgJ3ByaW1hcnknXCJcbiAgICAgICAgICAgICAgICAgICAgICAgIFtpZF09XCInY29udHJvbCcgKyBsYXlvdXROb2RlPy5faWRcIlxuICAgICAgICAgICAgICAgICAgICAgICAgbGFiZWxQb3NpdGlvbj1cImFmdGVyXCJcbiAgICAgICAgICAgICAgICAgICAgICAgIFtuYW1lXT1cImNvbnRyb2xOYW1lXCJcbiAgICAgICAgICAgICAgICAgICAgICAgIChibHVyKT1cIm9wdGlvbnMuc2hvd0Vycm9ycyA9IHRydWVcIj5cbiAgICAgIDxzcGFuICpuZ0lmPVwib3B0aW9ucz8udGl0bGVcIlxuICAgICAgICAgICAgY2xhc3M9XCJjaGVja2JveC1uYW1lXCJcbiAgICAgICAgICAgIFtzdHlsZS5kaXNwbGF5XT1cIm9wdGlvbnM/Lm5vdGl0bGUgPyAnbm9uZScgOiAnJ1wiXG4gICAgICAgICAgICBbaW5uZXJIVE1MXT1cIm9wdGlvbnM/LnRpdGxlXCI+PC9zcGFuPlxuICAgICAgPC9tYXQtc2xpZGUtdG9nZ2xlPlxuICAgICAgPG1hdC1zbGlkZS10b2dnbGUgKm5nSWY9XCIhYm91bmRDb250cm9sICYmIHNob3dTbGlkZVRvZ2dsZVwiXG4gICAgICAgICAgICAgICAgICAgICAgICBhbGlnbj1cImxlZnRcIlxuICAgICAgICAgICAgICAgICAgICAgICAgW2NvbG9yXT1cIm9wdGlvbnM/LmNvbG9yIHx8ICdwcmltYXJ5J1wiXG4gICAgICAgICAgICAgICAgICAgICAgICBbZGlzYWJsZWRdPVwiY29udHJvbERpc2FibGVkIHx8IG9wdGlvbnM/LnJlYWRvbmx5XCJcbiAgICAgICAgICAgICAgICAgICAgICAgIFtpZF09XCInY29udHJvbCcgKyBsYXlvdXROb2RlPy5faWRcIlxuICAgICAgICAgICAgICAgICAgICAgICAgbGFiZWxQb3NpdGlvbj1cImFmdGVyXCJcbiAgICAgICAgICAgICAgICAgICAgICAgIFtuYW1lXT1cImNvbnRyb2xOYW1lXCJcbiAgICAgICAgICAgICAgICAgICAgICAgIFtjaGVja2VkXT1cImlzQ2hlY2tlZFwiXG4gICAgICAgICAgICAgICAgICAgICAgICAoYmx1cik9XCJvcHRpb25zLnNob3dFcnJvcnMgPSB0cnVlXCJcbiAgICAgICAgICAgICAgICAgICAgICAgIChjaGFuZ2UpPVwidXBkYXRlVmFsdWUoJGV2ZW50KVwiPlxuICAgICAgPHNwYW4gKm5nSWY9XCJvcHRpb25zPy50aXRsZVwiXG4gICAgICAgICAgICBjbGFzcz1cImNoZWNrYm94LW5hbWVcIlxuICAgICAgICAgICAgW3N0eWxlLmRpc3BsYXldPVwib3B0aW9ucz8ubm90aXRsZSA/ICdub25lJyA6ICcnXCJcbiAgICAgICAgICAgIFtpbm5lckhUTUxdPVwib3B0aW9ucz8udGl0bGVcIj48L3NwYW4+XG4gICAgICA8L21hdC1zbGlkZS10b2dnbGU+XG4gICAgICA8bWF0LWVycm9yICpuZ0lmPVwib3B0aW9ucz8uc2hvd0Vycm9ycyAmJiBvcHRpb25zPy5lcnJvck1lc3NhZ2VcIlxuICAgICAgICAgICAgICAgICBbaW5uZXJIVE1MXT1cIm9wdGlvbnM/LmVycm9yTWVzc2FnZVwiPjwvbWF0LWVycm9yPmAsXG4gIHN0eWxlczogW2BcbiAgICAgIC5jaGVja2JveC1uYW1lIHtcbiAgICAgICAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICAgICAgfVxuXG4gICAgICBtYXQtZXJyb3Ige1xuICAgICAgICAgIGZvbnQtc2l6ZTogNzUlO1xuICAgICAgfVxuICBgXSxcbn0pXG5leHBvcnQgY2xhc3MgTWF0ZXJpYWxDaGVja2JveENvbXBvbmVudCBpbXBsZW1lbnRzIE9uSW5pdCB7XG4gIGZvcm1Db250cm9sOiBBYnN0cmFjdENvbnRyb2xcbiAgY29udHJvbE5hbWU6IHN0cmluZ1xuICBjb250cm9sVmFsdWU6IGFueVxuICBjb250cm9sRGlzYWJsZWQgPSBmYWxzZVxuICBib3VuZENvbnRyb2wgPSBmYWxzZVxuICBvcHRpb25zOiBhbnlcbiAgdHJ1ZVZhbHVlOiBhbnkgPSB0cnVlXG4gIGZhbHNlVmFsdWU6IGFueSA9IGZhbHNlXG4gIHNob3dTbGlkZVRvZ2dsZSA9IGZhbHNlXG4gIEBJbnB1dCgpIGxheW91dE5vZGU6IGFueVxuICBASW5wdXQoKSBsYXlvdXRJbmRleDogbnVtYmVyW11cbiAgQElucHV0KCkgZGF0YUluZGV4OiBudW1iZXJbXVxuXG4gIGNvbnN0cnVjdG9yKFxuICAgIHByaXZhdGUganNmOiBKc29uU2NoZW1hRm9ybVNlcnZpY2VcbiAgKSB7XG4gIH1cblxuICBnZXQgaXNDaGVja2VkKCkge1xuICAgIHJldHVybiB0aGlzLmpzZi5nZXRGb3JtQ29udHJvbFZhbHVlKHRoaXMpID09PSB0aGlzLnRydWVWYWx1ZVxuICB9XG5cbiAgbmdPbkluaXQoKSB7XG4gICAgdGhpcy5vcHRpb25zID0gdGhpcy5sYXlvdXROb2RlLm9wdGlvbnMgfHwge31cbiAgICB0aGlzLmpzZi5pbml0aWFsaXplQ29udHJvbCh0aGlzLCAhdGhpcy5vcHRpb25zLnJlYWRvbmx5KVxuICAgIGlmICh0aGlzLmNvbnRyb2xWYWx1ZSA9PT0gbnVsbCB8fCB0aGlzLmNvbnRyb2xWYWx1ZSA9PT0gdW5kZWZpbmVkKSB7XG4gICAgICB0aGlzLmNvbnRyb2xWYWx1ZSA9IGZhbHNlXG4gICAgICB0aGlzLmpzZi51cGRhdGVWYWx1ZSh0aGlzLCB0aGlzLmZhbHNlVmFsdWUpXG4gICAgfVxuICAgIGlmICh0aGlzLmxheW91dE5vZGUudHlwZSA9PT0gJ3NsaWRlLXRvZ2dsZScgfHxcbiAgICAgIHRoaXMubGF5b3V0Tm9kZS5mb3JtYXQgPT09ICdzbGlkZS10b2dnbGUnXG4gICAgKSB7XG4gICAgICB0aGlzLnNob3dTbGlkZVRvZ2dsZSA9IHRydWVcbiAgICB9XG4gIH1cblxuICB1cGRhdGVWYWx1ZShldmVudCkge1xuICAgIHRoaXMub3B0aW9ucy5zaG93RXJyb3JzID0gdHJ1ZVxuICAgIHRoaXMuanNmLnVwZGF0ZVZhbHVlKHRoaXMsIGV2ZW50LmNoZWNrZWQgPyB0aGlzLnRydWVWYWx1ZSA6IHRoaXMuZmFsc2VWYWx1ZSlcbiAgfVxufVxuIl19
