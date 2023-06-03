@@ -11,29 +11,6 @@ import * as i3 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { NoFramework } from '@ngsf/no-framework';
 
-function JsonSchemaFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "div");
-    i0.ɵɵelement(1, "link", 4);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const stylesheet_r3 = ctx.$implicit;
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("href", stylesheet_r3, i0.ɵɵsanitizeResourceUrl);
-} }
-function JsonSchemaFormComponent_div_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "div");
-} }
-function JsonSchemaFormComponent_div_4_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "div");
-    i0.ɵɵtext(1, " Debug output: ");
-    i0.ɵɵelementStart(2, "pre");
-    i0.ɵɵtext(3);
-    i0.ɵɵelementEnd()();
-} if (rf & 2) {
-    const ctx_r2 = i0.ɵɵnextContext();
-    i0.ɵɵadvance(3);
-    i0.ɵɵtextInterpolate(ctx_r2.debugOutput);
-} }
 const JSON_SCHEMA_FORM_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => JsonSchemaFormComponent),
@@ -479,30 +456,28 @@ class JsonSchemaFormComponent {
             }
         }
     }
-    static ɵfac = function JsonSchemaFormComponent_Factory(t) { return new (t || JsonSchemaFormComponent)(i0.ɵɵdirectiveInject(i0.ChangeDetectorRef), i0.ɵɵdirectiveInject(i1.FrameworkLibraryService), i0.ɵɵdirectiveInject(i1.WidgetLibraryService), i0.ɵɵdirectiveInject(i1.JsonSchemaFormService), i0.ɵɵdirectiveInject(i2.DomSanitizer)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: JsonSchemaFormComponent, selectors: [["json-schema-form"]], inputs: { schema: "schema", layout: "layout", data: "data", options: "options", framework: "framework", widgets: "widgets", form: "form", model: "model", JSONSchema: "JSONSchema", UISchema: "UISchema", formData: "formData", ngModel: "ngModel", language: "language", loadExternalAssets: "loadExternalAssets", debug: "debug", value: "value" }, outputs: { onChanges: "onChanges", onSubmit: "onSubmit", isValid: "isValid", validationErrors: "validationErrors", formSchema: "formSchema", formLayout: "formLayout", dataChange: "dataChange", modelChange: "modelChange", formDataChange: "formDataChange", ngModelChange: "ngModelChange" }, features: [i0.ɵɵProvidersFeature([JsonSchemaFormService, JSON_SCHEMA_FORM_VALUE_ACCESSOR]), i0.ɵɵNgOnChangesFeature], decls: 5, vars: 4, consts: [[4, "ngFor", "ngForOf"], [1, "json-schema-form", 3, "ngSubmit"], [3, "layout"], [4, "ngIf"], ["rel", "stylesheet", 3, "href"]], template: function JsonSchemaFormComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵtemplate(0, JsonSchemaFormComponent_div_0_Template, 2, 1, "div", 0);
-            i0.ɵɵtemplate(1, JsonSchemaFormComponent_div_1_Template, 1, 0, "div", 0);
-            i0.ɵɵelementStart(2, "form", 1);
-            i0.ɵɵlistener("ngSubmit", function JsonSchemaFormComponent_Template_form_ngSubmit_2_listener() { return ctx.submitForm(); });
-            i0.ɵɵelement(3, "root-widget", 2);
-            i0.ɵɵelementEnd();
-            i0.ɵɵtemplate(4, JsonSchemaFormComponent_div_4_Template, 4, 1, "div", 3);
-        } if (rf & 2) {
-            i0.ɵɵproperty("ngForOf", ctx.stylesheets);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngForOf", ctx.scripts);
-            i0.ɵɵadvance(2);
-            i0.ɵɵproperty("layout", ctx.jsf == null ? null : ctx.jsf.layout);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.debug || (ctx.jsf == null ? null : ctx.jsf.formOptions == null ? null : ctx.jsf.formOptions.debug));
-        } }, dependencies: [i3.NgForOf, i3.NgIf, i4.ɵNgNoValidate, i4.NgControlStatusGroup, i4.NgForm, i1.RootComponent], encapsulation: 2, changeDetection: 0 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: JsonSchemaFormComponent, deps: [{ token: i0.ChangeDetectorRef }, { token: i1.FrameworkLibraryService }, { token: i1.WidgetLibraryService }, { token: i1.JsonSchemaFormService }, { token: i2.DomSanitizer }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: JsonSchemaFormComponent, selector: "json-schema-form", inputs: { schema: "schema", layout: "layout", data: "data", options: "options", framework: "framework", widgets: "widgets", form: "form", model: "model", JSONSchema: "JSONSchema", UISchema: "UISchema", formData: "formData", ngModel: "ngModel", language: "language", loadExternalAssets: "loadExternalAssets", debug: "debug", value: "value" }, outputs: { onChanges: "onChanges", onSubmit: "onSubmit", isValid: "isValid", validationErrors: "validationErrors", formSchema: "formSchema", formLayout: "formLayout", dataChange: "dataChange", modelChange: "modelChange", formDataChange: "formDataChange", ngModelChange: "ngModelChange" }, providers: [JsonSchemaFormService, JSON_SCHEMA_FORM_VALUE_ACCESSOR], usesOnChanges: true, ngImport: i0, template: `
+    <div *ngFor="let stylesheet of stylesheets">
+      <link rel="stylesheet" [href]="stylesheet" />
+    </div>
+    <div *ngFor="let script of scripts">
+      <script type="text/javascript" [src]="script"></script>
+    </div>
+    <form class="json-schema-form" (ngSubmit)="submitForm()">
+      <root-widget [layout]="jsf?.layout"></root-widget>
+    </form>
+    <div *ngIf="debug || jsf?.formOptions?.debug">
+      Debug output:
+      <pre>{{ debugOutput }}</pre>
+    </div>
+  `, isInline: true, dependencies: [{ kind: "directive", type: i3.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i3.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i4.ɵNgNoValidate, selector: "form:not([ngNoForm]):not([ngNativeValidate])" }, { kind: "directive", type: i4.NgControlStatusGroup, selector: "[formGroupName],[formArrayName],[ngModelGroup],[formGroup],form:not([ngNoForm]),[ngForm]" }, { kind: "directive", type: i4.NgForm, selector: "form:not([ngNoForm]):not([formGroup]),ng-form,[ngForm]", inputs: ["ngFormOptions"], outputs: ["ngSubmit"], exportAs: ["ngForm"] }, { kind: "component", type: i1.RootComponent, selector: "root-widget", inputs: ["dataIndex", "layoutIndex", "layout", "isOrderable", "isFlexItem"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(JsonSchemaFormComponent, [{
-        type: Component,
-        args: [{
-                selector: 'json-schema-form',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: JsonSchemaFormComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'json-schema-form',
+                    template: `
     <div *ngFor="let stylesheet of stylesheets">
       <link rel="stylesheet" [href]="stylesheet" />
     </div>
@@ -517,62 +492,62 @@ class JsonSchemaFormComponent {
       <pre>{{ debugOutput }}</pre>
     </div>
   `,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                providers: [JsonSchemaFormService, JSON_SCHEMA_FORM_VALUE_ACCESSOR],
-            }]
-    }], function () { return [{ type: i0.ChangeDetectorRef }, { type: i1.FrameworkLibraryService }, { type: i1.WidgetLibraryService }, { type: i1.JsonSchemaFormService }, { type: i2.DomSanitizer }]; }, { schema: [{
-            type: Input
-        }], layout: [{
-            type: Input
-        }], data: [{
-            type: Input
-        }], options: [{
-            type: Input
-        }], framework: [{
-            type: Input
-        }], widgets: [{
-            type: Input
-        }], form: [{
-            type: Input
-        }], model: [{
-            type: Input
-        }], JSONSchema: [{
-            type: Input
-        }], UISchema: [{
-            type: Input
-        }], formData: [{
-            type: Input
-        }], ngModel: [{
-            type: Input
-        }], language: [{
-            type: Input
-        }], loadExternalAssets: [{
-            type: Input
-        }], debug: [{
-            type: Input
-        }], onChanges: [{
-            type: Output
-        }], onSubmit: [{
-            type: Output
-        }], isValid: [{
-            type: Output
-        }], validationErrors: [{
-            type: Output
-        }], formSchema: [{
-            type: Output
-        }], formLayout: [{
-            type: Output
-        }], dataChange: [{
-            type: Output
-        }], modelChange: [{
-            type: Output
-        }], formDataChange: [{
-            type: Output
-        }], ngModelChange: [{
-            type: Output
-        }], value: [{
-            type: Input
-        }] }); })();
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    providers: [JsonSchemaFormService, JSON_SCHEMA_FORM_VALUE_ACCESSOR],
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ChangeDetectorRef }, { type: i1.FrameworkLibraryService }, { type: i1.WidgetLibraryService }, { type: i1.JsonSchemaFormService }, { type: i2.DomSanitizer }]; }, propDecorators: { schema: [{
+                type: Input
+            }], layout: [{
+                type: Input
+            }], data: [{
+                type: Input
+            }], options: [{
+                type: Input
+            }], framework: [{
+                type: Input
+            }], widgets: [{
+                type: Input
+            }], form: [{
+                type: Input
+            }], model: [{
+                type: Input
+            }], JSONSchema: [{
+                type: Input
+            }], UISchema: [{
+                type: Input
+            }], formData: [{
+                type: Input
+            }], ngModel: [{
+                type: Input
+            }], language: [{
+                type: Input
+            }], loadExternalAssets: [{
+                type: Input
+            }], debug: [{
+                type: Input
+            }], onChanges: [{
+                type: Output
+            }], onSubmit: [{
+                type: Output
+            }], isValid: [{
+                type: Output
+            }], validationErrors: [{
+                type: Output
+            }], formSchema: [{
+                type: Output
+            }], formLayout: [{
+                type: Output
+            }], dataChange: [{
+                type: Output
+            }], modelChange: [{
+                type: Output
+            }], formDataChange: [{
+                type: Output
+            }], ngModelChange: [{
+                type: Output
+            }], value: [{
+                type: Input
+            }] } });
 
 class JsonSchemaFormModule {
     static forRoot(...frameworks) {
@@ -589,30 +564,29 @@ class JsonSchemaFormModule {
             ],
         };
     }
-    static ɵfac = function JsonSchemaFormModule_Factory(t) { return new (t || JsonSchemaFormModule)(); };
-    static ɵmod = i0.ɵɵdefineNgModule({ type: JsonSchemaFormModule });
-    static ɵinj = i0.ɵɵdefineInjector({ imports: [CommonModule,
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: JsonSchemaFormModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.0.3", ngImport: i0, type: JsonSchemaFormModule, declarations: [JsonSchemaFormComponent], imports: [CommonModule,
+            FormsModule,
+            ReactiveFormsModule,
+            WidgetLibraryModule], exports: [JsonSchemaFormComponent, WidgetLibraryModule] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: JsonSchemaFormModule, imports: [CommonModule,
             FormsModule,
             ReactiveFormsModule,
             WidgetLibraryModule, WidgetLibraryModule] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(JsonSchemaFormModule, [{
-        type: NgModule,
-        args: [{
-                imports: [
-                    CommonModule,
-                    FormsModule,
-                    ReactiveFormsModule,
-                    WidgetLibraryModule,
-                ],
-                declarations: [JsonSchemaFormComponent],
-                exports: [JsonSchemaFormComponent, WidgetLibraryModule],
-            }]
-    }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(JsonSchemaFormModule, { declarations: [JsonSchemaFormComponent], imports: [CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        WidgetLibraryModule], exports: [JsonSchemaFormComponent, WidgetLibraryModule] }); })();
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: JsonSchemaFormModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [
+                        CommonModule,
+                        FormsModule,
+                        ReactiveFormsModule,
+                        WidgetLibraryModule,
+                    ],
+                    declarations: [JsonSchemaFormComponent],
+                    exports: [JsonSchemaFormComponent, WidgetLibraryModule],
+                }]
+        }] });
 
 export { JSON_SCHEMA_FORM_VALUE_ACCESSOR, JsonSchemaFormComponent, JsonSchemaFormModule };
 //# sourceMappingURL=ngsf-json-schema-form.mjs.map
