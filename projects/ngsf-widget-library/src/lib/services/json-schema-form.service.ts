@@ -27,7 +27,7 @@ export class JsonSchemaFormService {
   AngularSchemaFormCompatibility = false
   tpldata: any = {}
 
-  ajvOptions: any = {allErrors: true, jsonPointers: true, unknownFormats: 'ignore'}
+  ajvOptions: any = {allErrors: true}
   ajv: any = new Ajv(this.ajvOptions) // AJV: Another JSON Schema Validator
 
   validateFormData: any = null // Compiled AJV function to validate active form's schema
@@ -110,10 +110,8 @@ export class JsonSchemaFormService {
 
   constructor() {
     this.setLanguage(this.language)
-
     this.ajv.addMetaSchema(draft6)
-    const ajv = new Ajv()
-    addFormats(ajv)
+    addFormats(this.ajv)
   }
 
   setLanguage(language: string = 'en-US') {
