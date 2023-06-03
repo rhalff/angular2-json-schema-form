@@ -377,7 +377,7 @@
     "@schematics/angular:component": {
       "flat": true,
       "prefix": "",
-      "styleext": "scss"
+      "style": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": ""

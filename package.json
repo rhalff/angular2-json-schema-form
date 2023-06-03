@@ -72,6 +72,9 @@
     "rxjs-compat": "6.6.7",
     "tslib": "^2.5.2"
   },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.0.3",
     "@angular-devkit/build-ng-packagr": "~0.1002.0",
