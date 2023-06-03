@@ -9,40 +9,40 @@ class NoFrameworkComponent {
     layoutNode;
     layoutIndex;
     dataIndex;
-    static ɵfac = function NoFrameworkComponent_Factory(t) { return new (t || NoFrameworkComponent)(); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: NoFrameworkComponent, selectors: [["no-framework"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 1, vars: 3, consts: [[3, "dataIndex", "layoutIndex", "layoutNode"]], template: function NoFrameworkComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵelement(0, "select-widget-widget", 0);
-        } if (rf & 2) {
-            i0.ɵɵproperty("dataIndex", ctx.dataIndex)("layoutIndex", ctx.layoutIndex)("layoutNode", ctx.layoutNode);
-        } }, dependencies: [i1.SelectWidgetComponent], encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: NoFrameworkComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: NoFrameworkComponent, selector: "no-framework", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+      <select-widget-widget
+              [dataIndex]="dataIndex"
+              [layoutIndex]="layoutIndex"
+              [layoutNode]="layoutNode"></select-widget-widget>`, isInline: true, dependencies: [{ kind: "component", type: i1.SelectWidgetComponent, selector: "select-widget-widget", inputs: ["layoutNode", "layoutIndex", "dataIndex"] }] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(NoFrameworkComponent, [{
-        type: Component,
-        args: [{
-                selector: 'no-framework',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: NoFrameworkComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'no-framework',
+                    template: `
       <select-widget-widget
               [dataIndex]="dataIndex"
               [layoutIndex]="layoutIndex"
               [layoutNode]="layoutNode"></select-widget-widget>`,
-            }]
-    }], null, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+                }]
+        }], propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
 class NoFramework extends Framework {
     name = 'no-framework';
     framework = NoFrameworkComponent;
-    static ɵfac = function () { let ɵNoFramework_BaseFactory; return function NoFramework_Factory(t) { return (ɵNoFramework_BaseFactory || (ɵNoFramework_BaseFactory = i0.ɵɵgetInheritedFactory(NoFramework)))(t || NoFramework); }; }();
-    static ɵprov = i0.ɵɵdefineInjectable({ token: NoFramework, factory: NoFramework.ɵfac });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: NoFramework, deps: null, target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: NoFramework });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(NoFramework, [{
-        type: Injectable
-    }], null, null); })();
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: NoFramework, decorators: [{
+            type: Injectable
+        }] });
 
 class NoFrameworkModule {
     static forRoot() {
@@ -57,24 +57,23 @@ class NoFrameworkModule {
             ]
         };
     }
-    static ɵfac = function NoFrameworkModule_Factory(t) { return new (t || NoFrameworkModule)(); };
-    static ɵmod = i0.ɵɵdefineNgModule({ type: NoFrameworkModule });
-    static ɵinj = i0.ɵɵdefineInjector({ imports: [CommonModule,
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: NoFrameworkModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.0.3", ngImport: i0, type: NoFrameworkModule, declarations: [NoFrameworkComponent], imports: [CommonModule,
+            WidgetLibraryModule], exports: [NoFrameworkComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: NoFrameworkModule, imports: [CommonModule,
             WidgetLibraryModule] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(NoFrameworkModule, [{
-        type: NgModule,
-        args: [{
-                imports: [
-                    CommonModule,
-                    WidgetLibraryModule
-                ],
-                declarations: [NoFrameworkComponent],
-                exports: [NoFrameworkComponent]
-            }]
-    }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(NoFrameworkModule, { declarations: [NoFrameworkComponent], imports: [CommonModule,
-        WidgetLibraryModule], exports: [NoFrameworkComponent] }); })();
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: NoFrameworkModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [
+                        CommonModule,
+                        WidgetLibraryModule
+                    ],
+                    declarations: [NoFrameworkComponent],
+                    exports: [NoFrameworkComponent]
+                }]
+        }] });
 
 export { NoFramework, NoFrameworkComponent, NoFrameworkModule };
 //# sourceMappingURL=ngsf-no-framework.mjs.map
