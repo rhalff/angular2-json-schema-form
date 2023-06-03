@@ -16,7 +16,7 @@ class JsonSchemaFormService {
     ReactJsonSchemaFormCompatibility = false;
     AngularSchemaFormCompatibility = false;
     tpldata = {};
-    ajvOptions = { allErrors: true, jsonPointers: true, unknownFormats: 'ignore' };
+    ajvOptions = { allErrors: true };
     ajv = new Ajv(this.ajvOptions);
     validateFormData = null;
     formValues = {};
