@@ -540,12 +540,12 @@ class JsonSchemaFormService {
         JsonPointer.remove(this.layout, this.getLayoutPointer(ctx));
         return true;
     }
-    static ɵfac = function JsonSchemaFormService_Factory(t) { return new (t || JsonSchemaFormService)(); };
-    static ɵprov = i0.ɵɵdefineInjectable({ token: JsonSchemaFormService, factory: JsonSchemaFormService.ɵfac });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: JsonSchemaFormService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: JsonSchemaFormService });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(JsonSchemaFormService, [{
-        type: Injectable
-    }], function () { return []; }, null); })();
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: JsonSchemaFormService, decorators: [{
+            type: Injectable
+        }], ctorParameters: function () { return []; } });
 
 class OrderableDirective {
     elementRef;
@@ -626,23 +626,23 @@ class OrderableDirective {
             });
         }
     }
-    static ɵfac = function OrderableDirective_Factory(t) { return new (t || OrderableDirective)(i0.ɵɵdirectiveInject(i0.ElementRef), i0.ɵɵdirectiveInject(JsonSchemaFormService), i0.ɵɵdirectiveInject(i0.NgZone)); };
-    static ɵdir = i0.ɵɵdefineDirective({ type: OrderableDirective, selectors: [["", "orderable", ""]], inputs: { orderable: "orderable", layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" } });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: OrderableDirective, deps: [{ token: i0.ElementRef }, { token: JsonSchemaFormService }, { token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Directive });
+    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.3", type: OrderableDirective, selector: "[orderable]", inputs: { orderable: "orderable", layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0 });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(OrderableDirective, [{
-        type: Directive,
-        args: [{
-                selector: '[orderable]',
-            }]
-    }], function () { return [{ type: i0.ElementRef }, { type: JsonSchemaFormService }, { type: i0.NgZone }]; }, { orderable: [{
-            type: Input
-        }], layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: OrderableDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[orderable]',
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: JsonSchemaFormService }, { type: i0.NgZone }]; }, propDecorators: { orderable: [{
+                type: Input
+            }], layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
 function buildTitleMap(titleMap, enumList, fieldRequired = true, flatList = true) {
     let newTitleMap = [];
@@ -779,34 +779,6 @@ function buildTitleMap(titleMap, enumList, fieldRequired = true, flatList = true
     return newTitleMap;
 }
 
-function AddReferenceComponent_button_0_span_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "span");
-} if (rf & 2) {
-    const ctx_r1 = i0.ɵɵnextContext(2);
-    i0.ɵɵclassMap(ctx_r1.options == null ? null : ctx_r1.options.icon);
-} }
-function AddReferenceComponent_button_0_span_2_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "span", 4);
-} if (rf & 2) {
-    const ctx_r2 = i0.ɵɵnextContext(2);
-    i0.ɵɵproperty("innerHTML", ctx_r2.buttonText, i0.ɵɵsanitizeHtml);
-} }
-function AddReferenceComponent_button_0_Template(rf, ctx) { if (rf & 1) {
-    const _r4 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "button", 1);
-    i0.ɵɵlistener("click", function AddReferenceComponent_button_0_Template_button_click_0_listener($event) { i0.ɵɵrestoreView(_r4); const ctx_r3 = i0.ɵɵnextContext(); return i0.ɵɵresetView(ctx_r3.addItem($event)); });
-    i0.ɵɵtemplate(1, AddReferenceComponent_button_0_span_1_Template, 1, 2, "span", 2);
-    i0.ɵɵtemplate(2, AddReferenceComponent_button_0_span_2_Template, 1, 1, "span", 3);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r0.options == null ? null : ctx_r0.options.fieldHtmlClass) || "");
-    i0.ɵɵproperty("disabled", ctx_r0.options == null ? null : ctx_r0.options.readonly);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r0.options == null ? null : ctx_r0.options.icon);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r0.options == null ? null : ctx_r0.options.title);
-} }
 class AddReferenceComponent {
     jsf;
     options;
@@ -839,18 +811,21 @@ class AddReferenceComponent {
         event.preventDefault();
         this.jsf.addItem(this);
     }
-    static ɵfac = function AddReferenceComponent_Factory(t) { return new (t || AddReferenceComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: AddReferenceComponent, selectors: [["add-reference-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 1, vars: 1, consts: [[3, "class", "disabled", "click", 4, "ngIf"], [3, "disabled", "click"], [3, "class", 4, "ngIf"], [3, "innerHTML", 4, "ngIf"], [3, "innerHTML"]], template: function AddReferenceComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵtemplate(0, AddReferenceComponent_button_0_Template, 3, 5, "button", 0);
-        } if (rf & 2) {
-            i0.ɵɵproperty("ngIf", ctx.showAddButton);
-        } }, dependencies: [i2.NgIf], encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: AddReferenceComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: AddReferenceComponent, selector: "add-reference-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+      <button *ngIf="showAddButton"
+              [class]="options?.fieldHtmlClass || ''"
+              [disabled]="options?.readonly"
+              (click)="addItem($event)">
+          <span *ngIf="options?.icon" [class]="options?.icon"></span>
+          <span *ngIf="options?.title" [innerHTML]="buttonText"></span>
+      </button>`, isInline: true, dependencies: [{ kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0.ChangeDetectionStrategy.Default });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AddReferenceComponent, [{
-        type: Component,
-        args: [{
-                selector: 'add-reference-widget',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: AddReferenceComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'add-reference-widget',
+                    template: `
       <button *ngIf="showAddButton"
               [class]="options?.fieldHtmlClass || ''"
               [disabled]="options?.readonly"
@@ -858,15 +833,15 @@ class AddReferenceComponent {
           <span *ngIf="options?.icon" [class]="options?.icon"></span>
           <span *ngIf="options?.title" [innerHTML]="buttonText"></span>
       </button>`,
-                changeDetection: ChangeDetectionStrategy.Default,
-            }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+                    changeDetection: ChangeDetectionStrategy.Default,
+                }]
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
 class OneOfComponent {
     jsf;
@@ -889,30 +864,23 @@ class OneOfComponent {
     updateValue(event) {
         this.jsf.updateValue(this, event.target.value);
     }
-    static ɵfac = function OneOfComponent_Factory(t) { return new (t || OneOfComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: OneOfComponent, selectors: [["one-of-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 0, vars: 0, template: function OneOfComponent_Template(rf, ctx) { }, encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: OneOfComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: OneOfComponent, selector: "one-of-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: ``, isInline: true });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(OneOfComponent, [{
-        type: Component,
-        args: [{
-                selector: 'one-of-widget',
-                template: ``,
-            }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: OneOfComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'one-of-widget',
+                    template: ``,
+                }]
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
-function ButtonComponent_span_2_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "span", 2);
-} if (rf & 2) {
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap(ctx_r0.options == null ? null : ctx_r0.options.icon);
-    i0.ɵɵproperty("innerHTML", ctx_r0.options == null ? null : ctx_r0.options.title, i0.ɵɵsanitizeHtml);
-} }
 class ButtonComponent {
     jsf;
     formControl;
@@ -939,27 +907,30 @@ class ButtonComponent {
             this.jsf.updateValue(this, event.target.value);
         }
     }
-    static ɵfac = function ButtonComponent_Factory(t) { return new (t || ButtonComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: ButtonComponent, selectors: [["button-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 3, vars: 11, consts: [[3, "disabled", "name", "type", "value", "click"], [3, "class", "innerHTML", 4, "ngIf"], [3, "innerHTML"]], template: function ButtonComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵelementStart(0, "div")(1, "button", 0);
-            i0.ɵɵlistener("click", function ButtonComponent_Template_button_click_1_listener($event) { return ctx.updateValue($event); });
-            i0.ɵɵtemplate(2, ButtonComponent_span_2_Template, 1, 3, "span", 1);
-            i0.ɵɵelementEnd()();
-        } if (rf & 2) {
-            i0.ɵɵclassMap((ctx.options == null ? null : ctx.options.htmlClass) || "");
-            i0.ɵɵadvance(1);
-            i0.ɵɵclassMap((ctx.options == null ? null : ctx.options.fieldHtmlClass) || "");
-            i0.ɵɵproperty("disabled", ctx.controlDisabled)("name", ctx.controlName)("type", ctx.layoutNode == null ? null : ctx.layoutNode.type)("value", ctx.controlValue);
-            i0.ɵɵattribute("readonly", (ctx.options == null ? null : ctx.options.readonly) ? "readonly" : null)("aria-describedby", "control" + (ctx.layoutNode == null ? null : ctx.layoutNode._id) + "Status");
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", (ctx.options == null ? null : ctx.options.icon) || (ctx.options == null ? null : ctx.options.title));
-        } }, dependencies: [i2.NgIf], encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: ButtonComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: ButtonComponent, selector: "button-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+      <div
+              [class]="options?.htmlClass || ''">
+          <button
+                  [attr.readonly]="options?.readonly ? 'readonly' : null"
+                  [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
+                  [class]="options?.fieldHtmlClass || ''"
+                  [disabled]="controlDisabled"
+                  [name]="controlName"
+                  [type]="layoutNode?.type"
+                  [value]="controlValue"
+                  (click)="updateValue($event)">
+        <span *ngIf="options?.icon || options?.title"
+              [class]="options?.icon"
+              [innerHTML]="options?.title"></span>
+          </button>
+      </div>`, isInline: true, dependencies: [{ kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(ButtonComponent, [{
-        type: Component,
-        args: [{
-                selector: 'button-widget',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: ButtonComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'button-widget',
+                    template: `
       <div
               [class]="options?.htmlClass || ''">
           <button
@@ -976,41 +947,15 @@ class ButtonComponent {
               [innerHTML]="options?.title"></span>
           </button>
       </div>`,
-            }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+                }]
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
-function CheckboxComponent_input_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "input", 3);
-} if (rf & 2) {
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap(((ctx_r0.options == null ? null : ctx_r0.options.fieldHtmlClass) || "") + (ctx_r0.isChecked ? " " + ((ctx_r0.options == null ? null : ctx_r0.options.activeClass) || "") + " " + ((ctx_r0.options == null ? null : ctx_r0.options.style == null ? null : ctx_r0.options.style.selected) || "") : " " + ((ctx_r0.options == null ? null : ctx_r0.options.style == null ? null : ctx_r0.options.style.unselected) || "")));
-    i0.ɵɵproperty("formControl", ctx_r0.formControl)("id", "control" + (ctx_r0.layoutNode == null ? null : ctx_r0.layoutNode._id))("name", ctx_r0.controlName)("readonly", (ctx_r0.options == null ? null : ctx_r0.options.readonly) ? "readonly" : null);
-    i0.ɵɵattribute("aria-describedby", "control" + (ctx_r0.layoutNode == null ? null : ctx_r0.layoutNode._id) + "Status");
-} }
-function CheckboxComponent_input_2_Template(rf, ctx) { if (rf & 1) {
-    const _r4 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "input", 4);
-    i0.ɵɵlistener("change", function CheckboxComponent_input_2_Template_input_change_0_listener($event) { i0.ɵɵrestoreView(_r4); const ctx_r3 = i0.ɵɵnextContext(); return i0.ɵɵresetView(ctx_r3.updateValue($event)); });
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r1 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap(((ctx_r1.options == null ? null : ctx_r1.options.fieldHtmlClass) || "") + (ctx_r1.isChecked ? " " + ((ctx_r1.options == null ? null : ctx_r1.options.activeClass) || "") + " " + ((ctx_r1.options == null ? null : ctx_r1.options.style == null ? null : ctx_r1.options.style.selected) || "") : " " + ((ctx_r1.options == null ? null : ctx_r1.options.style == null ? null : ctx_r1.options.style.unselected) || "")));
-    i0.ɵɵproperty("checked", ctx_r1.isChecked ? "checked" : null)("disabled", ctx_r1.controlDisabled)("id", "control" + (ctx_r1.layoutNode == null ? null : ctx_r1.layoutNode._id))("name", ctx_r1.controlName)("readonly", (ctx_r1.options == null ? null : ctx_r1.options.readonly) ? "readonly" : null)("value", ctx_r1.controlValue);
-    i0.ɵɵattribute("aria-describedby", "control" + (ctx_r1.layoutNode == null ? null : ctx_r1.layoutNode._id) + "Status");
-} }
-function CheckboxComponent_span_3_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "span", 5);
-} if (rf & 2) {
-    const ctx_r2 = i0.ɵɵnextContext();
-    i0.ɵɵstyleProp("display", (ctx_r2.options == null ? null : ctx_r2.options.notitle) ? "none" : "");
-    i0.ɵɵproperty("innerHTML", ctx_r2.options == null ? null : ctx_r2.options.title, i0.ɵɵsanitizeHtml);
-} }
 class CheckboxComponent {
     jsf;
     formControl;
@@ -1041,29 +986,44 @@ class CheckboxComponent {
         event.preventDefault();
         this.jsf.updateValue(this, event.target.checked ? this.trueValue : this.falseValue);
     }
-    static ɵfac = function CheckboxComponent_Factory(t) { return new (t || CheckboxComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: CheckboxComponent, selectors: [["checkbox-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 4, vars: 6, consts: [["type", "checkbox", 3, "formControl", "class", "id", "name", "readonly", 4, "ngIf"], ["type", "checkbox", 3, "checked", "class", "disabled", "id", "name", "readonly", "value", "change", 4, "ngIf"], [3, "display", "innerHTML", 4, "ngIf"], ["type", "checkbox", 3, "formControl", "id", "name", "readonly"], ["type", "checkbox", 3, "checked", "disabled", "id", "name", "readonly", "value", "change"], [3, "innerHTML"]], template: function CheckboxComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵelementStart(0, "label");
-            i0.ɵɵtemplate(1, CheckboxComponent_input_1_Template, 1, 7, "input", 0);
-            i0.ɵɵtemplate(2, CheckboxComponent_input_2_Template, 1, 9, "input", 1);
-            i0.ɵɵtemplate(3, CheckboxComponent_span_3_Template, 1, 3, "span", 2);
-            i0.ɵɵelementEnd();
-        } if (rf & 2) {
-            i0.ɵɵclassMap((ctx.options == null ? null : ctx.options.itemLabelHtmlClass) || "");
-            i0.ɵɵattribute("for", "control" + (ctx.layoutNode == null ? null : ctx.layoutNode._id));
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.boundControl);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", !ctx.boundControl);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.options == null ? null : ctx.options.title);
-        } }, dependencies: [i2.NgIf, i3.CheckboxControlValueAccessor, i3.NgControlStatus, i3.FormControlDirective], encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: CheckboxComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: CheckboxComponent, selector: "checkbox-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+      <label
+              [attr.for]="'control' + layoutNode?._id"
+              [class]="options?.itemLabelHtmlClass || ''">
+          <input *ngIf="boundControl"
+                 [formControl]="formControl"
+                 [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
+                 [class]="(options?.fieldHtmlClass || '') + (isChecked ?
+          (' ' + (options?.activeClass || '') + ' ' + (options?.style?.selected || '')) :
+          (' ' + (options?.style?.unselected || '')))"
+                 [id]="'control' + layoutNode?._id"
+                 [name]="controlName"
+                 [readonly]="options?.readonly ? 'readonly' : null"
+                 type="checkbox">
+          <input *ngIf="!boundControl"
+                 [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
+                 [checked]="isChecked ? 'checked' : null"
+                 [class]="(options?.fieldHtmlClass || '') + (isChecked ?
+          (' ' + (options?.activeClass || '') + ' ' + (options?.style?.selected || '')) :
+          (' ' + (options?.style?.unselected || '')))"
+                 [disabled]="controlDisabled"
+                 [id]="'control' + layoutNode?._id"
+                 [name]="controlName"
+                 [readonly]="options?.readonly ? 'readonly' : null"
+                 [value]="controlValue"
+                 type="checkbox"
+                 (change)="updateValue($event)">
+          <span *ngIf="options?.title"
+                [style.display]="options?.notitle ? 'none' : ''"
+                [innerHTML]="options?.title"></span>
+      </label>`, isInline: true, dependencies: [{ kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.CheckboxControlValueAccessor, selector: "input[type=checkbox][formControlName],input[type=checkbox][formControl],input[type=checkbox][ngModel]" }, { kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.FormControlDirective, selector: "[formControl]", inputs: ["formControl", "disabled", "ngModel"], outputs: ["ngModelChange"], exportAs: ["ngForm"] }] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(CheckboxComponent, [{
-        type: Component,
-        args: [{
-                selector: 'checkbox-widget',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: CheckboxComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'checkbox-widget',
+                    template: `
       <label
               [attr.for]="'control' + layoutNode?._id"
               [class]="options?.itemLabelHtmlClass || ''">
@@ -1094,82 +1054,15 @@ class CheckboxComponent {
                 [style.display]="options?.notitle ? 'none' : ''"
                 [innerHTML]="options?.title"></span>
       </label>`,
-            }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+                }]
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
-function CheckboxesComponent_label_0_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "label", 3);
-} if (rf & 2) {
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r0.options == null ? null : ctx_r0.options.labelHtmlClass) || "");
-    i0.ɵɵstyleProp("display", (ctx_r0.options == null ? null : ctx_r0.options.notitle) ? "none" : "");
-    i0.ɵɵproperty("innerHTML", ctx_r0.options == null ? null : ctx_r0.options.title, i0.ɵɵsanitizeHtml);
-} }
-function CheckboxesComponent_div_1_label_1_Template(rf, ctx) { if (rf & 1) {
-    const _r6 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "label")(1, "input", 5);
-    i0.ɵɵlistener("change", function CheckboxesComponent_div_1_label_1_Template_input_change_1_listener($event) { i0.ɵɵrestoreView(_r6); const ctx_r5 = i0.ɵɵnextContext(2); return i0.ɵɵresetView(ctx_r5.updateValue($event)); });
-    i0.ɵɵelementEnd();
-    i0.ɵɵelement(2, "span", 3);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const checkboxItem_r4 = ctx.$implicit;
-    const ctx_r3 = i0.ɵɵnextContext(2);
-    i0.ɵɵclassMap(((ctx_r3.options == null ? null : ctx_r3.options.itemLabelHtmlClass) || "") + (checkboxItem_r4.checked ? " " + ((ctx_r3.options == null ? null : ctx_r3.options.activeClass) || "") + " " + ((ctx_r3.options == null ? null : ctx_r3.options.style == null ? null : ctx_r3.options.style.selected) || "") : " " + ((ctx_r3.options == null ? null : ctx_r3.options.style == null ? null : ctx_r3.options.style.unselected) || "")));
-    i0.ɵɵattribute("for", "control" + (ctx_r3.layoutNode == null ? null : ctx_r3.layoutNode._id) + "/" + checkboxItem_r4.value);
-    i0.ɵɵadvance(1);
-    i0.ɵɵclassMap((ctx_r3.options == null ? null : ctx_r3.options.fieldHtmlClass) || "");
-    i0.ɵɵproperty("checked", checkboxItem_r4.checked)("disabled", ctx_r3.controlDisabled)("id", "control" + (ctx_r3.layoutNode == null ? null : ctx_r3.layoutNode._id) + "/" + checkboxItem_r4.value)("name", checkboxItem_r4 == null ? null : checkboxItem_r4.name)("readonly", (ctx_r3.options == null ? null : ctx_r3.options.readonly) ? "readonly" : null)("value", checkboxItem_r4.value);
-    i0.ɵɵattribute("required", ctx_r3.options == null ? null : ctx_r3.options.required);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("innerHTML", checkboxItem_r4.name, i0.ɵɵsanitizeHtml);
-} }
-function CheckboxesComponent_div_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "div");
-    i0.ɵɵtemplate(1, CheckboxesComponent_div_1_label_1_Template, 3, 13, "label", 4);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r1 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r1.options == null ? null : ctx_r1.options.htmlClass) || "");
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngForOf", ctx_r1.checkboxList);
-} }
-function CheckboxesComponent_div_2_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r10 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "div")(1, "label")(2, "input", 5);
-    i0.ɵɵlistener("change", function CheckboxesComponent_div_2_div_1_Template_input_change_2_listener($event) { i0.ɵɵrestoreView(_r10); const ctx_r9 = i0.ɵɵnextContext(2); return i0.ɵɵresetView(ctx_r9.updateValue($event)); });
-    i0.ɵɵelementEnd();
-    i0.ɵɵelement(3, "span", 3);
-    i0.ɵɵelementEnd()();
-} if (rf & 2) {
-    const checkboxItem_r8 = ctx.$implicit;
-    const ctx_r7 = i0.ɵɵnextContext(2);
-    i0.ɵɵclassMap((ctx_r7.options == null ? null : ctx_r7.options.htmlClass) || "");
-    i0.ɵɵadvance(1);
-    i0.ɵɵclassMap(((ctx_r7.options == null ? null : ctx_r7.options.itemLabelHtmlClass) || "") + (checkboxItem_r8.checked ? " " + ((ctx_r7.options == null ? null : ctx_r7.options.activeClass) || "") + " " + ((ctx_r7.options == null ? null : ctx_r7.options.style == null ? null : ctx_r7.options.style.selected) || "") : " " + ((ctx_r7.options == null ? null : ctx_r7.options.style == null ? null : ctx_r7.options.style.unselected) || "")));
-    i0.ɵɵattribute("for", "control" + (ctx_r7.layoutNode == null ? null : ctx_r7.layoutNode._id) + "/" + checkboxItem_r8.value);
-    i0.ɵɵadvance(1);
-    i0.ɵɵclassMap((ctx_r7.options == null ? null : ctx_r7.options.fieldHtmlClass) || "");
-    i0.ɵɵproperty("checked", checkboxItem_r8.checked)("disabled", ctx_r7.controlDisabled)("id", (ctx_r7.options == null ? null : ctx_r7.options.name) + "/" + checkboxItem_r8.value)("name", checkboxItem_r8 == null ? null : checkboxItem_r8.name)("readonly", (ctx_r7.options == null ? null : ctx_r7.options.readonly) ? "readonly" : null)("value", checkboxItem_r8.value);
-    i0.ɵɵattribute("required", ctx_r7.options == null ? null : ctx_r7.options.required);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("innerHTML", checkboxItem_r8 == null ? null : checkboxItem_r8.name, i0.ɵɵsanitizeHtml);
-} }
-function CheckboxesComponent_div_2_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "div");
-    i0.ɵɵtemplate(1, CheckboxesComponent_div_2_div_1_Template, 4, 15, "div", 4);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r2 = i0.ɵɵnextContext();
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngForOf", ctx_r2.checkboxList);
-} }
 class CheckboxesComponent {
     jsf;
     formControl;
@@ -1208,24 +1101,62 @@ class CheckboxesComponent {
             this.jsf.updateArrayCheckboxList(this, this.checkboxList);
         }
     }
-    static ɵfac = function CheckboxesComponent_Factory(t) { return new (t || CheckboxesComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: CheckboxesComponent, selectors: [["checkboxes-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 3, vars: 3, consts: [[3, "class", "display", "innerHTML", 4, "ngIf"], [3, "class", 4, "ngIf"], [4, "ngIf"], [3, "innerHTML"], [3, "class", 4, "ngFor", "ngForOf"], ["type", "checkbox", 3, "checked", "disabled", "id", "name", "readonly", "value", "change"]], template: function CheckboxesComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵtemplate(0, CheckboxesComponent_label_0_Template, 1, 5, "label", 0);
-            i0.ɵɵtemplate(1, CheckboxesComponent_div_1_Template, 2, 3, "div", 1);
-            i0.ɵɵtemplate(2, CheckboxesComponent_div_2_Template, 2, 1, "div", 2);
-        } if (rf & 2) {
-            i0.ɵɵproperty("ngIf", ctx.options == null ? null : ctx.options.title);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.layoutOrientation === "horizontal");
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.layoutOrientation === "vertical");
-        } }, dependencies: [i2.NgForOf, i2.NgIf], encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: CheckboxesComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: CheckboxesComponent, selector: "checkboxes-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+      <label *ngIf="options?.title"
+             [class]="options?.labelHtmlClass || ''"
+             [style.display]="options?.notitle ? 'none' : ''"
+             [innerHTML]="options?.title"></label>
+
+      <!-- 'horizontal' = checkboxes-inline or checkboxbuttons -->
+      <div *ngIf="layoutOrientation === 'horizontal'" [class]="options?.htmlClass || ''">
+          <label *ngFor="let checkboxItem of checkboxList"
+                 [attr.for]="'control' + layoutNode?._id + '/' + checkboxItem.value"
+                 [class]="(options?.itemLabelHtmlClass || '') + (checkboxItem.checked ?
+          (' ' + (options?.activeClass || '') + ' ' + (options?.style?.selected || '')) :
+          (' ' + (options?.style?.unselected || '')))">
+              <input type="checkbox"
+                     [attr.required]="options?.required"
+                     [checked]="checkboxItem.checked"
+                     [class]="options?.fieldHtmlClass || ''"
+                     [disabled]="controlDisabled"
+                     [id]="'control' + layoutNode?._id + '/' + checkboxItem.value"
+                     [name]="checkboxItem?.name"
+                     [readonly]="options?.readonly ? 'readonly' : null"
+                     [value]="checkboxItem.value"
+                     (change)="updateValue($event)">
+              <span [innerHTML]="checkboxItem.name"></span>
+          </label>
+      </div>
+
+      <!-- 'vertical' = regular checkboxes -->
+      <div *ngIf="layoutOrientation === 'vertical'">
+          <div *ngFor="let checkboxItem of checkboxList" [class]="options?.htmlClass || ''">
+              <label
+                      [attr.for]="'control' + layoutNode?._id + '/' + checkboxItem.value"
+                      [class]="(options?.itemLabelHtmlClass || '') + (checkboxItem.checked ?
+            (' ' + (options?.activeClass || '') + ' ' + (options?.style?.selected || '')) :
+            (' ' + (options?.style?.unselected || '')))">
+                  <input type="checkbox"
+                         [attr.required]="options?.required"
+                         [checked]="checkboxItem.checked"
+                         [class]="options?.fieldHtmlClass || ''"
+                         [disabled]="controlDisabled"
+                         [id]="options?.name + '/' + checkboxItem.value"
+                         [name]="checkboxItem?.name"
+                         [readonly]="options?.readonly ? 'readonly' : null"
+                         [value]="checkboxItem.value"
+                         (change)="updateValue($event)">
+                  <span [innerHTML]="checkboxItem?.name"></span>
+              </label>
+          </div>
+      </div>`, isInline: true, dependencies: [{ kind: "directive", type: i2.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(CheckboxesComponent, [{
-        type: Component,
-        args: [{
-                selector: 'checkboxes-widget',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: CheckboxesComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'checkboxes-widget',
+                    template: `
       <label *ngIf="options?.title"
              [class]="options?.labelHtmlClass || ''"
              [style.display]="options?.notitle ? 'none' : ''"
@@ -1274,14 +1205,14 @@ class CheckboxesComponent {
               </label>
           </div>
       </div>`,
-            }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+                }]
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
 class FileComponent {
     jsf;
@@ -1304,67 +1235,23 @@ class FileComponent {
     updateValue(event) {
         this.jsf.updateValue(this, event.target.value);
     }
-    static ɵfac = function FileComponent_Factory(t) { return new (t || FileComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: FileComponent, selectors: [["file-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 0, vars: 0, template: function FileComponent_Template(rf, ctx) { }, encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: FileComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: FileComponent, selector: "file-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: ``, isInline: true });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(FileComponent, [{
-        type: Component,
-        args: [{
-                selector: 'file-widget',
-                template: ``,
-            }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: FileComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'file-widget',
+                    template: ``,
+                }]
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
-function InputComponent_label_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "label", 4);
-} if (rf & 2) {
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r0.options == null ? null : ctx_r0.options.labelHtmlClass) || "");
-    i0.ɵɵstyleProp("display", (ctx_r0.options == null ? null : ctx_r0.options.notitle) ? "none" : "");
-    i0.ɵɵproperty("innerHTML", ctx_r0.options == null ? null : ctx_r0.options.title, i0.ɵɵsanitizeHtml);
-    i0.ɵɵattribute("for", "control" + (ctx_r0.layoutNode == null ? null : ctx_r0.layoutNode._id));
-} }
-function InputComponent_input_2_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "input", 5);
-} if (rf & 2) {
-    const ctx_r1 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r1.options == null ? null : ctx_r1.options.fieldHtmlClass) || "");
-    i0.ɵɵproperty("formControl", ctx_r1.formControl)("id", "control" + (ctx_r1.layoutNode == null ? null : ctx_r1.layoutNode._id))("name", ctx_r1.controlName)("readonly", (ctx_r1.options == null ? null : ctx_r1.options.readonly) ? "readonly" : null)("type", ctx_r1.layoutNode == null ? null : ctx_r1.layoutNode.type);
-    i0.ɵɵattribute("aria-describedby", "control" + (ctx_r1.layoutNode == null ? null : ctx_r1.layoutNode._id) + "Status")("list", "control" + (ctx_r1.layoutNode == null ? null : ctx_r1.layoutNode._id) + "Autocomplete")("maxlength", ctx_r1.options == null ? null : ctx_r1.options.maxLength)("minlength", ctx_r1.options == null ? null : ctx_r1.options.minLength)("pattern", ctx_r1.options == null ? null : ctx_r1.options.pattern)("placeholder", ctx_r1.options == null ? null : ctx_r1.options.placeholder)("required", ctx_r1.options == null ? null : ctx_r1.options.required);
-} }
-function InputComponent_input_3_Template(rf, ctx) { if (rf & 1) {
-    const _r5 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "input", 6);
-    i0.ɵɵlistener("input", function InputComponent_input_3_Template_input_input_0_listener($event) { i0.ɵɵrestoreView(_r5); const ctx_r4 = i0.ɵɵnextContext(); return i0.ɵɵresetView(ctx_r4.updateValue($event)); });
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r2 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r2.options == null ? null : ctx_r2.options.fieldHtmlClass) || "");
-    i0.ɵɵproperty("disabled", ctx_r2.controlDisabled)("id", "control" + (ctx_r2.layoutNode == null ? null : ctx_r2.layoutNode._id))("name", ctx_r2.controlName)("readonly", (ctx_r2.options == null ? null : ctx_r2.options.readonly) ? "readonly" : null)("type", ctx_r2.layoutNode == null ? null : ctx_r2.layoutNode.type)("value", ctx_r2.controlValue);
-    i0.ɵɵattribute("aria-describedby", "control" + (ctx_r2.layoutNode == null ? null : ctx_r2.layoutNode._id) + "Status")("list", "control" + (ctx_r2.layoutNode == null ? null : ctx_r2.layoutNode._id) + "Autocomplete")("maxlength", ctx_r2.options == null ? null : ctx_r2.options.maxLength)("minlength", ctx_r2.options == null ? null : ctx_r2.options.minLength)("pattern", ctx_r2.options == null ? null : ctx_r2.options.pattern)("placeholder", ctx_r2.options == null ? null : ctx_r2.options.placeholder)("required", ctx_r2.options == null ? null : ctx_r2.options.required);
-} }
-function InputComponent_datalist_4_option_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "option", 9);
-} if (rf & 2) {
-    const word_r7 = ctx.$implicit;
-    i0.ɵɵproperty("value", word_r7);
-} }
-function InputComponent_datalist_4_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "datalist", 7);
-    i0.ɵɵtemplate(1, InputComponent_datalist_4_option_1_Template, 1, 1, "option", 8);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r3 = i0.ɵɵnextContext();
-    i0.ɵɵproperty("id", "control" + (ctx_r3.layoutNode == null ? null : ctx_r3.layoutNode._id) + "Autocomplete");
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngForOf", ctx_r3.options == null ? null : ctx_r3.options.typeahead == null ? null : ctx_r3.options.typeahead.source);
-} }
 class InputComponent {
     jsf;
     formControl;
@@ -1387,31 +1274,55 @@ class InputComponent {
     updateValue(event) {
         this.jsf.updateValue(this, event.target.value);
     }
-    static ɵfac = function InputComponent_Factory(t) { return new (t || InputComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: InputComponent, selectors: [["input-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 5, vars: 6, consts: [[3, "class", "display", "innerHTML", 4, "ngIf"], [3, "formControl", "class", "id", "name", "readonly", "type", 4, "ngIf"], [3, "class", "disabled", "id", "name", "readonly", "type", "value", "input", 4, "ngIf"], [3, "id", 4, "ngIf"], [3, "innerHTML"], [3, "formControl", "id", "name", "readonly", "type"], [3, "disabled", "id", "name", "readonly", "type", "value", "input"], [3, "id"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"]], template: function InputComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵelementStart(0, "div");
-            i0.ɵɵtemplate(1, InputComponent_label_1_Template, 1, 6, "label", 0);
-            i0.ɵɵtemplate(2, InputComponent_input_2_Template, 1, 14, "input", 1);
-            i0.ɵɵtemplate(3, InputComponent_input_3_Template, 1, 15, "input", 2);
-            i0.ɵɵtemplate(4, InputComponent_datalist_4_Template, 2, 2, "datalist", 3);
-            i0.ɵɵelementEnd();
-        } if (rf & 2) {
-            i0.ɵɵclassMap((ctx.options == null ? null : ctx.options.htmlClass) || "");
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.options == null ? null : ctx.options.title);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.boundControl);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", !ctx.boundControl);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.options == null ? null : ctx.options.typeahead == null ? null : ctx.options.typeahead.source);
-        } }, dependencies: [i2.NgForOf, i2.NgIf, i3.NgSelectOption, i3.ɵNgSelectMultipleOption, i3.DefaultValueAccessor, i3.NgControlStatus, i3.FormControlDirective], encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: InputComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: InputComponent, selector: "input-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+    <div [class]="options?.htmlClass || ''">
+      <label *ngIf="options?.title"
+        [attr.for]="'control' + layoutNode?._id"
+        [class]="options?.labelHtmlClass || ''"
+        [style.display]="options?.notitle ? 'none' : ''"
+        [innerHTML]="options?.title"></label>
+      <input *ngIf="boundControl"
+        [formControl]="formControl"
+        [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
+        [attr.list]="'control' + layoutNode?._id + 'Autocomplete'"
+        [attr.maxlength]="options?.maxLength"
+        [attr.minlength]="options?.minLength"
+        [attr.pattern]="options?.pattern"
+        [attr.placeholder]="options?.placeholder"
+        [attr.required]="options?.required"
+        [class]="options?.fieldHtmlClass || ''"
+        [id]="'control' + layoutNode?._id"
+        [name]="controlName"
+        [readonly]="options?.readonly ? 'readonly' : null"
+        [type]="layoutNode?.type">
+      <input *ngIf="!boundControl"
+        [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
+        [attr.list]="'control' + layoutNode?._id + 'Autocomplete'"
+        [attr.maxlength]="options?.maxLength"
+        [attr.minlength]="options?.minLength"
+        [attr.pattern]="options?.pattern"
+        [attr.placeholder]="options?.placeholder"
+        [attr.required]="options?.required"
+        [class]="options?.fieldHtmlClass || ''"
+        [disabled]="controlDisabled"
+        [id]="'control' + layoutNode?._id"
+        [name]="controlName"
+        [readonly]="options?.readonly ? 'readonly' : null"
+        [type]="layoutNode?.type"
+        [value]="controlValue"
+        (input)="updateValue($event)">
+        <datalist *ngIf="options?.typeahead?.source"
+          [id]="'control' + layoutNode?._id + 'Autocomplete'">
+          <option *ngFor="let word of options?.typeahead?.source" [value]="word">
+        </datalist>
+    </div>`, isInline: true, dependencies: [{ kind: "directive", type: i2.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.NgSelectOption, selector: "option", inputs: ["ngValue", "value"] }, { kind: "directive", type: i3.ɵNgSelectMultipleOption, selector: "option", inputs: ["ngValue", "value"] }, { kind: "directive", type: i3.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.FormControlDirective, selector: "[formControl]", inputs: ["formControl", "disabled", "ngModel"], outputs: ["ngModelChange"], exportAs: ["ngForm"] }] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(InputComponent, [{
-        type: Component,
-        args: [{
-                selector: 'input-widget',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: InputComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'input-widget',
+                    template: `
     <div [class]="options?.htmlClass || ''">
       <label *ngIf="options?.title"
         [attr.for]="'control' + layoutNode?._id"
@@ -1453,22 +1364,15 @@ class InputComponent {
           <option *ngFor="let word of options?.typeahead?.source" [value]="word">
         </datalist>
     </div>`,
-            }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+                }]
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
-function MessageComponent_span_0_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "span", 1);
-} if (rf & 2) {
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r0.options == null ? null : ctx_r0.options.labelHtmlClass) || "");
-    i0.ɵɵproperty("innerHTML", ctx_r0.message, i0.ɵɵsanitizeHtml);
-} }
 class MessageComponent {
     jsf;
     options;
@@ -1484,85 +1388,50 @@ class MessageComponent {
         this.message = this.options.help || this.options.helpvalue ||
             this.options.msg || this.options.message;
     }
-    static ɵfac = function MessageComponent_Factory(t) { return new (t || MessageComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: MessageComponent, selectors: [["message-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 1, vars: 1, consts: [[3, "class", "innerHTML", 4, "ngIf"], [3, "innerHTML"]], template: function MessageComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵtemplate(0, MessageComponent_span_0_Template, 1, 3, "span", 0);
-        } if (rf & 2) {
-            i0.ɵɵproperty("ngIf", ctx.message);
-        } }, dependencies: [i2.NgIf], encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: MessageComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: MessageComponent, selector: "message-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+    <span *ngIf="message"
+      [class]="options?.labelHtmlClass || ''"
+      [innerHTML]="message"></span>`, isInline: true, dependencies: [{ kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(MessageComponent, [{
-        type: Component,
-        args: [{
-                selector: 'message-widget',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: MessageComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'message-widget',
+                    template: `
     <span *ngIf="message"
       [class]="options?.labelHtmlClass || ''"
       [innerHTML]="message"></span>`,
-            }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+                }]
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
 class NoneComponent {
     layoutNode;
     layoutIndex;
     dataIndex;
-    static ɵfac = function NoneComponent_Factory(t) { return new (t || NoneComponent)(); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: NoneComponent, selectors: [["none-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 0, vars: 0, template: function NoneComponent_Template(rf, ctx) { }, encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: NoneComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: NoneComponent, selector: "none-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: ``, isInline: true });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(NoneComponent, [{
-        type: Component,
-        args: [{
-                selector: 'none-widget',
-                template: ``,
-            }]
-    }], null, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: NoneComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'none-widget',
+                    template: ``,
+                }]
+        }], propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
-function NumberComponent_label_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "label", 4);
-} if (rf & 2) {
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r0.options == null ? null : ctx_r0.options.labelHtmlClass) || "");
-    i0.ɵɵstyleProp("display", (ctx_r0.options == null ? null : ctx_r0.options.notitle) ? "none" : "");
-    i0.ɵɵproperty("innerHTML", ctx_r0.options == null ? null : ctx_r0.options.title, i0.ɵɵsanitizeHtml);
-    i0.ɵɵattribute("for", "control" + (ctx_r0.layoutNode == null ? null : ctx_r0.layoutNode._id));
-} }
-function NumberComponent_input_2_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "input", 5);
-} if (rf & 2) {
-    const ctx_r1 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r1.options == null ? null : ctx_r1.options.fieldHtmlClass) || "");
-    i0.ɵɵproperty("formControl", ctx_r1.formControl)("id", "control" + (ctx_r1.layoutNode == null ? null : ctx_r1.layoutNode._id))("name", ctx_r1.controlName)("readonly", (ctx_r1.options == null ? null : ctx_r1.options.readonly) ? "readonly" : null)("title", ctx_r1.lastValidNumber)("type", (ctx_r1.layoutNode == null ? null : ctx_r1.layoutNode.type) === "range" ? "range" : "number");
-    i0.ɵɵattribute("aria-describedby", "control" + (ctx_r1.layoutNode == null ? null : ctx_r1.layoutNode._id) + "Status")("max", ctx_r1.options == null ? null : ctx_r1.options.maximum)("min", ctx_r1.options == null ? null : ctx_r1.options.minimum)("placeholder", ctx_r1.options == null ? null : ctx_r1.options.placeholder)("required", ctx_r1.options == null ? null : ctx_r1.options.required)("readonly", (ctx_r1.options == null ? null : ctx_r1.options.readonly) ? "readonly" : null)("step", (ctx_r1.options == null ? null : ctx_r1.options.multipleOf) || (ctx_r1.options == null ? null : ctx_r1.options.step) || "any");
-} }
-function NumberComponent_input_3_Template(rf, ctx) { if (rf & 1) {
-    const _r5 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "input", 6);
-    i0.ɵɵlistener("input", function NumberComponent_input_3_Template_input_input_0_listener($event) { i0.ɵɵrestoreView(_r5); const ctx_r4 = i0.ɵɵnextContext(); return i0.ɵɵresetView(ctx_r4.updateValue($event)); });
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r2 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r2.options == null ? null : ctx_r2.options.fieldHtmlClass) || "");
-    i0.ɵɵproperty("disabled", ctx_r2.controlDisabled)("id", "control" + (ctx_r2.layoutNode == null ? null : ctx_r2.layoutNode._id))("name", ctx_r2.controlName)("readonly", (ctx_r2.options == null ? null : ctx_r2.options.readonly) ? "readonly" : null)("title", ctx_r2.lastValidNumber)("type", (ctx_r2.layoutNode == null ? null : ctx_r2.layoutNode.type) === "range" ? "range" : "number")("value", ctx_r2.controlValue);
-    i0.ɵɵattribute("aria-describedby", "control" + (ctx_r2.layoutNode == null ? null : ctx_r2.layoutNode._id) + "Status")("max", ctx_r2.options == null ? null : ctx_r2.options.maximum)("min", ctx_r2.options == null ? null : ctx_r2.options.minimum)("placeholder", ctx_r2.options == null ? null : ctx_r2.options.placeholder)("required", ctx_r2.options == null ? null : ctx_r2.options.required)("readonly", (ctx_r2.options == null ? null : ctx_r2.options.readonly) ? "readonly" : null)("step", (ctx_r2.options == null ? null : ctx_r2.options.multipleOf) || (ctx_r2.options == null ? null : ctx_r2.options.step) || "any");
-} }
-function NumberComponent_span_4_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "span", 4);
-} if (rf & 2) {
-    const ctx_r3 = i0.ɵɵnextContext();
-    i0.ɵɵproperty("innerHTML", ctx_r3.controlValue, i0.ɵɵsanitizeHtml);
-} }
 class NumberComponent {
     jsf;
     formControl;
@@ -1591,31 +1460,54 @@ class NumberComponent {
     updateValue(event) {
         this.jsf.updateValue(this, event.target.value);
     }
-    static ɵfac = function NumberComponent_Factory(t) { return new (t || NumberComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: NumberComponent, selectors: [["number-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 5, vars: 6, consts: [[3, "class", "display", "innerHTML", 4, "ngIf"], [3, "formControl", "class", "id", "name", "readonly", "title", "type", 4, "ngIf"], [3, "class", "disabled", "id", "name", "readonly", "title", "type", "value", "input", 4, "ngIf"], [3, "innerHTML", 4, "ngIf"], [3, "innerHTML"], [3, "formControl", "id", "name", "readonly", "title", "type"], [3, "disabled", "id", "name", "readonly", "title", "type", "value", "input"]], template: function NumberComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵelementStart(0, "div");
-            i0.ɵɵtemplate(1, NumberComponent_label_1_Template, 1, 6, "label", 0);
-            i0.ɵɵtemplate(2, NumberComponent_input_2_Template, 1, 15, "input", 1);
-            i0.ɵɵtemplate(3, NumberComponent_input_3_Template, 1, 16, "input", 2);
-            i0.ɵɵtemplate(4, NumberComponent_span_4_Template, 1, 1, "span", 3);
-            i0.ɵɵelementEnd();
-        } if (rf & 2) {
-            i0.ɵɵclassMap((ctx.options == null ? null : ctx.options.htmlClass) || "");
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.options == null ? null : ctx.options.title);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.boundControl);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", !ctx.boundControl);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", (ctx.layoutNode == null ? null : ctx.layoutNode.type) === "range");
-        } }, dependencies: [i2.NgIf, i3.DefaultValueAccessor, i3.NgControlStatus, i3.FormControlDirective], encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: NumberComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: NumberComponent, selector: "number-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+      <div [class]="options?.htmlClass || ''">
+          <label *ngIf="options?.title"
+                 [attr.for]="'control' + layoutNode?._id"
+                 [class]="options?.labelHtmlClass || ''"
+                 [style.display]="options?.notitle ? 'none' : ''"
+                 [innerHTML]="options?.title"></label>
+          <input *ngIf="boundControl"
+                 [formControl]="formControl"
+                 [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
+                 [attr.max]="options?.maximum"
+                 [attr.min]="options?.minimum"
+                 [attr.placeholder]="options?.placeholder"
+                 [attr.required]="options?.required"
+                 [attr.readonly]="options?.readonly ? 'readonly' : null"
+                 [attr.step]="options?.multipleOf || options?.step || 'any'"
+                 [class]="options?.fieldHtmlClass || ''"
+                 [id]="'control' + layoutNode?._id"
+                 [name]="controlName"
+                 [readonly]="options?.readonly ? 'readonly' : null"
+                 [title]="lastValidNumber"
+                 [type]="layoutNode?.type === 'range' ? 'range' : 'number'">
+          <input *ngIf="!boundControl"
+                 [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
+                 [attr.max]="options?.maximum"
+                 [attr.min]="options?.minimum"
+                 [attr.placeholder]="options?.placeholder"
+                 [attr.required]="options?.required"
+                 [attr.readonly]="options?.readonly ? 'readonly' : null"
+                 [attr.step]="options?.multipleOf || options?.step || 'any'"
+                 [class]="options?.fieldHtmlClass || ''"
+                 [disabled]="controlDisabled"
+                 [id]="'control' + layoutNode?._id"
+                 [name]="controlName"
+                 [readonly]="options?.readonly ? 'readonly' : null"
+                 [title]="lastValidNumber"
+                 [type]="layoutNode?.type === 'range' ? 'range' : 'number'"
+                 [value]="controlValue"
+                 (input)="updateValue($event)">
+          <span *ngIf="layoutNode?.type === 'range'" [innerHTML]="controlValue"></span>
+      </div>`, isInline: true, dependencies: [{ kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.FormControlDirective, selector: "[formControl]", inputs: ["formControl", "disabled", "ngModel"], outputs: ["ngModelChange"], exportAs: ["ngForm"] }] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(NumberComponent, [{
-        type: Component,
-        args: [{
-                selector: 'number-widget',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: NumberComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'number-widget',
+                    template: `
       <div [class]="options?.htmlClass || ''">
           <label *ngIf="options?.title"
                  [attr.for]="'control' + layoutNode?._id"
@@ -1656,83 +1548,15 @@ class NumberComponent {
                  (input)="updateValue($event)">
           <span *ngIf="layoutNode?.type === 'range'" [innerHTML]="controlValue"></span>
       </div>`,
-            }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+                }]
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
-function RadiosComponent_label_0_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "label", 3);
-} if (rf & 2) {
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r0.options == null ? null : ctx_r0.options.labelHtmlClass) || "");
-    i0.ɵɵstyleProp("display", (ctx_r0.options == null ? null : ctx_r0.options.notitle) ? "none" : "");
-    i0.ɵɵproperty("innerHTML", ctx_r0.options == null ? null : ctx_r0.options.title, i0.ɵɵsanitizeHtml);
-    i0.ɵɵattribute("for", "control" + (ctx_r0.layoutNode == null ? null : ctx_r0.layoutNode._id));
-} }
-function RadiosComponent_div_1_label_1_Template(rf, ctx) { if (rf & 1) {
-    const _r6 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "label")(1, "input", 5);
-    i0.ɵɵlistener("change", function RadiosComponent_div_1_label_1_Template_input_change_1_listener($event) { i0.ɵɵrestoreView(_r6); const ctx_r5 = i0.ɵɵnextContext(2); return i0.ɵɵresetView(ctx_r5.updateValue($event)); });
-    i0.ɵɵelementEnd();
-    i0.ɵɵelement(2, "span", 3);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const radioItem_r4 = ctx.$implicit;
-    const ctx_r3 = i0.ɵɵnextContext(2);
-    i0.ɵɵclassMap(((ctx_r3.options == null ? null : ctx_r3.options.itemLabelHtmlClass) || "") + (ctx_r3.controlValue + "" === (radioItem_r4 == null ? null : radioItem_r4.value) + "" ? " " + ((ctx_r3.options == null ? null : ctx_r3.options.activeClass) || "") + " " + ((ctx_r3.options == null ? null : ctx_r3.options.style == null ? null : ctx_r3.options.style.selected) || "") : " " + ((ctx_r3.options == null ? null : ctx_r3.options.style == null ? null : ctx_r3.options.style.unselected) || "")));
-    i0.ɵɵattribute("for", "control" + (ctx_r3.layoutNode == null ? null : ctx_r3.layoutNode._id) + "/" + (radioItem_r4 == null ? null : radioItem_r4.value));
-    i0.ɵɵadvance(1);
-    i0.ɵɵclassMap((ctx_r3.options == null ? null : ctx_r3.options.fieldHtmlClass) || "");
-    i0.ɵɵproperty("checked", (radioItem_r4 == null ? null : radioItem_r4.value) === ctx_r3.controlValue)("disabled", ctx_r3.controlDisabled)("id", "control" + (ctx_r3.layoutNode == null ? null : ctx_r3.layoutNode._id) + "/" + (radioItem_r4 == null ? null : radioItem_r4.value))("name", ctx_r3.controlName)("value", radioItem_r4 == null ? null : radioItem_r4.value);
-    i0.ɵɵattribute("aria-describedby", "control" + (ctx_r3.layoutNode == null ? null : ctx_r3.layoutNode._id) + "Status")("readonly", (ctx_r3.options == null ? null : ctx_r3.options.readonly) ? "readonly" : null)("required", ctx_r3.options == null ? null : ctx_r3.options.required);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("innerHTML", radioItem_r4 == null ? null : radioItem_r4.name, i0.ɵɵsanitizeHtml);
-} }
-function RadiosComponent_div_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "div");
-    i0.ɵɵtemplate(1, RadiosComponent_div_1_label_1_Template, 3, 14, "label", 4);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r1 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r1.options == null ? null : ctx_r1.options.htmlClass) || "");
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngForOf", ctx_r1.radiosList);
-} }
-function RadiosComponent_div_2_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r10 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "div")(1, "label")(2, "input", 5);
-    i0.ɵɵlistener("change", function RadiosComponent_div_2_div_1_Template_input_change_2_listener($event) { i0.ɵɵrestoreView(_r10); const ctx_r9 = i0.ɵɵnextContext(2); return i0.ɵɵresetView(ctx_r9.updateValue($event)); });
-    i0.ɵɵelementEnd();
-    i0.ɵɵelement(3, "span", 3);
-    i0.ɵɵelementEnd()();
-} if (rf & 2) {
-    const radioItem_r8 = ctx.$implicit;
-    const ctx_r7 = i0.ɵɵnextContext(2);
-    i0.ɵɵclassMap((ctx_r7.options == null ? null : ctx_r7.options.htmlClass) || "");
-    i0.ɵɵadvance(1);
-    i0.ɵɵclassMap(((ctx_r7.options == null ? null : ctx_r7.options.itemLabelHtmlClass) || "") + (ctx_r7.controlValue + "" === (radioItem_r8 == null ? null : radioItem_r8.value) + "" ? " " + ((ctx_r7.options == null ? null : ctx_r7.options.activeClass) || "") + " " + ((ctx_r7.options == null ? null : ctx_r7.options.style == null ? null : ctx_r7.options.style.selected) || "") : " " + ((ctx_r7.options == null ? null : ctx_r7.options.style == null ? null : ctx_r7.options.style.unselected) || "")));
-    i0.ɵɵattribute("for", "control" + (ctx_r7.layoutNode == null ? null : ctx_r7.layoutNode._id) + "/" + (radioItem_r8 == null ? null : radioItem_r8.value));
-    i0.ɵɵadvance(1);
-    i0.ɵɵclassMap((ctx_r7.options == null ? null : ctx_r7.options.fieldHtmlClass) || "");
-    i0.ɵɵproperty("checked", (radioItem_r8 == null ? null : radioItem_r8.value) === ctx_r7.controlValue)("disabled", ctx_r7.controlDisabled)("id", "control" + (ctx_r7.layoutNode == null ? null : ctx_r7.layoutNode._id) + "/" + (radioItem_r8 == null ? null : radioItem_r8.value))("name", ctx_r7.controlName)("value", radioItem_r8 == null ? null : radioItem_r8.value);
-    i0.ɵɵattribute("aria-describedby", "control" + (ctx_r7.layoutNode == null ? null : ctx_r7.layoutNode._id) + "Status")("readonly", (ctx_r7.options == null ? null : ctx_r7.options.readonly) ? "readonly" : null)("required", ctx_r7.options == null ? null : ctx_r7.options.required);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("innerHTML", radioItem_r8 == null ? null : radioItem_r8.name, i0.ɵɵsanitizeHtml);
-} }
-function RadiosComponent_div_2_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "div");
-    i0.ɵɵtemplate(1, RadiosComponent_div_2_div_1_Template, 4, 16, "div", 4);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r2 = i0.ɵɵnextContext();
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngForOf", ctx_r2.radiosList);
-} }
 class RadiosComponent {
     jsf;
     formControl;
@@ -1761,24 +1585,69 @@ class RadiosComponent {
     updateValue(event) {
         this.jsf.updateValue(this, event.target.value);
     }
-    static ɵfac = function RadiosComponent_Factory(t) { return new (t || RadiosComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: RadiosComponent, selectors: [["radios-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 3, vars: 3, consts: [[3, "class", "display", "innerHTML", 4, "ngIf"], [3, "class", 4, "ngIf"], [4, "ngIf"], [3, "innerHTML"], [3, "class", 4, "ngFor", "ngForOf"], ["type", "radio", 3, "checked", "disabled", "id", "name", "value", "change"]], template: function RadiosComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵtemplate(0, RadiosComponent_label_0_Template, 1, 6, "label", 0);
-            i0.ɵɵtemplate(1, RadiosComponent_div_1_Template, 2, 3, "div", 1);
-            i0.ɵɵtemplate(2, RadiosComponent_div_2_Template, 2, 1, "div", 2);
-        } if (rf & 2) {
-            i0.ɵɵproperty("ngIf", ctx.options == null ? null : ctx.options.title);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.layoutOrientation === "horizontal");
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.layoutOrientation !== "horizontal");
-        } }, dependencies: [i2.NgForOf, i2.NgIf], encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: RadiosComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: RadiosComponent, selector: "radios-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+    <label *ngIf="options?.title"
+      [attr.for]="'control' + layoutNode?._id"
+      [class]="options?.labelHtmlClass || ''"
+      [style.display]="options?.notitle ? 'none' : ''"
+      [innerHTML]="options?.title"></label>
+
+    <!-- 'horizontal' = radios-inline or radiobuttons -->
+    <div *ngIf="layoutOrientation === 'horizontal'"
+      [class]="options?.htmlClass || ''">
+      <label *ngFor="let radioItem of radiosList"
+        [attr.for]="'control' + layoutNode?._id + '/' + radioItem?.value"
+        [class]="(options?.itemLabelHtmlClass || '') +
+          ((controlValue + '' === radioItem?.value + '') ?
+          (' ' + (options?.activeClass || '') + ' ' + (options?.style?.selected || '')) :
+          (' ' + (options?.style?.unselected || '')))">
+        <input type="radio"
+          [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
+          [attr.readonly]="options?.readonly ? 'readonly' : null"
+          [attr.required]="options?.required"
+          [checked]="radioItem?.value === controlValue"
+          [class]="options?.fieldHtmlClass || ''"
+          [disabled]="controlDisabled"
+          [id]="'control' + layoutNode?._id + '/' + radioItem?.value"
+          [name]="controlName"
+          [value]="radioItem?.value"
+          (change)="updateValue($event)">
+        <span [innerHTML]="radioItem?.name"></span>
+      </label>
+    </div>
+
+    <!-- 'vertical' = regular radios -->
+    <div *ngIf="layoutOrientation !== 'horizontal'">
+      <div *ngFor="let radioItem of radiosList"
+        [class]="options?.htmlClass || ''">
+        <label
+          [attr.for]="'control' + layoutNode?._id + '/' + radioItem?.value"
+          [class]="(options?.itemLabelHtmlClass || '') +
+            ((controlValue + '' === radioItem?.value + '') ?
+            (' ' + (options?.activeClass || '') + ' ' + (options?.style?.selected || '')) :
+            (' ' + (options?.style?.unselected || '')))">
+          <input type="radio"
+            [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
+            [attr.readonly]="options?.readonly ? 'readonly' : null"
+            [attr.required]="options?.required"
+            [checked]="radioItem?.value === controlValue"
+            [class]="options?.fieldHtmlClass || ''"
+            [disabled]="controlDisabled"
+            [id]="'control' + layoutNode?._id + '/' + radioItem?.value"
+            [name]="controlName"
+            [value]="radioItem?.value"
+            (change)="updateValue($event)">
+          <span [innerHTML]="radioItem?.name"></span>
+        </label>
+      </div>
+    </div>`, isInline: true, dependencies: [{ kind: "directive", type: i2.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(RadiosComponent, [{
-        type: Component,
-        args: [{
-                selector: 'radios-widget',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: RadiosComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'radios-widget',
+                    template: `
     <label *ngIf="options?.title"
       [attr.for]="'control' + layoutNode?._id"
       [class]="options?.labelHtmlClass || ''"
@@ -1834,16 +1703,15 @@ class RadiosComponent {
         </label>
       </div>
     </div>`,
-            }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+                }]
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
-const _c0$4 = ["widgetContainer"];
 class SelectFrameworkComponent {
     componentFactory;
     jsf;
@@ -1872,61 +1740,30 @@ class SelectFrameworkComponent {
             }
         }
     }
-    static ɵfac = function SelectFrameworkComponent_Factory(t) { return new (t || SelectFrameworkComponent)(i0.ɵɵdirectiveInject(i0.ComponentFactoryResolver), i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: SelectFrameworkComponent, selectors: [["select-framework-widget"]], viewQuery: function SelectFrameworkComponent_Query(rf, ctx) { if (rf & 1) {
-            i0.ɵɵviewQuery(_c0$4, 7, ViewContainerRef);
-        } if (rf & 2) {
-            let _t;
-            i0.ɵɵqueryRefresh(_t = i0.ɵɵloadQuery()) && (ctx.widgetContainer = _t.first);
-        } }, inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, features: [i0.ɵɵNgOnChangesFeature], decls: 2, vars: 0, consts: [["widgetContainer", ""]], template: function SelectFrameworkComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵelement(0, "div", null, 0);
-        } }, encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: SelectFrameworkComponent, deps: [{ token: i0.ComponentFactoryResolver }, { token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: SelectFrameworkComponent, selector: "select-framework-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, viewQueries: [{ propertyName: "widgetContainer", first: true, predicate: ["widgetContainer"], descendants: true, read: ViewContainerRef, static: true }], usesOnChanges: true, ngImport: i0, template: `
+    <div #widgetContainer></div>
+  `, isInline: true });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(SelectFrameworkComponent, [{
-        type: Component,
-        args: [{
-                selector: 'select-framework-widget',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: SelectFrameworkComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'select-framework-widget',
+                    template: `
     <div #widgetContainer></div>
   `,
-            }]
-    }], function () { return [{ type: i0.ComponentFactoryResolver }, { type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }], widgetContainer: [{
-            type: ViewChild,
-            args: ['widgetContainer', { read: ViewContainerRef, static: true }]
-        }] }); })();
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ComponentFactoryResolver }, { type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }], widgetContainer: [{
+                type: ViewChild,
+                args: ['widgetContainer', { read: ViewContainerRef, static: true }]
+            }] } });
 
-const _c0$3 = function () { return []; };
-function RootComponent_div_0_select_framework_widget_2_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "select-framework-widget", 3);
-} if (rf & 2) {
-    const ctx_r4 = i0.ɵɵnextContext();
-    const layoutItem_r1 = ctx_r4.$implicit;
-    const i_r2 = ctx_r4.index;
-    const ctx_r3 = i0.ɵɵnextContext();
-    i0.ɵɵproperty("dataIndex", (layoutItem_r1 == null ? null : layoutItem_r1.arrayItem) ? (ctx_r3.dataIndex || i0.ɵɵpureFunction0(3, _c0$3)).concat(i_r2) : ctx_r3.dataIndex || i0.ɵɵpureFunction0(4, _c0$3))("layoutIndex", (ctx_r3.layoutIndex || i0.ɵɵpureFunction0(5, _c0$3)).concat(i_r2))("layoutNode", layoutItem_r1);
-} }
-const _c1 = function () { return {}; };
-function RootComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "div")(1, "div", 1);
-    i0.ɵɵtemplate(2, RootComponent_div_0_select_framework_widget_2_Template, 1, 6, "select-framework-widget", 2);
-    i0.ɵɵelementEnd()();
-} if (rf & 2) {
-    const layoutItem_r1 = ctx.$implicit;
-    const i_r2 = ctx.index;
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵstyleProp("align-self", (layoutItem_r1.options || i0.ɵɵpureFunction0(17, _c1))["align-self"])("flex-basis", ctx_r0.getFlexAttribute(layoutItem_r1, "flex-basis"))("flex-grow", ctx_r0.getFlexAttribute(layoutItem_r1, "flex-grow"))("flex-shrink", ctx_r0.getFlexAttribute(layoutItem_r1, "flex-shrink"))("order", (layoutItem_r1.options || i0.ɵɵpureFunction0(18, _c1)).order);
-    i0.ɵɵclassProp("form-flex-item", ctx_r0.isFlexItem);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("dataIndex", (layoutItem_r1 == null ? null : layoutItem_r1.arrayItem) ? (ctx_r0.dataIndex || i0.ɵɵpureFunction0(19, _c0$3)).concat(i_r2) : ctx_r0.dataIndex || i0.ɵɵpureFunction0(20, _c0$3))("layoutIndex", (ctx_r0.layoutIndex || i0.ɵɵpureFunction0(21, _c0$3)).concat(i_r2))("layoutNode", layoutItem_r1)("orderable", ctx_r0.isDraggable(layoutItem_r1));
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r0.showWidget(layoutItem_r1));
-} }
 class RootComponent {
     jsf;
     options;
@@ -1950,16 +1787,30 @@ class RootComponent {
     showWidget(layoutNode) {
         return this.jsf.evaluateCondition(layoutNode, this.dataIndex);
     }
-    static ɵfac = function RootComponent_Factory(t) { return new (t || RootComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: RootComponent, selectors: [["root-widget"]], inputs: { dataIndex: "dataIndex", layoutIndex: "layoutIndex", layout: "layout", isOrderable: "isOrderable", isFlexItem: "isFlexItem" }, decls: 1, vars: 1, consts: [[3, "form-flex-item", "align-self", "flex-basis", "flex-grow", "flex-shrink", "order", 4, "ngFor", "ngForOf"], [3, "dataIndex", "layoutIndex", "layoutNode", "orderable"], [3, "dataIndex", "layoutIndex", "layoutNode", 4, "ngIf"], [3, "dataIndex", "layoutIndex", "layoutNode"]], template: function RootComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵtemplate(0, RootComponent_div_0_Template, 3, 22, "div", 0);
-        } if (rf & 2) {
-            i0.ɵɵproperty("ngForOf", ctx.layout);
-        } }, dependencies: [i2.NgForOf, i2.NgIf, SelectFrameworkComponent, OrderableDirective], styles: ["[draggable=true][_ngcontent-%COMP%]{transition:all .15s cubic-bezier(.4,0,.2,1)}[draggable=true][_ngcontent-%COMP%]:hover{cursor:move;box-shadow:2px 2px 4px #0003;position:relative;z-index:10;margin:-1px 1px 1px -1px}[draggable=true].drag-target-top[_ngcontent-%COMP%]{box-shadow:0 -2px #000;position:relative;z-index:20}[draggable=true].drag-target-bottom[_ngcontent-%COMP%]{box-shadow:0 2px #000;position:relative;z-index:20}"] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: RootComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: RootComponent, selector: "root-widget", inputs: { dataIndex: "dataIndex", layoutIndex: "layoutIndex", layout: "layout", isOrderable: "isOrderable", isFlexItem: "isFlexItem" }, ngImport: i0, template: `
+    <div *ngFor="let layoutItem of layout; let i = index"
+      [class.form-flex-item]="isFlexItem"
+      [style.align-self]="(layoutItem.options || {})['align-self']"
+      [style.flex-basis]="getFlexAttribute(layoutItem, 'flex-basis')"
+      [style.flex-grow]="getFlexAttribute(layoutItem, 'flex-grow')"
+      [style.flex-shrink]="getFlexAttribute(layoutItem, 'flex-shrink')"
+      [style.order]="(layoutItem.options || {}).order">
+      <div
+        [dataIndex]="layoutItem?.arrayItem ? (dataIndex || []).concat(i) : (dataIndex || [])"
+        [layoutIndex]="(layoutIndex || []).concat(i)"
+        [layoutNode]="layoutItem"
+        [orderable]="isDraggable(layoutItem)">
+        <select-framework-widget *ngIf="showWidget(layoutItem)"
+          [dataIndex]="layoutItem?.arrayItem ? (dataIndex || []).concat(i) : (dataIndex || [])"
+          [layoutIndex]="(layoutIndex || []).concat(i)"
+          [layoutNode]="layoutItem"></select-framework-widget>
+      </div>
+    </div>`, isInline: true, styles: ["[draggable=true]{transition:all .15s cubic-bezier(.4,0,.2,1)}[draggable=true]:hover{cursor:move;box-shadow:2px 2px 4px #0003;position:relative;z-index:10;margin:-1px 1px 1px -1px}[draggable=true].drag-target-top{box-shadow:0 -2px #000;position:relative;z-index:20}[draggable=true].drag-target-bottom{box-shadow:0 2px #000;position:relative;z-index:20}\n"], dependencies: [{ kind: "directive", type: i2.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "component", type: SelectFrameworkComponent, selector: "select-framework-widget", inputs: ["layoutNode", "layoutIndex", "dataIndex"] }, { kind: "directive", type: OrderableDirective, selector: "[orderable]", inputs: ["orderable", "layoutNode", "layoutIndex", "dataIndex"] }] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(RootComponent, [{
-        type: Component,
-        args: [{ selector: 'root-widget', template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: RootComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'root-widget', template: `
     <div *ngFor="let layoutItem of layout; let i = index"
       [class.form-flex-item]="isFlexItem"
       [style.align-self]="(layoutItem.options || {})['align-self']"
@@ -1978,121 +1829,18 @@ class RootComponent {
           [layoutNode]="layoutItem"></select-framework-widget>
       </div>
     </div>`, styles: ["[draggable=true]{transition:all .15s cubic-bezier(.4,0,.2,1)}[draggable=true]:hover{cursor:move;box-shadow:2px 2px 4px #0003;position:relative;z-index:10;margin:-1px 1px 1px -1px}[draggable=true].drag-target-top{box-shadow:0 -2px #000;position:relative;z-index:20}[draggable=true].drag-target-bottom{box-shadow:0 2px #000;position:relative;z-index:20}\n"] }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { dataIndex: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], layout: [{
-            type: Input
-        }], isOrderable: [{
-            type: Input
-        }], isFlexItem: [{
-            type: Input
-        }] }); })();
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { dataIndex: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], layout: [{
+                type: Input
+            }], isOrderable: [{
+                type: Input
+            }], isFlexItem: [{
+                type: Input
+            }] } });
 
-function SectionComponent_div_0_label_1_Template(rf, ctx) { if (rf & 1) {
-    const _r5 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "label", 4);
-    i0.ɵɵlistener("click", function SectionComponent_div_0_label_1_Template_label_click_0_listener() { i0.ɵɵrestoreView(_r5); const ctx_r4 = i0.ɵɵnextContext(2); return i0.ɵɵresetView(ctx_r4.toggleExpanded()); });
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r2 = i0.ɵɵnextContext(2);
-    i0.ɵɵclassMap((ctx_r2.options == null ? null : ctx_r2.options.labelHtmlClass) || "");
-    i0.ɵɵproperty("innerHTML", ctx_r2.sectionTitle, i0.ɵɵsanitizeHtml);
-} }
-function SectionComponent_div_0_root_widget_2_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "root-widget", 5);
-} if (rf & 2) {
-    const ctx_r3 = i0.ɵɵnextContext(2);
-    i0.ɵɵstyleProp("align-content", ctx_r3.getFlexAttribute("align-content"))("align-items", ctx_r3.getFlexAttribute("align-items"))("display", ctx_r3.getFlexAttribute("display"))("flex-direction", ctx_r3.getFlexAttribute("flex-direction"))("flex-wrap", ctx_r3.getFlexAttribute("flex-wrap"))("justify-content", ctx_r3.getFlexAttribute("justify-content"));
-    i0.ɵɵclassProp("form-flex-column", ctx_r3.getFlexAttribute("flex-direction") === "column")("form-flex-row", ctx_r3.getFlexAttribute("flex-direction") === "row");
-    i0.ɵɵproperty("dataIndex", ctx_r3.dataIndex)("layout", ctx_r3.layoutNode.items)("layoutIndex", ctx_r3.layoutIndex)("isFlexItem", ctx_r3.getFlexAttribute("is-flex"))("isOrderable", ctx_r3.options == null ? null : ctx_r3.options.orderable);
-} }
-function SectionComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "div");
-    i0.ɵɵtemplate(1, SectionComponent_div_0_label_1_Template, 1, 3, "label", 2);
-    i0.ɵɵtemplate(2, SectionComponent_div_0_root_widget_2_Template, 1, 21, "root-widget", 3);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r0.options == null ? null : ctx_r0.options.htmlClass) || "");
-    i0.ɵɵclassProp("expandable", (ctx_r0.options == null ? null : ctx_r0.options.expandable) && !ctx_r0.expanded)("expanded", (ctx_r0.options == null ? null : ctx_r0.options.expandable) && ctx_r0.expanded);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r0.sectionTitle);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r0.expanded);
-} }
-function SectionComponent_fieldset_1_legend_1_Template(rf, ctx) { if (rf & 1) {
-    const _r11 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "legend", 4);
-    i0.ɵɵlistener("click", function SectionComponent_fieldset_1_legend_1_Template_legend_click_0_listener() { i0.ɵɵrestoreView(_r11); const ctx_r10 = i0.ɵɵnextContext(2); return i0.ɵɵresetView(ctx_r10.toggleExpanded()); });
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r6 = i0.ɵɵnextContext(2);
-    i0.ɵɵclassMap((ctx_r6.options == null ? null : ctx_r6.options.labelHtmlClass) || "");
-    i0.ɵɵproperty("innerHTML", ctx_r6.sectionTitle, i0.ɵɵsanitizeHtml);
-} }
-function SectionComponent_fieldset_1_div_2_p_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "p", 9);
-} if (rf & 2) {
-    const ctx_r12 = i0.ɵɵnextContext(3);
-    i0.ɵɵclassMap((ctx_r12.options == null ? null : ctx_r12.options.labelHelpBlockClass) || "");
-    i0.ɵɵproperty("innerHTML", ctx_r12.options == null ? null : ctx_r12.options.description, i0.ɵɵsanitizeHtml);
-} }
-function SectionComponent_fieldset_1_div_2_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "div");
-    i0.ɵɵtemplate(1, SectionComponent_fieldset_1_div_2_p_1_Template, 1, 3, "p", 8);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r7 = i0.ɵɵnextContext(2);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r7.options == null ? null : ctx_r7.options.description);
-} }
-function SectionComponent_fieldset_1_root_widget_3_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "root-widget", 5);
-} if (rf & 2) {
-    const ctx_r8 = i0.ɵɵnextContext(2);
-    i0.ɵɵstyleProp("align-content", ctx_r8.getFlexAttribute("align-content"))("align-items", ctx_r8.getFlexAttribute("align-items"))("display", ctx_r8.getFlexAttribute("display"))("flex-direction", ctx_r8.getFlexAttribute("flex-direction"))("flex-wrap", ctx_r8.getFlexAttribute("flex-wrap"))("justify-content", ctx_r8.getFlexAttribute("justify-content"));
-    i0.ɵɵclassProp("form-flex-column", ctx_r8.getFlexAttribute("flex-direction") === "column")("form-flex-row", ctx_r8.getFlexAttribute("flex-direction") === "row");
-    i0.ɵɵproperty("dataIndex", ctx_r8.dataIndex)("layout", ctx_r8.layoutNode.items)("layoutIndex", ctx_r8.layoutIndex)("isFlexItem", ctx_r8.getFlexAttribute("is-flex"))("isOrderable", ctx_r8.options == null ? null : ctx_r8.options.orderable);
-} }
-function SectionComponent_fieldset_1_div_4_p_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "p", 9);
-} if (rf & 2) {
-    const ctx_r13 = i0.ɵɵnextContext(3);
-    i0.ɵɵclassMap((ctx_r13.options == null ? null : ctx_r13.options.labelHelpBlockClass) || "");
-    i0.ɵɵproperty("innerHTML", ctx_r13.options == null ? null : ctx_r13.options.description, i0.ɵɵsanitizeHtml);
-} }
-function SectionComponent_fieldset_1_div_4_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "div");
-    i0.ɵɵtemplate(1, SectionComponent_fieldset_1_div_4_p_1_Template, 1, 3, "p", 8);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r9 = i0.ɵɵnextContext(2);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r9.options == null ? null : ctx_r9.options.description);
-} }
-function SectionComponent_fieldset_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "fieldset", 6);
-    i0.ɵɵtemplate(1, SectionComponent_fieldset_1_legend_1_Template, 1, 3, "legend", 2);
-    i0.ɵɵtemplate(2, SectionComponent_fieldset_1_div_2_Template, 2, 1, "div", 7);
-    i0.ɵɵtemplate(3, SectionComponent_fieldset_1_root_widget_3_Template, 1, 21, "root-widget", 3);
-    i0.ɵɵtemplate(4, SectionComponent_fieldset_1_div_4_Template, 2, 1, "div", 7);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r1 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r1.options == null ? null : ctx_r1.options.htmlClass) || "");
-    i0.ɵɵclassProp("expandable", (ctx_r1.options == null ? null : ctx_r1.options.expandable) && !ctx_r1.expanded)("expanded", (ctx_r1.options == null ? null : ctx_r1.options.expandable) && ctx_r1.expanded);
-    i0.ɵɵproperty("disabled", ctx_r1.options == null ? null : ctx_r1.options.readonly);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r1.sectionTitle);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", (ctx_r1.options == null ? null : ctx_r1.options.messageLocation) !== "bottom");
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r1.expanded);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", (ctx_r1.options == null ? null : ctx_r1.options.messageLocation) === "bottom");
-} }
 class SectionComponent {
     jsf;
     options;
@@ -2155,19 +1903,73 @@ class SectionComponent {
                 return this.options[attribute];
         }
     }
-    static ɵfac = function SectionComponent_Factory(t) { return new (t || SectionComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: SectionComponent, selectors: [["section-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 2, vars: 2, consts: [[3, "class", "expandable", "expanded", 4, "ngIf"], [3, "class", "expandable", "expanded", "disabled", 4, "ngIf"], ["class", "legend", 3, "class", "innerHTML", "click", 4, "ngIf"], [3, "dataIndex", "layout", "layoutIndex", "isFlexItem", "isOrderable", "form-flex-column", "form-flex-row", "align-content", "align-items", "display", "flex-direction", "flex-wrap", "justify-content", 4, "ngIf"], [1, "legend", 3, "innerHTML", "click"], [3, "dataIndex", "layout", "layoutIndex", "isFlexItem", "isOrderable"], [3, "disabled"], [4, "ngIf"], ["class", "help-block", 3, "class", "innerHTML", 4, "ngIf"], [1, "help-block", 3, "innerHTML"]], template: function SectionComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵtemplate(0, SectionComponent_div_0_Template, 3, 8, "div", 0);
-            i0.ɵɵtemplate(1, SectionComponent_fieldset_1_Template, 5, 11, "fieldset", 1);
-        } if (rf & 2) {
-            i0.ɵɵproperty("ngIf", ctx.containerType === "div");
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.containerType === "fieldset");
-        } }, dependencies: [i2.NgIf, RootComponent], styles: [".legend[_ngcontent-%COMP%]{font-weight:700}.expandable[_ngcontent-%COMP%] > legend[_ngcontent-%COMP%]:before, .expandable[_ngcontent-%COMP%] > label[_ngcontent-%COMP%]:before{content:\"\\25b6\";padding-right:.3em}.expanded[_ngcontent-%COMP%] > legend[_ngcontent-%COMP%]:before, .expanded[_ngcontent-%COMP%] > label[_ngcontent-%COMP%]:before{content:\"\\25bc\";padding-right:.2em}"] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: SectionComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: SectionComponent, selector: "section-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+      <div *ngIf="containerType === 'div'"
+           [class]="options?.htmlClass || ''"
+           [class.expandable]="options?.expandable && !expanded"
+           [class.expanded]="options?.expandable && expanded">
+          <label *ngIf="sectionTitle"
+                 class="legend"
+                 [class]="options?.labelHtmlClass || ''"
+                 [innerHTML]="sectionTitle"
+                 (click)="toggleExpanded()"></label>
+          <root-widget *ngIf="expanded"
+                       [dataIndex]="dataIndex"
+                       [layout]="layoutNode.items"
+                       [layoutIndex]="layoutIndex"
+                       [isFlexItem]="getFlexAttribute('is-flex')"
+                       [isOrderable]="options?.orderable"
+                       [class.form-flex-column]="getFlexAttribute('flex-direction') === 'column'"
+                       [class.form-flex-row]="getFlexAttribute('flex-direction') === 'row'"
+                       [style.align-content]="getFlexAttribute('align-content')"
+                       [style.align-items]="getFlexAttribute('align-items')"
+                       [style.display]="getFlexAttribute('display')"
+                       [style.flex-direction]="getFlexAttribute('flex-direction')"
+                       [style.flex-wrap]="getFlexAttribute('flex-wrap')"
+                       [style.justify-content]="getFlexAttribute('justify-content')"></root-widget>
+      </div>
+      <fieldset *ngIf="containerType === 'fieldset'"
+                [class]="options?.htmlClass || ''"
+                [class.expandable]="options?.expandable && !expanded"
+                [class.expanded]="options?.expandable && expanded"
+                [disabled]="options?.readonly">
+          <legend *ngIf="sectionTitle"
+                  class="legend"
+                  [class]="options?.labelHtmlClass || ''"
+                  [innerHTML]="sectionTitle"
+                  (click)="toggleExpanded()"></legend>
+          <div *ngIf="options?.messageLocation !== 'bottom'">
+              <p *ngIf="options?.description"
+                 class="help-block"
+                 [class]="options?.labelHelpBlockClass || ''"
+                 [innerHTML]="options?.description"></p>
+          </div>
+          <root-widget *ngIf="expanded"
+                       [dataIndex]="dataIndex"
+                       [layout]="layoutNode.items"
+                       [layoutIndex]="layoutIndex"
+                       [isFlexItem]="getFlexAttribute('is-flex')"
+                       [isOrderable]="options?.orderable"
+                       [class.form-flex-column]="getFlexAttribute('flex-direction') === 'column'"
+                       [class.form-flex-row]="getFlexAttribute('flex-direction') === 'row'"
+                       [style.align-content]="getFlexAttribute('align-content')"
+                       [style.align-items]="getFlexAttribute('align-items')"
+                       [style.display]="getFlexAttribute('display')"
+                       [style.flex-direction]="getFlexAttribute('flex-direction')"
+                       [style.flex-wrap]="getFlexAttribute('flex-wrap')"
+                       [style.justify-content]="getFlexAttribute('justify-content')"></root-widget>
+          <div *ngIf="options?.messageLocation === 'bottom'">
+              <p *ngIf="options?.description"
+                 class="help-block"
+                 [class]="options?.labelHelpBlockClass || ''"
+                 [innerHTML]="options?.description"></p>
+          </div>
+      </fieldset>`, isInline: true, styles: [".legend{font-weight:700}.expandable>legend:before,.expandable>label:before{content:\"\\25b6\";padding-right:.3em}.expanded>legend:before,.expanded>label:before{content:\"\\25bc\";padding-right:.2em}\n"], dependencies: [{ kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "component", type: RootComponent, selector: "root-widget", inputs: ["dataIndex", "layoutIndex", "layout", "isOrderable", "isFlexItem"] }] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(SectionComponent, [{
-        type: Component,
-        args: [{ selector: 'section-widget', template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: SectionComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'section-widget', template: `
       <div *ngIf="containerType === 'div'"
            [class]="options?.htmlClass || ''"
            [class.expandable]="options?.expandable && !expanded"
@@ -2229,132 +2031,14 @@ class SectionComponent {
                  [innerHTML]="options?.description"></p>
           </div>
       </fieldset>`, styles: [".legend{font-weight:700}.expandable>legend:before,.expandable>label:before{content:\"\\25b6\";padding-right:.3em}.expanded>legend:before,.expanded>label:before{content:\"\\25bc\";padding-right:.2em}\n"] }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
-function SelectComponent_label_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "label", 3);
-} if (rf & 2) {
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r0.options == null ? null : ctx_r0.options.labelHtmlClass) || "");
-    i0.ɵɵstyleProp("display", (ctx_r0.options == null ? null : ctx_r0.options.notitle) ? "none" : "");
-    i0.ɵɵproperty("innerHTML", ctx_r0.options == null ? null : ctx_r0.options.title, i0.ɵɵsanitizeHtml);
-    i0.ɵɵattribute("for", "control" + (ctx_r0.layoutNode == null ? null : ctx_r0.layoutNode._id));
-} }
-function SelectComponent_select_2_ng_template_1_option_0_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "option", 8);
-    i0.ɵɵelement(1, "span", 3);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const selectItem_r4 = i0.ɵɵnextContext().$implicit;
-    i0.ɵɵproperty("value", selectItem_r4 == null ? null : selectItem_r4.value);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("innerHTML", selectItem_r4 == null ? null : selectItem_r4.name, i0.ɵɵsanitizeHtml);
-} }
-function SelectComponent_select_2_ng_template_1_optgroup_1_option_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "option", 8);
-    i0.ɵɵelement(1, "span", 3);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const subItem_r9 = ctx.$implicit;
-    i0.ɵɵproperty("value", subItem_r9 == null ? null : subItem_r9.value);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("innerHTML", subItem_r9 == null ? null : subItem_r9.name, i0.ɵɵsanitizeHtml);
-} }
-function SelectComponent_select_2_ng_template_1_optgroup_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "optgroup", 9);
-    i0.ɵɵtemplate(1, SelectComponent_select_2_ng_template_1_optgroup_1_option_1_Template, 2, 2, "option", 10);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const selectItem_r4 = i0.ɵɵnextContext().$implicit;
-    i0.ɵɵproperty("label", selectItem_r4 == null ? null : selectItem_r4.group);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngForOf", selectItem_r4.items);
-} }
-function SelectComponent_select_2_ng_template_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵtemplate(0, SelectComponent_select_2_ng_template_1_option_0_Template, 2, 2, "option", 6);
-    i0.ɵɵtemplate(1, SelectComponent_select_2_ng_template_1_optgroup_1_Template, 2, 2, "optgroup", 7);
-} if (rf & 2) {
-    const selectItem_r4 = ctx.$implicit;
-    const ctx_r3 = i0.ɵɵnextContext(2);
-    i0.ɵɵproperty("ngIf", !ctx_r3.isArray(selectItem_r4 == null ? null : selectItem_r4.items));
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r3.isArray(selectItem_r4 == null ? null : selectItem_r4.items));
-} }
-function SelectComponent_select_2_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "select", 4);
-    i0.ɵɵtemplate(1, SelectComponent_select_2_ng_template_1_Template, 2, 2, "ng-template", 5);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r1 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r1.options == null ? null : ctx_r1.options.fieldHtmlClass) || "");
-    i0.ɵɵproperty("formControl", ctx_r1.formControl)("id", "control" + (ctx_r1.layoutNode == null ? null : ctx_r1.layoutNode._id))("name", ctx_r1.controlName);
-    i0.ɵɵattribute("aria-describedby", "control" + (ctx_r1.layoutNode == null ? null : ctx_r1.layoutNode._id) + "Status")("readonly", (ctx_r1.options == null ? null : ctx_r1.options.readonly) ? "readonly" : null)("required", ctx_r1.options == null ? null : ctx_r1.options.required);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngForOf", ctx_r1.selectList);
-} }
-function SelectComponent_select_3_ng_template_1_option_0_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "option", 13);
-    i0.ɵɵelement(1, "span", 3);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const selectItem_r12 = i0.ɵɵnextContext().$implicit;
-    const ctx_r13 = i0.ɵɵnextContext(2);
-    i0.ɵɵproperty("selected", (selectItem_r12 == null ? null : selectItem_r12.value) === ctx_r13.controlValue)("value", selectItem_r12 == null ? null : selectItem_r12.value);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("innerHTML", selectItem_r12 == null ? null : selectItem_r12.name, i0.ɵɵsanitizeHtml);
-} }
-function SelectComponent_select_3_ng_template_1_optgroup_1_option_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "option", 8);
-    i0.ɵɵelement(1, "span", 3);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const subItem_r17 = ctx.$implicit;
-    const ctx_r16 = i0.ɵɵnextContext(4);
-    i0.ɵɵproperty("value", subItem_r17 == null ? null : subItem_r17.value);
-    i0.ɵɵattribute("selected", (subItem_r17 == null ? null : subItem_r17.value) === ctx_r16.controlValue);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("innerHTML", subItem_r17 == null ? null : subItem_r17.name, i0.ɵɵsanitizeHtml);
-} }
-function SelectComponent_select_3_ng_template_1_optgroup_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "optgroup", 9);
-    i0.ɵɵtemplate(1, SelectComponent_select_3_ng_template_1_optgroup_1_option_1_Template, 2, 3, "option", 10);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const selectItem_r12 = i0.ɵɵnextContext().$implicit;
-    i0.ɵɵproperty("label", selectItem_r12 == null ? null : selectItem_r12.group);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngForOf", selectItem_r12.items);
-} }
-function SelectComponent_select_3_ng_template_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵtemplate(0, SelectComponent_select_3_ng_template_1_option_0_Template, 2, 3, "option", 12);
-    i0.ɵɵtemplate(1, SelectComponent_select_3_ng_template_1_optgroup_1_Template, 2, 2, "optgroup", 7);
-} if (rf & 2) {
-    const selectItem_r12 = ctx.$implicit;
-    const ctx_r11 = i0.ɵɵnextContext(2);
-    i0.ɵɵproperty("ngIf", !ctx_r11.isArray(selectItem_r12 == null ? null : selectItem_r12.items));
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r11.isArray(selectItem_r12 == null ? null : selectItem_r12.items));
-} }
-function SelectComponent_select_3_Template(rf, ctx) { if (rf & 1) {
-    const _r20 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "select", 11);
-    i0.ɵɵlistener("change", function SelectComponent_select_3_Template_select_change_0_listener($event) { i0.ɵɵrestoreView(_r20); const ctx_r19 = i0.ɵɵnextContext(); return i0.ɵɵresetView(ctx_r19.updateValue($event)); });
-    i0.ɵɵtemplate(1, SelectComponent_select_3_ng_template_1_Template, 2, 2, "ng-template", 5);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r2 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r2.options == null ? null : ctx_r2.options.fieldHtmlClass) || "");
-    i0.ɵɵproperty("disabled", ctx_r2.controlDisabled)("id", "control" + (ctx_r2.layoutNode == null ? null : ctx_r2.layoutNode._id))("name", ctx_r2.controlName);
-    i0.ɵɵattribute("aria-describedby", "control" + (ctx_r2.layoutNode == null ? null : ctx_r2.layoutNode._id) + "Status")("readonly", (ctx_r2.options == null ? null : ctx_r2.options.readonly) ? "readonly" : null)("required", ctx_r2.options == null ? null : ctx_r2.options.required);
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngForOf", ctx_r2.selectList);
-} }
 class SelectComponent {
     jsf;
     formControl;
@@ -2379,28 +2063,69 @@ class SelectComponent {
     updateValue(event) {
         this.jsf.updateValue(this, event.target.value);
     }
-    static ɵfac = function SelectComponent_Factory(t) { return new (t || SelectComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: SelectComponent, selectors: [["select-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 4, vars: 5, consts: [[3, "class", "display", "innerHTML", 4, "ngIf"], [3, "formControl", "class", "id", "name", 4, "ngIf"], [3, "class", "disabled", "id", "name", "change", 4, "ngIf"], [3, "innerHTML"], [3, "formControl", "id", "name"], ["ngFor", "", 3, "ngForOf"], [3, "value", 4, "ngIf"], [3, "label", 4, "ngIf"], [3, "value"], [3, "label"], [3, "value", 4, "ngFor", "ngForOf"], [3, "disabled", "id", "name", "change"], [3, "selected", "value", 4, "ngIf"], [3, "selected", "value"]], template: function SelectComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵelementStart(0, "div");
-            i0.ɵɵtemplate(1, SelectComponent_label_1_Template, 1, 6, "label", 0);
-            i0.ɵɵtemplate(2, SelectComponent_select_2_Template, 2, 9, "select", 1);
-            i0.ɵɵtemplate(3, SelectComponent_select_3_Template, 2, 9, "select", 2);
-            i0.ɵɵelementEnd();
-        } if (rf & 2) {
-            i0.ɵɵclassMap((ctx.options == null ? null : ctx.options.htmlClass) || "");
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.options == null ? null : ctx.options.title);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.boundControl);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", !ctx.boundControl);
-        } }, dependencies: [i2.NgForOf, i2.NgIf, i3.NgSelectOption, i3.ɵNgSelectMultipleOption, i3.SelectControlValueAccessor, i3.NgControlStatus, i3.FormControlDirective], encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: SelectComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: SelectComponent, selector: "select-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+    <div
+      [class]="options?.htmlClass || ''">
+      <label *ngIf="options?.title"
+        [attr.for]="'control' + layoutNode?._id"
+        [class]="options?.labelHtmlClass || ''"
+        [style.display]="options?.notitle ? 'none' : ''"
+        [innerHTML]="options?.title"></label>
+      <select *ngIf="boundControl"
+        [formControl]="formControl"
+        [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
+        [attr.readonly]="options?.readonly ? 'readonly' : null"
+        [attr.required]="options?.required"
+        [class]="options?.fieldHtmlClass || ''"
+        [id]="'control' + layoutNode?._id"
+        [name]="controlName">
+        <ng-template ngFor let-selectItem [ngForOf]="selectList">
+          <option *ngIf="!isArray(selectItem?.items)"
+            [value]="selectItem?.value">
+            <span [innerHTML]="selectItem?.name"></span>
+          </option>
+          <optgroup *ngIf="isArray(selectItem?.items)"
+            [label]="selectItem?.group">
+            <option *ngFor="let subItem of selectItem.items"
+              [value]="subItem?.value">
+              <span [innerHTML]="subItem?.name"></span>
+            </option>
+          </optgroup>
+        </ng-template>
+      </select>
+      <select *ngIf="!boundControl"
+        [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
+        [attr.readonly]="options?.readonly ? 'readonly' : null"
+        [attr.required]="options?.required"
+        [class]="options?.fieldHtmlClass || ''"
+        [disabled]="controlDisabled"
+        [id]="'control' + layoutNode?._id"
+        [name]="controlName"
+        (change)="updateValue($event)">
+        <ng-template ngFor let-selectItem [ngForOf]="selectList">
+          <option *ngIf="!isArray(selectItem?.items)"
+            [selected]="selectItem?.value === controlValue"
+            [value]="selectItem?.value">
+            <span [innerHTML]="selectItem?.name"></span>
+          </option>
+          <optgroup *ngIf="isArray(selectItem?.items)"
+            [label]="selectItem?.group">
+            <option *ngFor="let subItem of selectItem.items"
+              [attr.selected]="subItem?.value === controlValue"
+              [value]="subItem?.value">
+              <span [innerHTML]="subItem?.name"></span>
+            </option>
+          </optgroup>
+        </ng-template>
+      </select>
+    </div>`, isInline: true, dependencies: [{ kind: "directive", type: i2.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.NgSelectOption, selector: "option", inputs: ["ngValue", "value"] }, { kind: "directive", type: i3.ɵNgSelectMultipleOption, selector: "option", inputs: ["ngValue", "value"] }, { kind: "directive", type: i3.SelectControlValueAccessor, selector: "select:not([multiple])[formControlName],select:not([multiple])[formControl],select:not([multiple])[ngModel]", inputs: ["compareWith"] }, { kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.FormControlDirective, selector: "[formControl]", inputs: ["formControl", "disabled", "ngModel"], outputs: ["ngModelChange"], exportAs: ["ngForm"] }] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(SelectComponent, [{
-        type: Component,
-        args: [{
-                selector: 'select-widget',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: SelectComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'select-widget',
+                    template: `
     <div
       [class]="options?.htmlClass || ''">
       <label *ngIf="options?.title"
@@ -2456,16 +2181,15 @@ class SelectComponent {
         </ng-template>
       </select>
     </div>`,
-            }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+                }]
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
-const _c0$2 = ["widgetContainer"];
 class SelectWidgetComponent {
     componentFactory;
     jsf;
@@ -2494,32 +2218,25 @@ class SelectWidgetComponent {
             }
         }
     }
-    static ɵfac = function SelectWidgetComponent_Factory(t) { return new (t || SelectWidgetComponent)(i0.ɵɵdirectiveInject(i0.ComponentFactoryResolver), i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: SelectWidgetComponent, selectors: [["select-widget-widget"]], viewQuery: function SelectWidgetComponent_Query(rf, ctx) { if (rf & 1) {
-            i0.ɵɵviewQuery(_c0$2, 7, ViewContainerRef);
-        } if (rf & 2) {
-            let _t;
-            i0.ɵɵqueryRefresh(_t = i0.ɵɵloadQuery()) && (ctx.widgetContainer = _t.first);
-        } }, inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, features: [i0.ɵɵNgOnChangesFeature], decls: 2, vars: 0, consts: [["widgetContainer", ""]], template: function SelectWidgetComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵelement(0, "div", null, 0);
-        } }, encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: SelectWidgetComponent, deps: [{ token: i0.ComponentFactoryResolver }, { token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: SelectWidgetComponent, selector: "select-widget-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, viewQueries: [{ propertyName: "widgetContainer", first: true, predicate: ["widgetContainer"], descendants: true, read: ViewContainerRef, static: true }], usesOnChanges: true, ngImport: i0, template: `<div #widgetContainer></div>`, isInline: true });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(SelectWidgetComponent, [{
-        type: Component,
-        args: [{
-                selector: 'select-widget-widget',
-                template: `<div #widgetContainer></div>`,
-            }]
-    }], function () { return [{ type: i0.ComponentFactoryResolver }, { type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }], widgetContainer: [{
-            type: ViewChild,
-            args: ['widgetContainer', { read: ViewContainerRef, static: true }]
-        }] }); })();
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: SelectWidgetComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'select-widget-widget',
+                    template: `<div #widgetContainer></div>`,
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ComponentFactoryResolver }, { type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }], widgetContainer: [{
+                type: ViewChild,
+                args: ['widgetContainer', { read: ViewContainerRef, static: true }]
+            }] } });
 
 class SubmitComponent {
     jsf;
@@ -2557,24 +2274,28 @@ class SubmitComponent {
             this.jsf.updateValue(this, event.target.value);
         }
     }
-    static ɵfac = function SubmitComponent_Factory(t) { return new (t || SubmitComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: SubmitComponent, selectors: [["submit-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 2, vars: 12, consts: [[3, "disabled", "id", "name", "type", "value", "click"]], template: function SubmitComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵelementStart(0, "div")(1, "input", 0);
-            i0.ɵɵlistener("click", function SubmitComponent_Template_input_click_1_listener($event) { return ctx.updateValue($event); });
-            i0.ɵɵelementEnd()();
-        } if (rf & 2) {
-            i0.ɵɵclassMap((ctx.options == null ? null : ctx.options.htmlClass) || "");
-            i0.ɵɵadvance(1);
-            i0.ɵɵclassMap((ctx.options == null ? null : ctx.options.fieldHtmlClass) || "");
-            i0.ɵɵproperty("disabled", ctx.controlDisabled)("id", "control" + (ctx.layoutNode == null ? null : ctx.layoutNode._id))("name", ctx.controlName)("type", ctx.layoutNode == null ? null : ctx.layoutNode.type)("value", ctx.controlValue);
-            i0.ɵɵattribute("aria-describedby", "control" + (ctx.layoutNode == null ? null : ctx.layoutNode._id) + "Status")("readonly", (ctx.options == null ? null : ctx.options.readonly) ? "readonly" : null)("required", ctx.options == null ? null : ctx.options.required);
-        } }, encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: SubmitComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: SubmitComponent, selector: "submit-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+    <div
+      [class]="options?.htmlClass || ''">
+      <input
+        [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
+        [attr.readonly]="options?.readonly ? 'readonly' : null"
+        [attr.required]="options?.required"
+        [class]="options?.fieldHtmlClass || ''"
+        [disabled]="controlDisabled"
+        [id]="'control' + layoutNode?._id"
+        [name]="controlName"
+        [type]="layoutNode?.type"
+        [value]="controlValue"
+        (click)="updateValue($event)">
+    </div>`, isInline: true });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(SubmitComponent, [{
-        type: Component,
-        args: [{
-                selector: 'submit-widget',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: SubmitComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'submit-widget',
+                    template: `
     <div
       [class]="options?.htmlClass || ''">
       <input
@@ -2589,62 +2310,15 @@ class SubmitComponent {
         [value]="controlValue"
         (click)="updateValue($event)">
     </div>`,
-            }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+                }]
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
-function TabsComponent_li_1_a_1_Template(rf, ctx) { if (rf & 1) {
-    const _r7 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "a", 4);
-    i0.ɵɵlistener("click", function TabsComponent_li_1_a_1_Template_a_click_0_listener() { i0.ɵɵrestoreView(_r7); const i_r3 = i0.ɵɵnextContext().index; const ctx_r5 = i0.ɵɵnextContext(); return i0.ɵɵresetView(ctx_r5.select(i_r3)); });
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r8 = i0.ɵɵnextContext();
-    const i_r3 = ctx_r8.index;
-    const item_r2 = ctx_r8.$implicit;
-    const ctx_r4 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap("nav-link" + (ctx_r4.selectedItem === i_r3 ? " " + (ctx_r4.options == null ? null : ctx_r4.options.activeClass) + " " + (ctx_r4.options == null ? null : ctx_r4.options.style == null ? null : ctx_r4.options.style.selected) : " " + (ctx_r4.options == null ? null : ctx_r4.options.style == null ? null : ctx_r4.options.style.unselected)));
-    i0.ɵɵproperty("innerHTML", ctx_r4.setTabTitle(item_r2, i_r3), i0.ɵɵsanitizeHtml);
-} }
-function TabsComponent_li_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "li", 2);
-    i0.ɵɵtemplate(1, TabsComponent_li_1_a_1_Template, 1, 3, "a", 3);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const item_r2 = ctx.$implicit;
-    const i_r3 = ctx.index;
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap(((ctx_r0.options == null ? null : ctx_r0.options.itemLabelHtmlClass) || "") + (ctx_r0.selectedItem === i_r3 ? " " + ((ctx_r0.options == null ? null : ctx_r0.options.activeClass) || "") + " " + ((ctx_r0.options == null ? null : ctx_r0.options.style == null ? null : ctx_r0.options.style.selected) || "") : " " + (ctx_r0.options == null ? null : ctx_r0.options.style == null ? null : ctx_r0.options.style.unselected)));
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r0.showAddTab || item_r2.type !== "$ref");
-} }
-const _c0$1 = function () { return []; };
-function TabsComponent_div_2_select_framework_widget_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "select-framework-widget", 6);
-} if (rf & 2) {
-    const ctx_r12 = i0.ɵɵnextContext();
-    const i_r10 = ctx_r12.index;
-    const layoutItem_r9 = ctx_r12.$implicit;
-    const ctx_r11 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap(((ctx_r11.options == null ? null : ctx_r11.options.fieldHtmlClass) || "") + " " + ((ctx_r11.options == null ? null : ctx_r11.options.activeClass) || "") + " " + ((ctx_r11.options == null ? null : ctx_r11.options.style == null ? null : ctx_r11.options.style.selected) || ""));
-    i0.ɵɵproperty("dataIndex", (ctx_r11.layoutNode == null ? null : ctx_r11.layoutNode.dataType) === "array" ? (ctx_r11.dataIndex || i0.ɵɵpureFunction0(5, _c0$1)).concat(i_r10) : ctx_r11.dataIndex)("layoutIndex", (ctx_r11.layoutIndex || i0.ɵɵpureFunction0(6, _c0$1)).concat(i_r10))("layoutNode", layoutItem_r9);
-} }
-function TabsComponent_div_2_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "div");
-    i0.ɵɵtemplate(1, TabsComponent_div_2_select_framework_widget_1_Template, 1, 7, "select-framework-widget", 5);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const i_r10 = ctx.index;
-    const ctx_r1 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r1.options == null ? null : ctx_r1.options.htmlClass) || "");
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("ngIf", ctx_r1.selectedItem === i_r10);
-} }
 class TabsComponent {
     jsf;
     options;
@@ -2684,23 +2358,40 @@ class TabsComponent {
     setTabTitle(item, index) {
         return this.jsf.setArrayItemTitle(this, item, index);
     }
-    static ɵfac = function TabsComponent_Factory(t) { return new (t || TabsComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: TabsComponent, selectors: [["tabs-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 3, vars: 4, consts: [["role", "presentation", "data-tabs", "", 3, "class", 4, "ngFor", "ngForOf"], [3, "class", 4, "ngFor", "ngForOf"], ["role", "presentation", "data-tabs", ""], [3, "class", "innerHTML", "click", 4, "ngIf"], [3, "innerHTML", "click"], [3, "class", "dataIndex", "layoutIndex", "layoutNode", 4, "ngIf"], [3, "dataIndex", "layoutIndex", "layoutNode"]], template: function TabsComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵelementStart(0, "ul");
-            i0.ɵɵtemplate(1, TabsComponent_li_1_Template, 2, 3, "li", 0);
-            i0.ɵɵelementEnd();
-            i0.ɵɵtemplate(2, TabsComponent_div_2_Template, 2, 3, "div", 1);
-        } if (rf & 2) {
-            i0.ɵɵclassMap((ctx.options == null ? null : ctx.options.labelHtmlClass) || "");
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngForOf", ctx.layoutNode == null ? null : ctx.layoutNode.items);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngForOf", ctx.layoutNode == null ? null : ctx.layoutNode.items);
-        } }, dependencies: [i2.NgForOf, i2.NgIf, SelectFrameworkComponent], styles: ["a[_ngcontent-%COMP%]{cursor:pointer}"] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: TabsComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: TabsComponent, selector: "tabs-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+    <ul
+      [class]="options?.labelHtmlClass || ''">
+      <li *ngFor="let item of layoutNode?.items; let i = index"
+        [class]="(options?.itemLabelHtmlClass || '') + (selectedItem === i ?
+          (' ' + (options?.activeClass || '') + ' ' + (options?.style?.selected || '')) :
+          (' ' + options?.style?.unselected))"
+        role="presentation"
+        data-tabs>
+        <a *ngIf="showAddTab || item.type !== '$ref'"
+           [class]="'nav-link' + (selectedItem === i ? (' ' + options?.activeClass + ' ' + options?.style?.selected) :
+            (' ' + options?.style?.unselected))"
+          [innerHTML]="setTabTitle(item, i)"
+          (click)="select(i)"></a>
+      </li>
+    </ul>
+
+    <div *ngFor="let layoutItem of layoutNode?.items; let i = index"
+      [class]="options?.htmlClass || ''">
+
+      <select-framework-widget *ngIf="selectedItem === i"
+        [class]="(options?.fieldHtmlClass || '') +
+          ' ' + (options?.activeClass || '') +
+          ' ' + (options?.style?.selected || '')"
+        [dataIndex]="layoutNode?.dataType === 'array' ? (dataIndex || []).concat(i) : dataIndex"
+        [layoutIndex]="(layoutIndex || []).concat(i)"
+        [layoutNode]="layoutItem"></select-framework-widget>
+
+    </div>`, isInline: true, styles: ["a{cursor:pointer}\n"], dependencies: [{ kind: "directive", type: i2.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "component", type: SelectFrameworkComponent, selector: "select-framework-widget", inputs: ["layoutNode", "layoutIndex", "dataIndex"] }] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(TabsComponent, [{
-        type: Component,
-        args: [{ selector: 'tabs-widget', template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: TabsComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'tabs-widget', template: `
     <ul
       [class]="options?.labelHtmlClass || ''">
       <li *ngFor="let item of layoutNode?.items; let i = index"
@@ -2729,15 +2420,14 @@ class TabsComponent {
         [layoutNode]="layoutItem"></select-framework-widget>
 
     </div>`, styles: ["a{cursor:pointer}\n"] }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
-const _c0 = ["widgetContainer"];
 class TemplateComponent {
     componentFactory;
     jsf;
@@ -2766,64 +2456,26 @@ class TemplateComponent {
             }
         }
     }
-    static ɵfac = function TemplateComponent_Factory(t) { return new (t || TemplateComponent)(i0.ɵɵdirectiveInject(i0.ComponentFactoryResolver), i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: TemplateComponent, selectors: [["template-widget"]], viewQuery: function TemplateComponent_Query(rf, ctx) { if (rf & 1) {
-            i0.ɵɵviewQuery(_c0, 7, ViewContainerRef);
-        } if (rf & 2) {
-            let _t;
-            i0.ɵɵqueryRefresh(_t = i0.ɵɵloadQuery()) && (ctx.widgetContainer = _t.first);
-        } }, inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, features: [i0.ɵɵNgOnChangesFeature], decls: 2, vars: 0, consts: [["widgetContainer", ""]], template: function TemplateComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵelement(0, "div", null, 0);
-        } }, encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: TemplateComponent, deps: [{ token: i0.ComponentFactoryResolver }, { token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: TemplateComponent, selector: "template-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, viewQueries: [{ propertyName: "widgetContainer", first: true, predicate: ["widgetContainer"], descendants: true, read: ViewContainerRef, static: true }], usesOnChanges: true, ngImport: i0, template: `<div #widgetContainer></div>`, isInline: true });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(TemplateComponent, [{
-        type: Component,
-        args: [{
-                selector: 'template-widget',
-                template: `<div #widgetContainer></div>`,
-            }]
-    }], function () { return [{ type: i0.ComponentFactoryResolver }, { type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }], widgetContainer: [{
-            type: ViewChild,
-            args: ['widgetContainer', { read: ViewContainerRef, static: true }]
-        }] }); })();
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: TemplateComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'template-widget',
+                    template: `<div #widgetContainer></div>`,
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ComponentFactoryResolver }, { type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }], widgetContainer: [{
+                type: ViewChild,
+                args: ['widgetContainer', { read: ViewContainerRef, static: true }]
+            }] } });
 
-function TextareaComponent_label_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "label", 3);
-} if (rf & 2) {
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r0.options == null ? null : ctx_r0.options.labelHtmlClass) || "");
-    i0.ɵɵstyleProp("display", (ctx_r0.options == null ? null : ctx_r0.options.notitle) ? "none" : "");
-    i0.ɵɵproperty("innerHTML", ctx_r0.options == null ? null : ctx_r0.options.title, i0.ɵɵsanitizeHtml);
-    i0.ɵɵattribute("for", "control" + (ctx_r0.layoutNode == null ? null : ctx_r0.layoutNode._id));
-} }
-function TextareaComponent_textarea_2_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "textarea", 4);
-} if (rf & 2) {
-    const ctx_r1 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r1.options == null ? null : ctx_r1.options.fieldHtmlClass) || "");
-    i0.ɵɵproperty("formControl", ctx_r1.formControl)("id", "control" + (ctx_r1.layoutNode == null ? null : ctx_r1.layoutNode._id))("name", ctx_r1.controlName);
-    i0.ɵɵattribute("aria-describedby", "control" + (ctx_r1.layoutNode == null ? null : ctx_r1.layoutNode._id) + "Status")("maxlength", ctx_r1.options == null ? null : ctx_r1.options.maxLength)("minlength", ctx_r1.options == null ? null : ctx_r1.options.minLength)("pattern", ctx_r1.options == null ? null : ctx_r1.options.pattern)("placeholder", ctx_r1.options == null ? null : ctx_r1.options.placeholder)("readonly", (ctx_r1.options == null ? null : ctx_r1.options.readonly) ? "readonly" : null)("required", ctx_r1.options == null ? null : ctx_r1.options.required);
-} }
-function TextareaComponent_textarea_3_Template(rf, ctx) { if (rf & 1) {
-    const _r4 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "textarea", 5);
-    i0.ɵɵlistener("input", function TextareaComponent_textarea_3_Template_textarea_input_0_listener($event) { i0.ɵɵrestoreView(_r4); const ctx_r3 = i0.ɵɵnextContext(); return i0.ɵɵresetView(ctx_r3.updateValue($event)); });
-    i0.ɵɵtext(1);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r2 = i0.ɵɵnextContext();
-    i0.ɵɵclassMap((ctx_r2.options == null ? null : ctx_r2.options.fieldHtmlClass) || "");
-    i0.ɵɵproperty("disabled", ctx_r2.controlDisabled)("id", "control" + (ctx_r2.layoutNode == null ? null : ctx_r2.layoutNode._id))("name", ctx_r2.controlName)("value", ctx_r2.controlValue);
-    i0.ɵɵattribute("aria-describedby", "control" + (ctx_r2.layoutNode == null ? null : ctx_r2.layoutNode._id) + "Status")("maxlength", ctx_r2.options == null ? null : ctx_r2.options.maxLength)("minlength", ctx_r2.options == null ? null : ctx_r2.options.minLength)("pattern", ctx_r2.options == null ? null : ctx_r2.options.pattern)("placeholder", ctx_r2.options == null ? null : ctx_r2.options.placeholder)("readonly", (ctx_r2.options == null ? null : ctx_r2.options.readonly) ? "readonly" : null)("required", ctx_r2.options == null ? null : ctx_r2.options.required);
-    i0.ɵɵadvance(1);
-    i0.ɵɵtextInterpolate(ctx_r2.controlValue);
-} }
 class TextareaComponent {
     jsf;
     formControl;
@@ -2845,28 +2497,48 @@ class TextareaComponent {
     updateValue(event) {
         this.jsf.updateValue(this, event.target.value);
     }
-    static ɵfac = function TextareaComponent_Factory(t) { return new (t || TextareaComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: TextareaComponent, selectors: [["textarea-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 4, vars: 5, consts: [[3, "class", "display", "innerHTML", 4, "ngIf"], [3, "formControl", "class", "id", "name", 4, "ngIf"], [3, "class", "disabled", "id", "name", "value", "input", 4, "ngIf"], [3, "innerHTML"], [3, "formControl", "id", "name"], [3, "disabled", "id", "name", "value", "input"]], template: function TextareaComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵelementStart(0, "div");
-            i0.ɵɵtemplate(1, TextareaComponent_label_1_Template, 1, 6, "label", 0);
-            i0.ɵɵtemplate(2, TextareaComponent_textarea_2_Template, 1, 12, "textarea", 1);
-            i0.ɵɵtemplate(3, TextareaComponent_textarea_3_Template, 2, 14, "textarea", 2);
-            i0.ɵɵelementEnd();
-        } if (rf & 2) {
-            i0.ɵɵclassMap((ctx.options == null ? null : ctx.options.htmlClass) || "");
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.options == null ? null : ctx.options.title);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", ctx.boundControl);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", !ctx.boundControl);
-        } }, dependencies: [i2.NgIf, i3.DefaultValueAccessor, i3.NgControlStatus, i3.FormControlDirective], encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: TextareaComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: TextareaComponent, selector: "textarea-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+    <div
+      [class]="options?.htmlClass || ''">
+      <label *ngIf="options?.title"
+        [attr.for]="'control' + layoutNode?._id"
+        [class]="options?.labelHtmlClass || ''"
+        [style.display]="options?.notitle ? 'none' : ''"
+        [innerHTML]="options?.title"></label>
+      <textarea *ngIf="boundControl"
+        [formControl]="formControl"
+        [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
+        [attr.maxlength]="options?.maxLength"
+        [attr.minlength]="options?.minLength"
+        [attr.pattern]="options?.pattern"
+        [attr.placeholder]="options?.placeholder"
+        [attr.readonly]="options?.readonly ? 'readonly' : null"
+        [attr.required]="options?.required"
+        [class]="options?.fieldHtmlClass || ''"
+        [id]="'control' + layoutNode?._id"
+        [name]="controlName"></textarea>
+      <textarea *ngIf="!boundControl"
+        [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
+        [attr.maxlength]="options?.maxLength"
+        [attr.minlength]="options?.minLength"
+        [attr.pattern]="options?.pattern"
+        [attr.placeholder]="options?.placeholder"
+        [attr.readonly]="options?.readonly ? 'readonly' : null"
+        [attr.required]="options?.required"
+        [class]="options?.fieldHtmlClass || ''"
+        [disabled]="controlDisabled"
+        [id]="'control' + layoutNode?._id"
+        [name]="controlName"
+        [value]="controlValue"
+        (input)="updateValue($event)">{{controlValue}}</textarea>
+    </div>`, isInline: true, dependencies: [{ kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.FormControlDirective, selector: "[formControl]", inputs: ["formControl", "disabled", "ngModel"], outputs: ["ngModelChange"], exportAs: ["ngForm"] }] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(TextareaComponent, [{
-        type: Component,
-        args: [{
-                selector: 'textarea-widget',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: TextareaComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'textarea-widget',
+                    template: `
     <div
       [class]="options?.htmlClass || ''">
       <label *ngIf="options?.title"
@@ -2901,14 +2573,14 @@ class TextareaComponent {
         [value]="controlValue"
         (input)="updateValue($event)">{{controlValue}}</textarea>
     </div>`,
-            }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+                }]
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
 class WidgetLibraryService {
     defaultWidget = 'text';
@@ -3071,12 +2743,12 @@ class WidgetLibraryService {
             activeWidgets: this.activeWidgets,
         };
     }
-    static ɵfac = function WidgetLibraryService_Factory(t) { return new (t || WidgetLibraryService)(); };
-    static ɵprov = i0.ɵɵdefineInjectable({ token: WidgetLibraryService, factory: WidgetLibraryService.ɵfac });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: WidgetLibraryService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: WidgetLibraryService });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(WidgetLibraryService, [{
-        type: Injectable
-    }], function () { return []; }, null); })();
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: WidgetLibraryService, decorators: [{
+            type: Injectable
+        }], ctorParameters: function () { return []; } });
 
 class FrameworkLibraryService {
     frameworks;
@@ -3129,31 +2801,19 @@ class FrameworkLibraryService {
     getFrameworkScripts(load = this.loadExternalAssets) {
         return (load && this.activeFramework.scripts) || [];
     }
-    static ɵfac = function FrameworkLibraryService_Factory(t) { return new (t || FrameworkLibraryService)(i0.ɵɵinject(Framework), i0.ɵɵinject(WidgetLibraryService)); };
-    static ɵprov = i0.ɵɵdefineInjectable({ token: FrameworkLibraryService, factory: FrameworkLibraryService.ɵfac });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: FrameworkLibraryService, deps: [{ token: Framework }, { token: WidgetLibraryService }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: FrameworkLibraryService });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(FrameworkLibraryService, [{
-        type: Injectable
-    }], function () { return [{ type: undefined, decorators: [{
-                type: Inject,
-                args: [Framework]
-            }] }, { type: WidgetLibraryService, decorators: [{
-                type: Inject,
-                args: [WidgetLibraryService]
-            }] }]; }, null); })();
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: FrameworkLibraryService, decorators: [{
+            type: Injectable
+        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
+                    type: Inject,
+                    args: [Framework]
+                }] }, { type: WidgetLibraryService, decorators: [{
+                    type: Inject,
+                    args: [WidgetLibraryService]
+                }] }]; } });
 
-function HiddenComponent_input_0_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "input", 2);
-} if (rf & 2) {
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵproperty("formControl", ctx_r0.formControl)("id", "control" + (ctx_r0.layoutNode == null ? null : ctx_r0.layoutNode._id))("name", ctx_r0.controlName);
-} }
-function HiddenComponent_input_1_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelement(0, "input", 3);
-} if (rf & 2) {
-    const ctx_r1 = i0.ɵɵnextContext();
-    i0.ɵɵproperty("disabled", ctx_r1.controlDisabled)("name", ctx_r1.controlName)("id", "control" + (ctx_r1.layoutNode == null ? null : ctx_r1.layoutNode._id))("value", ctx_r1.controlValue);
-} }
 class HiddenComponent {
     jsf;
     formControl;
@@ -3170,21 +2830,25 @@ class HiddenComponent {
     ngOnInit() {
         this.jsf.initializeControl(this);
     }
-    static ɵfac = function HiddenComponent_Factory(t) { return new (t || HiddenComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: HiddenComponent, selectors: [["hidden-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 2, vars: 2, consts: [["type", "hidden", 3, "formControl", "id", "name", 4, "ngIf"], ["type", "hidden", 3, "disabled", "name", "id", "value", 4, "ngIf"], ["type", "hidden", 3, "formControl", "id", "name"], ["type", "hidden", 3, "disabled", "name", "id", "value"]], template: function HiddenComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵtemplate(0, HiddenComponent_input_0_Template, 1, 3, "input", 0);
-            i0.ɵɵtemplate(1, HiddenComponent_input_1_Template, 1, 4, "input", 1);
-        } if (rf & 2) {
-            i0.ɵɵproperty("ngIf", ctx.boundControl);
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("ngIf", !ctx.boundControl);
-        } }, dependencies: [i2.NgIf, i3.DefaultValueAccessor, i3.NgControlStatus, i3.FormControlDirective], encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: HiddenComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: HiddenComponent, selector: "hidden-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+    <input *ngIf="boundControl"
+      [formControl]="formControl"
+      [id]="'control' + layoutNode?._id"
+      [name]="controlName"
+      type="hidden">
+    <input *ngIf="!boundControl"
+      [disabled]="controlDisabled"
+      [name]="controlName"
+      [id]="'control' + layoutNode?._id"
+      type="hidden"
+      [value]="controlValue">`, isInline: true, dependencies: [{ kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.FormControlDirective, selector: "[formControl]", inputs: ["formControl", "disabled", "ngModel"], outputs: ["ngModelChange"], exportAs: ["ngForm"] }] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(HiddenComponent, [{
-        type: Component,
-        args: [{
-                selector: 'hidden-widget',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: HiddenComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'hidden-widget',
+                    template: `
     <input *ngIf="boundControl"
       [formControl]="formControl"
       [id]="'control' + layoutNode?._id"
@@ -3196,14 +2860,14 @@ class HiddenComponent {
       [id]="'control' + layoutNode?._id"
       type="hidden"
       [value]="controlValue">`,
-            }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+                }]
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
 class TabComponent {
     jsf;
@@ -3217,36 +2881,34 @@ class TabComponent {
     ngOnInit() {
         this.options = this.layoutNode.options || {};
     }
-    static ɵfac = function TabComponent_Factory(t) { return new (t || TabComponent)(i0.ɵɵdirectiveInject(JsonSchemaFormService)); };
-    static ɵcmp = i0.ɵɵdefineComponent({ type: TabComponent, selectors: [["tab-widget"]], inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, decls: 2, vars: 5, consts: [[3, "dataIndex", "layoutIndex", "layout"]], template: function TabComponent_Template(rf, ctx) { if (rf & 1) {
-            i0.ɵɵelementStart(0, "div");
-            i0.ɵɵelement(1, "root-widget", 0);
-            i0.ɵɵelementEnd();
-        } if (rf & 2) {
-            i0.ɵɵclassMap((ctx.options == null ? null : ctx.options.htmlClass) || "");
-            i0.ɵɵadvance(1);
-            i0.ɵɵproperty("dataIndex", ctx.dataIndex)("layoutIndex", ctx.layoutIndex)("layout", ctx.layoutNode.items);
-        } }, dependencies: [RootComponent], encapsulation: 2 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: TabComponent, deps: [{ token: JsonSchemaFormService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.0.3", type: TabComponent, selector: "tab-widget", inputs: { layoutNode: "layoutNode", layoutIndex: "layoutIndex", dataIndex: "dataIndex" }, ngImport: i0, template: `
+    <div [class]="options?.htmlClass || ''">
+      <root-widget
+        [dataIndex]="dataIndex"
+        [layoutIndex]="layoutIndex"
+        [layout]="layoutNode.items"></root-widget>
+    </div>`, isInline: true, dependencies: [{ kind: "component", type: RootComponent, selector: "root-widget", inputs: ["dataIndex", "layoutIndex", "layout", "isOrderable", "isFlexItem"] }] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(TabComponent, [{
-        type: Component,
-        args: [{
-                selector: 'tab-widget',
-                template: `
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: TabComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'tab-widget',
+                    template: `
     <div [class]="options?.htmlClass || ''">
       <root-widget
         [dataIndex]="dataIndex"
         [layoutIndex]="layoutIndex"
         [layout]="layoutNode.items"></root-widget>
     </div>`,
-            }]
-    }], function () { return [{ type: JsonSchemaFormService }]; }, { layoutNode: [{
-            type: Input
-        }], layoutIndex: [{
-            type: Input
-        }], dataIndex: [{
-            type: Input
-        }] }); })();
+                }]
+        }], ctorParameters: function () { return [{ type: JsonSchemaFormService }]; }, propDecorators: { layoutNode: [{
+                type: Input
+            }], layoutIndex: [{
+                type: Input
+            }], dataIndex: [{
+                type: Input
+            }] } });
 
 class WidgetLibraryModule {
     static forRoot() {
@@ -3255,112 +2917,111 @@ class WidgetLibraryModule {
             providers: [JsonSchemaFormService],
         };
     }
-    static ɵfac = function WidgetLibraryModule_Factory(t) { return new (t || WidgetLibraryModule)(); };
-    static ɵmod = i0.ɵɵdefineNgModule({ type: WidgetLibraryModule });
-    static ɵinj = i0.ɵɵdefineInjector({ providers: [JsonSchemaFormService], imports: [CommonModule, FormsModule, ReactiveFormsModule] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: WidgetLibraryModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.0.3", ngImport: i0, type: WidgetLibraryModule, declarations: [AddReferenceComponent,
+            OneOfComponent,
+            ButtonComponent,
+            CheckboxComponent,
+            CheckboxesComponent,
+            FileComponent,
+            HiddenComponent,
+            InputComponent,
+            MessageComponent,
+            NoneComponent,
+            NumberComponent,
+            RadiosComponent,
+            RootComponent,
+            SectionComponent,
+            SelectComponent,
+            SelectFrameworkComponent,
+            SelectWidgetComponent,
+            SubmitComponent,
+            TabComponent,
+            TabsComponent,
+            TemplateComponent,
+            TextareaComponent,
+            OrderableDirective], imports: [CommonModule, FormsModule, ReactiveFormsModule], exports: [AddReferenceComponent,
+            OneOfComponent,
+            ButtonComponent,
+            CheckboxComponent,
+            CheckboxesComponent,
+            FileComponent,
+            HiddenComponent,
+            InputComponent,
+            MessageComponent,
+            NoneComponent,
+            NumberComponent,
+            RadiosComponent,
+            RootComponent,
+            SectionComponent,
+            SelectComponent,
+            SelectFrameworkComponent,
+            SelectWidgetComponent,
+            SubmitComponent,
+            TabComponent,
+            TabsComponent,
+            TemplateComponent,
+            TextareaComponent,
+            OrderableDirective] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: WidgetLibraryModule, providers: [JsonSchemaFormService], imports: [CommonModule, FormsModule, ReactiveFormsModule] });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(WidgetLibraryModule, [{
-        type: NgModule,
-        args: [{
-                imports: [CommonModule, FormsModule, ReactiveFormsModule],
-                declarations: [
-                    AddReferenceComponent,
-                    OneOfComponent,
-                    ButtonComponent,
-                    CheckboxComponent,
-                    CheckboxesComponent,
-                    FileComponent,
-                    HiddenComponent,
-                    InputComponent,
-                    MessageComponent,
-                    NoneComponent,
-                    NumberComponent,
-                    RadiosComponent,
-                    RootComponent,
-                    SectionComponent,
-                    SelectComponent,
-                    SelectFrameworkComponent,
-                    SelectWidgetComponent,
-                    SubmitComponent,
-                    TabComponent,
-                    TabsComponent,
-                    TemplateComponent,
-                    TextareaComponent,
-                    OrderableDirective,
-                ],
-                exports: [
-                    AddReferenceComponent,
-                    OneOfComponent,
-                    ButtonComponent,
-                    CheckboxComponent,
-                    CheckboxesComponent,
-                    FileComponent,
-                    HiddenComponent,
-                    InputComponent,
-                    MessageComponent,
-                    NoneComponent,
-                    NumberComponent,
-                    RadiosComponent,
-                    RootComponent,
-                    SectionComponent,
-                    SelectComponent,
-                    SelectFrameworkComponent,
-                    SelectWidgetComponent,
-                    SubmitComponent,
-                    TabComponent,
-                    TabsComponent,
-                    TemplateComponent,
-                    TextareaComponent,
-                    OrderableDirective,
-                ],
-                providers: [JsonSchemaFormService],
-            }]
-    }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(WidgetLibraryModule, { declarations: [AddReferenceComponent,
-        OneOfComponent,
-        ButtonComponent,
-        CheckboxComponent,
-        CheckboxesComponent,
-        FileComponent,
-        HiddenComponent,
-        InputComponent,
-        MessageComponent,
-        NoneComponent,
-        NumberComponent,
-        RadiosComponent,
-        RootComponent,
-        SectionComponent,
-        SelectComponent,
-        SelectFrameworkComponent,
-        SelectWidgetComponent,
-        SubmitComponent,
-        TabComponent,
-        TabsComponent,
-        TemplateComponent,
-        TextareaComponent,
-        OrderableDirective], imports: [CommonModule, FormsModule, ReactiveFormsModule], exports: [AddReferenceComponent,
-        OneOfComponent,
-        ButtonComponent,
-        CheckboxComponent,
-        CheckboxesComponent,
-        FileComponent,
-        HiddenComponent,
-        InputComponent,
-        MessageComponent,
-        NoneComponent,
-        NumberComponent,
-        RadiosComponent,
-        RootComponent,
-        SectionComponent,
-        SelectComponent,
-        SelectFrameworkComponent,
-        SelectWidgetComponent,
-        SubmitComponent,
-        TabComponent,
-        TabsComponent,
-        TemplateComponent,
-        TextareaComponent,
-        OrderableDirective] }); })();
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: WidgetLibraryModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [CommonModule, FormsModule, ReactiveFormsModule],
+                    declarations: [
+                        AddReferenceComponent,
+                        OneOfComponent,
+                        ButtonComponent,
+                        CheckboxComponent,
+                        CheckboxesComponent,
+                        FileComponent,
+                        HiddenComponent,
+                        InputComponent,
+                        MessageComponent,
+                        NoneComponent,
+                        NumberComponent,
+                        RadiosComponent,
+                        RootComponent,
+                        SectionComponent,
+                        SelectComponent,
+                        SelectFrameworkComponent,
+                        SelectWidgetComponent,
+                        SubmitComponent,
+                        TabComponent,
+                        TabsComponent,
+                        TemplateComponent,
+                        TextareaComponent,
+                        OrderableDirective,
+                    ],
+                    exports: [
+                        AddReferenceComponent,
+                        OneOfComponent,
+                        ButtonComponent,
+                        CheckboxComponent,
+                        CheckboxesComponent,
+                        FileComponent,
+                        HiddenComponent,
+                        InputComponent,
+                        MessageComponent,
+                        NoneComponent,
+                        NumberComponent,
+                        RadiosComponent,
+                        RootComponent,
+                        SectionComponent,
+                        SelectComponent,
+                        SelectFrameworkComponent,
+                        SelectWidgetComponent,
+                        SubmitComponent,
+                        TabComponent,
+                        TabsComponent,
+                        TemplateComponent,
+                        TextareaComponent,
+                        OrderableDirective,
+                    ],
+                    providers: [JsonSchemaFormService],
+                }]
+        }] });
 
 export { AddReferenceComponent, ButtonComponent, CheckboxComponent, CheckboxesComponent, FileComponent, FrameworkLibraryService, HiddenComponent, InputComponent, JsonSchemaFormService, MessageComponent, NoneComponent, NumberComponent, OneOfComponent, OrderableDirective, RadiosComponent, RootComponent, SectionComponent, SelectComponent, SelectFrameworkComponent, SelectWidgetComponent, SubmitComponent, TabComponent, TabsComponent, TemplateComponent, TextareaComponent, WidgetLibraryModule, WidgetLibraryService, buildTitleMap };
 //# sourceMappingURL=ngsf-widget-library.mjs.map
