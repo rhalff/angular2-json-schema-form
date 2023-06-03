@@ -79,8 +79,7 @@ class JsonSchemaFormService {
     constructor() {
         this.setLanguage(this.language);
         this.ajv.addMetaSchema(draft6);
-        const ajv = new Ajv();
-        addFormats(ajv);
+        addFormats(this.ajv);
     }
     setLanguage(language = 'en-US') {
         this.language = language;
