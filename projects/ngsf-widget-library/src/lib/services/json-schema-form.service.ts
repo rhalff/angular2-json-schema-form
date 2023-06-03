@@ -4,6 +4,7 @@ import {Subject} from 'rxjs-compat/Subject'
 import * as draft6 from 'ajv/lib/refs/json-schema-draft-06.json'
 import Ajv from 'ajv'
 import * as _ from 'lodash'
+import addFormats from 'ajv-formats'
 
 import {
   fixTitle, forEach, hasOwn, toTitleCase,
@@ -111,6 +112,8 @@ export class JsonSchemaFormService {
     this.setLanguage(this.language)
 
     this.ajv.addMetaSchema(draft6)
+    const ajv = new Ajv()
+    addFormats(ajv)
   }
 
   setLanguage(language: string = 'en-US') {
