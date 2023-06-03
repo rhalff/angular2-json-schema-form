@@ -2970,6 +2970,13 @@ ajv-formats@2.1.1, ajv-formats@^2.1.1:
   dependencies:
     ajv "^8.0.0"
 
+ajv-formats@^3.0.0-rc.0:
+  version "3.0.0-rc.0"
+  resolved "https://registry.yarnpkg.com/ajv-formats/-/ajv-formats-3.0.0-rc.0.tgz#d345d205242072ee8877e3a19f100f41a2106e5f"
+  integrity sha512-eyqaGv4OE7RMgW2GNujqwJZWFjOT4z0tQZTVnYiWtSDh9TFwD8CIsJ6ta065IblpZXcV3wFuy8y2gKFb1d0uPw==
+  dependencies:
+    ajv "^8.0.0"
+
 ajv-keywords@^3.5.2:
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.5.2.tgz#31f29da5ab6e00d1c2d329acf7b5929614d5014d"
