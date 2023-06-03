@@ -1096,12 +1096,12 @@ class JsonPointer {
         }
         console.error('parseObjectPath error: Input object path must be a string.');
     }
-    static ɵfac = function JsonPointer_Factory(t) { return new (t || JsonPointer)(); };
-    static ɵprov = i0.ɵɵdefineInjectable({ token: JsonPointer, factory: JsonPointer.ɵfac });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: JsonPointer, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: JsonPointer });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(JsonPointer, [{
-        type: Injectable
-    }], null, null); })();
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: JsonPointer, decorators: [{
+            type: Injectable
+        }] });
 
 const jsonSchemaFormatTests = {
     date: /^\d\d\d\d-[0-1]\d-[0-3]\d$/,
@@ -3936,12 +3936,12 @@ class Framework {
     widgets = {};
     stylesheets = [];
     scripts = [];
-    static ɵfac = function Framework_Factory(t) { return new (t || Framework)(); };
-    static ɵprov = i0.ɵɵdefineInjectable({ token: Framework, factory: Framework.ɵfac });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: Framework, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: Framework });
 }
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(Framework, [{
-        type: Injectable
-    }], null, null); })();
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.3", ngImport: i0, type: Framework, decorators: [{
+            type: Injectable
+        }] });
 
 const enValidationMessages = {
     required: 'This field is required.',
