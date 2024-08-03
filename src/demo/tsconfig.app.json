@@ -7,6 +7,7 @@
     "paths": {
       "@ngsf/bootstrap3-framework": ["../../dist/@ngsf/bootstrap3-framework"],
       "@ngsf/bootstrap4-framework": ["../../dist/@ngsf/bootstrap4-framework"],
+      "@ngsf/bootstrap5-framework": ["../../dist/@ngsf/bootstrap5-framework"],
       "@ngsf/common": ["../../dist/@ngsf/common"],
       "@ngsf/json-schema-form": ["../../dist/@ngsf/json-schema-form"],
       "@ngsf/material-design-framework": [

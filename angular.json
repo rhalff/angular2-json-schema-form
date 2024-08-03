@@ -179,6 +179,44 @@
         }
       }
     },
+    "@ngsf/bootstrap5-framework": {
+      "projectType": "library",
+      "root": "projects/ngsf-bootstrap5-framework",
+      "sourceRoot": "projects/ngsf-bootstrap5-framework/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngsf-bootstrap5-framework/tsconfig.lib.json",
+            "project": "projects/ngsf-bootstrap5-framework/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngsf-bootstrap5-framework/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngsf-bootstrap5-framework/src/test.ts",
+            "tsConfig": "projects/ngsf-bootstrap5-framework/tsconfig.spec.json",
+            "karmaConfig": "projects/ngsf-bootstrap5-framework/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngsf-bootstrap5-framework/tsconfig.lib.json",
+              "projects/ngsf-bootstrap5-framework/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
     "@ngsf/common": {
       "projectType": "library",
       "root": "projects/ngsf-common",

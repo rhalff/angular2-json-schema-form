@@ -50,6 +50,7 @@
     "predeploy": "npm run build",
     "deploy:bootstrap3-framework": "gh-pages --dist dist/@ngsf/bootstrap3-framework/ --branch angular-16-bootstrap3-framework-dist",
     "deploy:bootstrap4-framework": "gh-pages --dist dist/@ngsf/bootstrap4-framework/ --branch angular-16-bootstrap4-framework-dist",
+    "deploy:bootstrap5-framework": "gh-pages --dist dist/@ngsf/bootstrap5-framework/ --branch angular-16-bootstrap5-framework-dist",
     "deploy:common": "gh-pages --dist dist/@ngsf/common/ --branch angular-16-common-dist",
     "deploy:json-schema-form": "gh-pages --dist dist/@ngsf/json-schema-form/ --branch angular-16-json-schema-form-dist",
     "deploy:material-design-framework": "gh-pages --dist dist/@ngsf/material-design-framework/ --branch angular-16-material-design-framework-dist",

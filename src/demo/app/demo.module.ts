@@ -19,6 +19,7 @@ import {NoFrameworkModule} from '@ngsf/no-framework'
 import {MaterialDesignFrameworkModule} from '@ngsf/material-design-framework'
 import {Bootstrap3FrameworkModule} from '@ngsf/bootstrap3-framework'
 import {Bootstrap4FrameworkModule} from '@ngsf/bootstrap4-framework'
+import {Bootstrap5FrameworkModule} from '@ngsf/bootstrap5-framework'
 import {AceEditorDirective} from './ace-editor.directive'
 import {DemoComponent} from './demo.component'
 import {DemoRootComponent} from './demo-root.component'
@@ -53,11 +54,13 @@ import {routes} from './demo.routes'
     NoFrameworkModule,
     Bootstrap3FrameworkModule,
     Bootstrap4FrameworkModule,
+    Bootstrap5FrameworkModule,
     MaterialDesignFrameworkModule,
     JsonSchemaFormModule.forRoot(
       NoFrameworkModule,
       Bootstrap3FrameworkModule,
       Bootstrap4FrameworkModule,
+      Bootstrap5FrameworkModule,
       MaterialDesignFrameworkModule
     ),
   ],
@@ -72,4 +75,5 @@ import {routes} from './demo.routes'
 //   'material-design-framework',
 //   'bootstrap-3-framework'
 //   'bootstrap-4-framework'
+//   'bootstrap-5-framework'
 export class DemoModule {}
