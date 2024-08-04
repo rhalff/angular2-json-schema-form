@@ -10,98 +10,95 @@ import {JsonSchemaFormService} from '@ngsf/widget-library'
 @Component({
   selector: 'bootstrap-5-framework',
   template: `
-      <div
-              [class]="options?.htmlClass || ''"
-              [class.has-feedback]="options?.feedback && options?.isInputWidget &&
-        (formControl?.dirty || options?.feedbackOnRender)"
-              [class.has-error]="options?.enableErrorState && formControl?.errors &&
-        (formControl?.dirty || options?.feedbackOnRender)"
-              [class.has-success]="options?.enableSuccessState && !formControl?.errors &&
-        (formControl?.dirty || options?.feedbackOnRender)">
+    <div
+      [class]="options?.htmlClass || ''"
+      [class.has-feedback]='hasFeedback'
+      [class.has-error]='hasError'
+      [class.has-success]='hasSuccess'>
 
-          <button *ngIf="showRemoveButton"
-                  class="close pull-right"
-                  type="button"
-                  (click)="removeItem()">
-              <span aria-hidden="true">&times;</span>
-              <span class="sr-only">Close</span>
-          </button>
-          <div *ngIf="options?.messageLocation === 'top'">
-              <p *ngIf="options?.helpBlock"
-                 class="help-block"
-                 [innerHTML]="options?.helpBlock"></p>
-          </div>
+      <button *ngIf='showRemoveButton'
+              class='close pull-right'
+              type='button'
+              (click)='removeItem()'>
+        <span aria-hidden='true'>&times;</span>
+        <span class='sr-only'>Close</span>
+      </button>
 
-          <label *ngIf="options?.title && layoutNode?.type !== 'tab'"
-                 [attr.for]="'control' + layoutNode?._id"
-                 [class]="options?.labelHtmlClass || ''"
-                 [class.sr-only]="options?.notitle"
-                 [innerHTML]="options?.title"></label>
-          <p *ngIf="layoutNode?.type === 'submit' && jsf?.formOptions?.fieldsRequired">
-              <strong class="text-danger">*</strong> = required fields
-          </p>
-          <div [class.input-group]="options?.fieldAddonLeft || options?.fieldAddonRight">
-        <span *ngIf="options?.fieldAddonLeft"
-              class="input-group-addon"
-              [innerHTML]="options?.fieldAddonLeft"></span>
+      <div *ngIf="options?.messageLocation === 'top'">
+        <p *ngIf='options?.helpBlock'
+           class='help-block'
+           [innerHTML]='options?.helpBlock'></p>
+      </div>
+      <label *ngIf="options?.title && layoutNode?.type !== 'tab'"
+             [attr.for]="'control' + layoutNode?._id"
+             [class]="(options?.labelHtmlClass || '') + ' form-label'"
+             [class.sr-only]='options?.notitle'
+             [innerHTML]='options?.title'></label>
+      <p *ngIf="layoutNode?.type === 'submit' && jsf?.formOptions?.fieldsRequired">
+        <strong class='text-danger'>*</strong> = required fields
+      </p>
+      <div [class.input-group]='options?.fieldAddonLeft || options?.fieldAddonRight'>
+        <span *ngIf='options?.fieldAddonLeft'
+              class='input-group-addon'
+              [innerHTML]='options?.fieldAddonLeft'></span>
 
-              <select-widget-widget
-                      [layoutNode]="widgetLayoutNode"
-                      [dataIndex]="dataIndex"
-                      [layoutIndex]="layoutIndex"></select-widget-widget>
+        <select-widget-widget
+          [layoutNode]='widgetLayoutNode'
+          [dataIndex]='dataIndex'
+          [layoutIndex]='layoutIndex'></select-widget-widget>
 
-              <span *ngIf="options?.fieldAddonRight"
-                    class="input-group-addon"
-                    [innerHTML]="options?.fieldAddonRight"></span>
-          </div>
+        <span *ngIf='options?.fieldAddonRight'
+              class='input-group-addon'
+              [innerHTML]='options?.fieldAddonRight'></span>
+      </div>
 
-          <span *ngIf="options?.feedback && options?.isInputWidget &&
+      <span *ngIf='options?.feedback && options?.isInputWidget &&
           !options?.fieldAddonRight && !layoutNode.arrayItem &&
-          (formControl?.dirty || options?.feedbackOnRender)"
-                [class.glyphicon-ok]="options?.enableSuccessState && !formControl?.errors"
-                [class.glyphicon-remove]="options?.enableErrorState && formControl?.errors"
-                aria-hidden="true"
-                class="form-control-feedback glyphicon"></span>
-          <div *ngIf="options?.messageLocation !== 'top'">
-              <p *ngIf="options?.helpBlock"
-                 class="help-block"
-                 [innerHTML]="options?.helpBlock"></p>
-          </div>
+          (formControl?.dirty || options?.feedbackOnRender)'
+            [class.glyphicon-ok]='options?.enableSuccessState && !formControl?.errors'
+            [class.glyphicon-remove]='options?.enableErrorState && formControl?.errors'
+            aria-hidden='true'
+            class='form-control-feedback glyphicon'></span>
+      <div *ngIf="options?.messageLocation !== 'top'">
+        <p *ngIf='options?.helpBlock'
+           class='help-block'
+           [innerHTML]='options?.helpBlock'></p>
       </div>
+    </div>
 
-      <div *ngIf="debug && debugOutput">debug:
-          <pre>{{debugOutput}}</pre>
-      </div>
+    <div *ngIf='debug && debugOutput'>debug:
+      <pre>{{ debugOutput }}</pre>
+    </div>
   `,
   styles: [`
-      :host /deep/ .list-group-item .form-control-feedback {
-          top: 40px;
-      }
+    :host /deep/ .list-group-item .form-control-feedback {
+      top: 40px;
+    }
 
-      :host /deep/ .checkbox,
-      :host /deep/ .radio {
-          margin-top: 0;
-          margin-bottom: 0;
-      }
+    :host /deep/ .checkbox,
+    :host /deep/ .radio {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
 
-      :host /deep/ .checkbox-inline,
-      :host /deep/ .checkbox-inline + .checkbox-inline,
-      :host /deep/ .checkbox-inline + .radio-inline,
-      :host /deep/ .radio-inline,
-      :host /deep/ .radio-inline + .radio-inline,
-      :host /deep/ .radio-inline + .checkbox-inline {
-          margin-left: 0;
-          margin-right: 10px;
-      }
+    :host /deep/ .checkbox-inline,
+    :host /deep/ .checkbox-inline + .checkbox-inline,
+    :host /deep/ .checkbox-inline + .radio-inline,
+    :host /deep/ .radio-inline,
+    :host /deep/ .radio-inline + .radio-inline,
+    :host /deep/ .radio-inline + .checkbox-inline {
+      margin-left: 0;
+      margin-right: 10px;
+    }
 
-      :host /deep/ .checkbox-inline:last-child,
-      :host /deep/ .radio-inline:last-child {
-          margin-right: 0;
-      }
+    :host /deep/ .checkbox-inline:last-child,
+    :host /deep/ .radio-inline:last-child {
+      margin-right: 0;
+    }
 
-      :host /deep/ .ng-invalid.ng-touched {
-          border: 1px solid #f44336;
-      }
+    :host /deep/ .ng-invalid.ng-touched {
+      border: 1px solid #f44336;
+    }
   `],
 })
 export class Bootstrap5FrameworkComponent implements OnInit, OnChanges {
@@ -120,9 +117,25 @@ export class Bootstrap5FrameworkComponent implements OnInit, OnChanges {
 
   constructor(
     public changeDetector: ChangeDetectorRef,
-    public jsf: JsonSchemaFormService
+    public jsf: JsonSchemaFormService,
   ) {
   }
+
+  get hasFeedback(): boolean {
+    return this.options?.feedback && this.options?.isInputWidget &&
+      (this.formControl?.dirty || this.options?.feedbackOnRender)
+  }
+
+  get hasError(): boolean {
+    return this.options?.enableErrorState && this.formControl?.errors &&
+      (this.formControl?.dirty || this.options?.feedbackOnRender)
+  }
+
+  get hasSuccess(): boolean {
+    return this.options?.enableSuccessState && !this.formControl?.errors &&
+      (this.formControl?.dirty || this.options?.feedbackOnRender)
+  }
+
 
   get showRemoveButton(): boolean {
     if (!this.options.removable || this.options.readonly ||
@@ -166,7 +179,7 @@ export class Bootstrap5FrameworkComponent implements OnInit, OnChanges {
       this.options = _.cloneDeep(this.layoutNode.options)
       this.widgetLayoutNode = {
         ...this.layoutNode,
-        options: _.cloneDeep(this.layoutNode.options)
+        options: _.cloneDeep(this.layoutNode.options),
       }
       this.widgetOptions = this.widgetLayoutNode.options
       this.formControl = this.jsf.getFormControl(this)
@@ -176,7 +189,7 @@ export class Bootstrap5FrameworkComponent implements OnInit, OnChanges {
         'date', 'datetime-local', 'datetime', 'email', 'file', 'hidden',
         'image', 'integer', 'month', 'number', 'password', 'radio',
         'radiobuttons', 'radios-inline', 'radios', 'range', 'reset', 'search',
-        'select', 'submit', 'tel', 'text', 'textarea', 'time', 'url', 'week'
+        'select', 'submit', 'tel', 'text', 'textarea', 'time', 'url', 'week',
       ])
 
       this.options.title = this.setTitle()
