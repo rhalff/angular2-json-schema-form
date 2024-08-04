@@ -1,0 +1,28 @@
+{
+  "name": "@ngsf/bootstrap5-framework",
+  "version": "0.0.2",
+  "peerDependencies": {
+    "@angular/common": "^16.0.3",
+    "@angular/core": "^16.0.3",
+    "@ngsf/common": "^0.0.1",
+    "@ngsf/widget-library": "^0.0.1",
+    "lodash": "^4.17.21"
+  },
+  "dependencies": {
+    "tslib": "^2.5.2"
+  },
+  "module": "fesm2022/ngsf-bootstrap5-framework.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2022": "./esm2022/ngsf-bootstrap5-framework.mjs",
+      "esm": "./esm2022/ngsf-bootstrap5-framework.mjs",
+      "default": "./fesm2022/ngsf-bootstrap5-framework.mjs"
+    }
+  },
+  "sideEffects": false
+}
