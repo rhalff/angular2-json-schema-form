@@ -2,8 +2,8 @@
   "name": "@ngsf/bootstrap4-framework",
   "version": "0.0.2",
   "peerDependencies": {
-    "@angular/common": "^16.0.3",
-    "@angular/core": "^16.0.3",
+    "@angular/common": "^18.0.0",
+    "@angular/core": "^18.0.0",
     "@ngsf/common": "^0.0.1",
     "@ngsf/widget-library": "^0.0.1",
     "lodash": "^4.17.21"

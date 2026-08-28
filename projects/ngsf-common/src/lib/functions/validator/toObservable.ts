@@ -1,5 +1,4 @@
-import {isObservable, Observable} from 'rxjs'
-import {fromPromise} from 'rxjs-compat/observable/fromPromise'
+import {from as fromPromise, isObservable, Observable} from 'rxjs'
 import {isPromise} from './isPromise'
 
 /**

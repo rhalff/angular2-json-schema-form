@@ -27,7 +27,9 @@
                 "output": "/"
               }
             ],
-            "styles": ["src/demo/styles.scss"],
+            "styles": [
+              "src/demo/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -80,7 +82,9 @@
             "polyfills": "src/demo/polyfills.ts",
             "tsConfig": "src/demo/tsconfig.spec.json",
             "scripts": [],
-            "styles": ["src/demo/styles.scss"],
+            "styles": [
+              "src/demo/styles.scss"
+            ],
             "assets": [
               {
                 "glob": "**/*",
@@ -94,12 +98,6 @@
               }
             ]
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     },
@@ -110,7 +108,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngsf-bootstrap3-framework/tsconfig.lib.json",
             "project": "projects/ngsf-bootstrap3-framework/ng-package.json"
@@ -128,16 +126,6 @@
             "tsConfig": "projects/ngsf-bootstrap3-framework/tsconfig.spec.json",
             "karmaConfig": "projects/ngsf-bootstrap3-framework/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ngsf-bootstrap3-framework/tsconfig.lib.json",
-              "projects/ngsf-bootstrap3-framework/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     },
@@ -148,7 +136,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngsf-bootstrap4-framework/tsconfig.lib.json",
             "project": "projects/ngsf-bootstrap4-framework/ng-package.json"
@@ -166,16 +154,6 @@
             "tsConfig": "projects/ngsf-bootstrap4-framework/tsconfig.spec.json",
             "karmaConfig": "projects/ngsf-bootstrap4-framework/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ngsf-bootstrap4-framework/tsconfig.lib.json",
-              "projects/ngsf-bootstrap4-framework/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     },
@@ -186,7 +164,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngsf-bootstrap5-framework/tsconfig.lib.json",
             "project": "projects/ngsf-bootstrap5-framework/ng-package.json"
@@ -204,16 +182,6 @@
             "tsConfig": "projects/ngsf-bootstrap5-framework/tsconfig.spec.json",
             "karmaConfig": "projects/ngsf-bootstrap5-framework/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ngsf-bootstrap5-framework/tsconfig.lib.json",
-              "projects/ngsf-bootstrap5-framework/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     },
@@ -224,7 +192,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngsf-common/tsconfig.lib.json",
             "project": "projects/ngsf-common/ng-package.json"
@@ -242,16 +210,6 @@
             "tsConfig": "projects/ngsf-common/tsconfig.spec.json",
             "karmaConfig": "projects/ngsf-common/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ngsf-common/tsconfig.lib.json",
-              "projects/ngsf-common/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     },
@@ -262,7 +220,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngsf-widget-library/tsconfig.lib.json",
             "project": "projects/ngsf-widget-library/ng-package.json"
@@ -280,16 +238,6 @@
             "tsConfig": "projects/ngsf-widget-library/tsconfig.spec.json",
             "karmaConfig": "projects/ngsf-widget-library/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ngsf-widget-library/tsconfig.lib.json",
-              "projects/ngsf-widget-library/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     },
@@ -300,7 +248,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngsf-no-framework/tsconfig.lib.json",
             "project": "projects/ngsf-no-framework/ng-package.json"
@@ -318,16 +266,6 @@
             "tsConfig": "projects/ngsf-no-framework/tsconfig.spec.json",
             "karmaConfig": "projects/ngsf-no-framework/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ngsf-no-framework/tsconfig.lib.json",
-              "projects/ngsf-no-framework/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     },
@@ -338,7 +276,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngsf-material-design-framework/tsconfig.lib.json",
             "project": "projects/ngsf-material-design-framework/ng-package.json"
@@ -356,16 +294,6 @@
             "tsConfig": "projects/ngsf-material-design-framework/tsconfig.spec.json",
             "karmaConfig": "projects/ngsf-material-design-framework/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ngsf-material-design-framework/tsconfig.lib.json",
-              "projects/ngsf-material-design-framework/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     },
@@ -376,7 +304,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngsf-json-schema-form/tsconfig.lib.json",
             "project": "projects/ngsf-json-schema-form/ng-package.json"
@@ -393,16 +321,6 @@
             "main": "projects/ngsf-json-schema-form/src/test.ts",
             "tsConfig": "projects/ngsf-json-schema-form/tsconfig.spec.json",
             "karmaConfig": "projects/ngsf-json-schema-form/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ngsf-json-schema-form/tsconfig.lib.json",
-              "projects/ngsf-json-schema-form/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
           }
         }
       }

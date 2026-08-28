@@ -2,11 +2,11 @@
   "name": "@ngsf/material-design-framework",
   "version": "0.0.2",
   "peerDependencies": {
-    "@angular/common": "^16.0.3",
-    "@angular/core": "^16.0.3",
-    "@ngbracket/ngx-layout": "fbpx/ngx-layout#angular-13-ngx-layout-dist",
-    "@angular/forms": "^16.0.3",
-    "@angular/material": "^8.2.3",
+    "@angular/common": "^18.0.0",
+    "@angular/core": "^18.0.0",
+    "@ngbracket/ngx-layout": "^16.1.3",
+    "@angular/forms": "^18.0.0",
+    "@angular/material": "^18.0.0",
     "@ngsf/common": "^0.0.1",
     "@ngsf/widget-library": "^0.0.1",
     "lodash": "^4.17.21"

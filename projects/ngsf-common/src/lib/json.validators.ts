@@ -1,6 +1,6 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms'
-import {forkJoin} from 'rxjs-compat/observable/forkJoin'
-import {map} from 'rxjs-compat/operator/map'
+import {forkJoin} from 'rxjs'
+import {map} from 'rxjs/operators'
 
 import * as _ from 'lodash'
 

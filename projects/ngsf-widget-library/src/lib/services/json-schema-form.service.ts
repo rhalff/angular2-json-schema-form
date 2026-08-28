@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core'
 import {AbstractControl, FormArray, FormGroup} from '@angular/forms'
-import {Subject} from 'rxjs-compat/Subject'
+import {Subject} from 'rxjs'
 import * as draft6 from 'ajv/lib/refs/json-schema-draft-06.json'
 import Ajv from 'ajv'
 import * as _ from 'lodash'
