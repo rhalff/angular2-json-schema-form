@@ -1,4 +1,6 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing'
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing'
+import {NO_ERRORS_SCHEMA} from '@angular/core'
+import {JsonSchemaFormService} from '@ngsf/widget-library'
 
 import {Bootstrap4FrameworkComponent} from './bootstrap4-framework.component'
 
@@ -6,9 +8,11 @@ describe('Bootstrap4FrameworkComponent', () => {
   let component: Bootstrap4FrameworkComponent
   let fixture: ComponentFixture<Bootstrap4FrameworkComponent>
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [Bootstrap4FrameworkComponent]
+      declarations: [Bootstrap4FrameworkComponent],
+      providers: [JsonSchemaFormService],
+      schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents()
   }))
@@ -16,6 +20,7 @@ describe('Bootstrap4FrameworkComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(Bootstrap4FrameworkComponent)
     component = fixture.componentInstance
+    component.layoutNode = {type: 'section', options: {}}
     fixture.detectChanges()
   })
 

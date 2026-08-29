@@ -75,7 +75,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "src/demo/test.ts",
             "karmaConfig": "./karma.conf.js",
@@ -120,7 +120,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/ngsf-bootstrap3-framework/src/test.ts",
             "tsConfig": "projects/ngsf-bootstrap3-framework/tsconfig.spec.json",
@@ -148,7 +148,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/ngsf-bootstrap4-framework/src/test.ts",
             "tsConfig": "projects/ngsf-bootstrap4-framework/tsconfig.spec.json",
@@ -176,7 +176,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/ngsf-bootstrap5-framework/src/test.ts",
             "tsConfig": "projects/ngsf-bootstrap5-framework/tsconfig.spec.json",
@@ -204,7 +204,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/ngsf-common/src/test.ts",
             "tsConfig": "projects/ngsf-common/tsconfig.spec.json",
@@ -232,7 +232,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/ngsf-widget-library/src/test.ts",
             "tsConfig": "projects/ngsf-widget-library/tsconfig.spec.json",
@@ -260,7 +260,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/ngsf-no-framework/src/test.ts",
             "tsConfig": "projects/ngsf-no-framework/tsconfig.spec.json",
@@ -288,7 +288,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/ngsf-material-design-framework/src/test.ts",
             "tsConfig": "projects/ngsf-material-design-framework/tsconfig.spec.json",
@@ -316,7 +316,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/ngsf-json-schema-form/src/test.ts",
             "tsConfig": "projects/ngsf-json-schema-form/tsconfig.spec.json",

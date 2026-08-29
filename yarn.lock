@@ -117,7 +117,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/build@22.1.6":
+"@angular/build@22.1.6", "@angular/build@~22.1.6":
   version "22.1.6"
   resolved "https://registry.yarnpkg.com/@angular/build/-/build-22.1.6.tgz#fb084a262b609309e4498f106f8bf5f917c2497e"
   integrity sha512-J7JBd3hDAV4dlGNMavDC0KjtvbDd4KOddaom1inwkq92tYnD1ljmhDDigAsUBnRvQhJ82cvagD8zi0s9Ki4rTQ==

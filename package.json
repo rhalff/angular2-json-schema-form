@@ -29,8 +29,7 @@
     "url": "https://github.com/dschnelldavis/angular2-json-schema-form/issues"
   },
   "engines": {
-    "node": ">= 6.9.0",
-    "npm": ">= 3.0.0"
+    "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
   },
   "scripts": {
     "ng": "ng",
@@ -76,6 +75,7 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@angular/build": "~22.1.6",
     "@angular-devkit/build-angular": "~22.1.6",
     "@angular/animations": "^22.1.4",
     "@angular/cdk": "^22.1.4",
