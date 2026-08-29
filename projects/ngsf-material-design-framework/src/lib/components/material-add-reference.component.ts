@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core'
 import {JsonSchemaFormService} from '@ngsf/widget-library'
 
 @Component({
+  standalone: false,
   selector: 'material-add-reference-widget',
   template: `
       <section [class]="options?.htmlClass || ''" align="end">

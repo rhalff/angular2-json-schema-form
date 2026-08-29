@@ -1,12 +1,12 @@
 {
   "name": "ngsf-common",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "peerDependencies": {
-    "@angular/common": "^18.0.0",
-    "@angular/core": "^18.0.0",
+    "@angular/common": "^22.0.0",
+    "@angular/core": "^22.0.0",
     "@ngsf/common": "^0.0.1",
     "@ngsf/widget-library": "^0.0.1",
-    "@angular/forms": "^18.0.0",
+    "@angular/forms": "^22.0.0",
     "rxjs": "^7.8.1",
     "lodash": "^4.17.21"
   },

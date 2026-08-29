@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core'
 import {JsonSchemaFormService} from '@ngsf/widget-library'
 
 @Component({
+  standalone: false,
   selector: 'material-tabs-widget',
   template: `
       <nav mat-tab-nav-bar

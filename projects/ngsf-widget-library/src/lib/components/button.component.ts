@@ -3,6 +3,7 @@ import {AbstractControl} from '@angular/forms'
 import {JsonSchemaFormService} from '../services/json-schema-form.service'
 
 @Component({
+  standalone: false,
   selector: 'button-widget',
   template: `
       <div

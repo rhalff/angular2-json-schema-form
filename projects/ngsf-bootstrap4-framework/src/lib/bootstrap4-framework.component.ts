@@ -8,6 +8,7 @@ import {JsonSchemaFormService} from '@ngsf/widget-library'
  *
  */
 @Component({
+  standalone: false,
   selector: 'bootstrap-4-framework',
   template: `
       <div

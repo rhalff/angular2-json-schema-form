@@ -4,6 +4,7 @@ import {isArray} from '@ngsf/common'
 import {buildTitleMap, JsonSchemaFormService} from '@ngsf/widget-library'
 
 @Component({
+  standalone: false,
   selector: 'material-select-widget',
   template: `
       <mat-form-field

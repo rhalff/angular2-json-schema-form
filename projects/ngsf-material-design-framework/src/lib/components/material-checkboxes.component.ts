@@ -6,6 +6,7 @@ import {buildTitleMap, JsonSchemaFormService, TitleMapItem} from '@ngsf/widget-l
 // https://material.angular.io/components/list/overview
 
 @Component({
+  standalone: false,
   selector: 'material-checkboxes-widget',
   template: `
       <div>

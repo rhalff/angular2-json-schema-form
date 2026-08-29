@@ -3,6 +3,7 @@ import {AbstractControl} from '@angular/forms'
 import {buildTitleMap, JsonSchemaFormService} from '@ngsf/widget-library'
 
 @Component({
+  standalone: false,
   selector: 'material-radios-widget',
   template: `
       <div>

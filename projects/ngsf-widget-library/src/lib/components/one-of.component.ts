@@ -5,6 +5,7 @@ import {JsonSchemaFormService} from '../services/json-schema-form.service'
 // TODO: Add this control
 
 @Component({
+  standalone: false,
   selector: 'one-of-widget',
   template: ``,
 })

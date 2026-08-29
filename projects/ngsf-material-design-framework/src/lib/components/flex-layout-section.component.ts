@@ -3,6 +3,7 @@ import {AbstractControl} from '@angular/forms'
 import {JsonSchemaFormService} from '@ngsf/widget-library'
 
 @Component({
+  standalone: false,
   selector: 'flex-layout-section-widget',
   template: `
       <div *ngIf="containerType === 'div'"

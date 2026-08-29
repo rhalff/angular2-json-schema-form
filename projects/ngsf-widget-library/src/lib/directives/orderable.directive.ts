@@ -23,6 +23,7 @@ import {JsonSchemaFormService} from '../services/json-schema-form.service'
  * - drop: remove 'drag-target-...' classes from element, move dropped array item
  */
 @Directive({
+  standalone: false,
   selector: '[orderable]',
 })
 export class OrderableDirective implements OnInit {

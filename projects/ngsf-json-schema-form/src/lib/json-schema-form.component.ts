@@ -72,6 +72,7 @@ export const JSON_SCHEMA_FORM_VALUE_ACCESSOR: any = {
  *  - brace, Browserified Ace editor       http://thlorenz.github.io/brace
  */
 @Component({
+  standalone: false,
   selector: 'json-schema-form',
   template: `
     <div *ngFor="let stylesheet of stylesheets">

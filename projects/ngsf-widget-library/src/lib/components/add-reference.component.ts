@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core'
 import {JsonSchemaFormService} from '../services/json-schema-form.service'
 
 @Component({
+  standalone: false,
   selector: 'add-reference-widget',
   template: `
       <button *ngIf="showAddButton"

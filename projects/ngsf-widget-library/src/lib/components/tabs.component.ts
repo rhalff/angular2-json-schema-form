@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core'
 import {JsonSchemaFormService} from '../services/json-schema-form.service'
 
 @Component({
+  standalone: false,
   selector: 'tabs-widget',
   template: `
     <ul

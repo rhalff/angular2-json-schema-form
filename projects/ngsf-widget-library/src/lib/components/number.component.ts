@@ -3,6 +3,7 @@ import {AbstractControl} from '@angular/forms'
 import {JsonSchemaFormService} from '../services/json-schema-form.service'
 
 @Component({
+  standalone: false,
   selector: 'number-widget',
   template: `
       <div [class]="options?.htmlClass || ''">

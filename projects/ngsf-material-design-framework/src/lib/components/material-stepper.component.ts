@@ -5,6 +5,7 @@ import {JsonSchemaFormService} from '@ngsf/widget-library'
 // TODO: Add this control
 
 @Component({
+  standalone: false,
   selector: 'material-stepper-widget',
   template: ``,
 })

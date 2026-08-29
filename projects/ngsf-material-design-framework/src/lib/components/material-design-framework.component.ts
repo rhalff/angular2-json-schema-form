@@ -4,6 +4,7 @@ import {isDefined} from '@ngsf/common'
 import {JsonSchemaFormService} from '@ngsf/widget-library'
 
 @Component({
+  standalone: false,
   selector: 'material-design-framework',
   template: `
       <div

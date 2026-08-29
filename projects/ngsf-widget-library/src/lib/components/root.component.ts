@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core'
 import {JsonSchemaFormService} from '../services/json-schema-form.service'
 
 @Component({
+  standalone: false,
   selector: 'root-widget',
   template: `
     <div *ngFor="let layoutItem of layout; let i = index"

@@ -4,6 +4,7 @@ import {buildTitleMap} from '../functions/buildTitleMap'
 import {JsonSchemaFormService} from '../services/json-schema-form.service'
 
 @Component({
+  standalone: false,
   selector: 'radios-widget',
   template: `
     <label *ngIf="options?.title"

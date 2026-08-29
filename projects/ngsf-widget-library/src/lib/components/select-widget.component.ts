@@ -1,7 +1,8 @@
-import {Component, ComponentFactoryResolver, ComponentRef, Input, OnChanges, OnInit, ViewChild, ViewContainerRef} from '@angular/core'
+import {Component, ComponentRef, Input, OnChanges, OnInit, ViewChild, ViewContainerRef} from '@angular/core'
 import {JsonSchemaFormService} from '../services/json-schema-form.service'
 
 @Component({
+  standalone: false,
   selector: 'select-widget-widget',
   template: `<div #widgetContainer></div>`,
 })
@@ -13,10 +14,7 @@ export class SelectWidgetComponent implements OnChanges, OnInit {
   @ViewChild('widgetContainer', {read: ViewContainerRef, static: true})
   widgetContainer: ViewContainerRef
 
-  constructor(
-    private componentFactory: ComponentFactoryResolver,
-    private jsf: JsonSchemaFormService
-  ) {
+  constructor(private jsf: JsonSchemaFormService) {
   }
 
   ngOnInit() {
@@ -29,9 +27,7 @@ export class SelectWidgetComponent implements OnChanges, OnInit {
 
   updateComponent() {
     if (!this.newComponent && (this.layoutNode || {}).widget) {
-      this.newComponent = this.widgetContainer.createComponent(
-        this.componentFactory.resolveComponentFactory(this.layoutNode.widget)
-      )
+      this.newComponent = this.widgetContainer.createComponent(this.layoutNode.widget)
     }
     if (this.newComponent) {
       for (const input of ['layoutNode', 'layoutIndex', 'dataIndex']) {

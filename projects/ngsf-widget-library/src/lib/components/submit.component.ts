@@ -4,6 +4,7 @@ import {hasOwn} from '@ngsf/common'
 import {JsonSchemaFormService} from '../services/json-schema-form.service'
 
 @Component({
+  standalone: false,
   selector: 'submit-widget',
   template: `
     <div

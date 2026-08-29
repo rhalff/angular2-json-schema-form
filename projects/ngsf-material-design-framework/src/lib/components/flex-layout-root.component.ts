@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, Input} from '@angular/core'
 import {JsonSchemaFormService} from '@ngsf/widget-library'
 
 @Component({
+  standalone: false,
   selector: 'flex-layout-root-widget',
   template: `
       <div *ngFor="let layoutNode of layout; let i = index"

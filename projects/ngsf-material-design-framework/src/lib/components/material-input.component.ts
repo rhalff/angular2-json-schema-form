@@ -3,6 +3,7 @@ import {AbstractControl} from '@angular/forms'
 import {JsonSchemaFormService} from '@ngsf/widget-library'
 
 @Component({
+  standalone: false,
   selector: 'material-input-widget',
   template: `
       <mat-form-field

@@ -5,6 +5,7 @@ import {JsonSchemaFormService} from '../services/json-schema-form.service'
 import {buildTitleMap} from '../functions/buildTitleMap'
 
 @Component({
+  standalone: false,
   selector: 'select-widget',
   template: `
     <div

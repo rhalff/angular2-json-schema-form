@@ -4,6 +4,7 @@ import {dateToString, stringToDate} from '@ngsf/common'
 import {JsonSchemaFormService} from '@ngsf/widget-library'
 
 @Component({
+  standalone: false,
   selector: 'material-datepicker-widget',
   template: `
       <mat-form-field [style.width]="'100%'">

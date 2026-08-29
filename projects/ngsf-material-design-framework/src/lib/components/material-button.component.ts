@@ -4,6 +4,7 @@ import {hasOwn} from '@ngsf/common'
 import {JsonSchemaFormService} from '@ngsf/widget-library'
 
 @Component({
+  standalone: false,
   selector: 'material-button-widget',
   template: `
       <div class="button-row" [class]="options?.htmlClass || ''">

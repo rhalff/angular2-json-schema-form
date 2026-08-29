@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core'
 
 @Component({
+  standalone: false,
   selector: 'no-framework',
   template: `
       <select-widget-widget

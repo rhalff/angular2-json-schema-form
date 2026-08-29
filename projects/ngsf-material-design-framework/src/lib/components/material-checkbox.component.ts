@@ -3,6 +3,7 @@ import {AbstractControl} from '@angular/forms'
 import {JsonSchemaFormService} from '@ngsf/widget-library'
 
 @Component({
+  standalone: false,
   selector: 'material-checkbox-widget',
   template: `
       <mat-checkbox *ngIf="boundControl && !showSlideToggle"
