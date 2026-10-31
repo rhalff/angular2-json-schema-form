@@ -1,11 +1,11 @@
 {
   "name": "@ngsf/widget-library",
-  "version": "0.0.4",
+  "version": "22.0.0",
   "peerDependencies": {
     "@angular/common": "^22.0.0",
     "@angular/core": "^22.0.0",
     "@angular/forms": "^22.0.0",
-    "@ngsf/common": "^0.0.4",
+    "@ngsf/common": "^22.0.0",
     "ajv": "^8.12.0",
     "ajv-formats": "^3.0.0-rc.0"
   },

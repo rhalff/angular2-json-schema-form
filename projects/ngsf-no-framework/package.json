@@ -1,11 +1,11 @@
 {
   "name": "@ngsf/no-framework",
-  "version": "0.0.4",
+  "version": "22.0.0",
   "peerDependencies": {
     "@angular/common": "^22.0.0",
     "@angular/core": "^22.0.0",
-    "@ngsf/common": "^0.0.4",
-    "@ngsf/widget-library": "^0.0.4"
+    "@ngsf/common": "^22.0.0",
+    "@ngsf/widget-library": "^22.0.0"
   },
   "dependencies": {
     "tslib": "^2.5.2"
