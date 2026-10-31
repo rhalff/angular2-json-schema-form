@@ -1,5 +1,5 @@
 {
-  "name": "ngsf-common",
+  "name": "@ngsf/common",
   "version": "0.0.3",
   "peerDependencies": {
     "@angular/common": "^22.0.0",
