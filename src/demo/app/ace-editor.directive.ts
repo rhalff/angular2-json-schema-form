@@ -7,7 +7,8 @@ import 'brace/mode/json'
 declare var ace: any
 
 @Directive({
-  selector: '[ace-editor]'
+  selector: '[ace-editor]',
+  standalone: false
 })
 export class AceEditorDirective {
   _options: any = {}

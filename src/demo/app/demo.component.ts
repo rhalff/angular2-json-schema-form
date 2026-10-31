@@ -15,6 +15,7 @@ import { JsonPointer } from '@ngsf/common'
 
 @Component({
   selector: 'demo',
+  standalone: false,
   templateUrl: 'demo.component.html',
   animations: [
     trigger('expandSection', [
@@ -62,7 +63,7 @@ export class DemoComponent implements OnInit {
   }
 
   formActive = false
-  jsonFormSchema: string
+  jsonFormSchema = ''
   jsonFormValid = false
   jsonFormStatusMessage = 'Loading form...'
   jsonFormObject: any
@@ -76,7 +77,7 @@ export class DemoComponent implements OnInit {
   }
   liveFormData: any = {}
   formValidationErrors: any
-  formIsValid = null
+  formIsValid: boolean | null = null
   submittedFormData: any = null
   aceEditorOptions: any = {
     highlightActiveLine: true,
@@ -84,7 +85,7 @@ export class DemoComponent implements OnInit {
     printMargin: false,
     autoScrollEditorIntoView: true
   }
-  @ViewChild(MatMenuTrigger, { static: true }) menuTrigger: MatMenuTrigger
+  @ViewChild(MatMenuTrigger, { static: true }) menuTrigger!: MatMenuTrigger
 
   constructor(
     private http: HttpClient,
@@ -97,17 +98,18 @@ export class DemoComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params.set) {
         this.selectedSet = params.set
-        this.selectedSetName = {
+        const setNames: { [set: string]: string } = {
           'ng-jsf': '',
           asf: 'Angular Schema Form:',
           rsf: 'React Schema Form:',
           jsf: 'JSONForm:'
-        }[this.selectedSet]
+        }
+        this.selectedSetName = setNames[this.selectedSet] ?? ''
       }
       if (params.example) {
         this.selectedExample = params.example
         this.selectedExampleName = this.examples[this.selectedSet].schemas.find(
-          schema => schema.file === this.selectedExample
+          (schema: any) => schema.file === this.selectedExample
         ).name
       }
       if (params.framework) {

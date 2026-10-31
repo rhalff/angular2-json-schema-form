@@ -17,9 +17,6 @@
       "@ngsf/widget-library": ["../../dist/@ngsf/widget-library"]
     }
   },
-  "angularCompilerOptions": {
-    "enableIvy": false
-  },
   "atom": { "rewriteTsconfig": false },
   "files": ["main.ts", "polyfills.ts"]
 }

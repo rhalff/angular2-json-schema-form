@@ -18,7 +18,9 @@ For full details, see 'To install from NPM and use in your own project', below.
 
 ## Check out the live demo and play with the examples
 
-[Check out some examples here.](https://angular2-json-schema-form.firebaseapp.com/)
+[Check out some examples here.](https://rhalff.github.io/angular2-json-schema-form/)
+
+The demo is built from the latest `master` and deployed to GitHub Pages on every push.
 
 This example playground features over 70 different JSON Schemas for you to try (including all examples used by each of the three libraries listed above), and the ability to quickly view any example formatted with Material Design, Bootstrap 3, Bootstrap 4, or without any formatting.
 

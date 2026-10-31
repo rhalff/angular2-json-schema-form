@@ -193,7 +193,7 @@
       <!-- This is the form! -->
       <json-schema-form
         *ngIf="formActive"
-        loadExternalAssets="true"
+        [loadExternalAssets]="true"
         [form]="jsonFormObject"
         [options]="jsonFormOptions"
         [framework]="selectedFramework"

@@ -1,19 +1,20 @@
 // * { border: 1px solid red !important; }
 @use '@angular/material' as mat;
-@include mat.core();
-$demo-app-primary: mat.define-palette(mat.$blue-palette);
-$demo-app-accent:  mat.define-palette(mat.$amber-palette, A200, A100, A400);
-$demo-app-warn:    mat.define-palette(mat.$red-palette);
-$demo-app-theme:   mat.define-light-theme((
-  color: (
-    primary: $demo-app-primary,
-    accent: $demo-app-accent,
-    warn: $demo-app-warn,
-  ),
-  typography: mat.define-typography-config(),
-  density: 0,
-));
-@include mat.all-component-themes($demo-app-theme);
+
+// Material 22 uses the M3 theming API.
+html {
+  color-scheme: light;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
 
 $font-family: 'Roboto', 'Noto', 'Helvetica Neue', sans-serif;
 $row-height: 56px;
@@ -39,7 +40,7 @@ body {
 }
 
 .demo-page-header {
-  background-color: mat.get-color-from-palette($demo-app-primary, 'lighter');
+  background-color: var(--mat-sys-primary-container);
   margin-bottom: 12px;
   .header-content {
     font-family: $font-family;
