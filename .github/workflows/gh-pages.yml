@@ -25,9 +25,7 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        # The historical lockfile pins Angular 18 while package.json asks for
-        # 22, so npm ci cannot be used here.
-        run: npm install --legacy-peer-deps --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
       - name: Build libraries and demo
         run: |
