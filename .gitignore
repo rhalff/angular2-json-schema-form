@@ -48,3 +48,6 @@ Thumbs.db
 .ng_pkg_build
 
 .angular
+
+# macOS AppleDouble metadata (created when copying to a non-APFS volume)
+._*
