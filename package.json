@@ -2,6 +2,7 @@
   "name": "angular2-json-schema-form",
   "version": "0.7.0-alpha.1",
   "private": true,
+  "packageManager": "npm@11.12.1",
   "author": {
     "name": "David Schnell-Davis",
     "email": "dschnelldavis@gmail.com"
