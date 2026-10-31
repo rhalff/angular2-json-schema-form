@@ -45,16 +45,7 @@
     "prepublishOnly": "npm run build",
     "publish": "cd dist && npm publish",
     "preng-build": "rimraf dist/*",
-    "ng-build": "ng build",
-    "predeploy": "npm run build",
-    "deploy:bootstrap3-framework": "gh-pages --dist dist/@ngsf/bootstrap3-framework/ --branch angular-16-bootstrap3-framework-dist",
-    "deploy:bootstrap4-framework": "gh-pages --dist dist/@ngsf/bootstrap4-framework/ --branch angular-16-bootstrap4-framework-dist",
-    "deploy:bootstrap5-framework": "gh-pages --dist dist/@ngsf/bootstrap5-framework/ --branch angular-16-bootstrap5-framework-dist",
-    "deploy:common": "gh-pages --dist dist/@ngsf/common/ --branch angular-16-common-dist",
-    "deploy:json-schema-form": "gh-pages --dist dist/@ngsf/json-schema-form/ --branch angular-16-json-schema-form-dist",
-    "deploy:material-design-framework": "gh-pages --dist dist/@ngsf/material-design-framework/ --branch angular-16-material-design-framework-dist",
-    "deploy:no-framework": "gh-pages --dist dist/@ngsf/no-framework/ --branch angular-16-no-framework-dist",
-    "deploy:widget-library": "gh-pages --dist dist/@ngsf/widget-library/ --branch angular-16-widget-library-dist"
+    "ng-build": "ng build"
   },
   "peerDependencies": {
     "@angular/animations": "^22.0.0",
@@ -102,7 +93,6 @@
     "codelyzer": "^6.0.2",
     "concurrently": "^8.0.1",
     "core-js": "^3.30.2",
-    "gh-pages": "^5.0.0",
     "glob": "^10.2.6",
     "hammerjs": "^2.0.8",
     "jasmine-core": "^5.0.0",
